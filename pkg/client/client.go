@@ -28,7 +28,7 @@ func NewAPIClient(cfg Config) (*client.Ontap, error) {
 
 	// Insecure skip verify if needed just for testing
 	if httpTrans, ok := transport.Transport.(*http.Transport); ok && cfg.InsecureTLS {
-		httpTrans.TLSClientConfig = &tls.Config{InsecureSkipVerify: true}
+		httpTrans.TLSClientConfig = &tls.Config{InsecureSkipVerify: true} //nolint:all
 	}
 
 	// Basic Auth for now
