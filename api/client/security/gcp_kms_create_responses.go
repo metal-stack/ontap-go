@@ -30,6 +30,12 @@ func (o *GcpKmsCreateReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewGcpKmsCreateAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewGcpKmsCreateDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -115,6 +121,88 @@ func (o *GcpKmsCreateCreated) readResponse(response runtime.ClientResponse, cons
 	}
 
 	o.Payload = new(models.GcpKmsResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewGcpKmsCreateAccepted creates a GcpKmsCreateAccepted with default headers values
+func NewGcpKmsCreateAccepted() *GcpKmsCreateAccepted {
+	return &GcpKmsCreateAccepted{}
+}
+
+/*
+GcpKmsCreateAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type GcpKmsCreateAccepted struct {
+
+	/* Useful for tracking the resource location
+	 */
+	Location string
+
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this gcp kms create accepted response has a 2xx status code
+func (o *GcpKmsCreateAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this gcp kms create accepted response has a 3xx status code
+func (o *GcpKmsCreateAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this gcp kms create accepted response has a 4xx status code
+func (o *GcpKmsCreateAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this gcp kms create accepted response has a 5xx status code
+func (o *GcpKmsCreateAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this gcp kms create accepted response a status code equal to that given
+func (o *GcpKmsCreateAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the gcp kms create accepted response
+func (o *GcpKmsCreateAccepted) Code() int {
+	return 202
+}
+
+func (o *GcpKmsCreateAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /security/gcp-kms][%d] gcpKmsCreateAccepted %s", 202, payload)
+}
+
+func (o *GcpKmsCreateAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /security/gcp-kms][%d] gcpKmsCreateAccepted %s", 202, payload)
+}
+
+func (o *GcpKmsCreateAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *GcpKmsCreateAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
+
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	o.Payload = new(models.JobLinkResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

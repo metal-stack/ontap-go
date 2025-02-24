@@ -30,6 +30,12 @@ func (o *AzureKeyVaultCreateReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewAzureKeyVaultCreateAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewAzureKeyVaultCreateDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -115,6 +121,88 @@ func (o *AzureKeyVaultCreateCreated) readResponse(response runtime.ClientRespons
 	}
 
 	o.Payload = new(models.AzureKeyVaultResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewAzureKeyVaultCreateAccepted creates a AzureKeyVaultCreateAccepted with default headers values
+func NewAzureKeyVaultCreateAccepted() *AzureKeyVaultCreateAccepted {
+	return &AzureKeyVaultCreateAccepted{}
+}
+
+/*
+AzureKeyVaultCreateAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type AzureKeyVaultCreateAccepted struct {
+
+	/* Useful for tracking the resource location
+	 */
+	Location string
+
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this azure key vault create accepted response has a 2xx status code
+func (o *AzureKeyVaultCreateAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this azure key vault create accepted response has a 3xx status code
+func (o *AzureKeyVaultCreateAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this azure key vault create accepted response has a 4xx status code
+func (o *AzureKeyVaultCreateAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this azure key vault create accepted response has a 5xx status code
+func (o *AzureKeyVaultCreateAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this azure key vault create accepted response a status code equal to that given
+func (o *AzureKeyVaultCreateAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the azure key vault create accepted response
+func (o *AzureKeyVaultCreateAccepted) Code() int {
+	return 202
+}
+
+func (o *AzureKeyVaultCreateAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /security/azure-key-vaults][%d] azureKeyVaultCreateAccepted %s", 202, payload)
+}
+
+func (o *AzureKeyVaultCreateAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /security/azure-key-vaults][%d] azureKeyVaultCreateAccepted %s", 202, payload)
+}
+
+func (o *AzureKeyVaultCreateAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *AzureKeyVaultCreateAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
+
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	o.Payload = new(models.JobLinkResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

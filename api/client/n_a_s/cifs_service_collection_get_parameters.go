@@ -278,6 +278,12 @@ type CifsServiceCollectionGetParams struct {
 	*/
 	OptionsCopyOffload *bool
 
+	/* OptionsDacEnabled.
+
+	   Filter by options.dac_enabled
+	*/
+	OptionsDacEnabled *bool
+
 	/* OptionsExportPolicyEnabled.
 
 	   Filter by options.export_policy_enabled
@@ -1055,6 +1061,17 @@ func (o *CifsServiceCollectionGetParams) WithOptionsCopyOffload(optionsCopyOfflo
 // SetOptionsCopyOffload adds the optionsCopyOffload to the cifs service collection get params
 func (o *CifsServiceCollectionGetParams) SetOptionsCopyOffload(optionsCopyOffload *bool) {
 	o.OptionsCopyOffload = optionsCopyOffload
+}
+
+// WithOptionsDacEnabled adds the optionsDacEnabled to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) WithOptionsDacEnabled(optionsDacEnabled *bool) *CifsServiceCollectionGetParams {
+	o.SetOptionsDacEnabled(optionsDacEnabled)
+	return o
+}
+
+// SetOptionsDacEnabled adds the optionsDacEnabled to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) SetOptionsDacEnabled(optionsDacEnabled *bool) {
+	o.OptionsDacEnabled = optionsDacEnabled
 }
 
 // WithOptionsExportPolicyEnabled adds the optionsExportPolicyEnabled to the cifs service collection get params
@@ -2238,6 +2255,23 @@ func (o *CifsServiceCollectionGetParams) WriteToRequest(r runtime.ClientRequest,
 		if qOptionsCopyOffload != "" {
 
 			if err := r.SetQueryParam("options.copy_offload", qOptionsCopyOffload); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.OptionsDacEnabled != nil {
+
+		// query param options.dac_enabled
+		var qrOptionsDacEnabled bool
+
+		if o.OptionsDacEnabled != nil {
+			qrOptionsDacEnabled = *o.OptionsDacEnabled
+		}
+		qOptionsDacEnabled := swag.FormatBool(qrOptionsDacEnabled)
+		if qOptionsDacEnabled != "" {
+
+			if err := r.SetQueryParam("options.dac_enabled", qOptionsDacEnabled); err != nil {
 				return err
 			}
 		}

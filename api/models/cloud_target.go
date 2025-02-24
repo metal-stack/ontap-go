@@ -86,8 +86,8 @@ type CloudTarget struct {
 	// Fully qualified domain name of the object store server. Required on POST.  For Amazon S3, server name must be an AWS regional endpoint in the format s3.amazonaws.com or s3-<region>.amazonaws.com, for example, s3-us-west-2.amazonaws.com. The region of the server and the bucket must match. For Azure, if the server is a "blob.core.windows.net" or a "blob.core.usgovcloudapi.net", then a value of azure-account followed by a period is added in front of the server.
 	Server *string `json:"server,omitempty" yaml:"server,omitempty"`
 
-	// Encryption of data at rest by the object store server for AWS_S3 and other S3 compatible provider types. This is an advanced property. In most cases it is best not to change default value of "sse_s3" for object store servers which support SSE-S3 encryption. The encryption is in addition to any encryption done by ONTAP at a volume or at an aggregate level. Note that changing this option does not change encryption of data which already exist in the object store.
-	// Enum: ["none","sse_s3"]
+	// Encryption of data at rest by the object store server for AWS_S3 and other S3 compatible provider types. In most cases it is best not to change default value of "sse_s3" for object store servers which support SSE-S3 encryption. The encryption is in addition to any encryption done by ONTAP at a volume or at an aggregate level. Note that changing this option does not change encryption of data which already exist in the object store.
+	// Enum: ["none","sse_s3","sse_kms","dsse_kms"]
 	ServerSideEncryption *string `json:"server_side_encryption,omitempty" yaml:"server_side_encryption,omitempty"`
 
 	// Use of the cloud target by SnapMirror.
@@ -413,7 +413,7 @@ var cloudTargetTypeServerSideEncryptionPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["none","sse_s3"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["none","sse_s3","sse_kms","dsse_kms"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -428,6 +428,12 @@ const (
 
 	// CloudTargetServerSideEncryptionSseS3 captures enum value "sse_s3"
 	CloudTargetServerSideEncryptionSseS3 string = "sse_s3"
+
+	// CloudTargetServerSideEncryptionSseKms captures enum value "sse_kms"
+	CloudTargetServerSideEncryptionSseKms string = "sse_kms"
+
+	// CloudTargetServerSideEncryptionDsseKms captures enum value "dsse_kms"
+	CloudTargetServerSideEncryptionDsseKms string = "dsse_kms"
 )
 
 // prop value enum

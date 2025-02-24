@@ -138,7 +138,7 @@ type ClientService interface {
 
 	InterfacesMetricsCollectionGet(params *InterfacesMetricsCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*InterfacesMetricsCollectionGetOK, error)
 
-	IPServicePolicyCreate(params *IPServicePolicyCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPServicePolicyCreateOK, error)
+	IPServicePolicyCreate(params *IPServicePolicyCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPServicePolicyCreateOK, *IPServicePolicyCreateCreated, error)
 
 	IPServicePolicyDelete(params *IPServicePolicyDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPServicePolicyDeleteOK, error)
 
@@ -174,7 +174,7 @@ type ClientService interface {
 
 	NetworkEthernetBroadcastDomainsGet(params *NetworkEthernetBroadcastDomainsGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkEthernetBroadcastDomainsGetOK, error)
 
-	NetworkEthernetPortDelete(params *NetworkEthernetPortDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkEthernetPortDeleteOK, error)
+	NetworkEthernetPortDelete(params *NetworkEthernetPortDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkEthernetPortDeleteOK, *NetworkEthernetPortDeleteAccepted, error)
 
 	NetworkEthernetPortGet(params *NetworkEthernetPortGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkEthernetPortGetOK, error)
 
@@ -1182,7 +1182,7 @@ If not specified in POST, the following default property values are assigned:
   - svm if the svm parameter is specified
   - cluster if the svm parameter is not specified
 */
-func (a *Client) IPServicePolicyCreate(params *IPServicePolicyCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPServicePolicyCreateOK, error) {
+func (a *Client) IPServicePolicyCreate(params *IPServicePolicyCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IPServicePolicyCreateOK, *IPServicePolicyCreateCreated, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewIPServicePolicyCreateParams()
@@ -1206,15 +1206,17 @@ func (a *Client) IPServicePolicyCreate(params *IPServicePolicyCreateParams, auth
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*IPServicePolicyCreateOK)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *IPServicePolicyCreateOK:
+		return value, nil, nil
+	case *IPServicePolicyCreateCreated:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*IPServicePolicyCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -1951,7 +1953,7 @@ func (a *Client) NetworkEthernetBroadcastDomainsGet(params *NetworkEthernetBroad
 * `network port ifgrp delete`
 * `network port vlan delete`
 */
-func (a *Client) NetworkEthernetPortDelete(params *NetworkEthernetPortDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkEthernetPortDeleteOK, error) {
+func (a *Client) NetworkEthernetPortDelete(params *NetworkEthernetPortDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NetworkEthernetPortDeleteOK, *NetworkEthernetPortDeleteAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNetworkEthernetPortDeleteParams()
@@ -1975,15 +1977,17 @@ func (a *Client) NetworkEthernetPortDelete(params *NetworkEthernetPortDeletePara
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*NetworkEthernetPortDeleteOK)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *NetworkEthernetPortDeleteOK:
+		return value, nil, nil
+	case *NetworkEthernetPortDeleteAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*NetworkEthernetPortDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*

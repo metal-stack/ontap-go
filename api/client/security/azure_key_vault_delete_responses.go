@@ -30,6 +30,12 @@ func (o *AzureKeyVaultDeleteReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewAzureKeyVaultDeleteAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewAzureKeyVaultDeleteDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -94,6 +100,76 @@ func (o *AzureKeyVaultDeleteOK) String() string {
 }
 
 func (o *AzureKeyVaultDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewAzureKeyVaultDeleteAccepted creates a AzureKeyVaultDeleteAccepted with default headers values
+func NewAzureKeyVaultDeleteAccepted() *AzureKeyVaultDeleteAccepted {
+	return &AzureKeyVaultDeleteAccepted{}
+}
+
+/*
+AzureKeyVaultDeleteAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type AzureKeyVaultDeleteAccepted struct {
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this azure key vault delete accepted response has a 2xx status code
+func (o *AzureKeyVaultDeleteAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this azure key vault delete accepted response has a 3xx status code
+func (o *AzureKeyVaultDeleteAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this azure key vault delete accepted response has a 4xx status code
+func (o *AzureKeyVaultDeleteAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this azure key vault delete accepted response has a 5xx status code
+func (o *AzureKeyVaultDeleteAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this azure key vault delete accepted response a status code equal to that given
+func (o *AzureKeyVaultDeleteAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the azure key vault delete accepted response
+func (o *AzureKeyVaultDeleteAccepted) Code() int {
+	return 202
+}
+
+func (o *AzureKeyVaultDeleteAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /security/azure-key-vaults/{uuid}][%d] azureKeyVaultDeleteAccepted %s", 202, payload)
+}
+
+func (o *AzureKeyVaultDeleteAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /security/azure-key-vaults/{uuid}][%d] azureKeyVaultDeleteAccepted %s", 202, payload)
+}
+
+func (o *AzureKeyVaultDeleteAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *AzureKeyVaultDeleteAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

@@ -133,6 +133,8 @@ Also see the table of common errors in the <a href="#Response_body">Response bod
 */
 type MetroclusterDiagnosticsGetDefault struct {
 	_statusCode int
+
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this metrocluster diagnostics get default response has a 2xx status code
@@ -166,14 +168,27 @@ func (o *MetroclusterDiagnosticsGetDefault) Code() int {
 }
 
 func (o *MetroclusterDiagnosticsGetDefault) Error() string {
-	return fmt.Sprintf("[GET /cluster/metrocluster/diagnostics][%d] metrocluster_diagnostics_get default", o._statusCode)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cluster/metrocluster/diagnostics][%d] metrocluster_diagnostics_get default %s", o._statusCode, payload)
 }
 
 func (o *MetroclusterDiagnosticsGetDefault) String() string {
-	return fmt.Sprintf("[GET /cluster/metrocluster/diagnostics][%d] metrocluster_diagnostics_get default", o._statusCode)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /cluster/metrocluster/diagnostics][%d] metrocluster_diagnostics_get default %s", o._statusCode, payload)
+}
+
+func (o *MetroclusterDiagnosticsGetDefault) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *MetroclusterDiagnosticsGetDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

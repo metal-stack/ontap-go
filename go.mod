@@ -1,6 +1,6 @@
 module github.com/metal-stack/ontap-go
 
-go 1.23
+go 1.24
 
 require (
 	github.com/go-openapi/errors v0.22.0
@@ -31,9 +31,9 @@ require (
 	github.com/stretchr/objx v0.5.2 // indirect
 	go.mongodb.org/mongo-driver v1.17.2 // indirect
 	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
-	go.opentelemetry.io/otel v1.33.0 // indirect
-	go.opentelemetry.io/otel/metric v1.33.0 // indirect
-	go.opentelemetry.io/otel/trace v1.33.0 // indirect
-	golang.org/x/sync v0.10.0 // indirect
+	go.opentelemetry.io/otel v1.34.0 // indirect
+	go.opentelemetry.io/otel/metric v1.34.0 // indirect
+	go.opentelemetry.io/otel/trace v1.34.0 // indirect
+	golang.org/x/sync v0.11.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )

@@ -30,6 +30,12 @@ func (o *IPServicePolicyCreateReader) ReadResponse(response runtime.ClientRespon
 			return nil, err
 		}
 		return result, nil
+	case 201:
+		result := NewIPServicePolicyCreateCreated()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewIPServicePolicyCreateDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -94,6 +100,73 @@ func (o *IPServicePolicyCreateOK) String() string {
 }
 
 func (o *IPServicePolicyCreateOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewIPServicePolicyCreateCreated creates a IPServicePolicyCreateCreated with default headers values
+func NewIPServicePolicyCreateCreated() *IPServicePolicyCreateCreated {
+	return &IPServicePolicyCreateCreated{}
+}
+
+/*
+IPServicePolicyCreateCreated describes a response with status code 201, with default header values.
+
+Created
+*/
+type IPServicePolicyCreateCreated struct {
+
+	/* Useful for tracking the resource location
+	 */
+	Location string
+}
+
+// IsSuccess returns true when this ip service policy create created response has a 2xx status code
+func (o *IPServicePolicyCreateCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this ip service policy create created response has a 3xx status code
+func (o *IPServicePolicyCreateCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this ip service policy create created response has a 4xx status code
+func (o *IPServicePolicyCreateCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this ip service policy create created response has a 5xx status code
+func (o *IPServicePolicyCreateCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this ip service policy create created response a status code equal to that given
+func (o *IPServicePolicyCreateCreated) IsCode(code int) bool {
+	return code == 201
+}
+
+// Code gets the status code for the ip service policy create created response
+func (o *IPServicePolicyCreateCreated) Code() int {
+	return 201
+}
+
+func (o *IPServicePolicyCreateCreated) Error() string {
+	return fmt.Sprintf("[POST /network/ip/service-policies][%d] ipServicePolicyCreateCreated", 201)
+}
+
+func (o *IPServicePolicyCreateCreated) String() string {
+	return fmt.Sprintf("[POST /network/ip/service-policies][%d] ipServicePolicyCreateCreated", 201)
+}
+
+func (o *IPServicePolicyCreateCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
+
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
 
 	return nil
 }

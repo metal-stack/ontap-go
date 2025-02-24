@@ -14144,7 +14144,7 @@ type VolumeInlineSnaplock struct {
 	// Format: date-time
 	ComplianceClockTime *strfmt.DateTime `json:"compliance_clock_time,omitempty" yaml:"compliance_clock_time,omitempty"`
 
-	// Expiry time of the volume.
+	// Expiry time of the volume. For volumes with an infinite, indefinite or unspecified SnapLock expiry time, "9999-12-31T23:59:59" is used to denote the time.
 	// Example: Wed Sep  5 11:02:42 GMT 2018
 	// Read Only: true
 	// Format: date-time

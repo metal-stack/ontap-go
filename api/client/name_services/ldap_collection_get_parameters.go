@@ -272,7 +272,7 @@ type LdapCollectionGetParams struct {
 
 	/* StatusIPV4State.
 
-	   Filter by status.ipv4_state
+	   Filter by status.ipv4.state
 	*/
 	StatusIPV4State *string
 
@@ -1508,7 +1508,7 @@ func (o *LdapCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg st
 
 	if o.StatusIPV4State != nil {
 
-		// query param status.ipv4_state
+		// query param status.ipv4.state
 		var qrStatusIPV4State string
 
 		if o.StatusIPV4State != nil {
@@ -1517,7 +1517,7 @@ func (o *LdapCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg st
 		qStatusIPV4State := qrStatusIPV4State
 		if qStatusIPV4State != "" {
 
-			if err := r.SetQueryParam("status.ipv4_state", qStatusIPV4State); err != nil {
+			if err := r.SetQueryParam("status.ipv4.state", qStatusIPV4State); err != nil {
 				return err
 			}
 		}

@@ -6,10 +6,14 @@ package networking
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/metal-stack/ontap-go/api/models"
 )
 
 // NetworkIPInterfaceDeleteReader is a Reader for the NetworkIPInterfaceDelete structure.
@@ -115,6 +119,8 @@ Also see the table of common errors in the <a href="#Response_body">Response bod
 */
 type NetworkIPInterfaceDeleteDefault struct {
 	_statusCode int
+
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this network ip interface delete default response has a 2xx status code
@@ -148,14 +154,27 @@ func (o *NetworkIPInterfaceDeleteDefault) Code() int {
 }
 
 func (o *NetworkIPInterfaceDeleteDefault) Error() string {
-	return fmt.Sprintf("[DELETE /network/ip/interfaces/{uuid}][%d] network_ip_interface_delete default", o._statusCode)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/ip/interfaces/{uuid}][%d] network_ip_interface_delete default %s", o._statusCode, payload)
 }
 
 func (o *NetworkIPInterfaceDeleteDefault) String() string {
-	return fmt.Sprintf("[DELETE /network/ip/interfaces/{uuid}][%d] network_ip_interface_delete default", o._statusCode)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /network/ip/interfaces/{uuid}][%d] network_ip_interface_delete default %s", o._statusCode, payload)
+}
+
+func (o *NetworkIPInterfaceDeleteDefault) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *NetworkIPInterfaceDeleteDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

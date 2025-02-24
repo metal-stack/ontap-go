@@ -128,13 +128,13 @@ type ClientService interface {
 
 	AwsKmsCollectionGet(params *AwsKmsCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsCollectionGetOK, error)
 
-	AwsKmsCreate(params *AwsKmsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsCreateCreated, error)
+	AwsKmsCreate(params *AwsKmsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsCreateCreated, *AwsKmsCreateAccepted, error)
 
-	AwsKmsDelete(params *AwsKmsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsDeleteOK, error)
+	AwsKmsDelete(params *AwsKmsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsDeleteOK, *AwsKmsDeleteAccepted, error)
 
 	AwsKmsGet(params *AwsKmsGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsGetOK, error)
 
-	AwsKmsModify(params *AwsKmsModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsModifyOK, error)
+	AwsKmsModify(params *AwsKmsModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsModifyOK, *AwsKmsModifyAccepted, error)
 
 	AwsKmsRekeyExternal(params *AwsKmsRekeyExternalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsRekeyExternalCreated, *AwsKmsRekeyExternalAccepted, error)
 
@@ -144,9 +144,9 @@ type ClientService interface {
 
 	AzureKeyVaultCollectionGet(params *AzureKeyVaultCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AzureKeyVaultCollectionGetOK, error)
 
-	AzureKeyVaultCreate(params *AzureKeyVaultCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AzureKeyVaultCreateCreated, error)
+	AzureKeyVaultCreate(params *AzureKeyVaultCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AzureKeyVaultCreateCreated, *AzureKeyVaultCreateAccepted, error)
 
-	AzureKeyVaultDelete(params *AzureKeyVaultDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AzureKeyVaultDeleteOK, error)
+	AzureKeyVaultDelete(params *AzureKeyVaultDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AzureKeyVaultDeleteOK, *AzureKeyVaultDeleteAccepted, error)
 
 	AzureKeyVaultGet(params *AzureKeyVaultGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AzureKeyVaultGetOK, error)
 
@@ -202,9 +202,9 @@ type ClientService interface {
 
 	GcpKmsCollectionGet(params *GcpKmsCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GcpKmsCollectionGetOK, error)
 
-	GcpKmsCreate(params *GcpKmsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GcpKmsCreateCreated, error)
+	GcpKmsCreate(params *GcpKmsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GcpKmsCreateCreated, *GcpKmsCreateAccepted, error)
 
-	GcpKmsDelete(params *GcpKmsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GcpKmsDeleteOK, error)
+	GcpKmsDelete(params *GcpKmsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GcpKmsDeleteOK, *GcpKmsDeleteAccepted, error)
 
 	GcpKmsGet(params *GcpKmsGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GcpKmsGetOK, error)
 
@@ -1088,7 +1088,7 @@ func (a *Client) AwsKmsCollectionGet(params *AwsKmsCollectionGetParams, authInfo
 ### Related ONTAP commands
 * `security key-manager external aws enable`
 */
-func (a *Client) AwsKmsCreate(params *AwsKmsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsCreateCreated, error) {
+func (a *Client) AwsKmsCreate(params *AwsKmsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsCreateCreated, *AwsKmsCreateAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAwsKmsCreateParams()
@@ -1112,15 +1112,17 @@ func (a *Client) AwsKmsCreate(params *AwsKmsCreateParams, authInfo runtime.Clien
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*AwsKmsCreateCreated)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *AwsKmsCreateCreated:
+		return value, nil, nil
+	case *AwsKmsCreateAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*AwsKmsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -1129,7 +1131,7 @@ func (a *Client) AwsKmsCreate(params *AwsKmsCreateParams, authInfo runtime.Clien
 ### Related ONTAP commands
 * `security key-manager external aws disable`
 */
-func (a *Client) AwsKmsDelete(params *AwsKmsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsDeleteOK, error) {
+func (a *Client) AwsKmsDelete(params *AwsKmsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsDeleteOK, *AwsKmsDeleteAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAwsKmsDeleteParams()
@@ -1153,15 +1155,17 @@ func (a *Client) AwsKmsDelete(params *AwsKmsDeleteParams, authInfo runtime.Clien
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*AwsKmsDeleteOK)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *AwsKmsDeleteOK:
+		return value, nil, nil
+	case *AwsKmsDeleteAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*AwsKmsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -1233,7 +1237,7 @@ func (a *Client) AwsKmsGet(params *AwsKmsGetParams, authInfo runtime.ClientAuthI
 * `security key-manager external aws update-config`
 * `security key-manager external aws update-credentials`
 */
-func (a *Client) AwsKmsModify(params *AwsKmsModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsModifyOK, error) {
+func (a *Client) AwsKmsModify(params *AwsKmsModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AwsKmsModifyOK, *AwsKmsModifyAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAwsKmsModifyParams()
@@ -1257,15 +1261,17 @@ func (a *Client) AwsKmsModify(params *AwsKmsModifyParams, authInfo runtime.Clien
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*AwsKmsModifyOK)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *AwsKmsModifyOK:
+		return value, nil, nil
+	case *AwsKmsModifyAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*AwsKmsModifyDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -1466,7 +1472,7 @@ func (a *Client) AzureKeyVaultCollectionGet(params *AzureKeyVaultCollectionGetPa
 * `security key-manager external azure create-config`
 * `security key-manager external azure update-config`
 */
-func (a *Client) AzureKeyVaultCreate(params *AzureKeyVaultCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AzureKeyVaultCreateCreated, error) {
+func (a *Client) AzureKeyVaultCreate(params *AzureKeyVaultCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AzureKeyVaultCreateCreated, *AzureKeyVaultCreateAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAzureKeyVaultCreateParams()
@@ -1490,15 +1496,17 @@ func (a *Client) AzureKeyVaultCreate(params *AzureKeyVaultCreateParams, authInfo
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*AzureKeyVaultCreateCreated)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *AzureKeyVaultCreateCreated:
+		return value, nil, nil
+	case *AzureKeyVaultCreateAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*AzureKeyVaultCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -1507,7 +1515,7 @@ func (a *Client) AzureKeyVaultCreate(params *AzureKeyVaultCreateParams, authInfo
 ### Related ONTAP commands
 * `security key-manager external azure disable`
 */
-func (a *Client) AzureKeyVaultDelete(params *AzureKeyVaultDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AzureKeyVaultDeleteOK, error) {
+func (a *Client) AzureKeyVaultDelete(params *AzureKeyVaultDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AzureKeyVaultDeleteOK, *AzureKeyVaultDeleteAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAzureKeyVaultDeleteParams()
@@ -1531,15 +1539,17 @@ func (a *Client) AzureKeyVaultDelete(params *AzureKeyVaultDeleteParams, authInfo
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*AzureKeyVaultDeleteOK)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *AzureKeyVaultDeleteOK:
+		return value, nil, nil
+	case *AzureKeyVaultDeleteAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*AzureKeyVaultDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -2803,7 +2813,7 @@ func (a *Client) GcpKmsCollectionGet(params *GcpKmsCollectionGetParams, authInfo
 ### Related ONTAP commands
 * `security key-manager external gcp enable`
 */
-func (a *Client) GcpKmsCreate(params *GcpKmsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GcpKmsCreateCreated, error) {
+func (a *Client) GcpKmsCreate(params *GcpKmsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GcpKmsCreateCreated, *GcpKmsCreateAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGcpKmsCreateParams()
@@ -2827,15 +2837,17 @@ func (a *Client) GcpKmsCreate(params *GcpKmsCreateParams, authInfo runtime.Clien
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*GcpKmsCreateCreated)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *GcpKmsCreateCreated:
+		return value, nil, nil
+	case *GcpKmsCreateAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GcpKmsCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -2844,7 +2856,7 @@ func (a *Client) GcpKmsCreate(params *GcpKmsCreateParams, authInfo runtime.Clien
 ### Related ONTAP commands
 * `security key-manager external gcp disable`
 */
-func (a *Client) GcpKmsDelete(params *GcpKmsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GcpKmsDeleteOK, error) {
+func (a *Client) GcpKmsDelete(params *GcpKmsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GcpKmsDeleteOK, *GcpKmsDeleteAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGcpKmsDeleteParams()
@@ -2868,15 +2880,17 @@ func (a *Client) GcpKmsDelete(params *GcpKmsDeleteParams, authInfo runtime.Clien
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*GcpKmsDeleteOK)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *GcpKmsDeleteOK:
+		return value, nil, nil
+	case *GcpKmsDeleteAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GcpKmsDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*

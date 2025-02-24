@@ -1777,7 +1777,7 @@ func (m *NasApplicationComponentsItems0StorageService) UnmarshalBinary(b []byte)
 type NasExcludeAggregatesItems0 struct {
 
 	// The name of the aggregate to exclude.
-	// Enum: ["aggr0_fsqe_snc1_01","aggr1","aggr2"]
+	// Enum: ["aggr0_fel_wps1_i01_r03a250_a_01","aggr0_fel_wps1_i01_r03a250_a_02","aggr0_fel_wps1_i01_r03a250_b_01","aggr0_fel_wps1_i01_r03a250_b_02","aggr_fel_wps1_i01_r03a250_a_01","aggr_fel_wps1_i01_r03a250_a_02","aggr_fel_wps1_i01_r03a250_b_01","aggr_fel_wps1_i01_r03a250_b_02"]
 	Name string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// The ID of the aggregate to exclude. Usage: &lt;UUID&gt;
@@ -1802,7 +1802,7 @@ var nasExcludeAggregatesItems0TypeNamePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["aggr0_fsqe_snc1_01","aggr1","aggr2"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["aggr0_fel_wps1_i01_r03a250_a_01","aggr0_fel_wps1_i01_r03a250_a_02","aggr0_fel_wps1_i01_r03a250_b_01","aggr0_fel_wps1_i01_r03a250_b_02","aggr_fel_wps1_i01_r03a250_a_01","aggr_fel_wps1_i01_r03a250_a_02","aggr_fel_wps1_i01_r03a250_b_01","aggr_fel_wps1_i01_r03a250_b_02"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -1812,14 +1812,29 @@ func init() {
 
 const (
 
-	// NasExcludeAggregatesItems0NameAggr0FsqeSnc101 captures enum value "aggr0_fsqe_snc1_01"
-	NasExcludeAggregatesItems0NameAggr0FsqeSnc101 string = "aggr0_fsqe_snc1_01"
+	// NasExcludeAggregatesItems0NameAggr0FelWps1I01R03a250a01 captures enum value "aggr0_fel_wps1_i01_r03a250_a_01"
+	NasExcludeAggregatesItems0NameAggr0FelWps1I01R03a250a01 string = "aggr0_fel_wps1_i01_r03a250_a_01"
 
-	// NasExcludeAggregatesItems0NameAggr1 captures enum value "aggr1"
-	NasExcludeAggregatesItems0NameAggr1 string = "aggr1"
+	// NasExcludeAggregatesItems0NameAggr0FelWps1I01R03a250a02 captures enum value "aggr0_fel_wps1_i01_r03a250_a_02"
+	NasExcludeAggregatesItems0NameAggr0FelWps1I01R03a250a02 string = "aggr0_fel_wps1_i01_r03a250_a_02"
 
-	// NasExcludeAggregatesItems0NameAggr2 captures enum value "aggr2"
-	NasExcludeAggregatesItems0NameAggr2 string = "aggr2"
+	// NasExcludeAggregatesItems0NameAggr0FelWps1I01R03a250b01 captures enum value "aggr0_fel_wps1_i01_r03a250_b_01"
+	NasExcludeAggregatesItems0NameAggr0FelWps1I01R03a250b01 string = "aggr0_fel_wps1_i01_r03a250_b_01"
+
+	// NasExcludeAggregatesItems0NameAggr0FelWps1I01R03a250b02 captures enum value "aggr0_fel_wps1_i01_r03a250_b_02"
+	NasExcludeAggregatesItems0NameAggr0FelWps1I01R03a250b02 string = "aggr0_fel_wps1_i01_r03a250_b_02"
+
+	// NasExcludeAggregatesItems0NameAggrFelWps1I01R03a250a01 captures enum value "aggr_fel_wps1_i01_r03a250_a_01"
+	NasExcludeAggregatesItems0NameAggrFelWps1I01R03a250a01 string = "aggr_fel_wps1_i01_r03a250_a_01"
+
+	// NasExcludeAggregatesItems0NameAggrFelWps1I01R03a250a02 captures enum value "aggr_fel_wps1_i01_r03a250_a_02"
+	NasExcludeAggregatesItems0NameAggrFelWps1I01R03a250a02 string = "aggr_fel_wps1_i01_r03a250_a_02"
+
+	// NasExcludeAggregatesItems0NameAggrFelWps1I01R03a250b01 captures enum value "aggr_fel_wps1_i01_r03a250_b_01"
+	NasExcludeAggregatesItems0NameAggrFelWps1I01R03a250b01 string = "aggr_fel_wps1_i01_r03a250_b_01"
+
+	// NasExcludeAggregatesItems0NameAggrFelWps1I01R03a250b02 captures enum value "aggr_fel_wps1_i01_r03a250_b_02"
+	NasExcludeAggregatesItems0NameAggrFelWps1I01R03a250b02 string = "aggr_fel_wps1_i01_r03a250_b_02"
 )
 
 // prop value enum

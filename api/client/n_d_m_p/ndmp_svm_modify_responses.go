@@ -131,6 +131,8 @@ func NewNdmpSvmModifyDefault(code int) *NdmpSvmModifyDefault {
 */
 type NdmpSvmModifyDefault struct {
 	_statusCode int
+
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this ndmp svm modify default response has a 2xx status code
@@ -164,14 +166,27 @@ func (o *NdmpSvmModifyDefault) Code() int {
 }
 
 func (o *NdmpSvmModifyDefault) Error() string {
-	return fmt.Sprintf("[PATCH /protocols/ndmp/svms/{svm.uuid}][%d] ndmp_svm_modify default", o._statusCode)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /protocols/ndmp/svms/{svm.uuid}][%d] ndmp_svm_modify default %s", o._statusCode, payload)
 }
 
 func (o *NdmpSvmModifyDefault) String() string {
-	return fmt.Sprintf("[PATCH /protocols/ndmp/svms/{svm.uuid}][%d] ndmp_svm_modify default", o._statusCode)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /protocols/ndmp/svms/{svm.uuid}][%d] ndmp_svm_modify default %s", o._statusCode, payload)
+}
+
+func (o *NdmpSvmModifyDefault) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *NdmpSvmModifyDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

@@ -30,6 +30,12 @@ func (o *AwsKmsCreateReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewAwsKmsCreateAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewAwsKmsCreateDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -115,6 +121,88 @@ func (o *AwsKmsCreateCreated) readResponse(response runtime.ClientResponse, cons
 	}
 
 	o.Payload = new(models.AwsKmsResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewAwsKmsCreateAccepted creates a AwsKmsCreateAccepted with default headers values
+func NewAwsKmsCreateAccepted() *AwsKmsCreateAccepted {
+	return &AwsKmsCreateAccepted{}
+}
+
+/*
+AwsKmsCreateAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type AwsKmsCreateAccepted struct {
+
+	/* Useful for tracking the resource location
+	 */
+	Location string
+
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this aws kms create accepted response has a 2xx status code
+func (o *AwsKmsCreateAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this aws kms create accepted response has a 3xx status code
+func (o *AwsKmsCreateAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this aws kms create accepted response has a 4xx status code
+func (o *AwsKmsCreateAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this aws kms create accepted response has a 5xx status code
+func (o *AwsKmsCreateAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this aws kms create accepted response a status code equal to that given
+func (o *AwsKmsCreateAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the aws kms create accepted response
+func (o *AwsKmsCreateAccepted) Code() int {
+	return 202
+}
+
+func (o *AwsKmsCreateAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /security/aws-kms][%d] awsKmsCreateAccepted %s", 202, payload)
+}
+
+func (o *AwsKmsCreateAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /security/aws-kms][%d] awsKmsCreateAccepted %s", 202, payload)
+}
+
+func (o *AwsKmsCreateAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *AwsKmsCreateAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
+
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	o.Payload = new(models.JobLinkResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
