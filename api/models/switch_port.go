@@ -74,6 +74,10 @@ type SwitchPort struct {
 	// Read Only: true
 	// Enum: ["ethernetcsmacd","fastetherfx","fibrechannel","gigabitethernet","ieee8023adlag","other","propvirtual","softwareloopback","tunnel"]
 	Type *string `json:"type,omitempty" yaml:"type,omitempty"`
+
+	// Is configured as a Virtual Port Channel (vPC) peer-link.
+	// Read Only: true
+	VpcPeerLink *bool `json:"vpc_peer_link,omitempty" yaml:"vpc_peer_link,omitempty"`
 }
 
 // Validate validates this switch port
@@ -487,6 +491,10 @@ func (m *SwitchPort) ContextValidate(ctx context.Context, formats strfmt.Registr
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateVpcPeerLink(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -677,6 +685,15 @@ func (m *SwitchPort) contextValidateSwitchPortInlineVlanID(ctx context.Context, 
 func (m *SwitchPort) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := validate.ReadOnly(ctx, "type", "body", m.Type); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SwitchPort) contextValidateVpcPeerLink(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "vpc_peer_link", "body", m.VpcPeerLink); err != nil {
 		return err
 	}
 

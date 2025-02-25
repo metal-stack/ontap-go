@@ -30,6 +30,12 @@ func (o *GcpKmsDeleteReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewGcpKmsDeleteAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewGcpKmsDeleteDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -94,6 +100,76 @@ func (o *GcpKmsDeleteOK) String() string {
 }
 
 func (o *GcpKmsDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewGcpKmsDeleteAccepted creates a GcpKmsDeleteAccepted with default headers values
+func NewGcpKmsDeleteAccepted() *GcpKmsDeleteAccepted {
+	return &GcpKmsDeleteAccepted{}
+}
+
+/*
+GcpKmsDeleteAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type GcpKmsDeleteAccepted struct {
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this gcp kms delete accepted response has a 2xx status code
+func (o *GcpKmsDeleteAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this gcp kms delete accepted response has a 3xx status code
+func (o *GcpKmsDeleteAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this gcp kms delete accepted response has a 4xx status code
+func (o *GcpKmsDeleteAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this gcp kms delete accepted response has a 5xx status code
+func (o *GcpKmsDeleteAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this gcp kms delete accepted response a status code equal to that given
+func (o *GcpKmsDeleteAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the gcp kms delete accepted response
+func (o *GcpKmsDeleteAccepted) Code() int {
+	return 202
+}
+
+func (o *GcpKmsDeleteAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /security/gcp-kms/{uuid}][%d] gcpKmsDeleteAccepted %s", 202, payload)
+}
+
+func (o *GcpKmsDeleteAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /security/gcp-kms/{uuid}][%d] gcpKmsDeleteAccepted %s", 202, payload)
+}
+
+func (o *GcpKmsDeleteAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *GcpKmsDeleteAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

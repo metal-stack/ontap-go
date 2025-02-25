@@ -41,6 +41,9 @@ type CifsServiceOptions struct {
 	//
 	CopyOffload *bool `json:"copy_offload,omitempty" yaml:"copy_offload,omitempty"`
 
+	// Specifies whether or not the Dynamic Access Control (DAC) feature is enabled for the CIFS server.
+	DacEnabled *bool `json:"dac_enabled,omitempty" yaml:"dac_enabled,omitempty"`
+
 	// Specifies whether or not export policies are enabled for CIFS.
 	ExportPolicyEnabled *bool `json:"export_policy_enabled,omitempty" yaml:"export_policy_enabled,omitempty"`
 

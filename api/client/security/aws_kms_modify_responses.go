@@ -30,6 +30,12 @@ func (o *AwsKmsModifyReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewAwsKmsModifyAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewAwsKmsModifyDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -94,6 +100,76 @@ func (o *AwsKmsModifyOK) String() string {
 }
 
 func (o *AwsKmsModifyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewAwsKmsModifyAccepted creates a AwsKmsModifyAccepted with default headers values
+func NewAwsKmsModifyAccepted() *AwsKmsModifyAccepted {
+	return &AwsKmsModifyAccepted{}
+}
+
+/*
+AwsKmsModifyAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type AwsKmsModifyAccepted struct {
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this aws kms modify accepted response has a 2xx status code
+func (o *AwsKmsModifyAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this aws kms modify accepted response has a 3xx status code
+func (o *AwsKmsModifyAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this aws kms modify accepted response has a 4xx status code
+func (o *AwsKmsModifyAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this aws kms modify accepted response has a 5xx status code
+func (o *AwsKmsModifyAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this aws kms modify accepted response a status code equal to that given
+func (o *AwsKmsModifyAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the aws kms modify accepted response
+func (o *AwsKmsModifyAccepted) Code() int {
+	return 202
+}
+
+func (o *AwsKmsModifyAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /security/aws-kms/{uuid}][%d] awsKmsModifyAccepted %s", 202, payload)
+}
+
+func (o *AwsKmsModifyAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /security/aws-kms/{uuid}][%d] awsKmsModifyAccepted %s", 202, payload)
+}
+
+func (o *AwsKmsModifyAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *AwsKmsModifyAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

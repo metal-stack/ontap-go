@@ -1,5 +1,3 @@
-METAL_API_VERSION := $(or ${METAL_API_VERSION},$(shell cat VERSION))
-
 release:: generate-client mocks gofmt test;
 
 .PHONY: generate-client
@@ -20,7 +18,7 @@ mocks:
 		--user $$(id -u):$$(id -g) \
 		-w /work \
 		-v ${PWD}:/work \
-		vektra/mockery:v2.51.0 -r --keeptree --inpackage --dir api/client --output test/mocks --all
+		vektra/mockery:v2.52.3 -r --keeptree --inpackage --dir api/client --output test/mocks --all
 
 .PHONY: gofmt
 gofmt:

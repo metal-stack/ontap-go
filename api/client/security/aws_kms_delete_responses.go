@@ -30,6 +30,12 @@ func (o *AwsKmsDeleteReader) ReadResponse(response runtime.ClientResponse, consu
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewAwsKmsDeleteAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewAwsKmsDeleteDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -94,6 +100,76 @@ func (o *AwsKmsDeleteOK) String() string {
 }
 
 func (o *AwsKmsDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewAwsKmsDeleteAccepted creates a AwsKmsDeleteAccepted with default headers values
+func NewAwsKmsDeleteAccepted() *AwsKmsDeleteAccepted {
+	return &AwsKmsDeleteAccepted{}
+}
+
+/*
+AwsKmsDeleteAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type AwsKmsDeleteAccepted struct {
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this aws kms delete accepted response has a 2xx status code
+func (o *AwsKmsDeleteAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this aws kms delete accepted response has a 3xx status code
+func (o *AwsKmsDeleteAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this aws kms delete accepted response has a 4xx status code
+func (o *AwsKmsDeleteAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this aws kms delete accepted response has a 5xx status code
+func (o *AwsKmsDeleteAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this aws kms delete accepted response a status code equal to that given
+func (o *AwsKmsDeleteAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the aws kms delete accepted response
+func (o *AwsKmsDeleteAccepted) Code() int {
+	return 202
+}
+
+func (o *AwsKmsDeleteAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /security/aws-kms/{uuid}][%d] awsKmsDeleteAccepted %s", 202, payload)
+}
+
+func (o *AwsKmsDeleteAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /security/aws-kms/{uuid}][%d] awsKmsDeleteAccepted %s", 202, payload)
+}
+
+func (o *AwsKmsDeleteAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *AwsKmsDeleteAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

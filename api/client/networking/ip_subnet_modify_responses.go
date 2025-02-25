@@ -6,10 +6,14 @@ package networking
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
+
+	"github.com/metal-stack/ontap-go/api/models"
 )
 
 // IPSubnetModifyReader is a Reader for the IPSubnetModify structure.
@@ -132,6 +136,8 @@ Also see the table of common errors in the <a href="#Response_body">Response bod
 */
 type IPSubnetModifyDefault struct {
 	_statusCode int
+
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this ip subnet modify default response has a 2xx status code
@@ -165,14 +171,27 @@ func (o *IPSubnetModifyDefault) Code() int {
 }
 
 func (o *IPSubnetModifyDefault) Error() string {
-	return fmt.Sprintf("[PATCH /network/ip/subnets/{uuid}][%d] ip_subnet_modify default", o._statusCode)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /network/ip/subnets/{uuid}][%d] ip_subnet_modify default %s", o._statusCode, payload)
 }
 
 func (o *IPSubnetModifyDefault) String() string {
-	return fmt.Sprintf("[PATCH /network/ip/subnets/{uuid}][%d] ip_subnet_modify default", o._statusCode)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /network/ip/subnets/{uuid}][%d] ip_subnet_modify default %s", o._statusCode, payload)
+}
+
+func (o *IPSubnetModifyDefault) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *IPSubnetModifyDefault) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
