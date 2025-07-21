@@ -43,13 +43,13 @@ func NewAPIClient(cfg Config) (*client.Ontap, error) {
 	return client, nil
 }
 
-// MetroClusterConfig holds the configuration for two clusters in a metro cluster.
+// MetroClusterConfig holds the configuration for n clusters in a metro cluster.
 type MetroClusterConfig []Config
 
-// MetroClusterClient holds two API clients, one for each cluster in a metro cluster.
+// MetroClusterClient holds n API clients, one for each cluster in a metro cluster.
 type MetroClusterClient []client.Ontap
 
-// NewMetroClusterClient creates a new client for a metro cluster, which contains a client for each of the two clusters.
+// NewMetroClusterClient creates a new client for a metro cluster, which contains a client for each of the n clusters.
 func NewMetroClusterClient(cfg MetroClusterConfig) (*MetroClusterClient, error) {
 	var (
 		metroclients MetroClusterClient
