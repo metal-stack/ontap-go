@@ -51,7 +51,6 @@ type MetroClusterClient []client.Ontap
 
 // NewMetroClusterClient creates a new client for a metro cluster, which contains a client for each of the two clusters.
 func NewMetroClusterClient(cfg MetroClusterConfig) (*MetroClusterClient, error) {
-
 	var (
 		metroclients MetroClusterClient
 	)
