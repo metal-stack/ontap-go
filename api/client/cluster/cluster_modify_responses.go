@@ -202,6 +202,19 @@ func NewClusterModifyDefault(code int) *ClusterModifyDefault {
 
 | Error Code | Description |
 | ---------- | ----------- |
+| 655414 | Failed to the remove Active Directory machine. |
+| 655431 | Username cannot be empty. |
+| 655432 | Password cannot be empty. |
+| 655562 | The NetBIOS name cannot be longer than 15 characters. |
+| 655563 | NetBIOS name contains characters that are not allowed. |
+| 655914 | Failed to create the Active Directory machine account. |
+| 655915 | A CIFS server for this SVM already exists. Having both a CIFS server and an Active Directory account for the same SVM is not supported. Use the \\\"vserver cifs delete\\\" command to delete the existing CIFS server and try the command again. |
+| 656464 | Failed to create the Active Directory machine account. Reason: Invalid Credentials. |
+| 656465 | Failed to create the Active Directory machine account. Reason: An account with this name already exists. |
+| 656466 | Failed to create the Active Directory machine account. Reason: Unable to connect to any domain controllers. |
+| 656467 | Failed to create the Active Directory machine account. Reason: Organizational-Unit not found. |
+| 656478 | Failed to create the Active Directory machine account. Reason: KDC has no support for encryption type. |
+| 656483 | Active Directory account creation for the admin SVM requires an effective cluster version of 9.16.0 or later. |
 | 3604491 | Updating timezone failed. |
 | 3604520 | Internal error. System state is not correct to read or change timezone. |
 | 8847361 | Too many DNS domains provided. |

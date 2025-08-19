@@ -27,15 +27,15 @@ type SnapmirrorPolicy struct {
 	// Comment associated with the policy.
 	Comment *string `json:"comment,omitempty" yaml:"comment,omitempty"`
 
-	// Specifies that all the source Snapshot copies (including the one created by SnapMirror before the transfer begins) should be copied to the destination on a transfer. "Retention" properties cannot be specified along with this property. This is applicable only to async policies. Property can only be set to 'true'.
+	// Specifies that all the source snapshots (including the one created by SnapMirror before the transfer begins) should be copied to the destination on a transfer. "Retention" properties cannot be specified along with this property. This is applicable only to async policies. Property can only be set to 'true'.
 	// Example: true
 	CopyAllSourceSnapshots *bool `json:"copy_all_source_snapshots,omitempty" yaml:"copy_all_source_snapshots,omitempty"`
 
-	// Specifies that the latest source Snapshot copy (created by SnapMirror before the transfer begins) should be copied to the destination on a transfer. "Retention" properties cannot be specified along with this property. This is applicable only to async policies. Property can only be set to 'true'.
+	// Specifies that the latest source snapshot (created by SnapMirror before the transfer begins) should be copied to the destination on a transfer. "Retention" properties cannot be specified along with this property. This is applicable only to async policies. Property can only be set to 'true'.
 	// Example: true
 	CopyLatestSourceSnapshot *bool `json:"copy_latest_source_snapshot,omitempty" yaml:"copy_latest_source_snapshot,omitempty"`
 
-	// Specifies whether a new Snapshot copy should be created on the source at the beginning of an update or resync operation. This is applicable only to async policies. Property can only be set to 'false'.
+	// Specifies whether a new snapshot should be created on the source at the beginning of an update or resync operation. This is applicable only to async policies. Property can only be set to 'false'.
 	// Example: false
 	CreateSnapshotOnSource *bool `json:"create_snapshot_on_source,omitempty" yaml:"create_snapshot_on_source,omitempty"`
 
@@ -58,7 +58,7 @@ type SnapmirrorPolicy struct {
 	// Enum: ["svm","cluster"]
 	Scope *string `json:"scope,omitempty" yaml:"scope,omitempty"`
 
-	// Rules for Snapshot copy retention.
+	// Rules for snapshot retention.
 	SnapmirrorPolicyInlineRetention []*SnapmirrorPolicyRule `json:"retention,omitempty" yaml:"retention,omitempty"`
 
 	// svm
@@ -910,7 +910,7 @@ func (m *SnapmirrorPolicyInlineSvmInlineLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// SnapmirrorPolicyInlineSyncCommonSnapshotSchedule Schedule used to create common Snapshot copies for synchronous relationships.
+// SnapmirrorPolicyInlineSyncCommonSnapshotSchedule Schedule used to create common snapshots for synchronous relationships.
 //
 // swagger:model snapmirror_policy_inline_sync_common_snapshot_schedule
 type SnapmirrorPolicyInlineSyncCommonSnapshotSchedule struct {

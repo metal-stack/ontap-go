@@ -331,6 +331,11 @@ type NodeResponseInlineRecordsInlineArrayItem struct {
 	// links
 	Links *NodeResponseInlineRecordsInlineArrayItemInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
+	// Anti ransomware version.
+	// Example: 1.0
+	// Read Only: true
+	AntiRansomwareVersion *string `json:"anti_ransomware_version,omitempty" yaml:"anti_ransomware_version,omitempty"`
+
 	// cluster interface
 	ClusterInterface *NodeResponseInlineRecordsInlineArrayItemInlineClusterInterface `json:"cluster_interface,omitempty" yaml:"cluster_interface,omitempty"`
 
@@ -1149,6 +1154,10 @@ func (m *NodeResponseInlineRecordsInlineArrayItem) ContextValidate(ctx context.C
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAntiRansomwareVersion(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateClusterInterface(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -1287,6 +1296,15 @@ func (m *NodeResponseInlineRecordsInlineArrayItem) contextValidateLinks(ctx cont
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *NodeResponseInlineRecordsInlineArrayItem) contextValidateAntiRansomwareVersion(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anti_ransomware_version", "body", m.AntiRansomwareVersion); err != nil {
+		return err
 	}
 
 	return nil
@@ -4063,7 +4081,7 @@ type NodeResponseInlineRecordsInlineArrayItemInlineHaInlineGiveback struct {
 	// Enum: ["nothing_to_giveback","not_attempted","in_progress","failed"]
 	State *string `json:"state,omitempty" yaml:"state,omitempty"`
 
-	// Giveback status of each aggregate.
+	// Giveback status of each aggregate. This property is not supported on the ASA r2 platform.
 	// Read Only: true
 	Status []*NodeResponseRecordsItems0HaGivebackStatusItems0 `json:"status" yaml:"status"`
 }
@@ -4269,7 +4287,7 @@ func (m *NodeResponseInlineRecordsInlineArrayItemInlineHaInlineGiveback) Unmarsh
 	return nil
 }
 
-// NodeResponseInlineRecordsInlineArrayItemInlineHaInlineGivebackInlineFailure Indicates the failure code and message.
+// NodeResponseInlineRecordsInlineArrayItemInlineHaInlineGivebackInlineFailure Indicates the failure code and message. This property is not supported on the ASA r2 platform.
 //
 // swagger:model node_response_inline_records_inline_array_item_inline_ha_inline_giveback_inline_failure
 type NodeResponseInlineRecordsInlineArrayItemInlineHaInlineGivebackInlineFailure struct {
@@ -5592,7 +5610,7 @@ func (m *NodeResponseInlineRecordsInlineArrayItemInlineHaInlineTakeoverCheck) Un
 	return nil
 }
 
-// NodeResponseInlineRecordsInlineArrayItemInlineHaInlineTakeoverInlineFailure Indicates the failure code and message.
+// NodeResponseInlineRecordsInlineArrayItemInlineHaInlineTakeoverInlineFailure Indicates the failure code and message. This property is not supported on the ASA r2 platform.
 //
 // swagger:model node_response_inline_records_inline_array_item_inline_ha_inline_takeover_inline_failure
 type NodeResponseInlineRecordsInlineArrayItemInlineHaInlineTakeoverInlineFailure struct {
@@ -9038,7 +9056,8 @@ type NodeResponseInlineRecordsInlineArrayItemInlineStatistics struct {
 	// Example: 12345123
 	ProcessorUtilizationBase *int64 `json:"processor_utilization_base,omitempty" yaml:"processor_utilization_base,omitempty"`
 
-	// Raw CPU Utilization for the node. This should be divided by the processor_utilization_base to calculate the percentage CPU utilization for the node.
+	// Raw CPU utilization for the node. The change in this value over time should be divided by corresponding change in processor_utilization_base, then multiplied by 100 to calculate the percentage CPU utilization for the node. For example: ((processor_utilization_raw_t2 - processor_utilization_raw_t1) / (processor_utilization_base_t2 - processor_utilization_base_t1)) * 100.
+	//
 	// Example: 13
 	ProcessorUtilizationRaw *int64 `json:"processor_utilization_raw,omitempty" yaml:"processor_utilization_raw,omitempty"`
 

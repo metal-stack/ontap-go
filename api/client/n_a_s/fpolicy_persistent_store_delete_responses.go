@@ -111,7 +111,7 @@ func NewFpolicyPersistentStoreDeleteDefault(code int) *FpolicyPersistentStoreDel
 	| Error Code | Description |
 
 | ---------- | ----------- |
-| 9765064    | Persistent store is active on atleast one policy |
+| 9765064    | Persistent Store is active on at least one policy |
 */
 type FpolicyPersistentStoreDeleteDefault struct {
 	_statusCode int

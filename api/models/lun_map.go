@@ -41,7 +41,6 @@ type LunMap struct {
 	// When a LUN map is created, the cluster node hosting the LUN and its high availability (HA) partner are set as the default reporting node. In POST, the property `additional_reporting_node` may be used to add an additional node and its HA partner.<br/>
 	// For further information, see [`DOC /protocols/san/lun-maps/{lun.uuid}/{igroup.uuid}/reporting-nodes`](#docs-SAN-protocols_san_lun-maps_{lun.uuid}_{igroup.uuid}_reporting-nodes).
 	//
-	//
 	// Read Only: true
 	LunMapInlineReportingNodes []*LunMapInlineReportingNodesInlineArrayItem `json:"reporting_nodes,omitempty" yaml:"reporting_nodes,omitempty"`
 
@@ -866,7 +865,10 @@ type LunMapInlineLun struct {
 	// links
 	Links *LunMapInlineLunInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The fully qualified path name of the LUN composed of a \"/vol\" prefix, the volume name, the (optional) qtree name, and file name of the LUN. Valid in POST.
+	// The name of the LUN. Valid in POST.
+	// A LUN is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+	// LUN names are paths of the form "/vol/\<volume>[/\<qtree>]/\<namespace>" where the qtree name is optional.
+	//
 	//
 	// Example: /vol/volume1/qtree1/lun1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`

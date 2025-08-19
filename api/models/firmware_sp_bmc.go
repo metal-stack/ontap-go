@@ -20,9 +20,9 @@ import (
 // swagger:model firmware_sp_bmc
 type FirmwareSpBmc struct {
 
-	// autoupdte
+	// autoupdate
 	// Example: false
-	Autoupdte *bool `json:"autoupdte,omitempty" yaml:"autoupdte,omitempty"`
+	Autoupdate *bool `json:"autoupdate,omitempty" yaml:"autoupdate,omitempty"`
 
 	// end time
 	// Example: 2020-05-17 20:00:00

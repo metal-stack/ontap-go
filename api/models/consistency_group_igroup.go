@@ -34,7 +34,11 @@ type ConsistencyGroupIgroup struct {
 	// Min Length: 0
 	Comment *string `json:"comment,omitempty" yaml:"comment,omitempty"`
 
-	// Separate igroup definitions to include in this igroup.
+	// The existing initiator groups that are members of the group. Optional in POST.<br/>
+	// This property is mutually exclusive with the _initiators_ property during POST.<br/>
+	// This array contains only the direct children of the initiator group. If the member initiator groups have further nested initiator groups, those are reported in the `igroups` property of the child initiator group.<br/>
+	// Zero or more nested initiator groups can be supplied when the initiator group is created. The initiator group will act as if it contains the aggregation of all initiators in any nested initiator groups.<br/>
+	// After creation, nested initiator groups can be added or removed from the initiator group using the `/protocols/san/igroups/{igroup.uuid}/igroups` endpoint. See [`POST /protocols/san/igroups/{igroup.uuid}/igroups`](#/SAN/igroup_nested_create) and [`DELETE /protocols/san/igroups/{igroup.uuid}/igroups/{uuid}`](#/SAN/igroup_nested_delete) for more details.
 	//
 	ConsistencyGroupIgroupInlineIgroups []*ConsistencyGroupIgroupInlineIgroupsInlineArrayItem `json:"igroups,omitempty" yaml:"igroups,omitempty"`
 

@@ -54,6 +54,11 @@ type CifsShareACL struct {
 	// Enum: ["windows","unix_user","unix_group"]
 	Type *string `json:"type,omitempty" yaml:"type,omitempty"`
 
+	// Specifies the UNIX user or group identifier (UID/GID).
+	// Example: 100
+	// Read Only: true
+	UnixID *int64 `json:"unix_id,omitempty" yaml:"unix_id,omitempty"`
+
 	// Specifies the user or group name to add to the access control list of a CIFS share.
 	// Example: ENGDOMAIN\\ad_user
 	UserOrGroup *string `json:"user_or_group,omitempty" yaml:"user_or_group,omitempty"`
@@ -236,6 +241,10 @@ func (m *CifsShareACL) ContextValidate(ctx context.Context, formats strfmt.Regis
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateUnixID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -297,6 +306,15 @@ func (m *CifsShareACL) contextValidateSvm(ctx context.Context, formats strfmt.Re
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *CifsShareACL) contextValidateUnixID(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "unix_id", "body", m.UnixID); err != nil {
+		return err
 	}
 
 	return nil

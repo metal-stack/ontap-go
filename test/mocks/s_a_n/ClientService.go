@@ -1347,7 +1347,7 @@ func (_m *ClientService) LunAttributeCollectionGet(params *clients_a_n.LunAttrib
 }
 
 // LunAttributeCreate provides a mock function with given fields: params, authInfo, opts
-func (_m *ClientService) LunAttributeCreate(params *clients_a_n.LunAttributeCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...clients_a_n.ClientOption) (*clients_a_n.LunAttributeCreateCreated, error) {
+func (_m *ClientService) LunAttributeCreate(params *clients_a_n.LunAttributeCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...clients_a_n.ClientOption) (*clients_a_n.LunAttributeCreateCreated, *clients_a_n.LunAttributeCreateAccepted, error) {
 	_va := make([]interface{}, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
@@ -1362,8 +1362,9 @@ func (_m *ClientService) LunAttributeCreate(params *clients_a_n.LunAttributeCrea
 	}
 
 	var r0 *clients_a_n.LunAttributeCreateCreated
-	var r1 error
-	if rf, ok := ret.Get(0).(func(*clients_a_n.LunAttributeCreateParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) (*clients_a_n.LunAttributeCreateCreated, error)); ok {
+	var r1 *clients_a_n.LunAttributeCreateAccepted
+	var r2 error
+	if rf, ok := ret.Get(0).(func(*clients_a_n.LunAttributeCreateParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) (*clients_a_n.LunAttributeCreateCreated, *clients_a_n.LunAttributeCreateAccepted, error)); ok {
 		return rf(params, authInfo, opts...)
 	}
 	if rf, ok := ret.Get(0).(func(*clients_a_n.LunAttributeCreateParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) *clients_a_n.LunAttributeCreateCreated); ok {
@@ -1374,13 +1375,21 @@ func (_m *ClientService) LunAttributeCreate(params *clients_a_n.LunAttributeCrea
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(*clients_a_n.LunAttributeCreateParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) error); ok {
+	if rf, ok := ret.Get(1).(func(*clients_a_n.LunAttributeCreateParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) *clients_a_n.LunAttributeCreateAccepted); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
-		r1 = ret.Error(1)
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*clients_a_n.LunAttributeCreateAccepted)
+		}
 	}
 
-	return r0, r1
+	if rf, ok := ret.Get(2).(func(*clients_a_n.LunAttributeCreateParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) error); ok {
+		r2 = rf(params, authInfo, opts...)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
 }
 
 // LunAttributeDelete provides a mock function with given fields: params, authInfo, opts
@@ -1532,7 +1541,7 @@ func (_m *ClientService) LunCollectionGet(params *clients_a_n.LunCollectionGetPa
 }
 
 // LunCreate provides a mock function with given fields: params, authInfo, opts
-func (_m *ClientService) LunCreate(params *clients_a_n.LunCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...clients_a_n.ClientOption) (*clients_a_n.LunCreateCreated, error) {
+func (_m *ClientService) LunCreate(params *clients_a_n.LunCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...clients_a_n.ClientOption) (*clients_a_n.LunCreateCreated, *clients_a_n.LunCreateAccepted, error) {
 	_va := make([]interface{}, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
@@ -1547,8 +1556,9 @@ func (_m *ClientService) LunCreate(params *clients_a_n.LunCreateParams, authInfo
 	}
 
 	var r0 *clients_a_n.LunCreateCreated
-	var r1 error
-	if rf, ok := ret.Get(0).(func(*clients_a_n.LunCreateParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) (*clients_a_n.LunCreateCreated, error)); ok {
+	var r1 *clients_a_n.LunCreateAccepted
+	var r2 error
+	if rf, ok := ret.Get(0).(func(*clients_a_n.LunCreateParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) (*clients_a_n.LunCreateCreated, *clients_a_n.LunCreateAccepted, error)); ok {
 		return rf(params, authInfo, opts...)
 	}
 	if rf, ok := ret.Get(0).(func(*clients_a_n.LunCreateParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) *clients_a_n.LunCreateCreated); ok {
@@ -1559,17 +1569,25 @@ func (_m *ClientService) LunCreate(params *clients_a_n.LunCreateParams, authInfo
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(*clients_a_n.LunCreateParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) error); ok {
+	if rf, ok := ret.Get(1).(func(*clients_a_n.LunCreateParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) *clients_a_n.LunCreateAccepted); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
-		r1 = ret.Error(1)
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*clients_a_n.LunCreateAccepted)
+		}
 	}
 
-	return r0, r1
+	if rf, ok := ret.Get(2).(func(*clients_a_n.LunCreateParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) error); ok {
+		r2 = rf(params, authInfo, opts...)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
 }
 
 // LunDelete provides a mock function with given fields: params, authInfo, opts
-func (_m *ClientService) LunDelete(params *clients_a_n.LunDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...clients_a_n.ClientOption) (*clients_a_n.LunDeleteOK, error) {
+func (_m *ClientService) LunDelete(params *clients_a_n.LunDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...clients_a_n.ClientOption) (*clients_a_n.LunDeleteOK, *clients_a_n.LunDeleteAccepted, error) {
 	_va := make([]interface{}, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
@@ -1584,8 +1602,9 @@ func (_m *ClientService) LunDelete(params *clients_a_n.LunDeleteParams, authInfo
 	}
 
 	var r0 *clients_a_n.LunDeleteOK
-	var r1 error
-	if rf, ok := ret.Get(0).(func(*clients_a_n.LunDeleteParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) (*clients_a_n.LunDeleteOK, error)); ok {
+	var r1 *clients_a_n.LunDeleteAccepted
+	var r2 error
+	if rf, ok := ret.Get(0).(func(*clients_a_n.LunDeleteParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) (*clients_a_n.LunDeleteOK, *clients_a_n.LunDeleteAccepted, error)); ok {
 		return rf(params, authInfo, opts...)
 	}
 	if rf, ok := ret.Get(0).(func(*clients_a_n.LunDeleteParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) *clients_a_n.LunDeleteOK); ok {
@@ -1596,13 +1615,21 @@ func (_m *ClientService) LunDelete(params *clients_a_n.LunDeleteParams, authInfo
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(*clients_a_n.LunDeleteParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) error); ok {
+	if rf, ok := ret.Get(1).(func(*clients_a_n.LunDeleteParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) *clients_a_n.LunDeleteAccepted); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
-		r1 = ret.Error(1)
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*clients_a_n.LunDeleteAccepted)
+		}
 	}
 
-	return r0, r1
+	if rf, ok := ret.Get(2).(func(*clients_a_n.LunDeleteParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) error); ok {
+		r2 = rf(params, authInfo, opts...)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
 }
 
 // LunGet provides a mock function with given fields: params, authInfo, opts
@@ -1939,7 +1966,7 @@ func (_m *ClientService) LunMapReportingNodeGet(params *clients_a_n.LunMapReport
 }
 
 // LunModify provides a mock function with given fields: params, authInfo, opts
-func (_m *ClientService) LunModify(params *clients_a_n.LunModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...clients_a_n.ClientOption) (*clients_a_n.LunModifyOK, error) {
+func (_m *ClientService) LunModify(params *clients_a_n.LunModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...clients_a_n.ClientOption) (*clients_a_n.LunModifyOK, *clients_a_n.LunModifyAccepted, error) {
 	_va := make([]interface{}, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
@@ -1954,8 +1981,9 @@ func (_m *ClientService) LunModify(params *clients_a_n.LunModifyParams, authInfo
 	}
 
 	var r0 *clients_a_n.LunModifyOK
-	var r1 error
-	if rf, ok := ret.Get(0).(func(*clients_a_n.LunModifyParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) (*clients_a_n.LunModifyOK, error)); ok {
+	var r1 *clients_a_n.LunModifyAccepted
+	var r2 error
+	if rf, ok := ret.Get(0).(func(*clients_a_n.LunModifyParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) (*clients_a_n.LunModifyOK, *clients_a_n.LunModifyAccepted, error)); ok {
 		return rf(params, authInfo, opts...)
 	}
 	if rf, ok := ret.Get(0).(func(*clients_a_n.LunModifyParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) *clients_a_n.LunModifyOK); ok {
@@ -1966,13 +1994,21 @@ func (_m *ClientService) LunModify(params *clients_a_n.LunModifyParams, authInfo
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(*clients_a_n.LunModifyParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) error); ok {
+	if rf, ok := ret.Get(1).(func(*clients_a_n.LunModifyParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) *clients_a_n.LunModifyAccepted); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
-		r1 = ret.Error(1)
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*clients_a_n.LunModifyAccepted)
+		}
 	}
 
-	return r0, r1
+	if rf, ok := ret.Get(2).(func(*clients_a_n.LunModifyParams, runtime.ClientAuthInfoWriter, ...clients_a_n.ClientOption) error); ok {
+		r2 = rf(params, authInfo, opts...)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
 }
 
 // PerformanceFcpMetricCollectionGet provides a mock function with given fields: params, authInfo, opts

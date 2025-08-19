@@ -123,11 +123,11 @@ func NewSnapshotPolicyCreateDefault(code int) *SnapshotPolicyCreateDefault {
 
 | Error Code | Description |
 | ---------- | ----------- |
-| 1638407    | When adding schedule to a Snapshot copy policy, the count for that schedule must be specified. |
-| 1638408    | When adding schedule to a Snapshot copy policy, the schedule name must be specified. |
+| 1638407    | When adding schedule to a snapshot policy, the count for that schedule must be specified. |
+| 1638408    | When adding schedule to a snapshot policy, the schedule name must be specified. |
 | 1638413    | Schedule not found. |
 | 1638417    | Specified policy name is invalid. |
-| 1638451    | This operation would result in total Snapshot copy count for the policy to exceed maximum supported count. |
+| 1638451    | This operation would result in total snapshot count for the policy to exceed maximum supported count. |
 | 1638506    | Schedule already has a prefix. Cannot associate another prefix to the same schedule. |
 | 1638508    | Another schedule has the same prefix within this policy. |
 | 1638526    | This operation is not supported on a node Vserver. |

@@ -121,7 +121,7 @@ func NewDNSModifyDefault(code int) *DNSModifyDefault {
 | 8847383    | The specified TTL exceeds the maximum supported value of 720 hours. |
 | 8847392    | Domain name cannot be an IP address |
 | 8847393    | Top level domain name is invalid |
-| 8847394    | FQDN name voilated the limitations |
+| 8847394    | FQDN name violated the limitations |
 | 8847399    | One or more of the specified DNS servers do not exist or cannot be reached |
 | 8847404    | Dynamic DNS is applicable only for data SVMs |
 | 8847405    | DNS parameters updated successfully; however the update of Dynamic DNS-related parameters has failed. |

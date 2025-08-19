@@ -113,6 +113,7 @@ func NewNetworkEthernetPortModifyDefault(code int) *NetworkEthernetPortModifyDef
 | Error Code | Description |
 | ---------- | ----------- |
 | 1376361 | Port is already a member of a LAG. |
+| 1376369 | Cannot add port to the interface group because the port hosts one or more VLANs. |
 | 1376488 | Disabling the last operational cluster port on a node is not allowed. |
 | 1376492 | Cannot change the MTU of a VLAN to be greater than the MTU of the port hosting it. |
 | 1377563 | Port is already a member of a LAG. |
@@ -125,13 +126,20 @@ func NewNetworkEthernetPortModifyDefault(code int) *NetworkEthernetPortModifyDef
 | 1967095 | The specified LAG member port name and node name combination is not valid. |
 | 1967096 | The specified node does not match the specified LAG member port node. |
 | 1967097 | The specified LAG member ports UUID, name, and node name do not match. |
+| 1967126 | A LAG requires at least one member port. |
 | 1967148 | Failure to remove port from broadcast domain. |
 | 1967149 | Failure to add port to broadcast domain. |
 | 1967184 | The reachability parameter cannot be patched in the same request as other parameters that might affect the target port's reachability status. |
 | 1967185 | The port cannot be repaired because the port is deemed as non-repairable. |
 | 1967186 | Invalid value for the reachability parameter. |
+| 1967195 | Missing or incomplete name retrieval for specified port UUID. |
 | 1967580 | This command is not supported as the effective cluster version is earlier than 9.8. |
 | 1967582 | The reachability parameter is not supported on this cluster. |
+| 53216932 | Failed to determine whether newly introduced PFC flow control is supported. |
+| 53280899 | Not all nodes support enabling the PFC feature. |
+| 53280900 | No PFC queues specified. |
+| 53280901 | Failed to modify PFC. |
+| 53280902 | Cluster ports does not support PFC flow control. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type NetworkEthernetPortModifyDefault struct {

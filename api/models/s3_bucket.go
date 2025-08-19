@@ -39,6 +39,9 @@ type S3Bucket struct {
 	// Minimum: 1
 	ConstituentsPerAggregate *int64 `json:"constituents_per_aggregate,omitempty" yaml:"constituents_per_aggregate,omitempty"`
 
+	// cors
+	Cors *S3BucketInlineCors `json:"cors,omitempty" yaml:"cors,omitempty"`
+
 	// encryption
 	Encryption *S3BucketInlineEncryption `json:"encryption,omitempty" yaml:"encryption,omitempty"`
 
@@ -84,6 +87,9 @@ type S3Bucket struct {
 	// Maximum: 6.2672162783232e+16
 	// Minimum: 1.9922944e+08
 	Size *int64 `json:"size,omitempty" yaml:"size,omitempty"`
+
+	// snapshot policy
+	SnapshotPolicy *S3BucketInlineSnapshotPolicy `json:"snapshot_policy,omitempty" yaml:"snapshot_policy,omitempty"`
 
 	// Specifies the storage service level of the FlexGroup volume on which the bucket should be created. Valid values are "value", "performance" or "extreme".
 	// Example: value
@@ -132,6 +138,10 @@ func (m *S3Bucket) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateCors(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateEncryption(formats); err != nil {
 		res = append(res, err)
 	}
@@ -169,6 +179,10 @@ func (m *S3Bucket) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSize(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSnapshotPolicy(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -248,6 +262,25 @@ func (m *S3Bucket) validateConstituentsPerAggregate(formats strfmt.Registry) err
 
 	if err := validate.MaximumInt("constituents_per_aggregate", "body", *m.ConstituentsPerAggregate, 1000, false); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *S3Bucket) validateCors(formats strfmt.Registry) error {
+	if swag.IsZero(m.Cors) { // not required
+		return nil
+	}
+
+	if m.Cors != nil {
+		if err := m.Cors.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cors")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cors")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -470,6 +503,25 @@ func (m *S3Bucket) validateSize(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *S3Bucket) validateSnapshotPolicy(formats strfmt.Registry) error {
+	if swag.IsZero(m.SnapshotPolicy) { // not required
+		return nil
+	}
+
+	if m.SnapshotPolicy != nil {
+		if err := m.SnapshotPolicy.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("snapshot_policy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("snapshot_policy")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 var s3BucketTypeStorageServiceLevelPropEnum []interface{}
 
 func init() {
@@ -660,6 +712,10 @@ func (m *S3Bucket) ContextValidate(ctx context.Context, formats strfmt.Registry)
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateCors(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateEncryption(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -696,6 +752,10 @@ func (m *S3Bucket) ContextValidate(ctx context.Context, formats strfmt.Registry)
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateSnapshotPolicy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSvm(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -727,6 +787,27 @@ func (m *S3Bucket) contextValidateAuditEventSelector(ctx context.Context, format
 				return ve.ValidateName("audit_event_selector")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("audit_event_selector")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *S3Bucket) contextValidateCors(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Cors != nil {
+
+		if swag.IsZero(m.Cors) { // not required
+			return nil
+		}
+
+		if err := m.Cors.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cors")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cors")
 			}
 			return err
 		}
@@ -899,6 +980,27 @@ func (m *S3Bucket) contextValidateS3BucketInlineAggregates(ctx context.Context, 
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *S3Bucket) contextValidateSnapshotPolicy(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SnapshotPolicy != nil {
+
+		if swag.IsZero(m.SnapshotPolicy) { // not required
+			return nil
+		}
+
+		if err := m.SnapshotPolicy.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("snapshot_policy")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("snapshot_policy")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -1317,6 +1419,351 @@ func (m *S3BucketInlineAuditEventSelector) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *S3BucketInlineAuditEventSelector) UnmarshalBinary(b []byte) error {
 	var res S3BucketInlineAuditEventSelector
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// S3BucketInlineCors Cross-origin resource sharing (CORS) specifies an object associated with a bucket. The CORS configuration enables the bucket to service the cross-origin requests. A request might typically come from an origin with a domain that is different to that of the bucket. By configuring a CORS rule, you can define a combination of allowed origins, HTTP headers and methods that a bucket can use to filter out the cross-origin requests that it can service successfully.
+//
+// swagger:model s3_bucket_inline_cors
+type S3BucketInlineCors struct {
+
+	// Specifies an object store bucket CORS rule.
+	Rules []*S3BucketCorsRulesItems0 `json:"rules,omitempty" yaml:"rules,omitempty"`
+}
+
+// Validate validates this s3 bucket inline cors
+func (m *S3BucketInlineCors) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateRules(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *S3BucketInlineCors) validateRules(formats strfmt.Registry) error {
+	if swag.IsZero(m.Rules) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Rules); i++ {
+		if swag.IsZero(m.Rules[i]) { // not required
+			continue
+		}
+
+		if m.Rules[i] != nil {
+			if err := m.Rules[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("cors" + "." + "rules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("cors" + "." + "rules" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this s3 bucket inline cors based on the context it is used
+func (m *S3BucketInlineCors) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateRules(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *S3BucketInlineCors) contextValidateRules(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Rules); i++ {
+
+		if m.Rules[i] != nil {
+
+			if swag.IsZero(m.Rules[i]) { // not required
+				return nil
+			}
+
+			if err := m.Rules[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("cors" + "." + "rules" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("cors" + "." + "rules" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *S3BucketInlineCors) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *S3BucketInlineCors) UnmarshalBinary(b []byte) error {
+	var res S3BucketInlineCors
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// S3BucketCorsRulesItems0 Information about the CORS rule of an S3 bucket.
+//
+// swagger:model S3BucketCorsRulesItems0
+type S3BucketCorsRulesItems0 struct {
+
+	// links
+	Links *S3BucketCorsRulesItems0Links `json:"_links,omitempty" yaml:"_links,omitempty"`
+
+	// An array of HTTP headers allowed in the cross-origin requests.
+	//
+	// Example: ["x-amz-request-id"]
+	AllowedHeaders []*string `json:"allowed_headers" yaml:"allowed_headers"`
+
+	// An array of HTTP methods allowed in the cross-origin requests.
+	//
+	// Example: ["PUT","DELETE"]
+	AllowedMethods []*string `json:"allowed_methods" yaml:"allowed_methods"`
+
+	// List of origins from where a cross-origin request is allowed to originate from for the S3 bucket.
+	//
+	// Example: ["http://www.example.com"]
+	AllowedOrigins []*string `json:"allowed_origins" yaml:"allowed_origins"`
+
+	// List of extra headers sent in the response that customers can access from their applications.
+	//
+	// Example: ["x-amz-date"]
+	ExposeHeaders []*string `json:"expose_headers" yaml:"expose_headers"`
+
+	// Bucket CORS rule identifier. The length of the name can range from 0 to 256 characters.
+	// Max Length: 256
+	// Min Length: 0
+	ID *string `json:"id,omitempty" yaml:"id,omitempty"`
+
+	// The time in seconds for your browser to cache the preflight response for the specified resource.
+	// Example: 1024
+	MaxAgeSeconds *int64 `json:"max_age_seconds,omitempty" yaml:"max_age_seconds,omitempty"`
+}
+
+// Validate validates this s3 bucket cors rules items0
+func (m *S3BucketCorsRulesItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLinks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *S3BucketCorsRulesItems0) validateLinks(formats strfmt.Registry) error {
+	if swag.IsZero(m.Links) { // not required
+		return nil
+	}
+
+	if m.Links != nil {
+		if err := m.Links.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *S3BucketCorsRulesItems0) validateID(formats strfmt.Registry) error {
+	if swag.IsZero(m.ID) { // not required
+		return nil
+	}
+
+	if err := validate.MinLength("id", "body", *m.ID, 0); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("id", "body", *m.ID, 256); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this s3 bucket cors rules items0 based on the context it is used
+func (m *S3BucketCorsRulesItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *S3BucketCorsRulesItems0) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Links != nil {
+
+		if swag.IsZero(m.Links) { // not required
+			return nil
+		}
+
+		if err := m.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *S3BucketCorsRulesItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *S3BucketCorsRulesItems0) UnmarshalBinary(b []byte) error {
+	var res S3BucketCorsRulesItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// S3BucketCorsRulesItems0Links s3 bucket cors rules items0 links
+//
+// swagger:model S3BucketCorsRulesItems0Links
+type S3BucketCorsRulesItems0Links struct {
+
+	// self
+	Self *Href `json:"self,omitempty" yaml:"self,omitempty"`
+}
+
+// Validate validates this s3 bucket cors rules items0 links
+func (m *S3BucketCorsRulesItems0Links) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateSelf(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *S3BucketCorsRulesItems0Links) validateSelf(formats strfmt.Registry) error {
+	if swag.IsZero(m.Self) { // not required
+		return nil
+	}
+
+	if m.Self != nil {
+		if err := m.Self.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this s3 bucket cors rules items0 links based on the context it is used
+func (m *S3BucketCorsRulesItems0Links) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *S3BucketCorsRulesItems0Links) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Self != nil {
+
+		if swag.IsZero(m.Self) { // not required
+			return nil
+		}
+
+		if err := m.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *S3BucketCorsRulesItems0Links) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *S3BucketCorsRulesItems0Links) UnmarshalBinary(b []byte) error {
+	var res S3BucketCorsRulesItems0Links
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
@@ -3328,7 +3775,7 @@ func (m *S3BucketInlineProtectionStatusInlineDestination) UnmarshalBinary(b []by
 	return nil
 }
 
-// S3BucketInlineQosPolicy Specifes "qos_policy.max_throughput_iops" and/or "qos_policy.max_throughput_mbps" or "qos_policy.min_throughput_iops" and/or "qos_policy.min_throughput_mbps". Specifying "min_throughput_iops" or "min_throughput_mbps" is only supported on volumes hosted on a node that is flash optimized. A pre-created QoS policy can also be used by specifying "qos_policy.name" or "qos_policy.uuid" properties. Setting or assigning a QoS policy to a bucket is not supported if its containing volume or SVM already has a QoS policy attached.
+// S3BucketInlineQosPolicy Specifies "qos_policy.max_throughput_iops" and/or "qos_policy.max_throughput_mbps" or "qos_policy.min_throughput_iops" and/or "qos_policy.min_throughput_mbps". Specifying "min_throughput_iops" or "min_throughput_mbps" is only supported on volumes hosted on a node that is flash optimized. A pre-created QoS policy can also be used by specifying "qos_policy.name" or "qos_policy.uuid" properties. Setting or assigning a QoS policy to a bucket is not supported if its containing volume or SVM already has a QoS policy attached.
 //
 // swagger:model s3_bucket_inline_qos_policy
 type S3BucketInlineQosPolicy struct {
@@ -3727,6 +4174,70 @@ func (m *S3BucketInlineRetention) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
+// S3BucketInlineSnapshotPolicy Specifies the bucket snapshot policy.
+//
+// swagger:model s3_bucket_inline_snapshot_policy
+type S3BucketInlineSnapshotPolicy struct {
+
+	// Specifies the name of the snapshot policy.
+	// Example: default-1weekly
+	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
+
+	// Specifies the unique identifier of the snapshot policy.
+	// Example: 3675af31-431c-12fa-114a-20675afebc12
+	// Format: uuid
+	UUID *strfmt.UUID `json:"uuid,omitempty" yaml:"uuid,omitempty"`
+}
+
+// Validate validates this s3 bucket inline snapshot policy
+func (m *S3BucketInlineSnapshotPolicy) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateUUID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *S3BucketInlineSnapshotPolicy) validateUUID(formats strfmt.Registry) error {
+	if swag.IsZero(m.UUID) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("snapshot_policy"+"."+"uuid", "body", "uuid", m.UUID.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this s3 bucket inline snapshot policy based on context it is used
+func (m *S3BucketInlineSnapshotPolicy) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *S3BucketInlineSnapshotPolicy) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *S3BucketInlineSnapshotPolicy) UnmarshalBinary(b []byte) error {
+	var res S3BucketInlineSnapshotPolicy
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
 // S3BucketInlineSvm SVM, applies only to SVM-scoped objects.
 //
 // swagger:model s3_bucket_inline_svm
@@ -3935,7 +4446,7 @@ type S3BucketInlineVolume struct {
 	// links
 	Links *S3BucketInlineVolumeInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 

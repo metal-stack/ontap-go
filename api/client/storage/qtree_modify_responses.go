@@ -203,7 +203,7 @@ func NewQtreeModifyDefault(code int) *QtreeModifyDefault {
 | Error Code | Description |
 | ---------- | ----------- |
 | 262196 | The request contains a field which cannot be set in this operation. |
-| 262278 | Required field is missing in the reqeust. |
+| 262278 | Required field is missing in the request. |
 | 917505 | Vserver not found. |
 | 917525 | The specified volume does not exist in Vserver. |
 | 918235 | A volume with UUID was not found. |

@@ -138,6 +138,7 @@ func NewExportRuleClientsCreateDefault(code int) *ExportRuleClientsCreateDefault
 
 | Error Code | Description |
 | ---------- | ----------- |
+| 262196     | Field 'svm.name' is not supported in the body of POST request |
 | 1703954    | Export policy does not exist |
 | 1704036    | Invalid clientmatch:  missing domain name |
 | 1704037    | Invalid clientmatch:  missing network name |
@@ -153,6 +154,7 @@ func NewExportRuleClientsCreateDefault(code int) *ExportRuleClientsCreateDefault
 | 1704054    | Invalid clientmatch: invalid characters in netgroup name. Valid characters for a netgroup name are 0-9, A-Z, a-z, ".", "_" and "-" |
 | 1704064    | Clientmatch host name too long |
 | 1704065    | Clientmatch domain name too long |
+| 6691623    | User is not authorized |
 */
 type ExportRuleClientsCreateDefault struct {
 	_statusCode int

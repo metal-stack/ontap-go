@@ -445,7 +445,10 @@ type VvolBindingInlineProtocolEndpoint struct {
 	// links
 	Links *VvolBindingInlineProtocolEndpointInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The fully qualified path name of the LUN composed of the "/vol" prefix, the volume name, the (optional) qtree name, and base name of the LUN. Valid in POST and PATCH.
+	// The name of a LUN.
+	// A LUN is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+	// LUN names are paths of the form "/vol/\<volume>[/\<qtree>]/\<namespace>" where the qtree name is optional.
+	//
 	//
 	// Example: /vol/volume1/lun1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
@@ -845,7 +848,10 @@ type VvolBindingInlineVvol struct {
 	// links
 	Links *VvolBindingInlineVvolInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The fully qualified path name of the LUN composed of the "/vol" prefix, the volume name, the (optional) qtree name, and base name of the LUN. Valid in POST and PATCH.
+	// The name of a LUN.
+	// A LUN is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+	// LUN names are paths of the form "/vol/\<volume>[/\<qtree>]/\<namespace>" where the qtree name is optional.
+	//
 	//
 	// Example: /vol/volume1/lun1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`

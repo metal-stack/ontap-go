@@ -985,7 +985,7 @@ func (a *Client) LdapCollectionGet(params *LdapCollectionGetParams, authInfo run
 - restrict_discovery_to_site</br>
 Configuring more than one LDAP server is recommended to avoid a single point of failure.
 Both FQDNs and IP addresses are supported for the "servers" field.
-The Acitve Directory domain or LDAP servers are validated as part of this operation.</br>
+The Active Directory domain or LDAP servers are validated as part of this operation.</br>
 LDAP validation fails in the following scenarios:<br/>
 1. The server does not have LDAP installed.
 2. The server or Active Directory domain is invalid.
@@ -1118,7 +1118,7 @@ func (a *Client) LdapGet(params *LdapGetParams, authInfo runtime.ClientAuthInfoW
 * Both mandatory and optional parameters of the LDAP configuration can be updated.
 * The LDAP servers and Active Directory domain are mutually exclusive fields. These fields cannot be empty. At any point in time, either the LDAP servers or Active Directory domain must be populated.
 * IPv6 must be enabled if IPv6 family addresses are specified.<br/>
-</br>Configuring more than one LDAP server is recommended to avoid a sinlge point of failure.
+</br>Configuring more than one LDAP server is recommended to avoid a single point of failure.
 Both FQDNs and IP addresses are supported for the "servers" field.
 The Active Directory domain or LDAP servers are validated as part of this operation.<br/>
 LDAP validation fails in the following scenarios:<br/>
@@ -1416,12 +1416,14 @@ func (a *Client) LocalHostCollectionGet(params *LocalHostCollectionGetParams, au
 }
 
 /*
-	LocalHostCreate Creates a new IP to hostname mapping.
+	LocalHostCreate Creates a new cluster-scoped or SVM-scoped IP to hostname mapping. For SVM-scoped mappings, include either the SVM name as owner.name or the SVM UUID as owner.uuid in the request body, along with other necessary parameters. For cluster-scoped mappings, specifying owner.uuid or owner.name is not required.
 
 ### Required properties
-* `owner.uuid` or `owner.name` - Existing SVM in which to create IP to host mapping.
 * `address` - IPv4/IPv6 address in dotted form.
 * `hostname` - Canonical hostname.
+### Optional properties
+* `owner.uuid` or `owner.name` - Specify the name or UUID of an existing SVM to create an SVM-scoped IP-to-host mapping.
+* `aliases` - The list of aliases.
 ### Related ONTAP commands
 * `vserver services name-service dns hosts create`
 ### Learn more
@@ -2086,7 +2088,7 @@ func (a *Client) NisCollectionGet(params *NisCollectionGetParams, authInfo runti
 }
 
 /*
-	NisCreate Creates an NIS domain and server confguration for a data SVM.
+	NisCreate Creates an NIS domain and server configuration for a data SVM.
 
 NIS configuration for the cluster is managed via [`/api/security/authentication/cluster/nis`](#docs-security-security_authentication_cluster_nis).<br/>
 ### Important notes

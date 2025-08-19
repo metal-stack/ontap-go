@@ -64,6 +64,12 @@ AzureKeyVaultCreateParams contains all the parameters to send to the API endpoin
 */
 type AzureKeyVaultCreateParams struct {
 
+	/* CreateInactive.
+
+	   Indicates whether to create an active or inactive configuration.
+	*/
+	CreateInactive *bool
+
 	/* Info.
 
 	   Info specification
@@ -149,6 +155,17 @@ func (o *AzureKeyVaultCreateParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithCreateInactive adds the createInactive to the azure key vault create params
+func (o *AzureKeyVaultCreateParams) WithCreateInactive(createInactive *bool) *AzureKeyVaultCreateParams {
+	o.SetCreateInactive(createInactive)
+	return o
+}
+
+// SetCreateInactive adds the createInactive to the azure key vault create params
+func (o *AzureKeyVaultCreateParams) SetCreateInactive(createInactive *bool) {
+	o.CreateInactive = createInactive
+}
+
 // WithInfo adds the info to the azure key vault create params
 func (o *AzureKeyVaultCreateParams) WithInfo(info *models.AzureKeyVault) *AzureKeyVaultCreateParams {
 	o.SetInfo(info)
@@ -189,6 +206,23 @@ func (o *AzureKeyVaultCreateParams) WriteToRequest(r runtime.ClientRequest, reg 
 		return err
 	}
 	var res []error
+
+	if o.CreateInactive != nil {
+
+		// query param create_inactive
+		var qrCreateInactive bool
+
+		if o.CreateInactive != nil {
+			qrCreateInactive = *o.CreateInactive
+		}
+		qCreateInactive := swag.FormatBool(qrCreateInactive)
+		if qCreateInactive != "" {
+
+			if err := r.SetQueryParam("create_inactive", qCreateInactive); err != nil {
+				return err
+			}
+		}
+	}
 	if o.Info != nil {
 		if err := r.SetBodyParam(o.Info); err != nil {
 			return err

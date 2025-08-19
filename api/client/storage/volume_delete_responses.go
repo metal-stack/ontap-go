@@ -207,7 +207,13 @@ func NewVolumeDeleteDefault(code int) *VolumeDeleteDefault {
 | 917531 | Cannot delete the root volume because the SVM contains other volumes. |
 | 918667 | Volume \"name\" in SVM \"svm.name\" cannot be taken offline because it is configured to hold audit logs. |
 | 918693 | Volume \"name\" in SVM \"svm.name\" cannot be taken offline because it is configured to hold audit logs. |
+| 918701 | The specified operation on the volume endpoint is not supported on this platform. |
 | 13107349 | Operation is only supported on flexible volumes and FlexGroup volumes. |
+| 65537463 | Volume encryption keys (VEK) cannot be created or deleted for data Vserver \\\"{0}\\\". External key management has been configured for data Vserver \\\"{0}\\\" but ONTAP is not able to encrypt or decrypt with the key manager. Resolve the external key manager key issues at the key manager's portal before creating any new encrypted volumes. |
+| 65537529 | Encrypted volumes cannot be created or deleted for Vserver \\\"{0}\\\" as a rekey operation for the vserver is in progress. Try creating the encrypted volume again after some time. If the problem persists, run the rekey operation again after some time. |
+| 65537600 | Encrypted volumes cannot be created or deleted for Vserver \\\"{0}\\\" while the enabled keystore configuration is being switched. If a previous attempt to switch the keystore configuration failed, or was interrupted, the system will continue to prevent encrypted volume creation for Vserver \\\"{0}\\\". Use the \\\"security key-manager keystore enable\\\" command to re-run and complete the operation. |
+| 65539430 | Cannot create or delete volumes on Vserver \\\"{0}\\\" while the keystore is being initialized. Wait until the keystore is in the active state, and rerun the volume operation. |
+| 65539431 | Cannot create or delete volumes on Vserver \\\"{0}\\\" while the keystore is being disabled. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type VolumeDeleteDefault struct {

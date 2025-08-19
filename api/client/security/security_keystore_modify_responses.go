@@ -209,6 +209,16 @@ func NewSecurityKeystoreModifyDefault(code int) *SecurityKeystoreModifyDefault {
 | 65538910 | Disabling an enabled configuration through this method is currently not supported. |
 | 65539206 | The SVM associated with the supplied keystore UUID already has a keystore configuration enabled. This command does not support migrating from configurations of that keystore type". |
 | 65539212 | Cannot switch the enabled keystore configuration when it is not in the 'active' or 'switching' state. |
+| 65539513 | An effective cluster version of ONTAP 9.16.1 or later is required to enable an inactive key manager on the admin SVM. |
+| 65539514 | This command does not support enabling key manager configurations with the specified keystore type on the admin SVM. |
+| 65539515 | Cannot switch keystore types on the admin SVM. The keystore type for the invalid configuration must be OKM and the enabled configuration must be KMIP, or vice versa. |
+| 65539518 | Internal error. Cannot find the enabled configuration. |
+| 65539520 | Cannot enable the Onboard Key Manager on the admin SVM because an inactive Onboard Key Manager already exists on the admin SVM. |
+| 65539534 | Cannot switch admin SVM Key Manager when system root volumes are present. |
+| 65539583 | Cannot switch to the Onboard Key Manager when the external key manager has a policy associated with it |
+| 65539585 | Cannot enable an external key manager on the admin SVM because an inactive external key manager already exists on the admin SVM. |
+| 65539590 | Cannot switch to the Onboard Key Manager if there are more than two NSE-AKs in the cluster. |
+| 65539591 | Cannot switch to the Onboard Key Manager if there are fewer than two NSE-AKs in the cluster. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SecurityKeystoreModifyDefault struct {

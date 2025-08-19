@@ -24,6 +24,7 @@ type ConsistencyGroupClone struct {
 	Guarantee *ConsistencyGroupCloneInlineGuarantee `json:"guarantee,omitempty" yaml:"guarantee,omitempty"`
 
 	// Specifies if this consistency group is a FlexClone of a consistency group.
+	// Read Only: true
 	IsFlexclone *bool `json:"is_flexclone,omitempty" yaml:"is_flexclone,omitempty"`
 
 	// parent consistency group
@@ -43,7 +44,7 @@ type ConsistencyGroupClone struct {
 	// Read Only: true
 	SplitEstimate *int64 `json:"split_estimate,omitempty" yaml:"split_estimate,omitempty"`
 
-	// Splits volumes after cloning. Default is false.
+	// Splits volumes after cloning. Defaults to false during POST. Only accepts true during a PATCH.
 	SplitInitiated *bool `json:"split_initiated,omitempty" yaml:"split_initiated,omitempty"`
 
 	// volume
@@ -183,6 +184,10 @@ func (m *ConsistencyGroupClone) ContextValidate(ctx context.Context, formats str
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateIsFlexclone(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateParentConsistencyGroup(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -229,6 +234,15 @@ func (m *ConsistencyGroupClone) contextValidateGuarantee(ctx context.Context, fo
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *ConsistencyGroupClone) contextValidateIsFlexclone(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "is_flexclone", "body", m.IsFlexclone); err != nil {
+		return err
 	}
 
 	return nil
@@ -452,11 +466,9 @@ type ConsistencyGroupCloneInlineParentConsistencyGroup struct {
 	Links *SelfLink `json:"_links,omitempty" yaml:"_links,omitempty"`
 
 	// The name of the consistency group.
-	// Example: my_consistency_group
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// The unique identifier of the consistency group.
-	// Example: 02c9e252-41be-11e9-81d5-00a0986138f7
 	UUID *string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 }
 

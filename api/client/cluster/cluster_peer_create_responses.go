@@ -147,7 +147,7 @@ func NewClusterPeerCreateDefault(code int) *ClusterPeerCreateDefault {
 | 4653236 | The specified passphrase is too short. |
 | 4653365 | IPspaces are unavailable with cluster peering: {ipspace}. |
 | 4653368 | Invalid peer address passed in \"ip_addresses\": Verify that the peer address is correct, and then try the operation again. |
-| 4653419 | An unencrypted peering relationship is not suported because the cluster peering policy requires the use of encryption. |
+| 4653419 | An unencrypted peering relationship is not supported because the cluster peering policy requires the use of encryption. |
 | 4653708 | The specified addresses must be of the same address family. |
 | 4656069 | Specifying a passphrase without remote IP addresses is not supported. |
 | 4656070 | The encryption protocol is meaningful only with authenticated cluster peer relationships. |

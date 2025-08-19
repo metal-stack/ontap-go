@@ -122,7 +122,7 @@ func NewEffectivePermissionGetDefault(code int) *EffectivePermissionGetDefault {
 /*
 EffectivePermissionGetDefault describes a response with status code -1, with default header values.
 
-ONTAP Error Response Codes | Error Code | Description | | ---------- | ----------- | | 655865     | The specified path cannot be used, if the file does not exist.|
+ONTAP Error Response Codes | Error Code | Description | | ---------- | ----------- | | 262278     | User is a required field | | 655865     | The specified path cannot be used if the file does not exist | | 655470     | The specified share does not exist |
 */
 type EffectivePermissionGetDefault struct {
 	_statusCode int

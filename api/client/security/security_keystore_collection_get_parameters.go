@@ -126,6 +126,12 @@ type SecurityKeystoreCollectionGetParams struct {
 	*/
 	Scope *string
 
+	/* State.
+
+	   Filter by state
+	*/
+	State *string
+
 	/* SvmName.
 
 	   Filter by svm.name
@@ -325,6 +331,17 @@ func (o *SecurityKeystoreCollectionGetParams) WithScope(scope *string) *Security
 // SetScope adds the scope to the security keystore collection get params
 func (o *SecurityKeystoreCollectionGetParams) SetScope(scope *string) {
 	o.Scope = scope
+}
+
+// WithState adds the state to the security keystore collection get params
+func (o *SecurityKeystoreCollectionGetParams) WithState(state *string) *SecurityKeystoreCollectionGetParams {
+	o.SetState(state)
+	return o
+}
+
+// SetState adds the state to the security keystore collection get params
+func (o *SecurityKeystoreCollectionGetParams) SetState(state *string) {
+	o.State = state
 }
 
 // WithSvmName adds the svmName to the security keystore collection get params
@@ -532,6 +549,23 @@ func (o *SecurityKeystoreCollectionGetParams) WriteToRequest(r runtime.ClientReq
 		if qScope != "" {
 
 			if err := r.SetQueryParam("scope", qScope); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.State != nil {
+
+		// query param state
+		var qrState string
+
+		if o.State != nil {
+			qrState = *o.State
+		}
+		qState := qrState
+		if qState != "" {
+
+			if err := r.SetQueryParam("state", qState); err != nil {
 				return err
 			}
 		}

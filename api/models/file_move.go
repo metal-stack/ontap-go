@@ -55,7 +55,7 @@ type FileMove struct {
 	// Read Only: true
 	IsFlexgroup *bool `json:"is_flexgroup,omitempty" yaml:"is_flexgroup,omitempty"`
 
-	// Indicates whether Snapshot copies are fenced.
+	// Indicates whether snapshots are fenced.
 	// Read Only: true
 	IsSnapshotFenced *bool `json:"is_snapshot_fenced,omitempty" yaml:"is_snapshot_fenced,omitempty"`
 
@@ -1011,7 +1011,7 @@ type FileMoveInlineDestinationInlineVolume struct {
 	// links
 	Links *FileMoveInlineDestinationInlineVolumeInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
@@ -1727,7 +1727,7 @@ type FileMoveFilesToMoveDestinationsItems0Volume struct {
 	// links
 	Links *FileMoveFilesToMoveDestinationsItems0VolumeLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
@@ -2275,7 +2275,7 @@ type FileMoveFilesToMoveSourcesItems0Volume struct {
 	// links
 	Links *FileMoveFilesToMoveSourcesItems0VolumeLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
@@ -3026,7 +3026,7 @@ type FileMoveInlineReferenceInlineVolume struct {
 	// links
 	Links *FileMoveInlineReferenceInlineVolumeInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
@@ -3754,7 +3754,7 @@ type FileMoveInlineSourceInlineVolume struct {
 	// links
 	Links *FileMoveInlineSourceInlineVolumeInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
@@ -4152,7 +4152,7 @@ type FileMoveInlineVolume struct {
 	// links
 	Links *FileMoveInlineVolumeInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 

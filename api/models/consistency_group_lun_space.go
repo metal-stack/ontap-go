@@ -23,7 +23,7 @@ type ConsistencyGroupLunSpace struct {
 	Guarantee *ConsistencyGroupLunSpaceInlineGuarantee `json:"guarantee,omitempty" yaml:"guarantee,omitempty"`
 
 	// The total provisioned size of the LUN. The LUN size can be increased but not reduced using the REST interface.
-	// The maximum and minimum sizes listed here are the absolute maximum and absolute minimum sizes, in bytes. The actual minimum and maxiumum sizes vary depending on the ONTAP version, ONTAP platform, and the available space in the containing volume and aggregate.
+	// The maximum and minimum sizes listed here are the absolute maximum and absolute minimum sizes, in bytes. The actual minimum and maximum sizes vary depending on the ONTAP version, ONTAP platform, and the available space in the containing volume and aggregate.
 	// For more information, see _Size properties_ in the _docs_ section of the ONTAP REST API documentation.
 	//
 	// Example: 1073741824
@@ -164,6 +164,7 @@ func (m *ConsistencyGroupLunSpace) UnmarshalBinary(b []byte) error {
 type ConsistencyGroupLunSpaceInlineGuarantee struct {
 
 	// The requested space reservation policy for the LUN. If _true_, a space reservation is requested for the LUN; if _false_, the LUN is thin provisioned. Guaranteeing a space reservation request for a LUN requires that the volume in which the LUN resides is also space reserved and that the fractional reserve for the volume is 100%. Valid in POST and PATCH.
+	//
 	//
 	Requested *bool `json:"requested,omitempty" yaml:"requested,omitempty"`
 

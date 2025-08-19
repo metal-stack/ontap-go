@@ -57,6 +57,11 @@ type Autosupport struct {
 	// Example: true
 	IsMinimal *bool `json:"is_minimal,omitempty" yaml:"is_minimal,omitempty"`
 
+	// Specifies whether the AutoSupport OnDemand feature is enabled. When AutoSupport OnDemand is enabled, support personnel can remotely trigger new AutoSupport messages, resend existing AutoSupport messages, and decline the delivery of unwanted AutoSupport messages. When this option is disabled, the cluster does not respond to any AutoSupport OnDemand requests from support personnel.
+	//
+	// Example: true
+	OndemandEnabled *bool `json:"ondemand_enabled,omitempty" yaml:"ondemand_enabled,omitempty"`
+
 	// Proxy server for AutoSupport message delivery via HTTPS. Optionally specify a username/password for authentication with the proxy server.
 	// Example: proxy.company.com
 	// Format: uri

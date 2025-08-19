@@ -86,6 +86,42 @@ type S3ServiceCollectionGetParams struct {
 	*/
 	BucketsComment *string
 
+	/* BucketsCorsRulesAllowedHeaders.
+
+	   Filter by buckets.cors.rules.allowed_headers
+	*/
+	BucketsCorsRulesAllowedHeaders *string
+
+	/* BucketsCorsRulesAllowedMethods.
+
+	   Filter by buckets.cors.rules.allowed_methods
+	*/
+	BucketsCorsRulesAllowedMethods *string
+
+	/* BucketsCorsRulesAllowedOrigins.
+
+	   Filter by buckets.cors.rules.allowed_origins
+	*/
+	BucketsCorsRulesAllowedOrigins *string
+
+	/* BucketsCorsRulesExposeHeaders.
+
+	   Filter by buckets.cors.rules.expose_headers
+	*/
+	BucketsCorsRulesExposeHeaders *string
+
+	/* BucketsCorsRulesID.
+
+	   Filter by buckets.cors.rules.id
+	*/
+	BucketsCorsRulesID *string
+
+	/* BucketsCorsRulesMaxAgeSeconds.
+
+	   Filter by buckets.cors.rules.max_age_seconds
+	*/
+	BucketsCorsRulesMaxAgeSeconds *int64
+
 	/* BucketsEncryptionEnabled.
 
 	   Filter by buckets.encryption.enabled
@@ -356,6 +392,18 @@ type S3ServiceCollectionGetParams struct {
 	*/
 	BucketsSize *int64
 
+	/* BucketsSnapshotPolicyName.
+
+	   Filter by buckets.snapshot_policy.name
+	*/
+	BucketsSnapshotPolicyName *string
+
+	/* BucketsSnapshotPolicyUUID.
+
+	   Filter by buckets.snapshot_policy.uuid
+	*/
+	BucketsSnapshotPolicyUUID *string
+
 	/* BucketsSvmName.
 
 	   Filter by buckets.svm.name
@@ -458,6 +506,12 @@ type S3ServiceCollectionGetParams struct {
 	*/
 	MaxKeyTimeToLive *string
 
+	/* MaxLockRetentionPeriod.
+
+	   Filter by max_lock_retention_period
+	*/
+	MaxLockRetentionPeriod *string
+
 	/* MaxRecords.
 
 	   Limit the number of records returned.
@@ -547,6 +601,12 @@ type S3ServiceCollectionGetParams struct {
 	   Filter by metric.timestamp
 	*/
 	MetricTimestamp *string
+
+	/* MinLockRetentionPeriod.
+
+	   Filter by min_lock_retention_period
+	*/
+	MinLockRetentionPeriod *string
 
 	/* Name.
 
@@ -829,6 +889,72 @@ func (o *S3ServiceCollectionGetParams) WithBucketsComment(bucketsComment *string
 // SetBucketsComment adds the bucketsComment to the s3 service collection get params
 func (o *S3ServiceCollectionGetParams) SetBucketsComment(bucketsComment *string) {
 	o.BucketsComment = bucketsComment
+}
+
+// WithBucketsCorsRulesAllowedHeaders adds the bucketsCorsRulesAllowedHeaders to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) WithBucketsCorsRulesAllowedHeaders(bucketsCorsRulesAllowedHeaders *string) *S3ServiceCollectionGetParams {
+	o.SetBucketsCorsRulesAllowedHeaders(bucketsCorsRulesAllowedHeaders)
+	return o
+}
+
+// SetBucketsCorsRulesAllowedHeaders adds the bucketsCorsRulesAllowedHeaders to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) SetBucketsCorsRulesAllowedHeaders(bucketsCorsRulesAllowedHeaders *string) {
+	o.BucketsCorsRulesAllowedHeaders = bucketsCorsRulesAllowedHeaders
+}
+
+// WithBucketsCorsRulesAllowedMethods adds the bucketsCorsRulesAllowedMethods to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) WithBucketsCorsRulesAllowedMethods(bucketsCorsRulesAllowedMethods *string) *S3ServiceCollectionGetParams {
+	o.SetBucketsCorsRulesAllowedMethods(bucketsCorsRulesAllowedMethods)
+	return o
+}
+
+// SetBucketsCorsRulesAllowedMethods adds the bucketsCorsRulesAllowedMethods to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) SetBucketsCorsRulesAllowedMethods(bucketsCorsRulesAllowedMethods *string) {
+	o.BucketsCorsRulesAllowedMethods = bucketsCorsRulesAllowedMethods
+}
+
+// WithBucketsCorsRulesAllowedOrigins adds the bucketsCorsRulesAllowedOrigins to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) WithBucketsCorsRulesAllowedOrigins(bucketsCorsRulesAllowedOrigins *string) *S3ServiceCollectionGetParams {
+	o.SetBucketsCorsRulesAllowedOrigins(bucketsCorsRulesAllowedOrigins)
+	return o
+}
+
+// SetBucketsCorsRulesAllowedOrigins adds the bucketsCorsRulesAllowedOrigins to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) SetBucketsCorsRulesAllowedOrigins(bucketsCorsRulesAllowedOrigins *string) {
+	o.BucketsCorsRulesAllowedOrigins = bucketsCorsRulesAllowedOrigins
+}
+
+// WithBucketsCorsRulesExposeHeaders adds the bucketsCorsRulesExposeHeaders to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) WithBucketsCorsRulesExposeHeaders(bucketsCorsRulesExposeHeaders *string) *S3ServiceCollectionGetParams {
+	o.SetBucketsCorsRulesExposeHeaders(bucketsCorsRulesExposeHeaders)
+	return o
+}
+
+// SetBucketsCorsRulesExposeHeaders adds the bucketsCorsRulesExposeHeaders to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) SetBucketsCorsRulesExposeHeaders(bucketsCorsRulesExposeHeaders *string) {
+	o.BucketsCorsRulesExposeHeaders = bucketsCorsRulesExposeHeaders
+}
+
+// WithBucketsCorsRulesID adds the bucketsCorsRulesID to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) WithBucketsCorsRulesID(bucketsCorsRulesID *string) *S3ServiceCollectionGetParams {
+	o.SetBucketsCorsRulesID(bucketsCorsRulesID)
+	return o
+}
+
+// SetBucketsCorsRulesID adds the bucketsCorsRulesId to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) SetBucketsCorsRulesID(bucketsCorsRulesID *string) {
+	o.BucketsCorsRulesID = bucketsCorsRulesID
+}
+
+// WithBucketsCorsRulesMaxAgeSeconds adds the bucketsCorsRulesMaxAgeSeconds to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) WithBucketsCorsRulesMaxAgeSeconds(bucketsCorsRulesMaxAgeSeconds *int64) *S3ServiceCollectionGetParams {
+	o.SetBucketsCorsRulesMaxAgeSeconds(bucketsCorsRulesMaxAgeSeconds)
+	return o
+}
+
+// SetBucketsCorsRulesMaxAgeSeconds adds the bucketsCorsRulesMaxAgeSeconds to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) SetBucketsCorsRulesMaxAgeSeconds(bucketsCorsRulesMaxAgeSeconds *int64) {
+	o.BucketsCorsRulesMaxAgeSeconds = bucketsCorsRulesMaxAgeSeconds
 }
 
 // WithBucketsEncryptionEnabled adds the bucketsEncryptionEnabled to the s3 service collection get params
@@ -1326,6 +1452,28 @@ func (o *S3ServiceCollectionGetParams) SetBucketsSize(bucketsSize *int64) {
 	o.BucketsSize = bucketsSize
 }
 
+// WithBucketsSnapshotPolicyName adds the bucketsSnapshotPolicyName to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) WithBucketsSnapshotPolicyName(bucketsSnapshotPolicyName *string) *S3ServiceCollectionGetParams {
+	o.SetBucketsSnapshotPolicyName(bucketsSnapshotPolicyName)
+	return o
+}
+
+// SetBucketsSnapshotPolicyName adds the bucketsSnapshotPolicyName to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) SetBucketsSnapshotPolicyName(bucketsSnapshotPolicyName *string) {
+	o.BucketsSnapshotPolicyName = bucketsSnapshotPolicyName
+}
+
+// WithBucketsSnapshotPolicyUUID adds the bucketsSnapshotPolicyUUID to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) WithBucketsSnapshotPolicyUUID(bucketsSnapshotPolicyUUID *string) *S3ServiceCollectionGetParams {
+	o.SetBucketsSnapshotPolicyUUID(bucketsSnapshotPolicyUUID)
+	return o
+}
+
+// SetBucketsSnapshotPolicyUUID adds the bucketsSnapshotPolicyUuid to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) SetBucketsSnapshotPolicyUUID(bucketsSnapshotPolicyUUID *string) {
+	o.BucketsSnapshotPolicyUUID = bucketsSnapshotPolicyUUID
+}
+
 // WithBucketsSvmName adds the bucketsSvmName to the s3 service collection get params
 func (o *S3ServiceCollectionGetParams) WithBucketsSvmName(bucketsSvmName *string) *S3ServiceCollectionGetParams {
 	o.SetBucketsSvmName(bucketsSvmName)
@@ -1513,6 +1661,17 @@ func (o *S3ServiceCollectionGetParams) SetMaxKeyTimeToLive(maxKeyTimeToLive *str
 	o.MaxKeyTimeToLive = maxKeyTimeToLive
 }
 
+// WithMaxLockRetentionPeriod adds the maxLockRetentionPeriod to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) WithMaxLockRetentionPeriod(maxLockRetentionPeriod *string) *S3ServiceCollectionGetParams {
+	o.SetMaxLockRetentionPeriod(maxLockRetentionPeriod)
+	return o
+}
+
+// SetMaxLockRetentionPeriod adds the maxLockRetentionPeriod to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) SetMaxLockRetentionPeriod(maxLockRetentionPeriod *string) {
+	o.MaxLockRetentionPeriod = maxLockRetentionPeriod
+}
+
 // WithMaxRecords adds the maxRecords to the s3 service collection get params
 func (o *S3ServiceCollectionGetParams) WithMaxRecords(maxRecords *int64) *S3ServiceCollectionGetParams {
 	o.SetMaxRecords(maxRecords)
@@ -1676,6 +1835,17 @@ func (o *S3ServiceCollectionGetParams) WithMetricTimestamp(metricTimestamp *stri
 // SetMetricTimestamp adds the metricTimestamp to the s3 service collection get params
 func (o *S3ServiceCollectionGetParams) SetMetricTimestamp(metricTimestamp *string) {
 	o.MetricTimestamp = metricTimestamp
+}
+
+// WithMinLockRetentionPeriod adds the minLockRetentionPeriod to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) WithMinLockRetentionPeriod(minLockRetentionPeriod *string) *S3ServiceCollectionGetParams {
+	o.SetMinLockRetentionPeriod(minLockRetentionPeriod)
+	return o
+}
+
+// SetMinLockRetentionPeriod adds the minLockRetentionPeriod to the s3 service collection get params
+func (o *S3ServiceCollectionGetParams) SetMinLockRetentionPeriod(minLockRetentionPeriod *string) {
+	o.MinLockRetentionPeriod = minLockRetentionPeriod
 }
 
 // WithName adds the name to the s3 service collection get params
@@ -2057,6 +2227,108 @@ func (o *S3ServiceCollectionGetParams) WriteToRequest(r runtime.ClientRequest, r
 		if qBucketsComment != "" {
 
 			if err := r.SetQueryParam("buckets.comment", qBucketsComment); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.BucketsCorsRulesAllowedHeaders != nil {
+
+		// query param buckets.cors.rules.allowed_headers
+		var qrBucketsCorsRulesAllowedHeaders string
+
+		if o.BucketsCorsRulesAllowedHeaders != nil {
+			qrBucketsCorsRulesAllowedHeaders = *o.BucketsCorsRulesAllowedHeaders
+		}
+		qBucketsCorsRulesAllowedHeaders := qrBucketsCorsRulesAllowedHeaders
+		if qBucketsCorsRulesAllowedHeaders != "" {
+
+			if err := r.SetQueryParam("buckets.cors.rules.allowed_headers", qBucketsCorsRulesAllowedHeaders); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.BucketsCorsRulesAllowedMethods != nil {
+
+		// query param buckets.cors.rules.allowed_methods
+		var qrBucketsCorsRulesAllowedMethods string
+
+		if o.BucketsCorsRulesAllowedMethods != nil {
+			qrBucketsCorsRulesAllowedMethods = *o.BucketsCorsRulesAllowedMethods
+		}
+		qBucketsCorsRulesAllowedMethods := qrBucketsCorsRulesAllowedMethods
+		if qBucketsCorsRulesAllowedMethods != "" {
+
+			if err := r.SetQueryParam("buckets.cors.rules.allowed_methods", qBucketsCorsRulesAllowedMethods); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.BucketsCorsRulesAllowedOrigins != nil {
+
+		// query param buckets.cors.rules.allowed_origins
+		var qrBucketsCorsRulesAllowedOrigins string
+
+		if o.BucketsCorsRulesAllowedOrigins != nil {
+			qrBucketsCorsRulesAllowedOrigins = *o.BucketsCorsRulesAllowedOrigins
+		}
+		qBucketsCorsRulesAllowedOrigins := qrBucketsCorsRulesAllowedOrigins
+		if qBucketsCorsRulesAllowedOrigins != "" {
+
+			if err := r.SetQueryParam("buckets.cors.rules.allowed_origins", qBucketsCorsRulesAllowedOrigins); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.BucketsCorsRulesExposeHeaders != nil {
+
+		// query param buckets.cors.rules.expose_headers
+		var qrBucketsCorsRulesExposeHeaders string
+
+		if o.BucketsCorsRulesExposeHeaders != nil {
+			qrBucketsCorsRulesExposeHeaders = *o.BucketsCorsRulesExposeHeaders
+		}
+		qBucketsCorsRulesExposeHeaders := qrBucketsCorsRulesExposeHeaders
+		if qBucketsCorsRulesExposeHeaders != "" {
+
+			if err := r.SetQueryParam("buckets.cors.rules.expose_headers", qBucketsCorsRulesExposeHeaders); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.BucketsCorsRulesID != nil {
+
+		// query param buckets.cors.rules.id
+		var qrBucketsCorsRulesID string
+
+		if o.BucketsCorsRulesID != nil {
+			qrBucketsCorsRulesID = *o.BucketsCorsRulesID
+		}
+		qBucketsCorsRulesID := qrBucketsCorsRulesID
+		if qBucketsCorsRulesID != "" {
+
+			if err := r.SetQueryParam("buckets.cors.rules.id", qBucketsCorsRulesID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.BucketsCorsRulesMaxAgeSeconds != nil {
+
+		// query param buckets.cors.rules.max_age_seconds
+		var qrBucketsCorsRulesMaxAgeSeconds int64
+
+		if o.BucketsCorsRulesMaxAgeSeconds != nil {
+			qrBucketsCorsRulesMaxAgeSeconds = *o.BucketsCorsRulesMaxAgeSeconds
+		}
+		qBucketsCorsRulesMaxAgeSeconds := swag.FormatInt64(qrBucketsCorsRulesMaxAgeSeconds)
+		if qBucketsCorsRulesMaxAgeSeconds != "" {
+
+			if err := r.SetQueryParam("buckets.cors.rules.max_age_seconds", qBucketsCorsRulesMaxAgeSeconds); err != nil {
 				return err
 			}
 		}
@@ -2827,6 +3099,40 @@ func (o *S3ServiceCollectionGetParams) WriteToRequest(r runtime.ClientRequest, r
 		}
 	}
 
+	if o.BucketsSnapshotPolicyName != nil {
+
+		// query param buckets.snapshot_policy.name
+		var qrBucketsSnapshotPolicyName string
+
+		if o.BucketsSnapshotPolicyName != nil {
+			qrBucketsSnapshotPolicyName = *o.BucketsSnapshotPolicyName
+		}
+		qBucketsSnapshotPolicyName := qrBucketsSnapshotPolicyName
+		if qBucketsSnapshotPolicyName != "" {
+
+			if err := r.SetQueryParam("buckets.snapshot_policy.name", qBucketsSnapshotPolicyName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.BucketsSnapshotPolicyUUID != nil {
+
+		// query param buckets.snapshot_policy.uuid
+		var qrBucketsSnapshotPolicyUUID string
+
+		if o.BucketsSnapshotPolicyUUID != nil {
+			qrBucketsSnapshotPolicyUUID = *o.BucketsSnapshotPolicyUUID
+		}
+		qBucketsSnapshotPolicyUUID := qrBucketsSnapshotPolicyUUID
+		if qBucketsSnapshotPolicyUUID != "" {
+
+			if err := r.SetQueryParam("buckets.snapshot_policy.uuid", qBucketsSnapshotPolicyUUID); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.BucketsSvmName != nil {
 
 		// query param buckets.svm.name
@@ -3110,6 +3416,23 @@ func (o *S3ServiceCollectionGetParams) WriteToRequest(r runtime.ClientRequest, r
 		}
 	}
 
+	if o.MaxLockRetentionPeriod != nil {
+
+		// query param max_lock_retention_period
+		var qrMaxLockRetentionPeriod string
+
+		if o.MaxLockRetentionPeriod != nil {
+			qrMaxLockRetentionPeriod = *o.MaxLockRetentionPeriod
+		}
+		qMaxLockRetentionPeriod := qrMaxLockRetentionPeriod
+		if qMaxLockRetentionPeriod != "" {
+
+			if err := r.SetQueryParam("max_lock_retention_period", qMaxLockRetentionPeriod); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.MaxRecords != nil {
 
 		// query param max_records
@@ -3360,6 +3683,23 @@ func (o *S3ServiceCollectionGetParams) WriteToRequest(r runtime.ClientRequest, r
 		if qMetricTimestamp != "" {
 
 			if err := r.SetQueryParam("metric.timestamp", qMetricTimestamp); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.MinLockRetentionPeriod != nil {
+
+		// query param min_lock_retention_period
+		var qrMinLockRetentionPeriod string
+
+		if o.MinLockRetentionPeriod != nil {
+			qrMinLockRetentionPeriod = *o.MinLockRetentionPeriod
+		}
+		qMinLockRetentionPeriod := qrMinLockRetentionPeriod
+		if qMinLockRetentionPeriod != "" {
+
+			if err := r.SetQueryParam("min_lock_retention_period", qMinLockRetentionPeriod); err != nil {
 				return err
 			}
 		}

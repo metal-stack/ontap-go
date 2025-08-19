@@ -195,12 +195,12 @@ It takes the following values:
 - The properties "retention.creation_schedule" and "retention.prefix" are not applicable for "sync" type policies.
 - The property "retention.creation_schedule" is not applicable for "async" policies with "create_snapshot_on_source" set to "false".
 - The property "sync_common_snapshot_schedule" is not applicable for an "async" type policy.
-- The property "retention.count" specifies the maximum number of Snapshot copies that are retained on the SnapMirror destination volume.
-- When the property "retention.label" is specified, the Snapshot copies that have a SnapMirror label matching this property is transferred to the SnapMirror destination.
-- When the property "retention.creation_schedule" is specified, Snapshot copies are directly created on the SnapMirror destination. The Snapshot copies created have the same content as the latest Snapshot copy already present on the SnapMirror destination.
+- The property "retention.count" specifies the maximum number of snapshots that are retained on the SnapMirror destination volume.
+- When the property "retention.label" is specified, the snapshots that have a SnapMirror label matching this property is transferred to the SnapMirror destination.
+- When the property "retention.creation_schedule" is specified, snapshots are directly created on the SnapMirror destination. The snapshots created have the same content as the latest snapshot already present on the SnapMirror destination.
 - The property "transfer_schedule" cannot be set to null (no-quotes) during SnapMirror policy POST.
 - The properties "retention.label" and "retention.count" must be specified for "async" policies with "create_snapshot_on_source" set to "false".
-- The property "rentention.warn" is not supported for a policy when the "retention.preserve" property is false.
+- The property "retention.warn" is not supported for a policy when the "retention.preserve" property is false.
 - The property "retention.warn" value must be less than the property "retention.count" value for a rule in a policy.
 
 ### Required properties
@@ -236,17 +236,17 @@ If not specified in POST, the following default property values are assigned:
 	 POST "/api/snapmirror/policies" '{"name": "newPolicy", "svm":{"name" : "vs1"}, "type": "async"}'
 	 ```
 	 <br/>
-	Creating a SnapMirror policy of type "async" which replicates all Snapshot copies
+	Creating a SnapMirror policy of type "async" which replicates all snapshots
 	 ```
 	 POST "/api/snapmirror/policies" '{"name": "newPolicy", "svm":{"name" : "vs1"}, "type": "async", "copy_all_source_snapshots": "true"}'
 	 ```
 	 <br/>
-	Creating a SnapMirror policy of type "async" which replicates latest Snapshot copy
+	Creating a SnapMirror policy of type "async" which replicates latest snapshot
 	 ```
 	 POST "/api/snapmirror/policies" '{"name": "newPolicy2", "svm":{"name" : "vs1"}, "type": "async", "copy_latest_source_snapshot": "true"}'
 	 ```
 	 <br/>
-	Creating a SnapMirror policy of type "async" which does not create Snapshot copies on source
+	Creating a SnapMirror policy of type "async" which does not create snapshots on source
 	 ```
 	 POST "/api/snapmirror/policies" '{"name": "newPolicy", "svm":{"name" : "vs1"}, "type": "async", "create_snapshot_on_source": "false", "retention": [{"label": "daily", "count": 7}]}'
 	 ```
@@ -468,7 +468,7 @@ func (a *Client) SnapmirrorPolicyGet(params *SnapmirrorPolicyGetParams, authInfo
 	 ```
 	 <br/>
 
-	Updating the "retention" property to have rentention.preserve and retention.warn for existing rule.
+	Updating the "retention" property to have retention.preserve and retention.warn for existing rule.
 	 <br/>
 	 ```
 	 PATCH "/api/snapmirror/policies/fe65686d-00dc-11e9-b5fb-0050568e3f83" '{"retention": [{"label": "oldLabel1", "count": 3, "preserve": true, "warn": 2}]}'
@@ -565,7 +565,7 @@ The following examples show how to create FlexVol volumes, FlexGroup volumes, SV
 	Creating a FlexGroup SnapMirror relationship of type XDP.
 	<br/>
 	```
-	POST "/api/snapmirror/relationships/" '{"source": {"path": "src_svm:source_flexgrp"}, "destination": { "path": "dst_svm:dest_flexgrp"}}'
+	POST "/api/snapmirror/relationships/" '{"source": {"path": "src_svm:source_flexgroup"}, "destination": { "path": "dst_svm:dest_flexgroup"}}'
 	```
 	<br/>
 	Creating a SVM SnapMirror relationship of type XDP.
@@ -692,7 +692,7 @@ func (a *Client) SnapmirrorRelationshipCreate(params *SnapmirrorRelationshipCrea
 	SnapmirrorRelationshipDelete Deletes a SnapMirror relationship.
 
 ### Important notes
-* The "destination_only", "source_only", and "source_info_only" flags are mutually exclusive. If no flag is specified, the relationship is deleted from both the source and destination and all common Snapshot copies between the source and destination are also deleted.
+* The "destination_only", "source_only", and "source_info_only" flags are mutually exclusive. If no flag is specified, the relationship is deleted from both the source and destination and all common snapshots between the source and destination are also deleted.
 * For a restore relationship, the call must be executed on the cluster containing the destination endpoint without specifying the destination_only, source_only, or source_info_only parameters.
 * Additionally, ensure that there are no ongoing transfers on a restore relationship before calling this API.
 * The "failover", "force-failover" and "failback" query parameters are only applicable for SVM-DR SnapMirror relationships.
@@ -723,7 +723,7 @@ The following examples show how to delete the relationship from both the source 
 	DELETE "/api/snapmirror/relationships/93e828ba-02bc-11e9-acc7-005056a7697f/?source_only=true"
 	```
 	<br/>
-	Deleting the source information only. This API must be run on the cluster containing the source endpoint. This does not delete the common Snapshot copies between the source and destination.
+	Deleting the source information only. This API must be run on the cluster containing the source endpoint. This does not delete the common snapshots between the source and destination.
 	<br/>
 	```
 	DELETE "/api/snapmirror/relationships/caf545a2-fc60-11e8-aa13-005056a707ff/?source_info_only=true"
@@ -992,6 +992,7 @@ The following examples show how to perform the SnapMirror "resync", "initialize"
 	<br/>
 	```
 	PATCH "/api/snapmirror/relationships/98bb2608-fc60-11e8-aa13-005056a707ff/" '{"state":"snapmirrored", "backoff_level": "medium"}'
+	```
 
 ### Learn more
 * [`DOC /snapmirror/relationships`](#docs-snapmirror-snapmirror_relationships)
@@ -1034,7 +1035,7 @@ func (a *Client) SnapmirrorRelationshipModify(params *SnapmirrorRelationshipModi
 }
 
 /*
-	SnapmirrorRelationshipTransferCreate Starts a SnapMirror transfer operation. This API initiates a restore operation if the SnapMirror relationship is of type "restore". Otherwise, it intiates a SnapMirror "initialize" operation or "update" operation based on the current SnapMirror state.
+	SnapmirrorRelationshipTransferCreate Starts a SnapMirror transfer operation. This API initiates a restore operation if the SnapMirror relationship is of type "restore". Otherwise, it initiates a SnapMirror "initialize" operation or "update" operation based on the current SnapMirror state.
 
 ### Default property values
 * `storage_efficiency_enabled` - _true_
@@ -1065,7 +1066,7 @@ The following examples show how to perform SnapMirror "initialize", "update", an
 	POST "/api/snapmirror/relationships/c8c62a90-0fef-11e9-b09e-0050568e7067/transfers" '{"source_snapshot": "src", "files":[{"source_path": "/a1.txt.0", "destination_path": "/a1-renamed.txt.0"}]}'
 	```
 	<br/>
-	Performing a SnapMirror initialize or update using a particular Snapshot copy.
+	Performing a SnapMirror initialize or update using a particular snapshot.
 	<br/>
 	```
 	POST "/api/snapmirror/relationships/e4e7e130-0279-11e9-b566-0050568e9909/transfers" '{"source_snapshot":"snap1"}'

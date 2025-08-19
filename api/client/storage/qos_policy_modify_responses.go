@@ -204,6 +204,7 @@ func NewQosPolicyModifyDefault(code int) *QosPolicyModifyDefault {
 | ---------- | ----------- |
 | 8454147 | The maximum limit for QoS policies has been reached. |
 | 8454154 | The name specified for creating conflicts with an existing QoS policy name. |
+| 8454194 | The minimum throughput value for the policy group must be less than or equal to the maximum throughput value. |
 | 8454260 | Invalid value for maximum and minimum fields. Valid values for max_throughput_iops and max_throughput_mbps combination is for the ratio of max_throughput_mbps and max_throughput_iops to be within 1 to 4096. |
 | 8454273 | Invalid value for an adaptive field. Value should be non-zero. |
 | 8454277 | The name specified for creating an adaptive QoS policy conflicts with an existing fixed QoS policy name. |

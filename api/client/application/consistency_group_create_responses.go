@@ -226,6 +226,8 @@ func NewConsistencyGroupCreateDefault(code int) *ConsistencyGroupCreateDefault {
 
 | Error Code | Description |
 | ---------- | ----------- |
+| 5374127 | The specified LUN name is invalid. |
+| 5440501 | The specified storage unit size is insufficient. |
 | 5440509 | No suitable storage can be found for the specified requirements. |
 | 53411842 | Consistency group does not exist. |
 | 53411843 | A consistency group with specified UUID was not found. |
@@ -244,7 +246,8 @@ func NewConsistencyGroupCreateDefault(code int) *ConsistencyGroupCreateDefault {
 | 53411867 | LUN name is too long after appending a unique suffix. |
 | 53411869 | Volume name is too long after appending a unique suffix. |
 | 53411870 | When using the \"round_robin\" layout, the volume count must not be greater than the LUN count. |
-| 53411959 | Volumes with Snapshot copy locking enabled cannot be added to a consistency group. |
+| 53411959 | Volumes with snapshot locking enabled cannot be added to a consistency group. |
+| 53412040 | Splitting a non-snaplock clone from a Snaplock consistency group during clone creation is not supported. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type ConsistencyGroupCreateDefault struct {

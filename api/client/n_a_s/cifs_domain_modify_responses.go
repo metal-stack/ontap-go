@@ -116,6 +116,7 @@ func NewCifsDomainModifyDefault(code int) *CifsDomainModifyDefault {
 |  655513    | Password update failed due to invalid credentials. |
 |  656392    | Preferred DC's need to be configured if CIFS discovery mode is set to none. |
 |  656393    | Default site needs to be configured if CIFS discovery mode is set to site.  |
+|  656487    | Missing fields when doing CIFS operation with hybrid auth user type. |
 */
 type CifsDomainModifyDefault struct {
 	_statusCode int

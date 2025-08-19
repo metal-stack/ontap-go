@@ -113,7 +113,7 @@ func NewNvmeServiceDeleteDefault(code int) *NvmeServiceDeleteDefault {
 | Error Code | Description |
 | ---------- | ----------- |
 | 2621462 | The supplied SVM does not exist. |
-| 5376452 | Service POST and DELETE are not supported on ASA.next. |
+| 5376452 | Service POST and DELETE are not supported on ASA r2. |
 | 72089651 | The supplied SVM does not have an NVMe service. |
 | 72089653 | There are subsystems associated with the NVMe service SVM. The subsystems must be removed before deleting the NVMe service. |
 | 72089654 | There are NVMe-oF LIFs associated with the NVMe service SVM. The LIFs must be removed before deleting the NVMe service. |

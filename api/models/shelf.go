@@ -61,7 +61,7 @@ type Shelf struct {
 	// module type
 	// Example: iom6
 	// Read Only: true
-	// Enum: ["unknown","iom6","iom6e","iom12","iom12b","iom12c","iom12e","iom12f","iom12g","nsm100","nsm8e","nsm16e","psm3e"]
+	// Enum: ["unknown","iom6","iom6e","iom12","iom12b","iom12c","iom12e","iom12f","iom12g","nsm100","nsm8e","nsm16e","psm3e","nsm100b"]
 	ModuleType *string `json:"module_type,omitempty" yaml:"module_type,omitempty"`
 
 	// name
@@ -324,7 +324,7 @@ var shelfTypeModuleTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["unknown","iom6","iom6e","iom12","iom12b","iom12c","iom12e","iom12f","iom12g","nsm100","nsm8e","nsm16e","psm3e"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["unknown","iom6","iom6e","iom12","iom12b","iom12c","iom12e","iom12f","iom12g","nsm100","nsm8e","nsm16e","psm3e","nsm100b"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -372,6 +372,9 @@ const (
 
 	// ShelfModuleTypePsm3e captures enum value "psm3e"
 	ShelfModuleTypePsm3e string = "psm3e"
+
+	// ShelfModuleTypeNsm100b captures enum value "nsm100b"
+	ShelfModuleTypeNsm100b string = "nsm100b"
 )
 
 // prop value enum

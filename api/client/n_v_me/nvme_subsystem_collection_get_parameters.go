@@ -110,6 +110,12 @@ type NvmeSubsystemCollectionGetParams struct {
 	*/
 	HostsPriority *string
 
+	/* HostsTLSKeyType.
+
+	   Filter by hosts.tls.key_type
+	*/
+	HostsTLSKeyType *string
+
 	/* IoQueueDefaultCount.
 
 	   Filter by io_queue.default.count
@@ -375,6 +381,17 @@ func (o *NvmeSubsystemCollectionGetParams) WithHostsPriority(hostsPriority *stri
 // SetHostsPriority adds the hostsPriority to the nvme subsystem collection get params
 func (o *NvmeSubsystemCollectionGetParams) SetHostsPriority(hostsPriority *string) {
 	o.HostsPriority = hostsPriority
+}
+
+// WithHostsTLSKeyType adds the hostsTLSKeyType to the nvme subsystem collection get params
+func (o *NvmeSubsystemCollectionGetParams) WithHostsTLSKeyType(hostsTLSKeyType *string) *NvmeSubsystemCollectionGetParams {
+	o.SetHostsTLSKeyType(hostsTLSKeyType)
+	return o
+}
+
+// SetHostsTLSKeyType adds the hostsTlsKeyType to the nvme subsystem collection get params
+func (o *NvmeSubsystemCollectionGetParams) SetHostsTLSKeyType(hostsTLSKeyType *string) {
+	o.HostsTLSKeyType = hostsTLSKeyType
 }
 
 // WithIoQueueDefaultCount adds the ioQueueDefaultCount to the nvme subsystem collection get params
@@ -708,6 +725,23 @@ func (o *NvmeSubsystemCollectionGetParams) WriteToRequest(r runtime.ClientReques
 		if qHostsPriority != "" {
 
 			if err := r.SetQueryParam("hosts.priority", qHostsPriority); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.HostsTLSKeyType != nil {
+
+		// query param hosts.tls.key_type
+		var qrHostsTLSKeyType string
+
+		if o.HostsTLSKeyType != nil {
+			qrHostsTLSKeyType = *o.HostsTLSKeyType
+		}
+		qHostsTLSKeyType := qrHostsTLSKeyType
+		if qHostsTLSKeyType != "" {
+
+			if err := r.SetQueryParam("hosts.tls.key_type", qHostsTLSKeyType); err != nil {
 				return err
 			}
 		}

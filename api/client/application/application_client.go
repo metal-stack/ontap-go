@@ -332,10 +332,10 @@ func (a *Client) ApplicationComponentGet(params *ApplicationComponentGetParams, 
 }
 
 /*
-	ApplicationComponentSnapshotCollectionGet Retrieves Snapshot copies of an application component.<br/>
+	ApplicationComponentSnapshotCollectionGet Retrieves snapshots of an application component.<br/>
 
 This endpoint is only supported for Maxdata template applications.<br/>
-Component Snapshot copies are essentially more granular application Snapshot copies. There is no difference beyond the scope of the operation.
+Component snapshots are essentially more granular application snapshots. There is no difference beyond the scope of the operation.
 ### Learn more
 * [`DOC /application/applications/{application.uuid}/snapshots`](#docs-application-application_applications_{application.uuid}_snapshots)
 * [`GET /application/applications/{uuid}/snapshots`](#operations-application-application_snapshot_collection_get)
@@ -377,14 +377,14 @@ func (a *Client) ApplicationComponentSnapshotCollectionGet(params *ApplicationCo
 }
 
 /*
-	ApplicationComponentSnapshotCreate Creates a Snapshot copy of an application component.<br/>
+	ApplicationComponentSnapshotCreate Creates a snapshot of an application component.<br/>
 
 This endpoint is only supported for Maxdata template applications.<br/>
 ### Required properties
 * `name`
 ### Recommended optional properties
 * `consistency_type` - Track whether this snapshot is _application_ or _crash_ consistent.
-Component Snapshot copies are essentially more granular application Snapshot copies. There is no difference beyond the scope of the operation.
+Component snapshots are essentially more granular application snapshots. There is no difference beyond the scope of the operation.
 ### Learn more
 * [`DOC /application/applications/{application.uuid}/snapshots`](#docs-application-application_applications_{application.uuid}_snapshots)
 * [`GET /application/applications/{uuid}/snapshots`](#operations-application-application_snapshot_create)
@@ -428,10 +428,10 @@ func (a *Client) ApplicationComponentSnapshotCreate(params *ApplicationComponent
 }
 
 /*
-	ApplicationComponentSnapshotDelete Delete a Snapshot copy of an application component.<br/>
+	ApplicationComponentSnapshotDelete Delete a snapshot of an application component.<br/>
 
 This endpoint is only supported for Maxdata template applications.<br/>
-Component Snapshot copies are essentially more granular application Snapshot copies. There is no difference beyond the scope of the operation.
+Component snapshots are essentially more granular application snapshots. There is no difference beyond the scope of the operation.
 ### Learn more
 * [`DOC /application/applications/{application.uuid}/snapshots`](#docs-application-application_applications_{application.uuid}_snapshots)
 * [`DELETE /application/applications/{uuid}/snapshots`](#operations-application-application_snapshot_delete)
@@ -475,10 +475,10 @@ func (a *Client) ApplicationComponentSnapshotDelete(params *ApplicationComponent
 }
 
 /*
-	ApplicationComponentSnapshotGet Retrieve a Snapshot copy of an application component.<br/>
+	ApplicationComponentSnapshotGet Retrieve a snapshot of an application component.<br/>
 
 This endpoint is only supported for Maxdata template applications.<br/>
-Component Snapshot copies are essentially more granular application Snapshot copies. There is no difference beyond the scope of the operation.
+Component snapshots are essentially more granular application snapshots. There is no difference beyond the scope of the operation.
 ### Learn more
 * [`DOC /application/applications/{application.uuid}/snapshots`](#docs-application-application_applications_{application.uuid}_snapshots)
 * [`GET /application/applications/{uuid}/snapshots`](#operations-application-application_snapshot_get)
@@ -520,10 +520,10 @@ func (a *Client) ApplicationComponentSnapshotGet(params *ApplicationComponentSna
 }
 
 /*
-	ApplicationComponentSnapshotRestore Restore a Snapshot copy of an application component.<br/>
+	ApplicationComponentSnapshotRestore Restore a snapshot of an application component.<br/>
 
 This endpoint is only supported for Maxdata template applications.<br/>
-Component Snapshot copies are essentially more granular application Snapshot copies. There is no difference beyond the scope of the operation.
+Component snapshots are essentially more granular application snapshots. There is no difference beyond the scope of the operation.
 ### Learn more
 * [`DOC /application/applications/{application.uuid}/snapshots`](#docs-application-application_applications_{application.uuid}_snapshots)
 * [`POST /application/applications/{application.uuid}/snapshots/{uuid}/restore`](#operations-application-application_snapshot_restore)
@@ -597,7 +597,7 @@ If not specified in POST, the follow default property values are assigned. It is
 * `template.name` - Defaults to match the `<template>` provided. If specified, the value of this property must match the provided template properties.
 * `<template>` - The majority of template properties have default values. The defaults may vary from template to template. See the model of each template for complete details. In general the following patterns are common across all template properties. The location of these properties varies from template to template.
   - `<template>.storage_service.name` - _value_
-  - `<template>.protection_type.local_rpo` - _hourly_ (Hourly Snapshot copies)
+  - `<template>.protection_type.local_rpo` - _hourly_ (Hourly snapshots)
   - `<template>.protection_type.remote_rpo` - _none_ (Not MetroCluster)
   - `san.new_igroups.os_type` - Defaults to match the `os_type` provided for the application, but may need to be provided explicitly when using virtualization.
 
@@ -814,7 +814,7 @@ Size modifications are processed in a variety of ways depending on the type of a
 ### `igroup_name`
 Modification of the igroup name allows an entire application to be mapped from one initiator group to another. Data access will be interrupted as the LUNs are unmapped from the original igroup and remapped to the new one.
 ### Application state
-During a modification, the `state` property of the application updates to indicate `modifying`. In `modifying` state, statistics are not available and Snapshot copy operations are not allowed. If the modification fails, it is possible for the application to be left in an inconsistent state, with the underlying ONTAP storage elements not matching across a component. When this occurs, the application is left in the `modifying` state until the command is either retried and succeeds or a call to restore the original state is successful.
+During a modification, the `state` property of the application updates to indicate `modifying`. In `modifying` state, statistics are not available and snapshot operations are not allowed. If the modification fails, it is possible for the application to be left in an inconsistent state, with the underlying ONTAP storage elements not matching across a component. When this occurs, the application is left in the `modifying` state until the command is either retried and succeeds or a call to restore the original state is successful.
 ### Examples
  1. Change the storage service of the database of the Oracle application to _extreme_ and resize the redo logs to _100GB_.
     ```
@@ -899,14 +899,14 @@ func (a *Client) ApplicationModify(params *ApplicationModifyParams, authInfo run
 }
 
 /*
-	ApplicationSnapshotCollectionGet Retrieves Snapshot copies of an application.
+	ApplicationSnapshotCollectionGet Retrieves snapshots of an application.
 
 ### Query examples
-The following query returns all Snapshot copies from May 4, 2017 EST. For readability, the colon (`:`) is left in this example. For an actual call, they should be escaped as `%3A`.<br/><br/>
+The following query returns all snapshots from May 4, 2017 EST. For readability, the colon (`:`) is left in this example. For an actual call, they should be escaped as `%3A`.<br/><br/>
 ```
 GET /application/applications/{application.uuid}/snapshots?create_time=2017-05-04T00:00:00-05:00..2017-05-04T23:59:59-05:00
 ```
-<br/>The following query returns all Snapshot copies that have been flagged as _application consistent_.<br/><br/>
+<br/>The following query returns all snapshots that have been flagged as _application consistent_.<br/><br/>
 ```
 GET /application/applications/{application.uuid}/snapshots?consistency_type=application
 ```
@@ -950,7 +950,7 @@ func (a *Client) ApplicationSnapshotCollectionGet(params *ApplicationSnapshotCol
 }
 
 /*
-	ApplicationSnapshotCreate Creates a Snapshot copy of the application.
+	ApplicationSnapshotCreate Creates a snapshot of the application.
 
 ### Required properties
 * `name`
@@ -998,11 +998,11 @@ func (a *Client) ApplicationSnapshotCreate(params *ApplicationSnapshotCreatePara
 }
 
 /*
-	ApplicationSnapshotDelete Delete a Snapshot copy of an application
+	ApplicationSnapshotDelete Delete a snapshot of an application
 
 ### Query examples
-Individual Snapshot copies can be destroyed with no query parameters, or a range of Snapshot copies can be destroyed at one time using a query.<br/>
-The following query deletes all application Snapshot copies created before May 4, 2017<br/><br/>
+Individual snapshots can be destroyed with no query parameters, or a range of snapshots can be destroyed at one time using a query.<br/>
+The following query deletes all application snapshots created before May 4, 2017<br/><br/>
 ```
 DELETE /application/applications/{application.uuid}/snapshots?create_time=<2017-05-04T00:00:00-05:00
 ```
@@ -1045,10 +1045,10 @@ func (a *Client) ApplicationSnapshotDelete(params *ApplicationSnapshotDeletePara
 }
 
 /*
-	ApplicationSnapshotGet Retrieve a Snapshot copy of an application component.<br/>
+	ApplicationSnapshotGet Retrieve a snapshot of an application component.<br/>
 
 This endpoint is only supported for Maxdata template applications.<br/>
-Component Snapshot copies are essentially more granular application Snapshot copies. There is no difference beyond the scope of the operation.
+Component snapshots are essentially more granular application snapshots. There is no difference beyond the scope of the operation.
 ### Learn more
 * [`DOC /application/applications/{application.uuid}/snapshots`](#docs-application-application_applications_{application.uuid}_snapshots)
 * [`GET /application/applications/{uuid}/snapshots`](#operations-application-application_snapshot_create)
@@ -1092,7 +1092,7 @@ func (a *Client) ApplicationSnapshotGet(params *ApplicationSnapshotGetParams, au
 /*
 	ApplicationSnapshotRestore Restore an application snapshot<br/>
 
-Restoring an application Snapshot copy reverts all storage elements in the Snapshot copy to the state in which the Snapshot copy was in when the Snapshot copy was taken. This restoration does not apply to access settings that might have changed since the Snapshot copy was created.
+Restoring an application snapshot reverts all storage elements in the snapshot to the state in which the snapshot was in when the snapshot was taken. This restoration does not apply to access settings that might have changed since the snapshot was created.
 ### Learn more
 * [`DOC /application`](#docs-application-overview)
 * [`Asynchronous operations`](#Synchronous_and_asynchronous_operations)
@@ -1480,8 +1480,9 @@ func (a *Client) ConsistencyGroupMetricsCollectionGet(params *ConsistencyGroupMe
 	ConsistencyGroupModify Updates a consistency group.
 
 <br>Note that this operation will never delete storage elements. You can specify only elements that should be added to the consistency group regardless of existing storage objects.
+
 ## Related ONTAP commands
-N/A. There are no ONTAP commands for managing consistency groups.
+* `vserver consistency-group modify`
 */
 func (a *Client) ConsistencyGroupModify(params *ConsistencyGroupModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConsistencyGroupModifyOK, *ConsistencyGroupModifyAccepted, error) {
 	// TODO: Validate the params before sending
@@ -1521,13 +1522,13 @@ func (a *Client) ConsistencyGroupModify(params *ConsistencyGroupModifyParams, au
 }
 
 /*
-	ConsistencyGroupSnapshotCollectionGet Retrieves Snapshot copies for a consistency group.
+	ConsistencyGroupSnapshotCollectionGet Retrieves snapshots for a consistency group.
 
 ## Expensive properties
 There is an added computational cost to retrieving values for these properties. They are not included by default in GET results and must be explicitly requested using the `fields` query parameter. See [`DOC Requesting specific fields`](#docs-docs-Requesting-specific-fields) to learn more.
 * `is_partial`
-* `missing_voumes.uuid`
-* `missing_voumes.name`
+* `missing_volumes.uuid`
+* `missing_volumes.name`
 */
 func (a *Client) ConsistencyGroupSnapshotCollectionGet(params *ConsistencyGroupSnapshotCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConsistencyGroupSnapshotCollectionGetOK, error) {
 	// TODO: Validate the params before sending
@@ -1565,10 +1566,10 @@ func (a *Client) ConsistencyGroupSnapshotCollectionGet(params *ConsistencyGroupS
 }
 
 /*
-	ConsistencyGroupSnapshotCreate Creates a Snapshot copy of an existing consistency group.
+	ConsistencyGroupSnapshotCreate Creates a snapshot of an existing consistency group.
 
 ### Required properties
-* `consistency_group.uuid` - Existing consistency group UUID in which to create the Snapshot copy.
+* `consistency_group.uuid` - Existing consistency group UUID in which to create the snapshot.
 */
 func (a *Client) ConsistencyGroupSnapshotCreate(params *ConsistencyGroupSnapshotCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConsistencyGroupSnapshotCreateCreated, *ConsistencyGroupSnapshotCreateAccepted, error) {
 	// TODO: Validate the params before sending
@@ -1608,7 +1609,7 @@ func (a *Client) ConsistencyGroupSnapshotCreate(params *ConsistencyGroupSnapshot
 }
 
 /*
-	ConsistencyGroupSnapshotDelete Deletes a Snapshot copy of a consistency group.
+	ConsistencyGroupSnapshotDelete Deletes a snapshot of a consistency group.
 
 ## Examples
 */
@@ -1655,8 +1656,8 @@ func (a *Client) ConsistencyGroupSnapshotDelete(params *ConsistencyGroupSnapshot
 ### Expensive properties
 There is an added computational cost to retrieving values for these properties. They are not included by default in GET results and must be explicitly requested using the `fields` query parameter. See [`DOC Requesting specific fields`](#docs-docs-Requesting-specific-fields) to learn more.
 * `is_partial`
-* `missing_voumes.uuid`
-* `missing_voumes.name`
+* `missing_volumes.uuid`
+* `missing_volumes.name`
 */
 func (a *Client) ConsistencyGroupSnapshotGet(params *ConsistencyGroupSnapshotGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ConsistencyGroupSnapshotGetOK, error) {
 	// TODO: Validate the params before sending
@@ -1694,12 +1695,12 @@ func (a *Client) ConsistencyGroupSnapshotGet(params *ConsistencyGroupSnapshotGet
 }
 
 /*
-	ConsistencyGroupSnapshotModify Completes a Snapshot copy operation of a consistency group.
+	ConsistencyGroupSnapshotModify Completes a snapshot operation of a consistency group. This can also be used to modify the SnapLock expiry time of a locked snapshot in SnapLock for SnapVault destination.
 
 ## Example
-### Completing a Snapshot copy operation
+### Completing a snapshot operation
 
-	The following example shows how to complete the Snapshot copy operation by committing an existing Snapshot copy to disk:
+	The following example shows how to complete the snapshot operation by committing an existing snapshot to disk:
 	```
 	curl -X PATCH https://<mgmt-ip>/api/application/consistency-groups/a8d0626a-17a0-11eb-b141-005056acd498/snapshots/92c6c770-17a1-11eb-b141-005056acd498?action=commit
 	```
@@ -1708,6 +1709,28 @@ func (a *Client) ConsistencyGroupSnapshotGet(params *ConsistencyGroupSnapshotGet
 
 	```
 	{
+	}
+	```
+
+### Modifying the SnapLock expiry time of a snapshot in SnapLock for SnapVault
+
+	The following example shows how to modify the SnapLock expiry time of a locked snapshot in SnapLock for SnapVault destination:
+	```
+	curl -X PATCH 'https://<mgmt-ip>/api/application/consistency-groups/a8d0626a-17a0-11eb-b141-005056acd498/snapshots/92c6c770-17a1-11eb-b141-005056acd498' -d '{"snaplock.expiry_time" : "2/28/2024 10:11:10 +05:30"}' -H "accept: application/hal+json"
+	```
+
+#### Response:
+
+	```
+	{
+	  "job": {
+	    "uuid": "8c9cabf3-0a88-11ec-a449-005056bbcf9f",
+	    "_links": {
+	      "self": {
+	        "href": "/api/cluster/jobs/8c9cabf3-0a88-11ec-a449-005056bbcf9f"
+	      }
+	    }
+	  }
 	}
 	```
 */

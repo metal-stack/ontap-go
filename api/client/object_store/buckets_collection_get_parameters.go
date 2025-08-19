@@ -80,6 +80,42 @@ type BucketsCollectionGetParams struct {
 	*/
 	Comment *string
 
+	/* CorsRulesAllowedHeaders.
+
+	   Filter by cors.rules.allowed_headers
+	*/
+	CorsRulesAllowedHeaders *string
+
+	/* CorsRulesAllowedMethods.
+
+	   Filter by cors.rules.allowed_methods
+	*/
+	CorsRulesAllowedMethods *string
+
+	/* CorsRulesAllowedOrigins.
+
+	   Filter by cors.rules.allowed_origins
+	*/
+	CorsRulesAllowedOrigins *string
+
+	/* CorsRulesExposeHeaders.
+
+	   Filter by cors.rules.expose_headers
+	*/
+	CorsRulesExposeHeaders *string
+
+	/* CorsRulesID.
+
+	   Filter by cors.rules.id
+	*/
+	CorsRulesID *string
+
+	/* CorsRulesMaxAgeSeconds.
+
+	   Filter by cors.rules.max_age_seconds
+	*/
+	CorsRulesMaxAgeSeconds *int64
+
 	/* EncryptionEnabled.
 
 	   Filter by encryption.enabled
@@ -384,6 +420,18 @@ type BucketsCollectionGetParams struct {
 	*/
 	Size *int64
 
+	/* SnapshotPolicyName.
+
+	   Filter by snapshot_policy.name
+	*/
+	SnapshotPolicyName *string
+
+	/* SnapshotPolicyUUID.
+
+	   Filter by snapshot_policy.uuid
+	*/
+	SnapshotPolicyUUID *string
+
 	/* SvmName.
 
 	   Filter by svm.name
@@ -524,6 +572,72 @@ func (o *BucketsCollectionGetParams) WithComment(comment *string) *BucketsCollec
 // SetComment adds the comment to the buckets collection get params
 func (o *BucketsCollectionGetParams) SetComment(comment *string) {
 	o.Comment = comment
+}
+
+// WithCorsRulesAllowedHeaders adds the corsRulesAllowedHeaders to the buckets collection get params
+func (o *BucketsCollectionGetParams) WithCorsRulesAllowedHeaders(corsRulesAllowedHeaders *string) *BucketsCollectionGetParams {
+	o.SetCorsRulesAllowedHeaders(corsRulesAllowedHeaders)
+	return o
+}
+
+// SetCorsRulesAllowedHeaders adds the corsRulesAllowedHeaders to the buckets collection get params
+func (o *BucketsCollectionGetParams) SetCorsRulesAllowedHeaders(corsRulesAllowedHeaders *string) {
+	o.CorsRulesAllowedHeaders = corsRulesAllowedHeaders
+}
+
+// WithCorsRulesAllowedMethods adds the corsRulesAllowedMethods to the buckets collection get params
+func (o *BucketsCollectionGetParams) WithCorsRulesAllowedMethods(corsRulesAllowedMethods *string) *BucketsCollectionGetParams {
+	o.SetCorsRulesAllowedMethods(corsRulesAllowedMethods)
+	return o
+}
+
+// SetCorsRulesAllowedMethods adds the corsRulesAllowedMethods to the buckets collection get params
+func (o *BucketsCollectionGetParams) SetCorsRulesAllowedMethods(corsRulesAllowedMethods *string) {
+	o.CorsRulesAllowedMethods = corsRulesAllowedMethods
+}
+
+// WithCorsRulesAllowedOrigins adds the corsRulesAllowedOrigins to the buckets collection get params
+func (o *BucketsCollectionGetParams) WithCorsRulesAllowedOrigins(corsRulesAllowedOrigins *string) *BucketsCollectionGetParams {
+	o.SetCorsRulesAllowedOrigins(corsRulesAllowedOrigins)
+	return o
+}
+
+// SetCorsRulesAllowedOrigins adds the corsRulesAllowedOrigins to the buckets collection get params
+func (o *BucketsCollectionGetParams) SetCorsRulesAllowedOrigins(corsRulesAllowedOrigins *string) {
+	o.CorsRulesAllowedOrigins = corsRulesAllowedOrigins
+}
+
+// WithCorsRulesExposeHeaders adds the corsRulesExposeHeaders to the buckets collection get params
+func (o *BucketsCollectionGetParams) WithCorsRulesExposeHeaders(corsRulesExposeHeaders *string) *BucketsCollectionGetParams {
+	o.SetCorsRulesExposeHeaders(corsRulesExposeHeaders)
+	return o
+}
+
+// SetCorsRulesExposeHeaders adds the corsRulesExposeHeaders to the buckets collection get params
+func (o *BucketsCollectionGetParams) SetCorsRulesExposeHeaders(corsRulesExposeHeaders *string) {
+	o.CorsRulesExposeHeaders = corsRulesExposeHeaders
+}
+
+// WithCorsRulesID adds the corsRulesID to the buckets collection get params
+func (o *BucketsCollectionGetParams) WithCorsRulesID(corsRulesID *string) *BucketsCollectionGetParams {
+	o.SetCorsRulesID(corsRulesID)
+	return o
+}
+
+// SetCorsRulesID adds the corsRulesId to the buckets collection get params
+func (o *BucketsCollectionGetParams) SetCorsRulesID(corsRulesID *string) {
+	o.CorsRulesID = corsRulesID
+}
+
+// WithCorsRulesMaxAgeSeconds adds the corsRulesMaxAgeSeconds to the buckets collection get params
+func (o *BucketsCollectionGetParams) WithCorsRulesMaxAgeSeconds(corsRulesMaxAgeSeconds *int64) *BucketsCollectionGetParams {
+	o.SetCorsRulesMaxAgeSeconds(corsRulesMaxAgeSeconds)
+	return o
+}
+
+// SetCorsRulesMaxAgeSeconds adds the corsRulesMaxAgeSeconds to the buckets collection get params
+func (o *BucketsCollectionGetParams) SetCorsRulesMaxAgeSeconds(corsRulesMaxAgeSeconds *int64) {
+	o.CorsRulesMaxAgeSeconds = corsRulesMaxAgeSeconds
 }
 
 // WithEncryptionEnabled adds the encryptionEnabled to the buckets collection get params
@@ -1076,6 +1190,28 @@ func (o *BucketsCollectionGetParams) SetSize(size *int64) {
 	o.Size = size
 }
 
+// WithSnapshotPolicyName adds the snapshotPolicyName to the buckets collection get params
+func (o *BucketsCollectionGetParams) WithSnapshotPolicyName(snapshotPolicyName *string) *BucketsCollectionGetParams {
+	o.SetSnapshotPolicyName(snapshotPolicyName)
+	return o
+}
+
+// SetSnapshotPolicyName adds the snapshotPolicyName to the buckets collection get params
+func (o *BucketsCollectionGetParams) SetSnapshotPolicyName(snapshotPolicyName *string) {
+	o.SnapshotPolicyName = snapshotPolicyName
+}
+
+// WithSnapshotPolicyUUID adds the snapshotPolicyUUID to the buckets collection get params
+func (o *BucketsCollectionGetParams) WithSnapshotPolicyUUID(snapshotPolicyUUID *string) *BucketsCollectionGetParams {
+	o.SetSnapshotPolicyUUID(snapshotPolicyUUID)
+	return o
+}
+
+// SetSnapshotPolicyUUID adds the snapshotPolicyUuid to the buckets collection get params
+func (o *BucketsCollectionGetParams) SetSnapshotPolicyUUID(snapshotPolicyUUID *string) {
+	o.SnapshotPolicyUUID = snapshotPolicyUUID
+}
+
 // WithSvmName adds the svmName to the buckets collection get params
 func (o *BucketsCollectionGetParams) WithSvmName(svmName *string) *BucketsCollectionGetParams {
 	o.SetSvmName(svmName)
@@ -1207,6 +1343,108 @@ func (o *BucketsCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg
 		if qComment != "" {
 
 			if err := r.SetQueryParam("comment", qComment); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.CorsRulesAllowedHeaders != nil {
+
+		// query param cors.rules.allowed_headers
+		var qrCorsRulesAllowedHeaders string
+
+		if o.CorsRulesAllowedHeaders != nil {
+			qrCorsRulesAllowedHeaders = *o.CorsRulesAllowedHeaders
+		}
+		qCorsRulesAllowedHeaders := qrCorsRulesAllowedHeaders
+		if qCorsRulesAllowedHeaders != "" {
+
+			if err := r.SetQueryParam("cors.rules.allowed_headers", qCorsRulesAllowedHeaders); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.CorsRulesAllowedMethods != nil {
+
+		// query param cors.rules.allowed_methods
+		var qrCorsRulesAllowedMethods string
+
+		if o.CorsRulesAllowedMethods != nil {
+			qrCorsRulesAllowedMethods = *o.CorsRulesAllowedMethods
+		}
+		qCorsRulesAllowedMethods := qrCorsRulesAllowedMethods
+		if qCorsRulesAllowedMethods != "" {
+
+			if err := r.SetQueryParam("cors.rules.allowed_methods", qCorsRulesAllowedMethods); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.CorsRulesAllowedOrigins != nil {
+
+		// query param cors.rules.allowed_origins
+		var qrCorsRulesAllowedOrigins string
+
+		if o.CorsRulesAllowedOrigins != nil {
+			qrCorsRulesAllowedOrigins = *o.CorsRulesAllowedOrigins
+		}
+		qCorsRulesAllowedOrigins := qrCorsRulesAllowedOrigins
+		if qCorsRulesAllowedOrigins != "" {
+
+			if err := r.SetQueryParam("cors.rules.allowed_origins", qCorsRulesAllowedOrigins); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.CorsRulesExposeHeaders != nil {
+
+		// query param cors.rules.expose_headers
+		var qrCorsRulesExposeHeaders string
+
+		if o.CorsRulesExposeHeaders != nil {
+			qrCorsRulesExposeHeaders = *o.CorsRulesExposeHeaders
+		}
+		qCorsRulesExposeHeaders := qrCorsRulesExposeHeaders
+		if qCorsRulesExposeHeaders != "" {
+
+			if err := r.SetQueryParam("cors.rules.expose_headers", qCorsRulesExposeHeaders); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.CorsRulesID != nil {
+
+		// query param cors.rules.id
+		var qrCorsRulesID string
+
+		if o.CorsRulesID != nil {
+			qrCorsRulesID = *o.CorsRulesID
+		}
+		qCorsRulesID := qrCorsRulesID
+		if qCorsRulesID != "" {
+
+			if err := r.SetQueryParam("cors.rules.id", qCorsRulesID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.CorsRulesMaxAgeSeconds != nil {
+
+		// query param cors.rules.max_age_seconds
+		var qrCorsRulesMaxAgeSeconds int64
+
+		if o.CorsRulesMaxAgeSeconds != nil {
+			qrCorsRulesMaxAgeSeconds = *o.CorsRulesMaxAgeSeconds
+		}
+		qCorsRulesMaxAgeSeconds := swag.FormatInt64(qrCorsRulesMaxAgeSeconds)
+		if qCorsRulesMaxAgeSeconds != "" {
+
+			if err := r.SetQueryParam("cors.rules.max_age_seconds", qCorsRulesMaxAgeSeconds); err != nil {
 				return err
 			}
 		}
@@ -2045,6 +2283,40 @@ func (o *BucketsCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg
 		if qSize != "" {
 
 			if err := r.SetQueryParam("size", qSize); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.SnapshotPolicyName != nil {
+
+		// query param snapshot_policy.name
+		var qrSnapshotPolicyName string
+
+		if o.SnapshotPolicyName != nil {
+			qrSnapshotPolicyName = *o.SnapshotPolicyName
+		}
+		qSnapshotPolicyName := qrSnapshotPolicyName
+		if qSnapshotPolicyName != "" {
+
+			if err := r.SetQueryParam("snapshot_policy.name", qSnapshotPolicyName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.SnapshotPolicyUUID != nil {
+
+		// query param snapshot_policy.uuid
+		var qrSnapshotPolicyUUID string
+
+		if o.SnapshotPolicyUUID != nil {
+			qrSnapshotPolicyUUID = *o.SnapshotPolicyUUID
+		}
+		qSnapshotPolicyUUID := qrSnapshotPolicyUUID
+		if qSnapshotPolicyUUID != "" {
+
+			if err := r.SetQueryParam("snapshot_policy.uuid", qSnapshotPolicyUUID); err != nil {
 				return err
 			}
 		}

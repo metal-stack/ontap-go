@@ -43,7 +43,7 @@ type VolumeEfficiencyPolicy struct {
 	// schedule
 	Schedule *VolumeEfficiencyPolicyInlineSchedule `json:"schedule,omitempty" yaml:"schedule,omitempty"`
 
-	// This field is used with the policy type "threshold" to indicate the threshold percentage for triggering the volume efficiency policy. It is mutuallly exclusive of the schedule.
+	// This field is used with the policy type "threshold" to indicate the threshold percentage for triggering the volume efficiency policy. It is mutually exclusive of the schedule.
 	StartThresholdPercent *int64 `json:"start_threshold_percent,omitempty" yaml:"start_threshold_percent,omitempty"`
 
 	// svm

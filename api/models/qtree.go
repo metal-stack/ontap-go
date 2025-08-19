@@ -26,6 +26,9 @@ type Qtree struct {
 	// export policy
 	ExportPolicy *QtreeInlineExportPolicy `json:"export_policy,omitempty" yaml:"export_policy,omitempty"`
 
+	// ext performance monitoring
+	ExtPerformanceMonitoring *QtreeInlineExtPerformanceMonitoring `json:"ext_performance_monitoring,omitempty" yaml:"ext_performance_monitoring,omitempty"`
+
 	// group
 	Group *QtreeInlineGroup `json:"group,omitempty" yaml:"group,omitempty"`
 
@@ -36,6 +39,9 @@ type Qtree struct {
 	// Maximum: 4994
 	// Minimum: 0
 	ID *int64 `json:"id,omitempty" yaml:"id,omitempty"`
+
+	// metric
+	Metric *QtreeInlineMetric `json:"metric,omitempty" yaml:"metric,omitempty"`
 
 	// The name of the qtree. Required in POST; optional in PATCH.
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
@@ -88,11 +94,19 @@ func (m *Qtree) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateExtPerformanceMonitoring(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateGroup(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMetric(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -172,6 +186,25 @@ func (m *Qtree) validateExportPolicy(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Qtree) validateExtPerformanceMonitoring(formats strfmt.Registry) error {
+	if swag.IsZero(m.ExtPerformanceMonitoring) { // not required
+		return nil
+	}
+
+	if m.ExtPerformanceMonitoring != nil {
+		if err := m.ExtPerformanceMonitoring.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ext_performance_monitoring")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ext_performance_monitoring")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Qtree) validateGroup(formats strfmt.Registry) error {
 	if swag.IsZero(m.Group) { // not required
 		return nil
@@ -202,6 +235,25 @@ func (m *Qtree) validateID(formats strfmt.Registry) error {
 
 	if err := validate.MaximumInt("id", "body", *m.ID, 4994, false); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *Qtree) validateMetric(formats strfmt.Registry) error {
+	if swag.IsZero(m.Metric) { // not required
+		return nil
+	}
+
+	if m.Metric != nil {
+		if err := m.Metric.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metric")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metric")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -366,11 +418,19 @@ func (m *Qtree) ContextValidate(ctx context.Context, formats strfmt.Registry) er
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateExtPerformanceMonitoring(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateGroup(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.contextValidateID(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMetric(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -454,6 +514,27 @@ func (m *Qtree) contextValidateExportPolicy(ctx context.Context, formats strfmt.
 	return nil
 }
 
+func (m *Qtree) contextValidateExtPerformanceMonitoring(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ExtPerformanceMonitoring != nil {
+
+		if swag.IsZero(m.ExtPerformanceMonitoring) { // not required
+			return nil
+		}
+
+		if err := m.ExtPerformanceMonitoring.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("ext_performance_monitoring")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("ext_performance_monitoring")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Qtree) contextValidateGroup(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Group != nil {
@@ -479,6 +560,27 @@ func (m *Qtree) contextValidateID(ctx context.Context, formats strfmt.Registry) 
 
 	if err := validate.ReadOnly(ctx, "id", "body", m.ID); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *Qtree) contextValidateMetric(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Metric != nil {
+
+		if swag.IsZero(m.Metric) { // not required
+			return nil
+		}
+
+		if err := m.Metric.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metric")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metric")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -856,6 +958,43 @@ func (m *QtreeInlineExportPolicyInlineLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
+// QtreeInlineExtPerformanceMonitoring qtree inline ext performance monitoring
+//
+// swagger:model qtree_inline_ext_performance_monitoring
+type QtreeInlineExtPerformanceMonitoring struct {
+
+	// Specifies whether extended performance monitoring is enabled for the qtree.
+	Enabled *bool `json:"enabled,omitempty" yaml:"enabled,omitempty"`
+}
+
+// Validate validates this qtree inline ext performance monitoring
+func (m *QtreeInlineExtPerformanceMonitoring) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this qtree inline ext performance monitoring based on context it is used
+func (m *QtreeInlineExtPerformanceMonitoring) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *QtreeInlineExtPerformanceMonitoring) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *QtreeInlineExtPerformanceMonitoring) UnmarshalBinary(b []byte) error {
+	var res QtreeInlineExtPerformanceMonitoring
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
 // QtreeInlineGroup The user set as owner of the qtree.
 //
 // swagger:model qtree_inline_group
@@ -986,6 +1125,699 @@ func (m *QtreeInlineLinks) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *QtreeInlineLinks) UnmarshalBinary(b []byte) error {
 	var res QtreeInlineLinks
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// QtreeInlineMetric Performance numbers, such as IOPS latency and throughput.
+//
+// swagger:model qtree_inline_metric
+type QtreeInlineMetric struct {
+
+	// links
+	Links *QtreeInlineMetricInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
+
+	// The duration over which this sample is calculated. The time durations are represented in the ISO-8601 standard format. Samples can be calculated over the following durations:
+	//
+	// Example: PT5M
+	// Enum: ["PT4M","PT30M","PT2H","P1D","PT5M"]
+	Duration *string `json:"duration,omitempty" yaml:"duration,omitempty"`
+
+	// iops
+	Iops *QtreeInlineMetricInlineIops `json:"iops,omitempty" yaml:"iops,omitempty"`
+
+	// latency
+	Latency *QtreeInlineMetricInlineLatency `json:"latency,omitempty" yaml:"latency,omitempty"`
+
+	// Errors associated with the sample. For example, if the aggregation of data over multiple nodes fails, then any partial errors might return "ok" on success or "error" on an internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled to the previous 15 second timestamp and tagged with "backfilled_data". "Inconsistent_ delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "Negative_delta" is returned when an expected monotonically increasing value has decreased in value. "Inconsistent_old_data" is returned when one or more nodes do not have the latest data.
+	// Example: ok
+	// Read Only: true
+	// Enum: ["ok","error","partial_no_data","partial_no_response","partial_other_error","negative_delta","not_found","backfilled_data","inconsistent_delta_time","inconsistent_old_data","partial_no_uuid"]
+	Status *string `json:"status,omitempty" yaml:"status,omitempty"`
+
+	// throughput
+	Throughput *QtreeInlineMetricInlineThroughput `json:"throughput,omitempty" yaml:"throughput,omitempty"`
+
+	// The timestamp of the performance data.
+	// Example: 2017-01-25 11:20:13
+	// Read Only: true
+	// Format: date-time
+	Timestamp *strfmt.DateTime `json:"timestamp,omitempty" yaml:"timestamp,omitempty"`
+}
+
+// Validate validates this qtree inline metric
+func (m *QtreeInlineMetric) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLinks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDuration(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateIops(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLatency(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateStatus(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateThroughput(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTimestamp(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *QtreeInlineMetric) validateLinks(formats strfmt.Registry) error {
+	if swag.IsZero(m.Links) { // not required
+		return nil
+	}
+
+	if m.Links != nil {
+		if err := m.Links.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metric" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metric" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+var qtreeInlineMetricTypeDurationPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["PT4M","PT30M","PT2H","P1D","PT5M"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		qtreeInlineMetricTypeDurationPropEnum = append(qtreeInlineMetricTypeDurationPropEnum, v)
+	}
+}
+
+const (
+
+	// QtreeInlineMetricDurationPT4M captures enum value "PT4M"
+	QtreeInlineMetricDurationPT4M string = "PT4M"
+
+	// QtreeInlineMetricDurationPT30M captures enum value "PT30M"
+	QtreeInlineMetricDurationPT30M string = "PT30M"
+
+	// QtreeInlineMetricDurationPT2H captures enum value "PT2H"
+	QtreeInlineMetricDurationPT2H string = "PT2H"
+
+	// QtreeInlineMetricDurationP1D captures enum value "P1D"
+	QtreeInlineMetricDurationP1D string = "P1D"
+
+	// QtreeInlineMetricDurationPT5M captures enum value "PT5M"
+	QtreeInlineMetricDurationPT5M string = "PT5M"
+)
+
+// prop value enum
+func (m *QtreeInlineMetric) validateDurationEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, qtreeInlineMetricTypeDurationPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *QtreeInlineMetric) validateDuration(formats strfmt.Registry) error {
+	if swag.IsZero(m.Duration) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateDurationEnum("metric"+"."+"duration", "body", *m.Duration); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *QtreeInlineMetric) validateIops(formats strfmt.Registry) error {
+	if swag.IsZero(m.Iops) { // not required
+		return nil
+	}
+
+	if m.Iops != nil {
+		if err := m.Iops.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metric" + "." + "iops")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metric" + "." + "iops")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QtreeInlineMetric) validateLatency(formats strfmt.Registry) error {
+	if swag.IsZero(m.Latency) { // not required
+		return nil
+	}
+
+	if m.Latency != nil {
+		if err := m.Latency.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metric" + "." + "latency")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metric" + "." + "latency")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+var qtreeInlineMetricTypeStatusPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["ok","error","partial_no_data","partial_no_response","partial_other_error","negative_delta","not_found","backfilled_data","inconsistent_delta_time","inconsistent_old_data","partial_no_uuid"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		qtreeInlineMetricTypeStatusPropEnum = append(qtreeInlineMetricTypeStatusPropEnum, v)
+	}
+}
+
+const (
+
+	// QtreeInlineMetricStatusOk captures enum value "ok"
+	QtreeInlineMetricStatusOk string = "ok"
+
+	// QtreeInlineMetricStatusError captures enum value "error"
+	QtreeInlineMetricStatusError string = "error"
+
+	// QtreeInlineMetricStatusPartialNoData captures enum value "partial_no_data"
+	QtreeInlineMetricStatusPartialNoData string = "partial_no_data"
+
+	// QtreeInlineMetricStatusPartialNoResponse captures enum value "partial_no_response"
+	QtreeInlineMetricStatusPartialNoResponse string = "partial_no_response"
+
+	// QtreeInlineMetricStatusPartialOtherError captures enum value "partial_other_error"
+	QtreeInlineMetricStatusPartialOtherError string = "partial_other_error"
+
+	// QtreeInlineMetricStatusNegativeDelta captures enum value "negative_delta"
+	QtreeInlineMetricStatusNegativeDelta string = "negative_delta"
+
+	// QtreeInlineMetricStatusNotFound captures enum value "not_found"
+	QtreeInlineMetricStatusNotFound string = "not_found"
+
+	// QtreeInlineMetricStatusBackfilledData captures enum value "backfilled_data"
+	QtreeInlineMetricStatusBackfilledData string = "backfilled_data"
+
+	// QtreeInlineMetricStatusInconsistentDeltaTime captures enum value "inconsistent_delta_time"
+	QtreeInlineMetricStatusInconsistentDeltaTime string = "inconsistent_delta_time"
+
+	// QtreeInlineMetricStatusInconsistentOldData captures enum value "inconsistent_old_data"
+	QtreeInlineMetricStatusInconsistentOldData string = "inconsistent_old_data"
+
+	// QtreeInlineMetricStatusPartialNoUUID captures enum value "partial_no_uuid"
+	QtreeInlineMetricStatusPartialNoUUID string = "partial_no_uuid"
+)
+
+// prop value enum
+func (m *QtreeInlineMetric) validateStatusEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, qtreeInlineMetricTypeStatusPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *QtreeInlineMetric) validateStatus(formats strfmt.Registry) error {
+	if swag.IsZero(m.Status) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateStatusEnum("metric"+"."+"status", "body", *m.Status); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *QtreeInlineMetric) validateThroughput(formats strfmt.Registry) error {
+	if swag.IsZero(m.Throughput) { // not required
+		return nil
+	}
+
+	if m.Throughput != nil {
+		if err := m.Throughput.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metric" + "." + "throughput")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metric" + "." + "throughput")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QtreeInlineMetric) validateTimestamp(formats strfmt.Registry) error {
+	if swag.IsZero(m.Timestamp) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("metric"+"."+"timestamp", "body", "date-time", m.Timestamp.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this qtree inline metric based on the context it is used
+func (m *QtreeInlineMetric) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateIops(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateLatency(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateStatus(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateThroughput(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTimestamp(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *QtreeInlineMetric) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Links != nil {
+
+		if swag.IsZero(m.Links) { // not required
+			return nil
+		}
+
+		if err := m.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metric" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metric" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QtreeInlineMetric) contextValidateIops(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Iops != nil {
+
+		if swag.IsZero(m.Iops) { // not required
+			return nil
+		}
+
+		if err := m.Iops.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metric" + "." + "iops")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metric" + "." + "iops")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QtreeInlineMetric) contextValidateLatency(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Latency != nil {
+
+		if swag.IsZero(m.Latency) { // not required
+			return nil
+		}
+
+		if err := m.Latency.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metric" + "." + "latency")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metric" + "." + "latency")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QtreeInlineMetric) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "metric"+"."+"status", "body", m.Status); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *QtreeInlineMetric) contextValidateThroughput(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Throughput != nil {
+
+		if swag.IsZero(m.Throughput) { // not required
+			return nil
+		}
+
+		if err := m.Throughput.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metric" + "." + "throughput")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metric" + "." + "throughput")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QtreeInlineMetric) contextValidateTimestamp(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "metric"+"."+"timestamp", "body", m.Timestamp); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *QtreeInlineMetric) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *QtreeInlineMetric) UnmarshalBinary(b []byte) error {
+	var res QtreeInlineMetric
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// QtreeInlineMetricInlineIops The rate of I/O operations observed at the storage object.
+//
+// swagger:model qtree_inline_metric_inline_iops
+type QtreeInlineMetricInlineIops struct {
+
+	// Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+	Other *int64 `json:"other,omitempty" yaml:"other,omitempty"`
+
+	// Performance metric for read I/O operations.
+	// Example: 200
+	Read *int64 `json:"read,omitempty" yaml:"read,omitempty"`
+
+	// Performance metric aggregated over all types of I/O operations.
+	// Example: 1000
+	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
+
+	// Performance metric for write I/O operations.
+	// Example: 100
+	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
+}
+
+// Validate validates this qtree inline metric inline iops
+func (m *QtreeInlineMetricInlineIops) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validate this qtree inline metric inline iops based on the context it is used
+func (m *QtreeInlineMetricInlineIops) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *QtreeInlineMetricInlineIops) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *QtreeInlineMetricInlineIops) UnmarshalBinary(b []byte) error {
+	var res QtreeInlineMetricInlineIops
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// QtreeInlineMetricInlineLatency The round trip latency in microseconds observed at the storage object.
+//
+// swagger:model qtree_inline_metric_inline_latency
+type QtreeInlineMetricInlineLatency struct {
+
+	// Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+	Other *int64 `json:"other,omitempty" yaml:"other,omitempty"`
+
+	// Performance metric for read I/O operations.
+	// Example: 200
+	Read *int64 `json:"read,omitempty" yaml:"read,omitempty"`
+
+	// Performance metric aggregated over all types of I/O operations.
+	// Example: 1000
+	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
+
+	// Performance metric for write I/O operations.
+	// Example: 100
+	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
+}
+
+// Validate validates this qtree inline metric inline latency
+func (m *QtreeInlineMetricInlineLatency) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validate this qtree inline metric inline latency based on the context it is used
+func (m *QtreeInlineMetricInlineLatency) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *QtreeInlineMetricInlineLatency) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *QtreeInlineMetricInlineLatency) UnmarshalBinary(b []byte) error {
+	var res QtreeInlineMetricInlineLatency
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// QtreeInlineMetricInlineLinks qtree inline metric inline links
+//
+// swagger:model qtree_inline_metric_inline__links
+type QtreeInlineMetricInlineLinks struct {
+
+	// self
+	Self *Href `json:"self,omitempty" yaml:"self,omitempty"`
+}
+
+// Validate validates this qtree inline metric inline links
+func (m *QtreeInlineMetricInlineLinks) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateSelf(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *QtreeInlineMetricInlineLinks) validateSelf(formats strfmt.Registry) error {
+	if swag.IsZero(m.Self) { // not required
+		return nil
+	}
+
+	if m.Self != nil {
+		if err := m.Self.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metric" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metric" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this qtree inline metric inline links based on the context it is used
+func (m *QtreeInlineMetricInlineLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *QtreeInlineMetricInlineLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Self != nil {
+
+		if swag.IsZero(m.Self) { // not required
+			return nil
+		}
+
+		if err := m.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("metric" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("metric" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *QtreeInlineMetricInlineLinks) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *QtreeInlineMetricInlineLinks) UnmarshalBinary(b []byte) error {
+	var res QtreeInlineMetricInlineLinks
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// QtreeInlineMetricInlineThroughput The rate of throughput bytes per second observed at the storage object.
+//
+// swagger:model qtree_inline_metric_inline_throughput
+type QtreeInlineMetricInlineThroughput struct {
+
+	// Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+	Other *int64 `json:"other,omitempty" yaml:"other,omitempty"`
+
+	// Performance metric for read I/O operations.
+	// Example: 200
+	Read *int64 `json:"read,omitempty" yaml:"read,omitempty"`
+
+	// Performance metric aggregated over all types of I/O operations.
+	// Example: 1000
+	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
+
+	// Performance metric for write I/O operations.
+	// Example: 100
+	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
+}
+
+// Validate validates this qtree inline metric inline throughput
+func (m *QtreeInlineMetricInlineThroughput) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validate this qtree inline metric inline throughput based on the context it is used
+func (m *QtreeInlineMetricInlineThroughput) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *QtreeInlineMetricInlineThroughput) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *QtreeInlineMetricInlineThroughput) UnmarshalBinary(b []byte) error {
+	var res QtreeInlineMetricInlineThroughput
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
@@ -1360,6 +2192,9 @@ type QtreeInlineStatistics struct {
 	// iops raw
 	IopsRaw *QtreeInlineStatisticsInlineIopsRaw `json:"iops_raw,omitempty" yaml:"iops_raw,omitempty"`
 
+	// latency raw
+	LatencyRaw *QtreeInlineStatisticsInlineLatencyRaw `json:"latency_raw,omitempty" yaml:"latency_raw,omitempty"`
+
 	// Any errors associated with the sample. For example, if the aggregation of data over multiple nodes fails then any of the partial errors might be returned, "ok" on success, or "error" on any internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled with the next closest collection and tagged with "backfilled_data". "inconsistent_delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "negative_delta" is returned when an expected monotonically increasing value has decreased in value. "inconsistent_old_data" is returned when one or more nodes does not have the latest data.
 	// Example: ok
 	// Read Only: true
@@ -1381,6 +2216,10 @@ func (m *QtreeInlineStatistics) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateIopsRaw(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLatencyRaw(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1413,6 +2252,25 @@ func (m *QtreeInlineStatistics) validateIopsRaw(formats strfmt.Registry) error {
 				return ve.ValidateName("statistics" + "." + "iops_raw")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("statistics" + "." + "iops_raw")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QtreeInlineStatistics) validateLatencyRaw(formats strfmt.Registry) error {
+	if swag.IsZero(m.LatencyRaw) { // not required
+		return nil
+	}
+
+	if m.LatencyRaw != nil {
+		if err := m.LatencyRaw.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("statistics" + "." + "latency_raw")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("statistics" + "." + "latency_raw")
 			}
 			return err
 		}
@@ -1526,6 +2384,10 @@ func (m *QtreeInlineStatistics) ContextValidate(ctx context.Context, formats str
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateLatencyRaw(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -1557,6 +2419,27 @@ func (m *QtreeInlineStatistics) contextValidateIopsRaw(ctx context.Context, form
 				return ve.ValidateName("statistics" + "." + "iops_raw")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("statistics" + "." + "iops_raw")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QtreeInlineStatistics) contextValidateLatencyRaw(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LatencyRaw != nil {
+
+		if swag.IsZero(m.LatencyRaw) { // not required
+			return nil
+		}
+
+		if err := m.LatencyRaw.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("statistics" + "." + "latency_raw")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("statistics" + "." + "latency_raw")
 			}
 			return err
 		}
@@ -1638,7 +2521,7 @@ type QtreeInlineStatisticsInlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1676,6 +2559,60 @@ func (m *QtreeInlineStatisticsInlineIopsRaw) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
+// QtreeInlineStatisticsInlineLatencyRaw The raw latency observed at the storage object, in microseconds. This can be divided by the raw IOPS value to calculate the average latency per I/O operation.
+//
+// swagger:model qtree_inline_statistics_inline_latency_raw
+type QtreeInlineStatisticsInlineLatencyRaw struct {
+
+	// Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+	Other *int64 `json:"other,omitempty" yaml:"other,omitempty"`
+
+	// Performance metric for read I/O operations.
+	// Example: 200
+	Read *int64 `json:"read,omitempty" yaml:"read,omitempty"`
+
+	// Performance metric aggregated over all types of I/O operations.
+	// Example: 1000
+	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
+
+	// Performance metric for write I/O operations.
+	// Example: 100
+	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
+}
+
+// Validate validates this qtree inline statistics inline latency raw
+func (m *QtreeInlineStatisticsInlineLatencyRaw) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validate this qtree inline statistics inline latency raw based on the context it is used
+func (m *QtreeInlineStatisticsInlineLatencyRaw) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *QtreeInlineStatisticsInlineLatencyRaw) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *QtreeInlineStatisticsInlineLatencyRaw) UnmarshalBinary(b []byte) error {
+	var res QtreeInlineStatisticsInlineLatencyRaw
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
 // QtreeInlineStatisticsInlineThroughputRaw Throughput bytes observed at the storage object. This should be used along with delta time to calculate the rate of throughput bytes per unit of time.
 //
 // swagger:model qtree_inline_statistics_inline_throughput_raw
@@ -1692,7 +2629,7 @@ type QtreeInlineStatisticsInlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1980,7 +2917,7 @@ type QtreeInlineVolume struct {
 	// links
 	Links *QtreeInlineVolumeInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 

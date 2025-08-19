@@ -30,6 +30,12 @@ func (o *SecurityKeyManagerCreateReader) ReadResponse(response runtime.ClientRes
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewSecurityKeyManagerCreateAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewSecurityKeyManagerCreateDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -124,6 +130,88 @@ func (o *SecurityKeyManagerCreateCreated) readResponse(response runtime.ClientRe
 	return nil
 }
 
+// NewSecurityKeyManagerCreateAccepted creates a SecurityKeyManagerCreateAccepted with default headers values
+func NewSecurityKeyManagerCreateAccepted() *SecurityKeyManagerCreateAccepted {
+	return &SecurityKeyManagerCreateAccepted{}
+}
+
+/*
+SecurityKeyManagerCreateAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type SecurityKeyManagerCreateAccepted struct {
+
+	/* Useful for tracking the resource location
+	 */
+	Location string
+
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this security key manager create accepted response has a 2xx status code
+func (o *SecurityKeyManagerCreateAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this security key manager create accepted response has a 3xx status code
+func (o *SecurityKeyManagerCreateAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this security key manager create accepted response has a 4xx status code
+func (o *SecurityKeyManagerCreateAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this security key manager create accepted response has a 5xx status code
+func (o *SecurityKeyManagerCreateAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this security key manager create accepted response a status code equal to that given
+func (o *SecurityKeyManagerCreateAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the security key manager create accepted response
+func (o *SecurityKeyManagerCreateAccepted) Code() int {
+	return 202
+}
+
+func (o *SecurityKeyManagerCreateAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /security/key-managers][%d] securityKeyManagerCreateAccepted %s", 202, payload)
+}
+
+func (o *SecurityKeyManagerCreateAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /security/key-managers][%d] securityKeyManagerCreateAccepted %s", 202, payload)
+}
+
+func (o *SecurityKeyManagerCreateAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *SecurityKeyManagerCreateAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
+
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewSecurityKeyManagerCreateDefault creates a SecurityKeyManagerCreateDefault with default headers values
 func NewSecurityKeyManagerCreateDefault(code int) *SecurityKeyManagerCreateDefault {
 	return &SecurityKeyManagerCreateDefault{
@@ -173,6 +261,15 @@ func NewSecurityKeyManagerCreateDefault(code int) *SecurityKeyManagerCreateDefau
 | 65538120 | The key manager policy is not supported on the admin SVM. |
 | 65539216 | The Admin SVM has a key manager already configured. |
 | 65539221 | Failed to configure the Onboard Key Manager because the MetroCluster peer cluster is unhealthy. Verify that the peer cluster is online and healthy. |
+| 65539500 | Cannot create an inactive external key manager on this SVM because inactive external key managers can only be created on the admin SVM. |
+| 65539501 | Cannot create an inactive external key manager on the admin SVM because an external key manager already exists on the admin SVM. |
+| 65539503 | Cannot create an inactive external key manager on the admin SVM while MetroCluster is configured. |
+| 65539504 | An effective cluster version of ONTAP 9.16.1 or later is required to create an inactive external key manager on the admin SVM. |
+| 65539511 | Cannot create an inactive Onboard Key Manager on the admin SVM while MetroCluster is configured. |
+| 65539512 | An effective cluster version of ONTAP 9.16.1 or later is required to create an inactive Onboard Key Manager configuration on the admin SVM. |
+| 65539580 | Failed to create inactive Onboard Key Manager configuration. |
+| 65539581 | Cannot create an inactive Onboard Key Manager on the admin SVM because an inactive Onboard Key Manager configuration already exists on the admin SVM. |
+| 65539582 | Cannot specify the configuration name parameter. Only one Onboard Key Manager is supported for the admin SVM. |
 | 66060338 | Failed to establish secure connection for a key management server due to incorrect server_ca certificates. |
 | 66060339 | Failed to establish secure connection for a key management server due to incorrect client certificates. |
 | 66060340 | Failed to establish secure connection for a key management server due to Cryptsoft error. |

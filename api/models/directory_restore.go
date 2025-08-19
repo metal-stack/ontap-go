@@ -12,23 +12,23 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// DirectoryRestore Restores a directory from a volume Snapshot copy.
+// DirectoryRestore Restores a directory from a volume snapshot.
 //
 // swagger:model directory_restore
 type DirectoryRestore struct {
 
 	// Source from where the directory is restored.
-	// Example: src_file1, dir1/src_file2, ./.snapshot/snap1/src_file3
+	// Example: src_file1 or dir1/src_file2 or ./.snapshot/snap1/src_file3
 	Path *string `json:"path,omitempty" yaml:"path,omitempty"`
 
 	// Destination directory where the new directory tree is created.
-	// Example: dest_file1, dir1/dest_file2
+	// Example: dest_file1 or dir1/dest_file2
 	RestorePath *string `json:"restore_path,omitempty" yaml:"restore_path,omitempty"`
 
-	// Name of the volume Snapshot copy from which the directory is restored.
+	// Name of the volume snapshot from which the directory is restored.
 	Snapshot *string `json:"snapshot,omitempty" yaml:"snapshot,omitempty"`
 
-	// Name of the volume from which the Snapshot copy is used for directory restore.
+	// Name of the volume from which the snapshot is used for directory restore.
 	Volume *string `json:"volume,omitempty" yaml:"volume,omitempty"`
 
 	// Name of the SVM.

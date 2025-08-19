@@ -242,7 +242,7 @@ func NewSnapmirrorRelationshipModifyDefault(code int) *SnapmirrorRelationshipMod
 | 13304070    | Remote peer cluster requires the dp_rest_support capability to support reversing the direction of a DP relationship. |
 | 13304071    | Failed to access capabilities on remote cluster. |
 | 13304080    | Specified uuid and name do not match. |
-| 13304081    | Modifying a property during the opertaion is not supported. |
+| 13304081    | Modifying a property during the operation is not supported. |
 | 13304082    | The specified properties are mutually exclusive. |
 | 13304083    | The specified property is not supported because all nodes in the cluster are not capable of supporting the property. |
 | 13304086    | Reversing the direction of a SnapMirror relationship associated with a policy containing the property create_snapshot_on_source set to false is not supported. |
@@ -255,9 +255,10 @@ func NewSnapmirrorRelationshipModifyDefault(code int) *SnapmirrorRelationshipMod
 | 13304120    | Values specified for the source.path and destination.path properties do not match the relationship's source.path or destination.path properties.
 
 | 13304003    | IntraCluster flip operation is not supported. |
-| 6621125     | The policy is not valid for relationships with FlexGroup volume endpoints. Only policies without Snapshot copy creation schedules are supported for these relationships. |
+| 6621125     | The policy is not valid for relationships with FlexGroup volume endpoints. Only policies without snapshot creation schedules are supported for these relationships. |
 | 13304093    | The property specified is not supported for the specified relationships. |
 | 6622077     | The expand operation has failed on the SnapMirror active sync relationship with specified destination path. |
+| 6619720     | Relationship information has been updated and is being propagated. Wait a few minutes and try the operation again. |
 */
 type SnapmirrorRelationshipModifyDefault struct {
 	_statusCode int

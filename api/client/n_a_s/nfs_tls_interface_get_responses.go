@@ -120,9 +120,13 @@ func NewNfsTLSInterfaceGetDefault(code int) *NfsTLSInterfaceGetDefault {
 }
 
 /*
-NfsTLSInterfaceGetDefault describes a response with status code -1, with default header values.
+	NfsTLSInterfaceGetDefault describes a response with status code -1, with default header values.
 
-Error
+	ONTAP Error Response codes
+
+| Error codes | Description |
+| ----------- | ----------- |
+| 262197      | The value provided is invalid for field \"fields\".|
 */
 type NfsTLSInterfaceGetDefault struct {
 	_statusCode int

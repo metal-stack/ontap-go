@@ -226,6 +226,7 @@ func NewSnapmirrorRelationshipCreateDefault(code int) *SnapmirrorRelationshipCre
 
 | Error Code | Description |
 | ---------- | ----------- |
+| 918657 | Invalid duration value for the \"retention_period\" field. |
 | 1115542 | Invalid value given for the field. |
 | 6619441 | The source volume cannot be the same as the destination volume. |
 | 6619599 | Only the \"none\" tiering policy is supported when creating a destination volume with \"snapshot_locking_enabled\" set to true or if \"snapshot_locking_enabled\" is set to true on the source volume. |
@@ -234,11 +235,12 @@ func NewSnapmirrorRelationshipCreateDefault(code int) *SnapmirrorRelationshipCre
 | 6620374 | Internal error. Failed to get SVM information. |
 | 6620478 | Internal error. Failed to check SnapMirror capability. |
 | 6620654 | Invalid SnapMirror Consistency Group name. |
-| 6621125 | The policy is not valid for relationships with FlexGroup volume endpoints. Only policies without Snapshot copy creation schedules are supported for these relationships. |
+| 6621125 | The policy is not valid for relationships with FlexGroup volume endpoints. Only policies without snapshot creation schedules are supported for these relationships. |
+| 6621128 | Policy is not valid because it has snapshot creation schedules associated with it. Such policies cannot be used for relationships with Consistency Group endpoints. |
 | 6621458 | The destination Consistency Group is the source of a SnapMirror Synchronous (SM-S) relationship. Sources of SM-S relationships cannot be the destination of any other SnapMirror relationship. |
 | 6621782 | A property of the policy is not valid for relationships between these endpoints. |
 | 6621834 | Object store configuration does not exist for specified SVM. |
-| 6622088 | SnapMirror Asynchronous relationship is not supported on a Consistency Group volume that has Snapshot copy locking enabled. |
+| 6622088 | SnapMirror Asynchronous relationship is not supported on a Consistency Group volume that has snapshot locking enabled. |
 | 13303819 | Could not retrieve SnapMirror policy information. |
 | 13303821 | Invalid SnapMirror policy UUID. |
 | 13303841 | This operation is not supported for SnapMirror relationships between these endpoints. |
@@ -278,7 +280,7 @@ func NewSnapmirrorRelationshipCreateDefault(code int) *SnapmirrorRelationshipCre
 | 13303921 | Unable to retrieve the SnapMirror capabilities of the destination cluster. |
 | 13303922 | Specified source SVM is not a data SVM. |
 | 13303923 | Specified destination SVM is not a data SVM. |
-| 13303924 | Source SVM has an invalid Snapshot copy policy. |
+| 13303924 | Source SVM has an invalid snapshot policy. |
 | 13303925 | SnapMirror validation has failed. |
 | 13303930 | The specified tiering policy is not supported for destination volumes of Synchronous relationships. |
 | 13303938 | Fetching information from the local cluster failed. |
@@ -305,11 +307,12 @@ func NewSnapmirrorRelationshipCreateDefault(code int) *SnapmirrorRelationshipCre
 | 13304082 | Specified properties are mutually exclusive. |
 | 13304083 | The specified property is not supported because all nodes in the cluster are not capable of supporting the property. |
 | 13304093 | The property specified is not supported for the specified relationships. |
-| 13304098 | This SnapMirror policy is not supported for SnapMirror relationhips with SnapLock volumes. |
+| 13304098 | This SnapMirror policy is not supported for SnapMirror relationships with SnapLock volumes. |
 | 13304099 | SnapLock Compliance Clock is not running on all nodes in the destination cluster. |
 | 13304108 | Schedule not found in the Administrative SVM or the SVM for the relationship. |
 | 13304112 | File restore from a Consistency Group asynchronous SnapMirror relationship endpoint is not supported. |
 | 13304132 | Creating a destination endpoint is not supported with the \"backoff_level\" property. |
+| 13304144 | SnapLock is not licensed on the destination cluster. |
 | 53411897 | The specified source volumes do not match the volumes contained in the source consistency group. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 ##### Above error msgs have been added in sorted(ascending) order

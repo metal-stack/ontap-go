@@ -42,6 +42,9 @@ type ZappS3BucketApplicationComponents struct {
 	// Specifies the default retention period that is applied to objects while committing them to the WORM state without an associated retention period. The retention period can be in years, or days. The retention period value represents a duration and must be specified in the ISO-8601 duration format. A period specified for years and days is represented in the ISO-8601 format as quot;Plt;num&gt;Y&quot; and quot;Plt;num&gt;D&quot; respectively, for example &quot;P10Y&quot; represents a duration of 10 years. The period string must contain only a single time element that is, either years, or days. A duration which combines different periods is not supported, for example &quot;P1Y10D&quot; is not supported. Usage: {{&lt;integer&gt; days|years} | none}
 	DefaultRetentionPeriod *string `json:"default_retention_period,omitempty" yaml:"default_retention_period,omitempty"`
 
+	// exclude aggregates
+	ExcludeAggregates []*ZappS3BucketApplicationComponentsExcludeAggregatesItems0 `json:"exclude_aggregates" yaml:"exclude_aggregates"`
+
 	// The name of the application component.
 	// Required: true
 	// Max Length: 63
@@ -90,6 +93,10 @@ func (m *ZappS3BucketApplicationComponents) Validate(formats strfmt.Registry) er
 	}
 
 	if err := m.validateComment(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateExcludeAggregates(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -241,6 +248,32 @@ func (m *ZappS3BucketApplicationComponents) validateComment(formats strfmt.Regis
 
 	if err := validate.MaxLength("comment", "body", m.Comment, 256); err != nil {
 		return err
+	}
+
+	return nil
+}
+
+func (m *ZappS3BucketApplicationComponents) validateExcludeAggregates(formats strfmt.Registry) error {
+	if swag.IsZero(m.ExcludeAggregates) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ExcludeAggregates); i++ {
+		if swag.IsZero(m.ExcludeAggregates[i]) { // not required
+			continue
+		}
+
+		if m.ExcludeAggregates[i] != nil {
+			if err := m.ExcludeAggregates[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("exclude_aggregates" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("exclude_aggregates" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
 	}
 
 	return nil
@@ -399,6 +432,10 @@ func (m *ZappS3BucketApplicationComponents) ContextValidate(ctx context.Context,
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateExcludeAggregates(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateQos(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -432,6 +469,31 @@ func (m *ZappS3BucketApplicationComponents) contextValidateAccessPolicies(ctx co
 					return ve.ValidateName("access_policies" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("access_policies" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *ZappS3BucketApplicationComponents) contextValidateExcludeAggregates(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.ExcludeAggregates); i++ {
+
+		if m.ExcludeAggregates[i] != nil {
+
+			if swag.IsZero(m.ExcludeAggregates[i]) { // not required
+				return nil
+			}
+
+			if err := m.ExcludeAggregates[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("exclude_aggregates" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("exclude_aggregates" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -504,6 +566,116 @@ func (m *ZappS3BucketApplicationComponents) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *ZappS3BucketApplicationComponents) UnmarshalBinary(b []byte) error {
 	var res ZappS3BucketApplicationComponents
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// ZappS3BucketApplicationComponentsExcludeAggregatesItems0 zapp s3 bucket application components exclude aggregates items0
+//
+// swagger:model ZappS3BucketApplicationComponentsExcludeAggregatesItems0
+type ZappS3BucketApplicationComponentsExcludeAggregatesItems0 struct {
+
+	// The name of the aggregate to exclude.
+	// Enum: ["aggr0_fel_wps1_ba1_r01c800_a","aggr0_fel_wps1_ba1_r01c800_b","aggr0_stg_kkw7_ba1_r01c800_a","aggr0_stg_kkw7_ba1_r01c800_b","data01_mcc_renamed_20250617101056_2041346693","data02_mcc_renamed_20250617101056_2041346693","data03","data04"]
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
+
+	// The ID of the aggregate to exclude. Usage: &lt;UUID&gt;
+	UUID string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
+}
+
+// Validate validates this zapp s3 bucket application components exclude aggregates items0
+func (m *ZappS3BucketApplicationComponentsExcludeAggregatesItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+var zappS3BucketApplicationComponentsExcludeAggregatesItems0TypeNamePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["aggr0_fel_wps1_ba1_r01c800_a","aggr0_fel_wps1_ba1_r01c800_b","aggr0_stg_kkw7_ba1_r01c800_a","aggr0_stg_kkw7_ba1_r01c800_b","data01_mcc_renamed_20250617101056_2041346693","data02_mcc_renamed_20250617101056_2041346693","data03","data04"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		zappS3BucketApplicationComponentsExcludeAggregatesItems0TypeNamePropEnum = append(zappS3BucketApplicationComponentsExcludeAggregatesItems0TypeNamePropEnum, v)
+	}
+}
+
+const (
+
+	// ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameAggr0FelWps1Ba1R01c800a captures enum value "aggr0_fel_wps1_ba1_r01c800_a"
+	ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameAggr0FelWps1Ba1R01c800a string = "aggr0_fel_wps1_ba1_r01c800_a"
+
+	// ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameAggr0FelWps1Ba1R01c800b captures enum value "aggr0_fel_wps1_ba1_r01c800_b"
+	ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameAggr0FelWps1Ba1R01c800b string = "aggr0_fel_wps1_ba1_r01c800_b"
+
+	// ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800a captures enum value "aggr0_stg_kkw7_ba1_r01c800_a"
+	ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800a string = "aggr0_stg_kkw7_ba1_r01c800_a"
+
+	// ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800b captures enum value "aggr0_stg_kkw7_ba1_r01c800_b"
+	ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800b string = "aggr0_stg_kkw7_ba1_r01c800_b"
+
+	// ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameData01MccRenamed202506171010562041346693 captures enum value "data01_mcc_renamed_20250617101056_2041346693"
+	ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameData01MccRenamed202506171010562041346693 string = "data01_mcc_renamed_20250617101056_2041346693"
+
+	// ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameData02MccRenamed202506171010562041346693 captures enum value "data02_mcc_renamed_20250617101056_2041346693"
+	ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameData02MccRenamed202506171010562041346693 string = "data02_mcc_renamed_20250617101056_2041346693"
+
+	// ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameData03 captures enum value "data03"
+	ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameData03 string = "data03"
+
+	// ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameData04 captures enum value "data04"
+	ZappS3BucketApplicationComponentsExcludeAggregatesItems0NameData04 string = "data04"
+)
+
+// prop value enum
+func (m *ZappS3BucketApplicationComponentsExcludeAggregatesItems0) validateNameEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, zappS3BucketApplicationComponentsExcludeAggregatesItems0TypeNamePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *ZappS3BucketApplicationComponentsExcludeAggregatesItems0) validateName(formats strfmt.Registry) error {
+	if swag.IsZero(m.Name) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateNameEnum("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this zapp s3 bucket application components exclude aggregates items0 based on context it is used
+func (m *ZappS3BucketApplicationComponentsExcludeAggregatesItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ZappS3BucketApplicationComponentsExcludeAggregatesItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ZappS3BucketApplicationComponentsExcludeAggregatesItems0) UnmarshalBinary(b []byte) error {
+	var res ZappS3BucketApplicationComponentsExcludeAggregatesItems0
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

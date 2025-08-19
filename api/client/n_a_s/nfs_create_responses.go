@@ -140,7 +140,11 @@ func NewNfsCreateDefault(code int) *NfsCreateDefault {
 | ---------- | ----------- |
 | 1534829    | The port numbers allowed are 635 (the default) and 1024 through 9999 |
 | 2621516    | This operation is only supported on a data SVM |
-| 2621574    | This operation is not permitted on a SVM that is configured as the destination of a MetroCluster SVM relationship |
+| 2621570    | This operation is not permitted on an SVM that is configured as the destination for SVM DR.|
+| 2621574    | This operation is not permitted on an SVM that is configured as the destination of a MetroCluster SVM relationship |
+| 2621706    | The specified SVM UUID is incorrect for the specified SVM name |
+| 3276852    | NFSv4.1 implementation name length for the SVM must be less than 256 bytes.|
+| 3276900    | NFSv4.1 implementation name cannot be an empty string |
 | 3276916    | Vserver is not running |
 | 3276994    | Kerberos must be disabled on all LIFs on Vserver before adding or removing AES encryption. Disable Kerberos on the LIF and try again |
 | 3277038    | Cannot enable \\\"showmount\\\" feature because it requires an effective cluster version of Data ONTAP 8.3.0 or later |
@@ -152,6 +156,7 @@ func NewNfsCreateDefault(code int) *NfsCreateDefault {
 | 3277089    | Attempting to create an NFS server using 64-bits for NFSv3 FSIDs and File IDs on Vserver. Older client software might not work with 64-bit identifiers|
 | 3277099    | Domain name contains invalid characters or it is too short. Allowed characters are: alphabetical characters (A-Za-z), numeric characters (0-9), minus sign (-), and the period (.). The first character must be alphabetical or numeric, last character must not be a minus sign or a period. Minimum supported length: 2 characters, maximum of 256 characters |
 | 3277140    | Cannot set \"transport.tcp_max_transfer_size\" to a value other than multiples of 4096 |
+| 2621507    | The NFS protocol is not allowed for the specified SVM.|
 | 2621519    | SVM name is invalid. The SVM name must begin with a letter or an underscore. If the SVM is of type \"sync-source\", the maximum supported length is 41. Otherwise, the maximum supported length is 47.|
 | 262196     | Field \"access_cache_config.harvest_timeout\" cannot be set in this operation.|
 */

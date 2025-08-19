@@ -64,6 +64,14 @@ type NvmeSubsystemController struct {
 
 	// svm
 	Svm *NvmeSubsystemControllerInlineSvm `json:"svm,omitempty" yaml:"svm,omitempty"`
+
+	// tls
+	TLS *NvmeSubsystemControllerInlineTLS `json:"tls,omitempty" yaml:"tls,omitempty"`
+
+	// Transport Protocol
+	// Read Only: true
+	// Enum: ["fc_nvme","nvme_tcp"]
+	TransportProtocol *string `json:"transport_protocol,omitempty" yaml:"transport_protocol,omitempty"`
 }
 
 // Validate validates this nvme subsystem controller
@@ -107,6 +115,14 @@ func (m *NvmeSubsystemController) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSvm(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTLS(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTransportProtocol(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -306,6 +322,67 @@ func (m *NvmeSubsystemController) validateSvm(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *NvmeSubsystemController) validateTLS(formats strfmt.Registry) error {
+	if swag.IsZero(m.TLS) { // not required
+		return nil
+	}
+
+	if m.TLS != nil {
+		if err := m.TLS.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("tls")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("tls")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+var nvmeSubsystemControllerTypeTransportProtocolPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["fc_nvme","nvme_tcp"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		nvmeSubsystemControllerTypeTransportProtocolPropEnum = append(nvmeSubsystemControllerTypeTransportProtocolPropEnum, v)
+	}
+}
+
+const (
+
+	// NvmeSubsystemControllerTransportProtocolFcNvme captures enum value "fc_nvme"
+	NvmeSubsystemControllerTransportProtocolFcNvme string = "fc_nvme"
+
+	// NvmeSubsystemControllerTransportProtocolNvmeTCP captures enum value "nvme_tcp"
+	NvmeSubsystemControllerTransportProtocolNvmeTCP string = "nvme_tcp"
+)
+
+// prop value enum
+func (m *NvmeSubsystemController) validateTransportProtocolEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, nvmeSubsystemControllerTypeTransportProtocolPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *NvmeSubsystemController) validateTransportProtocol(formats strfmt.Registry) error {
+	if swag.IsZero(m.TransportProtocol) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateTransportProtocolEnum("transport_protocol", "body", *m.TransportProtocol); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // ContextValidate validate this nvme subsystem controller based on the context it is used
 func (m *NvmeSubsystemController) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -355,6 +432,14 @@ func (m *NvmeSubsystemController) ContextValidate(ctx context.Context, formats s
 	}
 
 	if err := m.contextValidateSvm(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTLS(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTransportProtocol(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -592,6 +677,36 @@ func (m *NvmeSubsystemController) contextValidateSvm(ctx context.Context, format
 	return nil
 }
 
+func (m *NvmeSubsystemController) contextValidateTLS(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.TLS != nil {
+
+		if swag.IsZero(m.TLS) { // not required
+			return nil
+		}
+
+		if err := m.TLS.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("tls")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("tls")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *NvmeSubsystemController) contextValidateTransportProtocol(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "transport_protocol", "body", m.TransportProtocol); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // MarshalBinary interface implementation
 func (m *NvmeSubsystemController) MarshalBinary() ([]byte, error) {
 	if m == nil {
@@ -672,13 +787,13 @@ func (m *NvmeSubsystemControllerInlineAdminQueue) UnmarshalBinary(b []byte) erro
 // swagger:model nvme_subsystem_controller_inline_dh_hmac_chap
 type NvmeSubsystemControllerInlineDhHmacChap struct {
 
-	// The Diffie-Hellman group size used for NVMe in-band authentication.
+	// The Diffie-Hellman group size used for NVMe in-band authentication. This property is populated only when NVMe in-band authentication was performed for the NVMe-oF transport connection.
 	//
 	// Read Only: true
 	// Enum: ["none","2048_bit","3072_bit","4096_bit","6144_bit","8192_bit"]
 	GroupSize *string `json:"group_size,omitempty" yaml:"group_size,omitempty"`
 
-	// The hash function used for NVMe in-band authentication.
+	// The hash function used for NVMe in-band authentication. This property is populated only when NVMe in-band authentication was performed for the NVMe-oF transport connection.
 	//
 	// Read Only: true
 	// Enum: ["sha_256","sha_512"]
@@ -2006,6 +2121,204 @@ func (m *NvmeSubsystemControllerInlineSvmInlineLinks) MarshalBinary() ([]byte, e
 // UnmarshalBinary interface implementation
 func (m *NvmeSubsystemControllerInlineSvmInlineLinks) UnmarshalBinary(b []byte) error {
 	var res NvmeSubsystemControllerInlineSvmInlineLinks
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// NvmeSubsystemControllerInlineTLS A container for properties that describe the encrypted NVMe/TCP transport connection between the host and the NVMe subsystem.
+//
+// swagger:model nvme_subsystem_controller_inline_tls
+type NvmeSubsystemControllerInlineTLS struct {
+
+	// The cipher suite used for the transport by the encrypted NVMe/TCP transport connection between the host and the NVMe subsystem. This property is populated only when encryption is in use for the transport connection.
+	//
+	// Example: tls_aes_128_gcm_sha256
+	// Read Only: true
+	// Enum: ["tls_aes_128_gcm_sha256","tls_aes_256_gcm_sha384"]
+	Cipher *string `json:"cipher,omitempty" yaml:"cipher,omitempty"`
+
+	// The method by which the TLS pre-shared key (PSK) was obtained when establishing the encrypted NVMe/TCP transport connection between the host and the NVMe subsystem.
+	// Possible values:
+	//   - `none` - TLS encryption is not configured for the host connection.
+	//   - `configured` - A user supplied PSK was used for the encrypted NVMe/TCP-TLS transport connection between the host and the NVMe subsystem.
+	//
+	// Example: configured
+	// Read Only: true
+	// Enum: ["none","configured"]
+	KeyType *string `json:"key_type,omitempty" yaml:"key_type,omitempty"`
+
+	// The TLS PSK identity supplied by the host when establishing the encrypted NVMe/TCP transport connection between the host and the NVMe subsystem. This property is populated only when encryption is in use for the transport connection.
+	//
+	// Example: NVMe1R01 nqn.2014-08.org.nvmexpress:uuid:713b3816-f9bf-ba43-b95a-5e4bf8c726e9 nqn.1992-08.com.netapp:sn.76f9d9bfb96511eea95e005056bb72b2:subsystem.ss1 mS1A7nrooevA9ZqAM09fQzWQlB2UZRt0BE1X4vINjY0=:
+	// Read Only: true
+	PskIdentity *string `json:"psk_identity,omitempty" yaml:"psk_identity,omitempty"`
+}
+
+// Validate validates this nvme subsystem controller inline tls
+func (m *NvmeSubsystemControllerInlineTLS) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateCipher(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateKeyType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+var nvmeSubsystemControllerInlineTlsTypeCipherPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["tls_aes_128_gcm_sha256","tls_aes_256_gcm_sha384"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		nvmeSubsystemControllerInlineTlsTypeCipherPropEnum = append(nvmeSubsystemControllerInlineTlsTypeCipherPropEnum, v)
+	}
+}
+
+const (
+
+	// NvmeSubsystemControllerInlineTLSCipherTLSAes128GcmSha256 captures enum value "tls_aes_128_gcm_sha256"
+	NvmeSubsystemControllerInlineTLSCipherTLSAes128GcmSha256 string = "tls_aes_128_gcm_sha256"
+
+	// NvmeSubsystemControllerInlineTLSCipherTLSAes256GcmSha384 captures enum value "tls_aes_256_gcm_sha384"
+	NvmeSubsystemControllerInlineTLSCipherTLSAes256GcmSha384 string = "tls_aes_256_gcm_sha384"
+)
+
+// prop value enum
+func (m *NvmeSubsystemControllerInlineTLS) validateCipherEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, nvmeSubsystemControllerInlineTlsTypeCipherPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *NvmeSubsystemControllerInlineTLS) validateCipher(formats strfmt.Registry) error {
+	if swag.IsZero(m.Cipher) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateCipherEnum("tls"+"."+"cipher", "body", *m.Cipher); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var nvmeSubsystemControllerInlineTlsTypeKeyTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["none","configured"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		nvmeSubsystemControllerInlineTlsTypeKeyTypePropEnum = append(nvmeSubsystemControllerInlineTlsTypeKeyTypePropEnum, v)
+	}
+}
+
+const (
+
+	// NvmeSubsystemControllerInlineTLSKeyTypeNone captures enum value "none"
+	NvmeSubsystemControllerInlineTLSKeyTypeNone string = "none"
+
+	// NvmeSubsystemControllerInlineTLSKeyTypeConfigured captures enum value "configured"
+	NvmeSubsystemControllerInlineTLSKeyTypeConfigured string = "configured"
+)
+
+// prop value enum
+func (m *NvmeSubsystemControllerInlineTLS) validateKeyTypeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, nvmeSubsystemControllerInlineTlsTypeKeyTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *NvmeSubsystemControllerInlineTLS) validateKeyType(formats strfmt.Registry) error {
+	if swag.IsZero(m.KeyType) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateKeyTypeEnum("tls"+"."+"key_type", "body", *m.KeyType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this nvme subsystem controller inline tls based on the context it is used
+func (m *NvmeSubsystemControllerInlineTLS) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateCipher(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateKeyType(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePskIdentity(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *NvmeSubsystemControllerInlineTLS) contextValidateCipher(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "tls"+"."+"cipher", "body", m.Cipher); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *NvmeSubsystemControllerInlineTLS) contextValidateKeyType(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "tls"+"."+"key_type", "body", m.KeyType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *NvmeSubsystemControllerInlineTLS) contextValidatePskIdentity(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "tls"+"."+"psk_identity", "body", m.PskIdentity); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *NvmeSubsystemControllerInlineTLS) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *NvmeSubsystemControllerInlineTLS) UnmarshalBinary(b []byte) error {
+	var res NvmeSubsystemControllerInlineTLS
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

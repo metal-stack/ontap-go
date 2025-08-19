@@ -226,6 +226,7 @@ func NewCifsServiceCreateDefault(code int) *CifsServiceCreateDefault {
 
 | Error Code | Description |
 | ---------- | ----------- |
+| 1115127    | The cluster lacks a valid CIFS license. |
 | 3735751    | Failed to authenticate and retrieve the access token from the Azure OAuth host. |
 | 3735752    | Failed to extract the private key from the Azure Key Vault certificate. |
 | 3735753    | Unsupported content_type in the Azure secrets response. |
@@ -249,6 +250,8 @@ func NewCifsServiceCreateDefault(code int) *CifsServiceCreateDefault {
 | 656466     | Failed to create the Active Directory machine account. Reason: Domain Controller is not reachable or does not exist. |
 | 656467     | Failed to create the Active Directory machine account. Reason: Organizational-Unit not found. |
 | 656473     | Fields security.kdc_encryption and security.advertised_kdc_encryptions are mutually exclusive. Specify only one of the two.|
+| 655477     | Only one CIFS server is supported per SVM. |
+| 656487     | Missing fields when doing CIFS operation with hybrid auth user type. |
 */
 type CifsServiceCreateDefault struct {
 	_statusCode int

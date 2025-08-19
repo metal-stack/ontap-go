@@ -131,6 +131,7 @@ func NewActiveDirectoryModifyDefault(code int) *ActiveDirectoryModifyDefault {
 | 656466 | Failed to create the Active Directory machine account. Reason: Unable to connect to any domain controllers. |
 | 656467 | Failed to modify the Active Directory machine account. Reason: Organizational-Unit not found. |
 | 656478 | Failed to create the Active Directory machine account. Reason: KDC has no support for encryption type. |
+| 656490 | Unable to modify the Active Directory account. The Active Directory account name is already used by another SVM. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type ActiveDirectoryModifyDefault struct {

@@ -123,6 +123,7 @@ func NewIPServicePolicyModifyDefault(code int) *IPServicePolicyModifyDefault {
 | 53281934 | An SVM-scoped service cannot be added to a Cluster-scoped service policy. |
 | 53281952 | The service policy on an SVM cannot be updated to include a block service. Use built-in service policies for SAN services. |
 | 53281953 | The service policy on an SVM cannot be updated to include a new service. |
+| 53281960 | Service cannot be removed from the service policy because it is used by one or more interfaces. |
 | 53281961 | Service cannot be removed from the service policy because it is used by one or more interfaces. |
 | 53281963 | Service cannot be removed from the service policy because it is used by one or more interfaces. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.

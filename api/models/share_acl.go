@@ -45,6 +45,9 @@ type ShareACL struct {
 	// Specifies the user or group name to add to the access control list of a CIFS share.
 	// Example: ENGDOMAIN\\ad_user
 	UserOrGroup *string `json:"user_or_group,omitempty" yaml:"user_or_group,omitempty"`
+
+	// Windows SID/UNIX ID depending on access-control type.
+	WinSidUnixID *string `json:"win_sid_unix_id,omitempty" yaml:"win_sid_unix_id,omitempty"`
 }
 
 // Validate validates this share acl

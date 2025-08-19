@@ -30,8 +30,8 @@ type Volume struct {
 	// activity tracking
 	ActivityTracking *VolumeInlineActivityTracking `json:"activity_tracking,omitempty" yaml:"activity_tracking,omitempty"`
 
-	// Specifies the aggressive readahead mode enabled on the volume. When set to "file_prefetch", on a file read, the system aggressively issues readaheads for all of the blocks in the file and retains those blocks in a cache for a finite period of time.
-	// Enum: ["none","file_prefetch"]
+	// Specifies the `aggressive_readahead_mode` enabled on the volume. When set to _file_prefetch_, on a file read, the system aggressively issues readaheads for all of the blocks in the file and retains those blocks in a cache for a finite period of time. When the option is set to _sequential_read_, the system aggressively prefetches the file completely, or to a certain length based on the file size limit, and continues as the read makes progress. If the option is set to _cross_file_sequential_read_, then the system aggressively prefetches multiple files completely, or to a certain length, and continues as the read makes progress.
+	// Enum: ["none","file_prefetch","sequential_read","cross_file_sequential_read"]
 	AggressiveReadaheadMode *string `json:"aggressive_readahead_mode,omitempty" yaml:"aggressive_readahead_mode,omitempty"`
 
 	// analytics
@@ -111,8 +111,12 @@ type Volume struct {
 	// flexgroup
 	Flexgroup *VolumeInlineFlexgroup `json:"flexgroup,omitempty" yaml:"flexgroup,omitempty"`
 
-	// State of granular data on the volume. This setting is `true` by default when creating an AWS S3 FlexGroup volume via a POST request and `false` by default for creating any other type of FlexGroup volume via a POST request. On FlexVols, the setting is always `false`, as only FlexGroup volumes support this feature. Once enabled, this setting can only be disabled by restoring a Snapshot copy. Earlier versions of ONTAP (pre 9.12) are not compatible with this feature. Therefore, reverting to an earlier version of ONTAP is not possible unless this volume is deleted or restored to a Snapshot copy that was taken before the setting was enabled.
+	// State of granular data on the volume. This setting is `true` by default when creating an AWS S3 FlexGroup volume via a POST request and `false` by default for creating any other type of FlexGroup volume via a POST request. On FlexVol volumes, the setting is always `false`, as only FlexGroup volumes support this feature. Once enabled, this setting can only be disabled by restoring a snapshot. Earlier versions of ONTAP (pre 9.12) are not compatible with this feature. Therefore, reverting to an earlier version of ONTAP is not possible unless this volume is deleted or restored to a snapshot that was taken before the setting was enabled.
 	GranularData *bool `json:"granular_data,omitempty" yaml:"granular_data,omitempty"`
+
+	// Mode of granular data on the volume. This setting defaults to `basic` when the `granular_data` parameter is set to `true`, but can be specified at the time of creation via a POST request. Earlier versions of ONTAP (pre 9.12) are not compatible with the `basic` setting. Therefore, when set to `basic`, reverting to an earlier version of ONTAP is not possible unless this volume is deleted or restored to a snapshot that was taken before the `basic` mode was enabled. Earlier versions of ONTAP (pre 9.16) are not compatible with the `advanced` setting. Therefore, when set to `advanced`, reverting to an earlier version of ONTAP is not possible unless this volume is deleted or restored to a snapshot that was taken before the `advanced` mode was enabled.
+	// Enum: ["disabled","basic","advanced"]
+	GranularDataMode *string `json:"granular_data_mode,omitempty" yaml:"granular_data_mode,omitempty"`
 
 	// guarantee
 	Guarantee *VolumeInlineGuarantee `json:"guarantee,omitempty" yaml:"guarantee,omitempty"`
@@ -141,7 +145,7 @@ type Volume struct {
 	// The volume's Master Set ID.
 	Msid *int64 `json:"msid,omitempty" yaml:"msid,omitempty"`
 
-	// Volume name. The name of volume must start with an alphabetic character (a to z or A to Z) or an underscore (_). The name must be 197 or fewer characters in length for FlexGroups, and 203 or fewer characters in length for all other types of volumes. Volume names must be unique within an SVM. Required on POST.
+	// Volume name. The name of volume must start with an alphabetic character (a to z or A to Z) or an underscore (_). The name must be 197 or fewer characters in length for FlexGroup volumes, and 203 or fewer characters in length for all other types of volumes. Volume names must be unique within an SVM. Required on POST.
 	// Example: vol_cs_dept
 	// Max Length: 203
 	// Min Length: 1
@@ -150,7 +154,7 @@ type Volume struct {
 	// nas
 	Nas *VolumeInlineNas `json:"nas,omitempty" yaml:"nas,omitempty"`
 
-	// Specifies whether to create the constituents of the FlexGroup volume on the aggegates specified in the order they are specified, or whether the system should optimize the ordering of the aggregates. If this value is 'true', the system optimizes the ordering of the aggregates specified. If this value is false, the order of the aggregates is unchanged. The default value is 'false'.
+	// Specifies whether to create the constituents of the FlexGroup volume on the aggregates specified in the order they are specified, or whether the system should optimize the ordering of the aggregates. If this value is 'true', the system optimizes the ordering of the aggregates specified. If this value is false, the order of the aggregates is unchanged. The default value is 'false'.
 	OptimizeAggregates *bool `json:"optimize_aggregates,omitempty" yaml:"optimize_aggregates,omitempty"`
 
 	// qos
@@ -165,8 +169,8 @@ type Volume struct {
 	// rebalancing
 	Rebalancing *VolumeInlineRebalancing `json:"rebalancing,omitempty" yaml:"rebalancing,omitempty"`
 
-	// Naming Scheme for automatic Snapshot copies:
-	// * create_time - Automatic Snapshot copies are saved as per the start of their current date and time.
+	// Naming Scheme for automatic snapshots:
+	// * create_time - Automatic snapshots are saved as per the start of their current date and time.
 	// * ordinal - Latest automatic snapshot copy is saved as <scheduled_frequency>.0 and subsequent copies will follow the create_time naming convention.
 	//
 	// Enum: ["create_time","ordinal"]
@@ -181,7 +185,7 @@ type Volume struct {
 	// snapmirror
 	Snapmirror *VolumeInlineSnapmirror `json:"snapmirror,omitempty" yaml:"snapmirror,omitempty"`
 
-	// Number of Snapshot copies in the volume.
+	// Number of snapshots in the volume.
 	// Read Only: true
 	// Maximum: 1023
 	// Minimum: 0
@@ -206,7 +210,7 @@ type Volume struct {
 	// statistics
 	Statistics *VolumeInlineStatistics `json:"statistics,omitempty" yaml:"statistics,omitempty"`
 
-	// The style of the volume. If "style" is not specified, the volume type is determined based on the specified aggregates or license. Specifying a single aggregate, without "constituents_per_aggregate", creates a flexible volume. Specifying multiple aggregates, or a single aggregate with "constituents_per_aggregate", creates a FlexGroup volume. When the UDO License is installed, and no aggregates are specified, the system automatically provisions a FlexGroup volume on system selected aggregates. Specifying a volume "style" creates a volume of that type. For example, if the style is "flexvol", you must specify a single aggregate. If the style is "flexgroup", the system either uses the specified aggregates or automatically provisions aggregates if there are no specified aggregates. The style "flexgroup_constituent" is not supported when creating a volume.<br>flexvol &dash; flexible volumes and FlexClone volumes<br>flexgroup &dash; FlexGroup volumes<br>flexgroup_constituent &dash; FlexGroup constituents.
+	// The style of the volume. If "style" is not specified, the volume type is determined based on the specified aggregates or license. Specifying a single aggregate, without "constituents_per_aggregate", creates a flexible volume. Specifying multiple aggregates, or a single aggregate with "constituents_per_aggregate", creates a FlexGroup volume. When the UDO License is installed, and no aggregates are specified, the system automatically provisions a FlexGroup volume on system selected aggregates. Specifying a volume "style" creates a volume of that type. For example, if the style is "flexvol", you must specify a single aggregate. If the style is "flexgroup", the system either uses the specified aggregates or automatically provisions aggregates if there are no specified aggregates. The style "flexgroup_constituent" is not supported when creating a volume.<br>flexvol &dash; flexible volumes and FlexClone volumes<br>flexgroup &dash; FlexGroup volumes<br>flexgroup_constituent &dash; FlexGroup volume constituents.
 	// Enum: ["flexvol","flexgroup","flexgroup_constituent"]
 	Style *string `json:"style,omitempty" yaml:"style,omitempty"`
 
@@ -220,7 +224,7 @@ type Volume struct {
 	// Enum: ["rw","dp","ls"]
 	Type *string `json:"type,omitempty" yaml:"type,omitempty"`
 
-	// Specifies whether mirrored aggregates are selected when provisioning a FlexGroup without specifying "aggregates.name" or "aggregates.uuid". Only mirrored aggregates are used if this parameter is set to 'true' and only unmirrored aggregates are used if this parameter is set to 'false'. Aggregate level mirroring for a FlexGroup can be changed by moving all of the constituents to the required aggregates. The default value is 'true' for a MetroCluster configuration and is 'false' for a non-MetroCluster configuration.
+	// Specifies whether mirrored aggregates are selected when provisioning a FlexGroup without specifying "aggregates.name" or "aggregates.uuid". Only mirrored aggregates are used if this parameter is set to 'true' and only unmirrored aggregates are used if this parameter is set to 'false'. Aggregate level mirroring for a FlexGroup volume can be changed by moving all of the constituents to the required aggregates. The default value is 'true' for a MetroCluster configuration and is 'false' for a non-MetroCluster configuration.
 	UseMirroredAggregates *bool `json:"use_mirrored_aggregates,omitempty" yaml:"use_mirrored_aggregates,omitempty"`
 
 	// Unique identifier for the volume. This corresponds to the instance-uuid that is exposed in the CLI and ONTAPI. It does not change due to a volume move.
@@ -239,7 +243,7 @@ type Volume struct {
 	// Aggregate hosting the volume. Required on POST.
 	VolumeInlineAggregates []*VolumeInlineAggregatesInlineArrayItem `json:"aggregates,omitempty" yaml:"aggregates,omitempty"`
 
-	// FlexGroup Constituents. FlexGroup Constituents can be retrieved more efficiently by specifying "is_constituent=true" or "is_constituent=true&flexgroup.uuid=<flexgroup.uuid>" as query parameters.
+	// FlexGroup volume constituents. FlexGroup volume constituents can be retrieved more efficiently by specifying "is_constituent=true" or "is_constituent=true&flexgroup.uuid=<flexgroup.uuid>" as query parameters.
 	VolumeInlineConstituents []*VolumeInlineConstituentsInlineArrayItem `json:"constituents,omitempty" yaml:"constituents,omitempty"`
 
 	// Describes the current status of a volume.
@@ -332,6 +336,10 @@ func (m *Volume) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateFlexgroup(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateGranularDataMode(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -479,7 +487,7 @@ var volumeTypeAggressiveReadaheadModePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["none","file_prefetch"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["none","file_prefetch","sequential_read","cross_file_sequential_read"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -494,6 +502,12 @@ const (
 
 	// VolumeAggressiveReadaheadModeFilePrefetch captures enum value "file_prefetch"
 	VolumeAggressiveReadaheadModeFilePrefetch string = "file_prefetch"
+
+	// VolumeAggressiveReadaheadModeSequentialRead captures enum value "sequential_read"
+	VolumeAggressiveReadaheadModeSequentialRead string = "sequential_read"
+
+	// VolumeAggressiveReadaheadModeCrossFileSequentialRead captures enum value "cross_file_sequential_read"
+	VolumeAggressiveReadaheadModeCrossFileSequentialRead string = "cross_file_sequential_read"
 )
 
 // prop value enum
@@ -896,6 +910,51 @@ func (m *Volume) validateFlexgroup(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+var volumeTypeGranularDataModePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["disabled","basic","advanced"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		volumeTypeGranularDataModePropEnum = append(volumeTypeGranularDataModePropEnum, v)
+	}
+}
+
+const (
+
+	// VolumeGranularDataModeDisabled captures enum value "disabled"
+	VolumeGranularDataModeDisabled string = "disabled"
+
+	// VolumeGranularDataModeBasic captures enum value "basic"
+	VolumeGranularDataModeBasic string = "basic"
+
+	// VolumeGranularDataModeAdvanced captures enum value "advanced"
+	VolumeGranularDataModeAdvanced string = "advanced"
+)
+
+// prop value enum
+func (m *Volume) validateGranularDataModeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, volumeTypeGranularDataModePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *Volume) validateGranularDataMode(formats strfmt.Registry) error {
+	if swag.IsZero(m.GranularDataMode) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateGranularDataModeEnum("granular_data_mode", "body", *m.GranularDataMode); err != nil {
+		return err
 	}
 
 	return nil
@@ -3458,7 +3517,7 @@ type VolumeInlineAnalyticsInlineScanThrottleReason struct {
 	Code *string `json:"code,omitempty" yaml:"code,omitempty"`
 
 	// A message that provides details for scan throttling.
-	// Example: The file system analytics scan running on volume \"fsavol2\" in SVM \"vs2\" has slowed down on node \"bldrtp112-rh7-01\". Reason: Computing resources are being used by higher priority workloads.
+	// Example: The file system analytics scan running on volume \"fsavol2\" in SVM \"vs2\" has slowed down on node \"my_node\". Reason: Computing resources are being used by higher priority workloads.
 	// Read Only: true
 	Message *string `json:"message,omitempty" yaml:"message,omitempty"`
 }
@@ -3602,6 +3661,9 @@ func (m *VolumeInlineAnalyticsInlineUnsupportedReason) UnmarshalBinary(b []byte)
 // swagger:model volume_inline_anti_ransomware
 type VolumeInlineAntiRansomware struct {
 
+	// attack detection parameters
+	AttackDetectionParameters *AntiRansomwareVolumeAttackDetectionParameters `json:"attack_detection_parameters,omitempty" yaml:"attack_detection_parameters,omitempty"`
+
 	// Probability of a ransomware attack.<br>`none` No files are suspected of ransomware activity.<br>`low` A number of files are suspected of ransomware activity.<br>`moderate` A moderate number of files are suspected of ransomware activity.<br>`high` A large number of files are suspected of ransomware activity.
 	// Read Only: true
 	// Enum: ["none","low","moderate","high"]
@@ -3626,20 +3688,33 @@ type VolumeInlineAntiRansomware struct {
 	// Enum: ["disabled","disable_in_progress","dry_run","enabled","paused","enable_paused","dry_run_paused"]
 	State *string `json:"state,omitempty" yaml:"state,omitempty"`
 
-	// Indicates whether or not to set the surge values as historical values. This field is no longer supported. Use update-baseline-from-surge instead.
+	// Indicates whether or not to set the surge values as historical values. This field is no longer supported. Use update_baseline_from_surge instead.
 	SurgeAsNormal *bool `json:"surge_as_normal,omitempty" yaml:"surge_as_normal,omitempty"`
+
+	// surge usage
+	SurgeUsage *VolumeInlineAntiRansomwareInlineSurgeUsage `json:"surge_usage,omitempty" yaml:"surge_usage,omitempty"`
 
 	// suspect files
 	// Read Only: true
 	SuspectFiles []*VolumeAntiRansomwareSuspectFilesItems0 `json:"suspect_files,omitempty" yaml:"suspect_files,omitempty"`
 
+	// typical usage
+	TypicalUsage *VolumeInlineAntiRansomwareInlineTypicalUsage `json:"typical_usage,omitempty" yaml:"typical_usage,omitempty"`
+
 	// Sets the observed surge value as the new baseline on a volume.
 	UpdateBaselineFromSurge *bool `json:"update_baseline_from_surge,omitempty" yaml:"update_baseline_from_surge,omitempty"`
+
+	// workload
+	Workload *AntiRansomwareVolumeWorkload `json:"workload,omitempty" yaml:"workload,omitempty"`
 }
 
 // Validate validates this volume inline anti ransomware
 func (m *VolumeInlineAntiRansomware) Validate(formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.validateAttackDetectionParameters(formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.validateAttackProbability(formats); err != nil {
 		res = append(res, err)
@@ -3665,13 +3740,44 @@ func (m *VolumeInlineAntiRansomware) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validateSurgeUsage(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSuspectFiles(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTypicalUsage(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateWorkload(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomware) validateAttackDetectionParameters(formats strfmt.Registry) error {
+	if swag.IsZero(m.AttackDetectionParameters) { // not required
+		return nil
+	}
+
+	if m.AttackDetectionParameters != nil {
+		if err := m.AttackDetectionParameters.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("anti_ransomware" + "." + "attack_detection_parameters")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("anti_ransomware" + "." + "attack_detection_parameters")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3856,6 +3962,25 @@ func (m *VolumeInlineAntiRansomware) validateState(formats strfmt.Registry) erro
 	return nil
 }
 
+func (m *VolumeInlineAntiRansomware) validateSurgeUsage(formats strfmt.Registry) error {
+	if swag.IsZero(m.SurgeUsage) { // not required
+		return nil
+	}
+
+	if m.SurgeUsage != nil {
+		if err := m.SurgeUsage.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("anti_ransomware" + "." + "surge_usage")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("anti_ransomware" + "." + "surge_usage")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *VolumeInlineAntiRansomware) validateSuspectFiles(formats strfmt.Registry) error {
 	if swag.IsZero(m.SuspectFiles) { // not required
 		return nil
@@ -3882,9 +4007,51 @@ func (m *VolumeInlineAntiRansomware) validateSuspectFiles(formats strfmt.Registr
 	return nil
 }
 
+func (m *VolumeInlineAntiRansomware) validateTypicalUsage(formats strfmt.Registry) error {
+	if swag.IsZero(m.TypicalUsage) { // not required
+		return nil
+	}
+
+	if m.TypicalUsage != nil {
+		if err := m.TypicalUsage.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("anti_ransomware" + "." + "typical_usage")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("anti_ransomware" + "." + "typical_usage")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomware) validateWorkload(formats strfmt.Registry) error {
+	if swag.IsZero(m.Workload) { // not required
+		return nil
+	}
+
+	if m.Workload != nil {
+		if err := m.Workload.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("anti_ransomware" + "." + "workload")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("anti_ransomware" + "." + "workload")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this volume inline anti ransomware based on the context it is used
 func (m *VolumeInlineAntiRansomware) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
+
+	if err := m.contextValidateAttackDetectionParameters(ctx, formats); err != nil {
+		res = append(res, err)
+	}
 
 	if err := m.contextValidateAttackProbability(ctx, formats); err != nil {
 		res = append(res, err)
@@ -3906,13 +4073,46 @@ func (m *VolumeInlineAntiRansomware) ContextValidate(ctx context.Context, format
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateSurgeUsage(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSuspectFiles(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTypicalUsage(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateWorkload(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomware) contextValidateAttackDetectionParameters(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.AttackDetectionParameters != nil {
+
+		if swag.IsZero(m.AttackDetectionParameters) { // not required
+			return nil
+		}
+
+		if err := m.AttackDetectionParameters.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("anti_ransomware" + "." + "attack_detection_parameters")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("anti_ransomware" + "." + "attack_detection_parameters")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4005,6 +4205,27 @@ func (m *VolumeInlineAntiRansomware) contextValidateSpace(ctx context.Context, f
 	return nil
 }
 
+func (m *VolumeInlineAntiRansomware) contextValidateSurgeUsage(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.SurgeUsage != nil {
+
+		if swag.IsZero(m.SurgeUsage) { // not required
+			return nil
+		}
+
+		if err := m.SurgeUsage.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("anti_ransomware" + "." + "surge_usage")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("anti_ransomware" + "." + "surge_usage")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *VolumeInlineAntiRansomware) contextValidateSuspectFiles(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := validate.ReadOnly(ctx, "anti_ransomware"+"."+"suspect_files", "body", []*VolumeAntiRansomwareSuspectFilesItems0(m.SuspectFiles)); err != nil {
@@ -4029,6 +4250,48 @@ func (m *VolumeInlineAntiRansomware) contextValidateSuspectFiles(ctx context.Con
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomware) contextValidateTypicalUsage(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.TypicalUsage != nil {
+
+		if swag.IsZero(m.TypicalUsage) { // not required
+			return nil
+		}
+
+		if err := m.TypicalUsage.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("anti_ransomware" + "." + "typical_usage")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("anti_ransomware" + "." + "typical_usage")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomware) contextValidateWorkload(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Workload != nil {
+
+		if swag.IsZero(m.Workload) { // not required
+			return nil
+		}
+
+		if err := m.Workload.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("anti_ransomware" + "." + "workload")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("anti_ransomware" + "." + "workload")
+			}
+			return err
+		}
 	}
 
 	return nil
@@ -4060,7 +4323,7 @@ type VolumeInlineAntiRansomwareInlineEventLog struct {
 	// Specifies whether to send an EMS when a new file extension is discovered.
 	IsEnabledOnNewFileExtensionSeen *bool `json:"is_enabled_on_new_file_extension_seen,omitempty" yaml:"is_enabled_on_new_file_extension_seen,omitempty"`
 
-	// Specifies whether to send an EMS when a Snapshot copy is created.
+	// Specifies whether to send an EMS when a snapshot is created.
 	IsEnabledOnSnapshotCopyCreation *bool `json:"is_enabled_on_snapshot_copy_creation,omitempty" yaml:"is_enabled_on_snapshot_copy_creation,omitempty"`
 }
 
@@ -4097,7 +4360,7 @@ func (m *VolumeInlineAntiRansomwareInlineEventLog) UnmarshalBinary(b []byte) err
 // swagger:model volume_inline_anti_ransomware_inline_space
 type VolumeInlineAntiRansomwareInlineSpace struct {
 
-	// Total number of Anti-ransomware backup Snapshot copies.
+	// Total number of Anti-ransomware backup snapshots.
 	// Read Only: true
 	SnapshotCount *int64 `json:"snapshot_count,omitempty" yaml:"snapshot_count,omitempty"`
 
@@ -4109,7 +4372,7 @@ type VolumeInlineAntiRansomwareInlineSpace struct {
 	// Read Only: true
 	UsedByLogs *int64 `json:"used_by_logs,omitempty" yaml:"used_by_logs,omitempty"`
 
-	// Space in bytes used by the Anti-ransomware backup Snapshot copies.
+	// Space in bytes used by the Anti-ransomware backup snapshots.
 	// Read Only: true
 	UsedBySnapshots *int64 `json:"used_by_snapshots,omitempty" yaml:"used_by_snapshots,omitempty"`
 }
@@ -4192,6 +4455,175 @@ func (m *VolumeInlineAntiRansomwareInlineSpace) MarshalBinary() ([]byte, error) 
 // UnmarshalBinary interface implementation
 func (m *VolumeInlineAntiRansomwareInlineSpace) UnmarshalBinary(b []byte) error {
 	var res VolumeInlineAntiRansomwareInlineSpace
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// VolumeInlineAntiRansomwareInlineSurgeUsage Usage values of the volume's workload during surge. This object is no longer supported use surge_statistics instead.
+//
+// swagger:model volume_inline_anti_ransomware_inline_surge_usage
+type VolumeInlineAntiRansomwareInlineSurgeUsage struct {
+
+	// Peak rate of file creates per minute in the workload of the volume during surge.
+	// Example: 10
+	// Read Only: true
+	FileCreatePeakRatePerMinute *int64 `json:"file_create_peak_rate_per_minute,omitempty" yaml:"file_create_peak_rate_per_minute,omitempty"`
+
+	// Peak rate of file deletes per minute in the workload of the volume during surge.
+	// Example: 50
+	// Read Only: true
+	FileDeletePeakRatePerMinute *int64 `json:"file_delete_peak_rate_per_minute,omitempty" yaml:"file_delete_peak_rate_per_minute,omitempty"`
+
+	// Peak rate of file renames per minute in the workload of the volume during surge.
+	// Example: 30
+	// Read Only: true
+	FileRenamePeakRatePerMinute *int64 `json:"file_rename_peak_rate_per_minute,omitempty" yaml:"file_rename_peak_rate_per_minute,omitempty"`
+
+	// Peak percentage of high entropy data writes in the volume during surge.
+	// Example: 30
+	// Read Only: true
+	HighEntropyDataWritePeakPercent *int64 `json:"high_entropy_data_write_peak_percent,omitempty" yaml:"high_entropy_data_write_peak_percent,omitempty"`
+
+	// Peak high entropy data write rate in the volume during surge, in KBs per minute.
+	// Example: 2500
+	// Read Only: true
+	HighEntropyDataWritePeakRateKbPerMinute *int64 `json:"high_entropy_data_write_peak_rate_kb_per_minute,omitempty" yaml:"high_entropy_data_write_peak_rate_kb_per_minute,omitempty"`
+
+	// Timestamp at which the first surge in the volume's workload is observed.
+	// Example: 2021-12-01 17:46:20
+	// Read Only: true
+	// Format: date-time
+	Time *strfmt.DateTime `json:"time,omitempty" yaml:"time,omitempty"`
+}
+
+// Validate validates this volume inline anti ransomware inline surge usage
+func (m *VolumeInlineAntiRansomwareInlineSurgeUsage) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateTime(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomwareInlineSurgeUsage) validateTime(formats strfmt.Registry) error {
+	if swag.IsZero(m.Time) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("anti_ransomware"+"."+"surge_usage"+"."+"time", "body", "date-time", m.Time.String(), formats); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this volume inline anti ransomware inline surge usage based on the context it is used
+func (m *VolumeInlineAntiRansomwareInlineSurgeUsage) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateFileCreatePeakRatePerMinute(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFileDeletePeakRatePerMinute(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFileRenamePeakRatePerMinute(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHighEntropyDataWritePeakPercent(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHighEntropyDataWritePeakRateKbPerMinute(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateTime(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomwareInlineSurgeUsage) contextValidateFileCreatePeakRatePerMinute(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anti_ransomware"+"."+"surge_usage"+"."+"file_create_peak_rate_per_minute", "body", m.FileCreatePeakRatePerMinute); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomwareInlineSurgeUsage) contextValidateFileDeletePeakRatePerMinute(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anti_ransomware"+"."+"surge_usage"+"."+"file_delete_peak_rate_per_minute", "body", m.FileDeletePeakRatePerMinute); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomwareInlineSurgeUsage) contextValidateFileRenamePeakRatePerMinute(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anti_ransomware"+"."+"surge_usage"+"."+"file_rename_peak_rate_per_minute", "body", m.FileRenamePeakRatePerMinute); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomwareInlineSurgeUsage) contextValidateHighEntropyDataWritePeakPercent(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anti_ransomware"+"."+"surge_usage"+"."+"high_entropy_data_write_peak_percent", "body", m.HighEntropyDataWritePeakPercent); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomwareInlineSurgeUsage) contextValidateHighEntropyDataWritePeakRateKbPerMinute(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anti_ransomware"+"."+"surge_usage"+"."+"high_entropy_data_write_peak_rate_kb_per_minute", "body", m.HighEntropyDataWritePeakRateKbPerMinute); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomwareInlineSurgeUsage) contextValidateTime(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anti_ransomware"+"."+"surge_usage"+"."+"time", "body", m.Time); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *VolumeInlineAntiRansomwareInlineSurgeUsage) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *VolumeInlineAntiRansomwareInlineSurgeUsage) UnmarshalBinary(b []byte) error {
+	var res VolumeInlineAntiRansomwareInlineSurgeUsage
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
@@ -4282,6 +4714,135 @@ func (m *VolumeAntiRansomwareSuspectFilesItems0) MarshalBinary() ([]byte, error)
 // UnmarshalBinary interface implementation
 func (m *VolumeAntiRansomwareSuspectFilesItems0) UnmarshalBinary(b []byte) error {
 	var res VolumeAntiRansomwareSuspectFilesItems0
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// VolumeInlineAntiRansomwareInlineTypicalUsage Typical usage values of volume workload. This object is no longer supported use historical_statistics instead.
+//
+// swagger:model volume_inline_anti_ransomware_inline_typical_usage
+type VolumeInlineAntiRansomwareInlineTypicalUsage struct {
+
+	// Typical peak rate of file creates per minute in the workload of the volume.
+	// Example: 50
+	// Read Only: true
+	FileCreatePeakRatePerMinute *int64 `json:"file_create_peak_rate_per_minute,omitempty" yaml:"file_create_peak_rate_per_minute,omitempty"`
+
+	// Typical peak rate of file deletes per minute in the workload of the volume.
+	// Example: 10
+	// Read Only: true
+	FileDeletePeakRatePerMinute *int64 `json:"file_delete_peak_rate_per_minute,omitempty" yaml:"file_delete_peak_rate_per_minute,omitempty"`
+
+	// Typical peak rate of file renames per minute in the workload of the volume.
+	// Example: 5
+	// Read Only: true
+	FileRenamePeakRatePerMinute *int64 `json:"file_rename_peak_rate_per_minute,omitempty" yaml:"file_rename_peak_rate_per_minute,omitempty"`
+
+	// Typical peak percentage of high entropy data writes in the volume.
+	// Example: 10
+	// Read Only: true
+	HighEntropyDataWritePeakPercent *int64 `json:"high_entropy_data_write_peak_percent,omitempty" yaml:"high_entropy_data_write_peak_percent,omitempty"`
+
+	// Typical peak high entropy data write rate in the volume, in KBs per minute.
+	// Example: 1200
+	// Read Only: true
+	HighEntropyDataWritePeakRateKbPerMinute *int64 `json:"high_entropy_data_write_peak_rate_kb_per_minute,omitempty" yaml:"high_entropy_data_write_peak_rate_kb_per_minute,omitempty"`
+}
+
+// Validate validates this volume inline anti ransomware inline typical usage
+func (m *VolumeInlineAntiRansomwareInlineTypicalUsage) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validate this volume inline anti ransomware inline typical usage based on the context it is used
+func (m *VolumeInlineAntiRansomwareInlineTypicalUsage) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateFileCreatePeakRatePerMinute(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFileDeletePeakRatePerMinute(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFileRenamePeakRatePerMinute(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHighEntropyDataWritePeakPercent(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHighEntropyDataWritePeakRateKbPerMinute(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomwareInlineTypicalUsage) contextValidateFileCreatePeakRatePerMinute(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anti_ransomware"+"."+"typical_usage"+"."+"file_create_peak_rate_per_minute", "body", m.FileCreatePeakRatePerMinute); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomwareInlineTypicalUsage) contextValidateFileDeletePeakRatePerMinute(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anti_ransomware"+"."+"typical_usage"+"."+"file_delete_peak_rate_per_minute", "body", m.FileDeletePeakRatePerMinute); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomwareInlineTypicalUsage) contextValidateFileRenamePeakRatePerMinute(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anti_ransomware"+"."+"typical_usage"+"."+"file_rename_peak_rate_per_minute", "body", m.FileRenamePeakRatePerMinute); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomwareInlineTypicalUsage) contextValidateHighEntropyDataWritePeakPercent(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anti_ransomware"+"."+"typical_usage"+"."+"high_entropy_data_write_peak_percent", "body", m.HighEntropyDataWritePeakPercent); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *VolumeInlineAntiRansomwareInlineTypicalUsage) contextValidateHighEntropyDataWritePeakRateKbPerMinute(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anti_ransomware"+"."+"typical_usage"+"."+"high_entropy_data_write_peak_rate_kb_per_minute", "body", m.HighEntropyDataWritePeakRateKbPerMinute); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *VolumeInlineAntiRansomwareInlineTypicalUsage) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *VolumeInlineAntiRansomwareInlineTypicalUsage) UnmarshalBinary(b []byte) error {
+	var res VolumeInlineAntiRansomwareInlineTypicalUsage
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
@@ -4408,7 +4969,7 @@ func (m *VolumeInlineAsynchronousDirectoryDelete) UnmarshalBinary(b []byte) erro
 // swagger:model volume_inline_autosize
 type VolumeInlineAutosize struct {
 
-	// Used space threshold size, in percentage, for the automatic growth of the volume. When the amount of used space in the volume becomes greater than this threhold, the volume automatically grows unless it has reached the maximum size. The volume grows when 'space.used' is greater than this percent of 'space.size'. The 'grow_threshold' size cannot be less than or equal to the 'shrink_threshold' size..
+	// Used space threshold size, in percentage, for the automatic growth of the volume. When the amount of used space in the volume becomes greater than this threshold, the volume automatically grows unless it has reached the maximum size. The volume grows when 'space.used' is greater than this percent of 'space.size'. The 'grow_threshold' size cannot be less than or equal to the 'shrink_threshold' size..
 	GrowThreshold *int64 `json:"grow_threshold,omitempty" yaml:"grow_threshold,omitempty"`
 
 	// Maximum size in bytes up to which a volume grows automatically. This size cannot be less than the current volume size, or less than or equal to the minimum size of volume.
@@ -4512,6 +5073,10 @@ func (m *VolumeInlineAutosize) UnmarshalBinary(b []byte) error {
 // swagger:model volume_inline_clone
 type VolumeInlineClone struct {
 
+	// Specifies whether this volume is a parent of any FlexClone volume.
+	// Read Only: true
+	HasFlexclone *bool `json:"has_flexclone,omitempty" yaml:"has_flexclone,omitempty"`
+
 	// Inherited physical used from the clone's base snapshot.
 	// Read Only: true
 	InheritedPhysicalUsed *int64 `json:"inherited_physical_used,omitempty" yaml:"inherited_physical_used,omitempty"`
@@ -4520,7 +5085,7 @@ type VolumeInlineClone struct {
 	// Read Only: true
 	InheritedSavings *int64 `json:"inherited_savings,omitempty" yaml:"inherited_savings,omitempty"`
 
-	// Specifies if this volume is a normal FlexVol or FlexClone. This field needs to be set when creating a FlexClone. Valid in POST.
+	// Specifies if this volume is a normal FlexVol volume or FlexClone volume. This field needs to be set when creating a FlexClone volume. Valid in POST.
 	IsFlexclone *bool `json:"is_flexclone,omitempty" yaml:"is_flexclone,omitempty"`
 
 	// parent snapshot
@@ -4532,7 +5097,7 @@ type VolumeInlineClone struct {
 	// parent volume
 	ParentVolume *VolumeInlineCloneInlineParentVolume `json:"parent_volume,omitempty" yaml:"parent_volume,omitempty"`
 
-	// Percentage of FlexClone blocks split from its parent volume.
+	// Percentage of FlexClone volume blocks split from its parent volume.
 	// Read Only: true
 	SplitCompletePercent *int64 `json:"split_complete_percent,omitempty" yaml:"split_complete_percent,omitempty"`
 
@@ -4540,7 +5105,7 @@ type VolumeInlineClone struct {
 	// Read Only: true
 	SplitEstimate *int64 `json:"split_estimate,omitempty" yaml:"split_estimate,omitempty"`
 
-	// This field is set when split is executed on any FlexClone, that is when the FlexClone volume is split from its parent FlexVol. This field needs to be set for splitting a FlexClone form FlexVol. Valid in PATCH.
+	// This field is set when a split is executed on any FlexClone volume, that is when the FlexClone volume is split from its parent FlexVol volume. Setting this field initiates a split of a FlexClone volume from a FlexVol volume. Valid in PATCH.
 	SplitInitiated *bool `json:"split_initiated,omitempty" yaml:"split_initiated,omitempty"`
 }
 
@@ -4627,6 +5192,10 @@ func (m *VolumeInlineClone) validateParentVolume(formats strfmt.Registry) error 
 func (m *VolumeInlineClone) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateHasFlexclone(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateInheritedPhysicalUsed(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -4658,6 +5227,15 @@ func (m *VolumeInlineClone) ContextValidate(ctx context.Context, formats strfmt.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *VolumeInlineClone) contextValidateHasFlexclone(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "clone"+"."+"has_flexclone", "body", m.HasFlexclone); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -4986,7 +5564,7 @@ type VolumeInlineCloneInlineParentVolume struct {
 	// links
 	Links *VolumeInlineCloneInlineParentVolumeInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
@@ -5248,7 +5826,7 @@ type VolumeInlineConstituentsInlineArrayItem struct {
 	// movement
 	Movement *VolumeInlineConstituentsInlineArrayItemInlineMovement `json:"movement,omitempty" yaml:"movement,omitempty"`
 
-	// FlexGroup Constituents name.
+	// FlexGroup volume constituent name.
 	// Read Only: true
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
@@ -5456,7 +6034,7 @@ func (m *VolumeInlineConstituentsInlineArrayItem) UnmarshalBinary(b []byte) erro
 // swagger:model volume_inline_constituents_inline_array_item_inline_aggregates
 type VolumeInlineConstituentsInlineArrayItemInlineAggregates struct {
 
-	// Name of the aggregate hosting the FlexGroup Constituent.
+	// Name of the aggregate hosting the FlexGroup volume constituent.
 	// Read Only: true
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
@@ -5525,7 +6103,7 @@ func (m *VolumeInlineConstituentsInlineArrayItemInlineAggregates) UnmarshalBinar
 	return nil
 }
 
-// VolumeInlineConstituentsInlineArrayItemInlineMovement Volume movement. All attributes are modify, that is, not writable through POST. Set PATCH state to destination_aggregate to initiate a volume move operation. Volume movement on FlexGroup constituents are not supported.
+// VolumeInlineConstituentsInlineArrayItemInlineMovement Volume movement. All attributes are modify, that is, not writable through POST. Set PATCH state to destination_aggregate to initiate a volume move operation. Volume movement on FlexGroup volume constituents is not supported.
 //
 // swagger:model volume_inline_constituents_inline_array_item_inline_movement
 type VolumeInlineConstituentsInlineArrayItemInlineMovement struct {
@@ -6475,13 +7053,13 @@ func (m *VolumeInlineConstituentsInlineArrayItemInlineSpaceInlineLogicalSpace) U
 // swagger:model volume_inline_constituents_inline_array_item_inline_space_inline_snapshot
 type VolumeInlineConstituentsInlineArrayItemInlineSpaceInlineSnapshot struct {
 
-	// Specifies whether Snapshot copy autodelete is currently enabled on this volume.
+	// Specifies whether snapshot autodelete is currently enabled on this volume.
 	AutodeleteEnabled *bool `json:"autodelete_enabled,omitempty" yaml:"autodelete_enabled,omitempty"`
 
-	// The space that has been set aside as a reserve for Snapshot copy usage, in percent.
+	// The space that has been set aside as a reserve for snapshot usage, in percent.
 	ReservePercent *int64 `json:"reserve_percent,omitempty" yaml:"reserve_percent,omitempty"`
 
-	// The total space used by Snapshot copies in the volume, in bytes.
+	// The total space used by snapshots in the volume, in bytes.
 	// Read Only: true
 	Used *int64 `json:"used,omitempty" yaml:"used,omitempty"`
 }
@@ -6546,11 +7124,11 @@ type VolumeInlineEfficiency struct {
 	// Enum: ["auto","deprioritized"]
 	AutoState *string `json:"auto_state,omitempty" yaml:"auto_state,omitempty"`
 
-	// The system can be enabled/disabled compaction.<br>inline &dash; Data will be compacted first and written to the volume.<br>none &dash; None<br>mixed &dash; Read only field for FlexGroups, where some of the constituent volumes are compaction enabled and some are disabled.
+	// The system can be enabled/disabled compaction.<br>inline &dash; Data will be compacted first and written to the volume.<br>none &dash; None<br>mixed &dash; Read only field for FlexGroup volumes, where some of the constituent volumes are compaction enabled and some are disabled.
 	// Enum: ["inline","none","mixed"]
 	Compaction *string `json:"compaction,omitempty" yaml:"compaction,omitempty"`
 
-	// The system can be enabled/disabled compression. Disabling compression is not allowed on Capacity optimized Flash with QAT supported platforms.<br>inline &dash; Data will be compressed first and written to the volume. <br>background &dash; Data will be written to the volume and compressed later. <br>both &dash; Inline compression compresses the data and write to the volume, background compression compresses only the blocks on which inline compression is not run.<br>none &dash; None<br>mixed &dash; Read only field for FlexGroups, where some of the constituent volumes are compression enabled and some are disabled. <br>Note that On volumes with container compression enabled, background compression refers to inactive data compression scan enabled on the volume.
+	// The system can be enabled/disabled compression. Disabling compression is not allowed on Capacity optimized Flash with QAT supported platforms.<br>inline &dash; Data will be compressed first and written to the volume. <br>background &dash; Data will be written to the volume and compressed later. <br>both &dash; Inline compression compresses the data and write to the volume, background compression compresses only the blocks on which inline compression is not run.<br>none &dash; None<br>mixed &dash; Read only field for FlexGroup volumes, where some of the constituent volumes are compression enabled and some are disabled. <br>Note that On volumes with container compression enabled, background compression refers to inactive data compression scan enabled on the volume.
 	// Enum: ["inline","background","both","none","mixed"]
 	Compression *string `json:"compression,omitempty" yaml:"compression,omitempty"`
 
@@ -6558,11 +7136,11 @@ type VolumeInlineEfficiency struct {
 	// Enum: ["none","secondary","adaptive"]
 	CompressionType *string `json:"compression_type,omitempty" yaml:"compression_type,omitempty"`
 
-	// The system can be enabled/disabled cross volume dedupe. it can be enabled only when dedupe is enabled. Disabling cross volume dedupe is not allowed on Capacity optimized Flash with QAT supported platforms.<br>inline &dash; Data will be cross volume deduped first and written to the volume.<br>background &dash; Data will be written to the volume and cross volume deduped later.<br>both &dash; Inline cross volume dedupe dedupes the data and write to the volume, background cross volume dedupe dedupes only the blocks on which inline dedupe is not run.<br>none &dash; None<br>mixed &dash; Read only field for FlexGroups, where some of the constituent volumes are cross volume dedupe enabled and some are disabled.
+	// The system can be enabled/disabled cross volume dedupe. it can be enabled only when dedupe is enabled. Disabling cross volume dedupe is not allowed on Capacity optimized Flash with QAT supported platforms.<br>inline &dash; Data will be cross volume deduped first and written to the volume.<br>background &dash; Data will be written to the volume and cross volume deduped later.<br>both &dash; Inline cross volume dedupe dedupes the data and write to the volume, background cross volume dedupe dedupes only the blocks on which inline dedupe is not run.<br>none &dash; None<br>mixed &dash; Read only field for FlexGroup volumes, where some of the constituent volumes are cross volume dedupe enabled and some are disabled.
 	// Enum: ["inline","background","both","none","mixed"]
 	CrossVolumeDedupe *string `json:"cross_volume_dedupe,omitempty" yaml:"cross_volume_dedupe,omitempty"`
 
-	// The system can be enabled/disabled dedupe. Disabling dedupe is not allowed on Capacity optimized Flash with QAT supported platforms.<br>inline &dash; Data will be deduped first and written to the volume.<br>background &dash; Data will be written to the volume and deduped later.<br>both &dash; Inline dedupe dedupes the data and write to the volume, background dedupe dedupes only the blocks on which inline dedupe is not run.<br>none &dash; None<br>mixed &dash; Read only field for FlexGroups, where some of the constituent volumes are dedupe enabled and some are disabled.
+	// The system can be enabled/disabled dedupe. Disabling dedupe is not allowed on Capacity optimized Flash with QAT supported platforms.<br>inline &dash; Data will be deduped first and written to the volume.<br>background &dash; Data will be written to the volume and deduped later.<br>both &dash; Inline dedupe dedupes the data and write to the volume, background dedupe dedupes only the blocks on which inline dedupe is not run.<br>none &dash; None<br>mixed &dash; Read only field for FlexGroup volumes, where some of the constituent volumes are dedupe enabled and some are disabled.
 	// Enum: ["inline","background","both","none","mixed"]
 	Dedupe *string `json:"dedupe,omitempty" yaml:"dedupe,omitempty"`
 
@@ -10213,7 +10791,7 @@ type VolumeInlineMetricInlineCloudInlineIops struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -10267,7 +10845,7 @@ type VolumeInlineMetricInlineCloudInlineLatency struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -10572,7 +11150,7 @@ type VolumeInlineMetricInlineIops struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -10626,7 +11204,7 @@ type VolumeInlineMetricInlineLatency struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -10775,7 +11353,7 @@ type VolumeInlineMetricInlineThroughput struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -10813,7 +11391,7 @@ func (m *VolumeInlineMetricInlineThroughput) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// VolumeInlineMovement Volume movement. All attributes are modify, that is, not writable through POST. Set PATCH state to destination_aggregate to initiate a volume move operation. Volume movement on FlexGroup constituents are not supported.
+// VolumeInlineMovement Volume movement. All attributes are modify, that is, not writable through POST. Set PATCH state to destination_aggregate to initiate a volume move operation. Volume movement on FlexGroup volume constituents are not supported.
 //
 // swagger:model volume_inline_movement
 type VolumeInlineMovement struct {
@@ -12305,12 +12883,12 @@ func (m *VolumeInlineQosInlinePolicyInlineLinks) UnmarshalBinary(b []byte) error
 	return nil
 }
 
-// VolumeInlineQuota Quotas track the space or file usage of a user, group, or qtree in a FlexVol or a FlexGroup volume.
+// VolumeInlineQuota Quotas track the space or file usage of a user, group, or qtree in a FlexVol volume or a FlexGroup volume.
 //
 // swagger:model volume_inline_quota
 type VolumeInlineQuota struct {
 
-	// This option is used to enable or disable the quota for the volume. This option is valid only in PATCH. Quotas are enabled for FlexVols or FlexGroup volumes when the quota state is "on". Quotas are disabled for FlexVols or FlexGroup volumes when the quota state is "off".
+	// This option is used to enable or disable the quota for the volume. This option is valid only in PATCH. Quotas are enabled for FlexVol volumes or FlexGroup volumes when the quota state is "on". Quotas are disabled for FlexVol volumes or FlexGroup volumes when the quota state is "off".
 	Enabled *bool `json:"enabled,omitempty" yaml:"enabled,omitempty"`
 
 	// Quota state of the volume
@@ -12443,7 +13021,7 @@ type VolumeInlineRebalancing struct {
 	// engine
 	Engine *VolumeInlineRebalancingInlineEngine `json:"engine,omitempty" yaml:"engine,omitempty"`
 
-	// Specifies whether or not to exclude files that are stuck in Snapshot copies during rebalancing operation. When a new capacity rebalancing operation is started on a FlexGroup volume, it uses the current "exclude_snapshots" value. Once the operation is started, any changes to the "exclude_snapshots" value do not affect the currently running capacity rebalancing operation. Only future capacity rebalancing operations will use the new "exclude_snapshots" value.
+	// Specifies whether or not to exclude files that are stuck in snapshots during rebalancing operation. When a new capacity rebalancing operation is started on a FlexGroup volume, it uses the current "exclude_snapshots" value. Once the operation is started, any changes to the "exclude_snapshots" value do not affect the currently running capacity rebalancing operation. Only future capacity rebalancing operations will use the new "exclude_snapshots" value.
 	ExcludeSnapshots *bool `json:"exclude_snapshots,omitempty" yaml:"exclude_snapshots,omitempty"`
 
 	// Represents the percentage the volume is out of balance.
@@ -12485,7 +13063,7 @@ type VolumeInlineRebalancing struct {
 	// Format: date-time
 	StartTime *strfmt.DateTime `json:"start_time,omitempty" yaml:"start_time,omitempty"`
 
-	// State of the volume capacity rebalancing operation. PATCH the state to "starting" to trigger the capacity rebalance operation, and include start_time to schedule rebalancing. PATCH the state to "stopping" to stop the capacity rebalance operation, or cancel a scheduled rebalancing operation. PATCH without the state with a valid start_time to modify the start_time of an existing scheduled rebalance operation.<br><br>While a FlexGroup volume is rebalancing, every constituent will have a rebalancing engine that can either be scanning the filesystem for space usage and files to move, actively moving files or temporarily doing neither.<br><br>If one or more constituents has a state of "rebalancing_source" or "rebalancing_dest", then files are being moved to rebalance the FlexGroup.<br><br>If no files are being moved, more information about what the rebalancing engine is doing for each constituent is available using the "rebalancing.engine" property.<br><br>The following values apply to FlexGroup volumes.<br>not_running &dash; capacity rebalancing is not running on the volume.<br>starting &dash; used in a PATCH operation to start a capacity rebalancing operation.<br>rebalancing &dash; capacity rebalancing is running on the volume.<br> paused &dash; volume capacity rebalancing is paused on the volume.<br>stopping &dash; used in a PATCH operation to stop a capacity rebalancing operation.<br>unknown &dash; the system was unable to determine the rebalancing state for the volume.<br><br>The following values apply to FlexGroup volume constituents.<br>idle &dash; capacity rebalancing is running on the constituent, however, no active scanning or file movement is currently occurring.<br>scanning &dash; the constituent's file system is being scanned to find files to move and determine free space.<br>rebalancing_source &dash; a file is being moved off of the constituent.<br>rebalancing_dest &dash; a file is being moved to the constituent.<br>not_running &dash; capacity rebalancing is not running on the constituent.<br>unknown &dash; the system was unable to determine the rebalancing state for the constituent.
+	// State of the volume capacity rebalancing operation. PATCH the state to "starting" to trigger the capacity rebalance operation, and include start_time to schedule rebalancing. PATCH the state to "stopping" to stop the capacity rebalance operation, or cancel a scheduled rebalancing operation. PATCH without the state with a valid start_time to modify the start_time of an existing scheduled rebalance operation.<br><br>While a FlexGroup volume is rebalancing, every constituent will have a rebalancing engine that can either be scanning the filesystem for space usage and files to move, actively moving files or temporarily doing neither.<br><br>If one or more constituents has a state of "rebalancing_source" or "rebalancing_dest", then files are being moved to rebalance the FlexGroup volume.<br><br>If no files are being moved, more information about what the rebalancing engine is doing for each constituent is available using the "rebalancing.engine" property.<br><br>The following values apply to FlexGroup volumes.<br>not_running &dash; capacity rebalancing is not running on the volume.<br>starting &dash; used in a PATCH operation to start a capacity rebalancing operation.<br>rebalancing &dash; capacity rebalancing is running on the volume.<br> paused &dash; volume capacity rebalancing is paused on the volume.<br>stopping &dash; used in a PATCH operation to stop a capacity rebalancing operation.<br>unknown &dash; the system was unable to determine the rebalancing state for the volume.<br><br>The following values apply to FlexGroup volume constituents.<br>idle &dash; capacity rebalancing is running on the constituent, however, no active scanning or file movement is currently occurring.<br>scanning &dash; the constituent's file system is being scanned to find files to move and determine free space.<br>rebalancing_source &dash; a file is being moved off of the constituent.<br>rebalancing_dest &dash; a file is being moved to the constituent.<br>not_running &dash; capacity rebalancing is not running on the constituent.<br>unknown &dash; the system was unable to determine the rebalancing state for the constituent.
 	// Example: rebalancing
 	// Enum: ["not_running","starting","rebalancing","paused","stopping","idle","scanning","rebalancing_source","rebalancing_dest","unknown"]
 	State *string `json:"state,omitempty" yaml:"state,omitempty"`
@@ -12499,7 +13077,7 @@ type VolumeInlineRebalancing struct {
 	// Read Only: true
 	TargetUsed *int64 `json:"target_used,omitempty" yaml:"target_used,omitempty"`
 
-	// Represents the used size of each constituent, as determined by the rebalancing engine. Calculated by subtracting the size used by Snapshot copies, the size of files pending deletion and the size of filesystem metadata from the volume used size.
+	// Represents the used size of each constituent, as determined by the rebalancing engine. Calculated by subtracting the size used by snapshots, the size of files pending deletion and the size of filesystem metadata from the volume used size.
 	// Read Only: true
 	UsedForImbalance *int64 `json:"used_for_imbalance,omitempty" yaml:"used_for_imbalance,omitempty"`
 }
@@ -13531,7 +14109,7 @@ type VolumeInlineRebalancingInlineEngineInlineScannerInlineBlocksSkipped struct 
 	// Read Only: true
 	FootprintInvalid *int64 `json:"footprint_invalid,omitempty" yaml:"footprint_invalid,omitempty"`
 
-	// Number of blocks skipped by the scanner on this constituent because of files in Snapshot copies.
+	// Number of blocks skipped by the scanner on this constituent because of files in snapshots.
 	// Read Only: true
 	InSnapshot *int64 `json:"in_snapshot,omitempty" yaml:"in_snapshot,omitempty"`
 
@@ -13791,7 +14369,7 @@ type VolumeInlineRebalancingInlineEngineInlineScannerInlineFilesSkipped struct {
 	// Read Only: true
 	FootprintInvalid *int64 `json:"footprint_invalid,omitempty" yaml:"footprint_invalid,omitempty"`
 
-	// Number of files skipped by the scanner on this constituent because they are trapped in Snapshot copies.
+	// Number of files skipped by the scanner on this constituent because they are trapped in snapshots.
 	// Read Only: true
 	InSnapshot *int64 `json:"in_snapshot,omitempty" yaml:"in_snapshot,omitempty"`
 
@@ -14691,7 +15269,7 @@ func (m *VolumeInlineSnapmirrorInlineDestinations) UnmarshalBinary(b []byte) err
 	return nil
 }
 
-// VolumeInlineSnapshotPolicy This is a reference to the Snapshot copy policy.
+// VolumeInlineSnapshotPolicy This is a reference to the snapshot policy.
 //
 // swagger:model volume_inline_snapshot_policy
 type VolumeInlineSnapshotPolicy struct {
@@ -15030,7 +15608,7 @@ type VolumeInlineSpace struct {
 	// Total provisioned size. The default size is equal to the minimum size of 20MB, in bytes.
 	Size *int64 `json:"size,omitempty" yaml:"size,omitempty"`
 
-	// Available space for Snapshot copies from snap-reserve, in bytes.
+	// Available space for snapshots from snap-reserve, in bytes.
 	// Read Only: true
 	SizeAvailableForSnapshots *int64 `json:"size_available_for_snapshots,omitempty" yaml:"size_available_for_snapshots,omitempty"`
 
@@ -15041,7 +15619,7 @@ type VolumeInlineSpace struct {
 	// snapshot
 	Snapshot *VolumeInlineSpaceInlineSnapshot `json:"snapshot,omitempty" yaml:"snapshot,omitempty"`
 
-	// Snapshot reserve that is not available for Snapshot copy creation, in bytes.
+	// Snapshot reserve that is not available for snapshot creation, in bytes.
 	// Read Only: true
 	SnapshotReserveUnusable *int64 `json:"snapshot_reserve_unusable,omitempty" yaml:"snapshot_reserve_unusable,omitempty"`
 
@@ -15725,7 +16303,7 @@ type VolumeInlineSpaceInlineLogicalSpace struct {
 	// Read Only: true
 	UsedByAfs *int64 `json:"used_by_afs,omitempty" yaml:"used_by_afs,omitempty"`
 
-	// Size that is logically used across all Snapshot copies in the volume, in bytes.
+	// Size that is logically used across all snapshots in the volume, in bytes.
 	// Read Only: true
 	UsedBySnapshots *int64 `json:"used_by_snapshots,omitempty" yaml:"used_by_snapshots,omitempty"`
 
@@ -15840,21 +16418,21 @@ type VolumeInlineSpaceInlineSnapshot struct {
 	// autodelete
 	Autodelete *VolumeInlineSpaceInlineSnapshotInlineAutodelete `json:"autodelete,omitempty" yaml:"autodelete,omitempty"`
 
-	// Specifies whether Snapshot copy autodelete is currently enabled on this volume. This field will no longer be supported in a future release. Use autodelete.enabled instead.
+	// Specifies whether snapshot autodelete is currently enabled on this volume. This field will no longer be supported in a future release. Use autodelete.enabled instead.
 	AutodeleteEnabled *bool `json:"autodelete_enabled,omitempty" yaml:"autodelete_enabled,omitempty"`
 
-	// Specifies when the system should trigger an autodelete of Snapshot copies. When set to _volume_, autodelete is triggered based on volume fullness. When set to _snap_reserve_, autodelete is triggered based on Snapshot copy reserve fullness. The default value is _volume_. This field will no longer be supported in a future release. Use autodelete.trigger instead.
+	// Specifies when the system should trigger an autodelete of snapshots. When set to _volume_, autodelete is triggered based on volume fullness. When set to _snap_reserve_, autodelete is triggered based on snapshot reserve fullness. The default value is _volume_. This field will no longer be supported in a future release. Use autodelete.trigger instead.
 	// Enum: ["volume","snap_reserve"]
 	AutodeleteTrigger *string `json:"autodelete_trigger,omitempty" yaml:"autodelete_trigger,omitempty"`
 
-	// Size available for Snapshot copies within the Snapshot copy reserve, in bytes.
+	// Size available for snapshots within the snapshot reserve, in bytes.
 	// Read Only: true
 	ReserveAvailable *int64 `json:"reserve_available,omitempty" yaml:"reserve_available,omitempty"`
 
-	// The space that has been set aside as a reserve for Snapshot copy usage, in percent.
+	// The space that has been set aside as a reserve for snapshot usage, in percent.
 	ReservePercent *int64 `json:"reserve_percent,omitempty" yaml:"reserve_percent,omitempty"`
 
-	// Size in the volume that has been set aside as a reserve for Snapshot copy usage, in bytes.
+	// Size in the volume that has been set aside as a reserve for snapshot usage, in bytes.
 	// Read Only: true
 	ReserveSize *int64 `json:"reserve_size,omitempty" yaml:"reserve_size,omitempty"`
 
@@ -15862,7 +16440,7 @@ type VolumeInlineSpaceInlineSnapshot struct {
 	// Read Only: true
 	SpaceUsedPercent *int64 `json:"space_used_percent,omitempty" yaml:"space_used_percent,omitempty"`
 
-	// The total space used by Snapshot copies in the volume, in bytes.
+	// The total space used by snapshots in the volume, in bytes.
 	// Read Only: true
 	Used *int64 `json:"used,omitempty" yaml:"used,omitempty"`
 }
@@ -16056,28 +16634,28 @@ func (m *VolumeInlineSpaceInlineSnapshot) UnmarshalBinary(b []byte) error {
 // swagger:model volume_inline_space_inline_snapshot_inline_autodelete
 type VolumeInlineSpaceInlineSnapshotInlineAutodelete struct {
 
-	// By default, Snapshot copy autodelete does not delete Snapshot copies locked by Snapmirror, clones of a volume, a LUN, an NVMe namespace, or a file.  Deletion of Snapshot copies locked by these applications is specified using this option. The default value is try.
+	// By default, snapshot autodelete does not delete snapshots locked by Snapmirror, clones of a volume, a LUN, an NVMe namespace, or a file.  Deletion of snapshots locked by these applications is specified using this option. The default value is try.
 	// Enum: ["try","disrupt","destroy"]
 	Commitment *string `json:"commitment,omitempty" yaml:"commitment,omitempty"`
 
-	// Allows the user to inform Snapshot copy autodelete to defer the deletion of a specified Snapshot copy until the end. The default value is user_created.
+	// Allows the user to inform snapshot autodelete to defer the deletion of a specified snapshot until the end. The default value is user_created.
 	// Enum: ["scheduled","user_created","prefix","none"]
 	DeferDelete *string `json:"defer_delete,omitempty" yaml:"defer_delete,omitempty"`
 
-	// Specifies the order in which Snapshot copy autodelete occurs. Ordering is done using the date and time the Snapshot copy is created. The default value is oldest_first.
+	// Specifies the order in which snapshot autodelete occurs. Ordering is done using the date and time the snapshot is created. The default value is oldest_first.
 	// Enum: ["newest_first","oldest_first"]
 	DeleteOrder *string `json:"delete_order,omitempty" yaml:"delete_order,omitempty"`
 
-	// Specifies whether Snapshot copy autodelete is currently enabled on this volume.
+	// Specifies whether snapshot autodelete is currently enabled on this volume.
 	Enabled *bool `json:"enabled,omitempty" yaml:"enabled,omitempty"`
 
-	// Specifies the prefix of the Snapshot copy which if matched, is deleted last. Used with autodelete_defer_delete when used with a prefix value.
+	// Specifies the prefix of the snapshot which if matched, is deleted last. Used with autodelete_defer_delete when used with a prefix value.
 	Prefix *string `json:"prefix,omitempty" yaml:"prefix,omitempty"`
 
-	// Snapshot copies are deleted, one at a time, until the used volume space reaches the value specified. The default is 20% free space or 80% utilized.
+	// Snapshots are deleted, one at a time, until the used volume space reaches the value specified. The default is 20% free space or 80% utilized.
 	TargetFreeSpace *int64 `json:"target_free_space,omitempty" yaml:"target_free_space,omitempty"`
 
-	// Specifies when the system should trigger an autodelete of Snapshot copies. When set to _volume_, autodelete is triggered based on volume fullness. When set to _snap_reserve_, autodelete is triggered based on Snapshot copy reserve fullness. The default value is _volume_.
+	// Specifies when the system should trigger an autodelete of snapshots. When set to _volume_, autodelete is triggered based on volume fullness. When set to _snap_reserve_, autodelete is triggered based on snapshot reserve fullness. The default value is _volume_.
 	// Enum: ["volume","snap_reserve"]
 	Trigger *string `json:"trigger,omitempty" yaml:"trigger,omitempty"`
 }
@@ -19259,7 +19837,7 @@ type VolumeInlineStatisticsInlineCloudInlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -19313,7 +19891,7 @@ type VolumeInlineStatisticsInlineCloudInlineLatencyRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -19543,7 +20121,7 @@ type VolumeInlineStatisticsInlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -19597,7 +20175,7 @@ type VolumeInlineStatisticsInlineLatencyRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -21791,7 +22369,7 @@ type VolumeInlineStatisticsInlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -22045,11 +22623,11 @@ type VolumeInlineTiering struct {
 	// Unique: true
 	ObjectTags []*string `json:"object_tags,omitempty" yaml:"object_tags,omitempty"`
 
-	// Policy that determines whether the user data blocks of a volume in a FabricPool will be tiered to the cloud store when they become cold. FabricPool combines flash (performance tier) with a cloud store into a single aggregate. Temperature of a volume block increases if it is accessed frequently and decreases when it is not. Valid in POST or PATCH.<br>all &dash; This policy allows tiering of both Snapshot copies and active file system user data to the cloud store as soon as possible by ignoring the temperature on the volume blocks.<br>auto &dash; This policy allows tiering of both snapshot and active file system user data to the cloud store<br>none &dash; Volume blocks will not be tiered to the cloud store.<br>snapshot_only &dash; This policy allows tiering of only the volume Snapshot copies not associated with the active file system. The default tiering policy is "snapshot-only" for a FlexVol and "none" for a FlexGroup. The default minimum cooling period for the "snapshot-only" tiering policy is 2 days and for the "auto" tiering policy is 31 days.
+	// Policy that determines whether the user data blocks of a volume in a FabricPool will be tiered to the cloud store when they become cold. FabricPool combines flash (performance tier) with a cloud store into a single aggregate. Temperature of a volume block increases if it is accessed frequently and decreases when it is not. Valid in POST or PATCH.<br>all &dash; This policy allows tiering of both snapshots and active file system user data to the cloud store as soon as possible by ignoring the temperature on the volume blocks.<br>auto &dash; This policy allows tiering of both snapshot and active file system user data to the cloud store<br>none &dash; Volume blocks will not be tiered to the cloud store.<br>snapshot_only &dash; This policy allows tiering of only the volume snapshots not associated with the active file system. The default tiering policy is "snapshot-only" for a FlexVol volume and "none" for a FlexGroup volume. The default minimum cooling period for the "snapshot-only" tiering policy is 2 days and for the "auto" tiering policy is 31 days.
 	// Enum: ["all","auto","none","snapshot_only"]
 	Policy *string `json:"policy,omitempty" yaml:"policy,omitempty"`
 
-	// This parameter specifies whether or not FabricPools are selected when provisioning a FlexGroup without specifying "aggregates.name" or "aggregates.uuid". Only FabricPool aggregates are used if this parameter is set to true and only non FabricPool aggregates are used if this parameter is set to false. Tiering support for a FlexGroup can be changed by moving all of the constituents to the required aggregates. Note that in order to tier data, not only does the volume need to support tiering by using FabricPools, the tiering "policy" must not be 'none'. A volume that uses FabricPools but has a tiering "policy" of 'none' supports tiering, but will not tier any data.
+	// This parameter specifies whether or not FabricPools are selected when provisioning a FlexGroup volume without specifying "aggregates.name" or "aggregates.uuid". Only FabricPool aggregates are used if this parameter is set to true and only non FabricPool aggregates are used if this parameter is set to false. Tiering support for a FlexGroup volume can be changed by moving all of the constituents to the required aggregates. Note that in order to tier data, not only does the volume need to support tiering by using FabricPools, the tiering "policy" must not be 'none'. A volume that uses FabricPools but has a tiering "policy" of 'none' supports tiering, but will not tier any data.
 	Supported *bool `json:"supported,omitempty" yaml:"supported,omitempty"`
 }
 

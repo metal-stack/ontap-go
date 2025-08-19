@@ -70,7 +70,7 @@ type FileDeleteParams struct {
 
 	/* Recurse.
 
-	   Delete an entire directory. The behaviour of this call is equivalent to rm -rf.
+	   Delete an entire directory. The behavior of this call is equivalent to rm -rf.
 	*/
 	Recurse *bool
 

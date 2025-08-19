@@ -23,6 +23,10 @@ type SvmSSHServer struct {
 	// links
 	Links *SvmSSHServerInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
+	// Enables or disables the _ssh-rsa_ signature scheme, which uses the SHA-1 hash algorithm, for RSA keys in public key algorithms. If this flag is _false_, older SSH implementations might fail to authenticate using RSA keys. This flag should be enabled only as a temporary measure until legacy SSH client implementations can be upgraded or reconfigured with another key type, for example: ECDSA.
+	//
+	IsRsaInPublickeyAlgorithmsEnabled *bool `json:"is_rsa_in_publickey_algorithms_enabled,omitempty" yaml:"is_rsa_in_publickey_algorithms_enabled,omitempty"`
+
 	// Maximum authentication retries allowed before closing the connection.
 	// Maximum: 6
 	// Minimum: 2
@@ -34,6 +38,10 @@ type SvmSSHServer struct {
 	// Ciphers for encrypting the data.
 	// Example: ["aes256_ctr","aes192_ctr","aes128_ctr"]
 	SvmSSHServerInlineCiphers []*Cipher `json:"ciphers,omitempty" yaml:"ciphers,omitempty"`
+
+	// Host key algorithms. The host key algorithm 'ssh_ed25519' can be configured only in non-FIPS mode.
+	// Example: ["ecdsa_sha2_nistp256","ssh_ed25519","ssh_rsa"]
+	SvmSSHServerInlineHostKeyAlgorithms []*HostKeyAlgorithm `json:"host_key_algorithms,omitempty" yaml:"host_key_algorithms,omitempty"`
 
 	// Key exchange algorithms.
 	// Example: ["diffie_hellman_group_exchange_sha256","ecdh_sha2_nistp256"]
@@ -61,6 +69,10 @@ func (m *SvmSSHServer) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateSvmSSHServerInlineCiphers(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateSvmSSHServerInlineHostKeyAlgorithms(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -158,6 +170,32 @@ func (m *SvmSSHServer) validateSvmSSHServerInlineCiphers(formats strfmt.Registry
 	return nil
 }
 
+func (m *SvmSSHServer) validateSvmSSHServerInlineHostKeyAlgorithms(formats strfmt.Registry) error {
+	if swag.IsZero(m.SvmSSHServerInlineHostKeyAlgorithms) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.SvmSSHServerInlineHostKeyAlgorithms); i++ {
+		if swag.IsZero(m.SvmSSHServerInlineHostKeyAlgorithms[i]) { // not required
+			continue
+		}
+
+		if m.SvmSSHServerInlineHostKeyAlgorithms[i] != nil {
+			if err := m.SvmSSHServerInlineHostKeyAlgorithms[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("host_key_algorithms" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("host_key_algorithms" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *SvmSSHServer) validateSvmSSHServerInlineKeyExchangeAlgorithms(formats strfmt.Registry) error {
 	if swag.IsZero(m.SvmSSHServerInlineKeyExchangeAlgorithms) { // not required
 		return nil
@@ -223,6 +261,10 @@ func (m *SvmSSHServer) ContextValidate(ctx context.Context, formats strfmt.Regis
 	}
 
 	if err := m.contextValidateSvmSSHServerInlineCiphers(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateSvmSSHServerInlineHostKeyAlgorithms(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -297,6 +339,31 @@ func (m *SvmSSHServer) contextValidateSvmSSHServerInlineCiphers(ctx context.Cont
 					return ve.ValidateName("ciphers" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("ciphers" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *SvmSSHServer) contextValidateSvmSSHServerInlineHostKeyAlgorithms(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.SvmSSHServerInlineHostKeyAlgorithms); i++ {
+
+		if m.SvmSSHServerInlineHostKeyAlgorithms[i] != nil {
+
+			if swag.IsZero(m.SvmSSHServerInlineHostKeyAlgorithms[i]) { // not required
+				return nil
+			}
+
+			if err := m.SvmSSHServerInlineHostKeyAlgorithms[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("host_key_algorithms" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("host_key_algorithms" + "." + strconv.Itoa(i))
 				}
 				return err
 			}

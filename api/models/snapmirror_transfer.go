@@ -66,11 +66,11 @@ type SnapmirrorTransfer struct {
 	// Options for snapmirror transfer.
 	SnapmirrorTransferInlineOptions []interface{} `json:"options,omitempty" yaml:"options,omitempty"`
 
-	// Name of Snapshot copy being transferred.
+	// Name of snapshot being transferred.
 	// Read Only: true
 	Snapshot *string `json:"snapshot,omitempty" yaml:"snapshot,omitempty"`
 
-	// Specifies the Snapshot copy on the source to be transferred to the destination.
+	// Specifies the snapshot on the source to be transferred to the destination.
 	SourceSnapshot *string `json:"source_snapshot,omitempty" yaml:"source_snapshot,omitempty"`
 
 	// Status of the transfer. Set PATCH state to "aborted" to abort the transfer. Set PATCH state to "hard_aborted" to abort the transfer and discard the restart checkpoint. To find "queued" transfers refer to relationships GET API.

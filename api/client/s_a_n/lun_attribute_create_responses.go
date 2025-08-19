@@ -30,6 +30,12 @@ func (o *LunAttributeCreateReader) ReadResponse(response runtime.ClientResponse,
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewLunAttributeCreateAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewLunAttributeCreateDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -124,6 +130,88 @@ func (o *LunAttributeCreateCreated) readResponse(response runtime.ClientResponse
 	return nil
 }
 
+// NewLunAttributeCreateAccepted creates a LunAttributeCreateAccepted with default headers values
+func NewLunAttributeCreateAccepted() *LunAttributeCreateAccepted {
+	return &LunAttributeCreateAccepted{}
+}
+
+/*
+LunAttributeCreateAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type LunAttributeCreateAccepted struct {
+
+	/* Useful for tracking the resource location
+	 */
+	Location string
+
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this lun attribute create accepted response has a 2xx status code
+func (o *LunAttributeCreateAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this lun attribute create accepted response has a 3xx status code
+func (o *LunAttributeCreateAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this lun attribute create accepted response has a 4xx status code
+func (o *LunAttributeCreateAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this lun attribute create accepted response has a 5xx status code
+func (o *LunAttributeCreateAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this lun attribute create accepted response a status code equal to that given
+func (o *LunAttributeCreateAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the lun attribute create accepted response
+func (o *LunAttributeCreateAccepted) Code() int {
+	return 202
+}
+
+func (o *LunAttributeCreateAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /storage/luns/{lun.uuid}/attributes][%d] lunAttributeCreateAccepted %s", 202, payload)
+}
+
+func (o *LunAttributeCreateAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /storage/luns/{lun.uuid}/attributes][%d] lunAttributeCreateAccepted %s", 202, payload)
+}
+
+func (o *LunAttributeCreateAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *LunAttributeCreateAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
+
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewLunAttributeCreateDefault creates a LunAttributeCreateDefault with default headers values
 func NewLunAttributeCreateDefault(code int) *LunAttributeCreateDefault {
 	return &LunAttributeCreateDefault{
@@ -142,6 +230,7 @@ func NewLunAttributeCreateDefault(code int) *LunAttributeCreateDefault {
 | 5374928 | An incomplete attribute name/value pair was supplied. |
 | 5374929 | The combined sizes of an attribute name and value are too large. |
 | 5374930 | The attribute already exists for the LUN. |
+| 5375060 | The copy start operation failed. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type LunAttributeCreateDefault struct {

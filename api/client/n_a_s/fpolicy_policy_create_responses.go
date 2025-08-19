@@ -145,9 +145,9 @@ func NewFpolicyPolicyCreateDefault(code int) *FpolicyPolicyCreateDefault {
 | 9765037    | FPolicy creation failed as passthrough-read cannot be enabled for policy without privileged user |
 | 9765038    | Passthrough-read policies are not supported with asynchronous external engine |
 | 9765056    | The specified Persistent Store does not exist |
-| 9765059    | Persistent store feature is not supported with native engine |
-| 9765060    | Persistent store feature is not supported with synchronous engine |
-| 9765061    | Persistent store feature is not supported with mandatory screening |
+| 9765059    | Persistent Store feature is not supported with native engine |
+| 9765060    | Persistent Store feature is not supported with synchronous engine |
+| 9765061    | Persistent Store feature is not supported with mandatory screening |
 | 9765065    | A valid privileged user name must be in the form "domain-name\\user-name" |
 | 9765066    | The privileged user contains characters that are not allowed |
 */

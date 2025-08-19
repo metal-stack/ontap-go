@@ -146,6 +146,12 @@ type SecurityOauth2CollectionGetParams struct {
 	*/
 	OutgoingProxy *string
 
+	/* Provider.
+
+	   Filter by provider
+	*/
+	Provider *string
+
 	/* RemoteUserClaim.
 
 	   Filter by remote_user_claim
@@ -399,6 +405,17 @@ func (o *SecurityOauth2CollectionGetParams) WithOutgoingProxy(outgoingProxy *str
 // SetOutgoingProxy adds the outgoingProxy to the security oauth2 collection get params
 func (o *SecurityOauth2CollectionGetParams) SetOutgoingProxy(outgoingProxy *string) {
 	o.OutgoingProxy = outgoingProxy
+}
+
+// WithProvider adds the provider to the security oauth2 collection get params
+func (o *SecurityOauth2CollectionGetParams) WithProvider(provider *string) *SecurityOauth2CollectionGetParams {
+	o.SetProvider(provider)
+	return o
+}
+
+// SetProvider adds the provider to the security oauth2 collection get params
+func (o *SecurityOauth2CollectionGetParams) SetProvider(provider *string) {
+	o.Provider = provider
 }
 
 // WithRemoteUserClaim adds the remoteUserClaim to the security oauth2 collection get params
@@ -685,6 +702,23 @@ func (o *SecurityOauth2CollectionGetParams) WriteToRequest(r runtime.ClientReque
 		if qOutgoingProxy != "" {
 
 			if err := r.SetQueryParam("outgoing_proxy", qOutgoingProxy); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Provider != nil {
+
+		// query param provider
+		var qrProvider string
+
+		if o.Provider != nil {
+			qrProvider = *o.Provider
+		}
+		qProvider := qrProvider
+		if qProvider != "" {
+
+			if err := r.SetQueryParam("provider", qProvider); err != nil {
 				return err
 			}
 		}
