@@ -56,7 +56,7 @@ type KeyManagerKeys struct {
 	KeyTag *string `json:"key_tag,omitempty" yaml:"key_tag,omitempty"`
 
 	// Encryption Key type.
-	// Enum: ["nse_ak","aek","vek","nek","svm_kek"]
+	// Enum: ["nse_ak","aek","vek","nek","svm_kek","mroot_ak"]
 	KeyType *string `json:"key_type,omitempty" yaml:"key_type,omitempty"`
 
 	// SVM associated with the key.
@@ -248,7 +248,7 @@ var keyManagerKeysTypeKeyTypePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["nse_ak","aek","vek","nek","svm_kek"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["nse_ak","aek","vek","nek","svm_kek","mroot_ak"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -272,6 +272,9 @@ const (
 
 	// KeyManagerKeysKeyTypeSvmKek captures enum value "svm_kek"
 	KeyManagerKeysKeyTypeSvmKek string = "svm_kek"
+
+	// KeyManagerKeysKeyTypeMrootAk captures enum value "mroot_ak"
+	KeyManagerKeysKeyTypeMrootAk string = "mroot_ak"
 )
 
 // prop value enum

@@ -59,6 +59,7 @@ AwsKmsRekeyExternalCreated describes a response with status code 201, with defau
 Created
 */
 type AwsKmsRekeyExternalCreated struct {
+	Payload *models.JobLinkResponse
 }
 
 // IsSuccess returns true when this aws kms rekey external created response has a 2xx status code
@@ -92,14 +93,27 @@ func (o *AwsKmsRekeyExternalCreated) Code() int {
 }
 
 func (o *AwsKmsRekeyExternalCreated) Error() string {
-	return fmt.Sprintf("[POST /security/aws-kms/{aws_kms.uuid}/rekey-external][%d] awsKmsRekeyExternalCreated", 201)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /security/aws-kms/{aws_kms.uuid}/rekey-external][%d] awsKmsRekeyExternalCreated %s", 201, payload)
 }
 
 func (o *AwsKmsRekeyExternalCreated) String() string {
-	return fmt.Sprintf("[POST /security/aws-kms/{aws_kms.uuid}/rekey-external][%d] awsKmsRekeyExternalCreated", 201)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /security/aws-kms/{aws_kms.uuid}/rekey-external][%d] awsKmsRekeyExternalCreated %s", 201, payload)
+}
+
+func (o *AwsKmsRekeyExternalCreated) GetPayload() *models.JobLinkResponse {
+	return o.Payload
 }
 
 func (o *AwsKmsRekeyExternalCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -115,6 +129,7 @@ AwsKmsRekeyExternalAccepted describes a response with status code 202, with defa
 Accepted
 */
 type AwsKmsRekeyExternalAccepted struct {
+	Payload *models.JobLinkResponse
 }
 
 // IsSuccess returns true when this aws kms rekey external accepted response has a 2xx status code
@@ -148,14 +163,27 @@ func (o *AwsKmsRekeyExternalAccepted) Code() int {
 }
 
 func (o *AwsKmsRekeyExternalAccepted) Error() string {
-	return fmt.Sprintf("[POST /security/aws-kms/{aws_kms.uuid}/rekey-external][%d] awsKmsRekeyExternalAccepted", 202)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /security/aws-kms/{aws_kms.uuid}/rekey-external][%d] awsKmsRekeyExternalAccepted %s", 202, payload)
 }
 
 func (o *AwsKmsRekeyExternalAccepted) String() string {
-	return fmt.Sprintf("[POST /security/aws-kms/{aws_kms.uuid}/rekey-external][%d] awsKmsRekeyExternalAccepted", 202)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /security/aws-kms/{aws_kms.uuid}/rekey-external][%d] awsKmsRekeyExternalAccepted %s", 202, payload)
+}
+
+func (o *AwsKmsRekeyExternalAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
 }
 
 func (o *AwsKmsRekeyExternalAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -177,8 +205,11 @@ func NewAwsKmsRekeyExternalDefault(code int) *AwsKmsRekeyExternalDefault {
 | 65537538 | Internal error. Failed to get unwrapped key for a given key ID. |
 | 65537543 | Internal Error. Missing top-level internal key protection key (KEK) on a node. |
 | 65537547 | One or more volume encryption keys for encrypted volumes of this data SVM are stored in the key manager configured for the admin SVM. Use the REST API POST method to migrate this data SVM's keys from the admin SVM's key manager before running the rekey operation. |
+| 65537610 | Rekey cannot be performed on the SVM while the enabled keystore configuration is being switched. If a previous attempt to switch the keystore configuration failed, or was interrupted, the system will continue to prevent rekeying for the SVM. Use the REST API PATCH method "/api/security/key-stores/{uuid}" to re-run and complete the operation. |
 | 65537919 | External rekey failed on one or more nodes. |
 | 65537926 | AWS KMS is not configured for the given SVM. |
+| 65539436 | Rekey cannot be performed on the SVM while the enabled keystore configuration is being initialized. Wait until the keystore is in the active state, and rerun the rekey operation. |
+| 65539437 | Rekey cannot be performed on the SVM while the enabled keystore configuration is being disabled. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type AwsKmsRekeyExternalDefault struct {

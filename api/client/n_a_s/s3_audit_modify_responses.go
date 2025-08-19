@@ -59,6 +59,7 @@ S3AuditModifyOK describes a response with status code 200, with default header v
 OK
 */
 type S3AuditModifyOK struct {
+	Payload *models.JobLinkResponse
 }
 
 // IsSuccess returns true when this s3 audit modify o k response has a 2xx status code
@@ -92,14 +93,27 @@ func (o *S3AuditModifyOK) Code() int {
 }
 
 func (o *S3AuditModifyOK) Error() string {
-	return fmt.Sprintf("[PATCH /protocols/audit/{svm.uuid}/object-store][%d] s3AuditModifyOK", 200)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /protocols/audit/{svm.uuid}/object-store][%d] s3AuditModifyOK %s", 200, payload)
 }
 
 func (o *S3AuditModifyOK) String() string {
-	return fmt.Sprintf("[PATCH /protocols/audit/{svm.uuid}/object-store][%d] s3AuditModifyOK", 200)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /protocols/audit/{svm.uuid}/object-store][%d] s3AuditModifyOK %s", 200, payload)
+}
+
+func (o *S3AuditModifyOK) GetPayload() *models.JobLinkResponse {
+	return o.Payload
 }
 
 func (o *S3AuditModifyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -115,6 +129,7 @@ S3AuditModifyAccepted describes a response with status code 202, with default he
 Accepted
 */
 type S3AuditModifyAccepted struct {
+	Payload *models.JobLinkResponse
 }
 
 // IsSuccess returns true when this s3 audit modify accepted response has a 2xx status code
@@ -148,14 +163,27 @@ func (o *S3AuditModifyAccepted) Code() int {
 }
 
 func (o *S3AuditModifyAccepted) Error() string {
-	return fmt.Sprintf("[PATCH /protocols/audit/{svm.uuid}/object-store][%d] s3AuditModifyAccepted", 202)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /protocols/audit/{svm.uuid}/object-store][%d] s3AuditModifyAccepted %s", 202, payload)
 }
 
 func (o *S3AuditModifyAccepted) String() string {
-	return fmt.Sprintf("[PATCH /protocols/audit/{svm.uuid}/object-store][%d] s3AuditModifyAccepted", 202)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /protocols/audit/{svm.uuid}/object-store][%d] s3AuditModifyAccepted %s", 202, payload)
+}
+
+func (o *S3AuditModifyAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
 }
 
 func (o *S3AuditModifyAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

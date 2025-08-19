@@ -605,6 +605,9 @@ func (a *Client) ClusterGet(params *ClusterGetParams, authInfo runtime.ClientAut
 * `vserver services name-service dns modify`
 * `timezone`
 * `security ssl modify`
+* `vserver active-directory create`
+* `vserver active-directory modify`
+* `vserver active-directory delete`
 */
 func (a *Client) ClusterModify(params *ClusterModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ClusterModifyOK, *ClusterModifyAccepted, error) {
 	// TODO: Validate the params before sending
@@ -2580,6 +2583,7 @@ func (a *Client) MetroclusterInterconnectModify(params *MetroclusterInterconnect
 * `metrocluster switchover`
 * `metrocluster switchback`
 * `metrocluster heal`
+* `metrocluster modify`
 */
 func (a *Client) MetroclusterModify(params *MetroclusterModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MetroclusterModifyOK, *MetroclusterModifyAccepted, error) {
 	// TODO: Validate the params before sending
@@ -3800,6 +3804,7 @@ Important note:
 * `estimate_only` - Estimates the time duration; does not perform any update.
 * `nodes_to_update` - Specifies a subset of the cluster's nodes for update.
 * `show_validation_details` - If the value is set to true, then all validation details will be shown in the output.
+* `skip_nodes_at_target_version` - If the value is set to true, then nodes already at the target version will not be upgraded. Defaults to true in non-MetroCluster configurations. Setting this option to false will force all the selected nodes of the cluster to undergo upgrade.
 ### Related ONTAP commands
 * `cluster image validate`
 * `cluster image update`

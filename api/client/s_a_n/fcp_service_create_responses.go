@@ -146,7 +146,7 @@ func NewFcpServiceCreateDefault(code int) *FcpServiceCreateDefault {
 | 5374082 | The Fibre Channel Protocol service already exists for the SVM. |
 | 5374092 | The Fibre Channel Protocol is not supported on the cluster hardware configuration; there are no Fibre Channel adapters. |
 | 5374893 | The SVM is stopped. The SVM must be running to create a Fibre Channel Protocol service. |
-| 5376452 | Service POST and DELETE are not supported on ASA.next. |
+| 5376452 | Service POST and DELETE are not supported on ASA r2. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type FcpServiceCreateDefault struct {

@@ -148,6 +148,7 @@ func NewNetworkIPRoutesCreateDefault(code int) *NetworkIPRoutesCreateDefault {
 | 2621462 | The specified SVM does not exist. |
 | 2621574 | This operation is not permitted on an SVM that is configured as the destination of a MetroCluster SVM relationship. |
 | 2621706 | The specified UUID and name refer to different SVMs. |
+| 53282375 | The specified destination is invalid. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type NetworkIPRoutesCreateDefault struct {

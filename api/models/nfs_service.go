@@ -48,13 +48,13 @@ type NfsService struct {
 
 	// Number of I/O operations on a file to be grouped and considered as one session for event generation applications, such as FPolicy.
 	// Example: 5000
-	// Maximum: 20000
+	// Maximum: 120000
 	// Minimum: 1000
 	FileSessionIoGroupingCount *int64 `json:"file_session_io_grouping_count,omitempty" yaml:"file_session_io_grouping_count,omitempty"`
 
 	// The duration for which I/O operations on a file will be grouped and considered as one session for event generation applications, such as FPolicy.
 	// Example: 120
-	// Maximum: 600
+	// Maximum: 3600
 	// Minimum: 60
 	FileSessionIoGroupingDuration *int64 `json:"file_session_io_grouping_duration,omitempty" yaml:"file_session_io_grouping_duration,omitempty"`
 
@@ -289,7 +289,7 @@ func (m *NfsService) validateFileSessionIoGroupingCount(formats strfmt.Registry)
 		return err
 	}
 
-	if err := validate.MaximumInt("file_session_io_grouping_count", "body", *m.FileSessionIoGroupingCount, 20000, false); err != nil {
+	if err := validate.MaximumInt("file_session_io_grouping_count", "body", *m.FileSessionIoGroupingCount, 120000, false); err != nil {
 		return err
 	}
 
@@ -305,7 +305,7 @@ func (m *NfsService) validateFileSessionIoGroupingDuration(formats strfmt.Regist
 		return err
 	}
 
-	if err := validate.MaximumInt("file_session_io_grouping_duration", "body", *m.FileSessionIoGroupingDuration, 600, false); err != nil {
+	if err := validate.MaximumInt("file_session_io_grouping_duration", "body", *m.FileSessionIoGroupingDuration, 3600, false); err != nil {
 		return err
 	}
 
@@ -1958,7 +1958,7 @@ type NfsServiceInlineMetricInlineV3InlineIops struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -2012,7 +2012,7 @@ type NfsServiceInlineMetricInlineV3InlineLatency struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -2158,7 +2158,7 @@ type NfsServiceInlineMetricInlineV3InlineThroughput struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3118,7 +3118,7 @@ type NfsServiceInlineMetricInlineV41InlineIops struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3172,7 +3172,7 @@ type NfsServiceInlineMetricInlineV41InlineLatency struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3318,7 +3318,7 @@ type NfsServiceInlineMetricInlineV41InlineThroughput struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3372,7 +3372,7 @@ type NfsServiceInlineMetricInlineV4InlineIops struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3426,7 +3426,7 @@ type NfsServiceInlineMetricInlineV4InlineLatency struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3572,7 +3572,7 @@ type NfsServiceInlineMetricInlineV4InlineThroughput struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -4187,7 +4187,7 @@ func (m *NfsServiceInlineProtocolAccessRules) UnmarshalBinary(b []byte) error {
 // swagger:model nfs_service_inline_protocol_inline_v3_features
 type NfsServiceInlineProtocolInlineV3Features struct {
 
-	// Specfies whether the dropping of a connection when an NFSv3 request is dropped is enabled.
+	// Specifies whether the dropping of a connection when an NFSv3 request is dropped is enabled.
 	ConnectionDrop *bool `json:"connection_drop,omitempty" yaml:"connection_drop,omitempty"`
 
 	// Specifies whether NFSv3 EJUKEBOX error is enabled.
@@ -4196,7 +4196,7 @@ type NfsServiceInlineProtocolInlineV3Features struct {
 	// Specifies whether the change in FSID as NFSv3 clients traverse filesystems should be shown.
 	FsidChange *bool `json:"fsid_change,omitempty" yaml:"fsid_change,omitempty"`
 
-	// Specifies whether hiding a Snapshot copy directory under a NFSv3 mount point is enabled.
+	// Specifies whether hiding a snapshot directory under a NFSv3 mount point is enabled.
 	HideSnapshotEnabled *bool `json:"hide_snapshot_enabled,omitempty" yaml:"hide_snapshot_enabled,omitempty"`
 
 	// Specifies which port the NFS mount daemon (mountd) uses.
@@ -5257,7 +5257,7 @@ type NfsServiceInlineStatisticsInlineV3InlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -5311,7 +5311,7 @@ type NfsServiceInlineStatisticsInlineV3InlineLatencyRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -5362,7 +5362,7 @@ type NfsServiceInlineStatisticsInlineV3InlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -6064,7 +6064,7 @@ type NfsServiceInlineStatisticsInlineV41InlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -6118,7 +6118,7 @@ type NfsServiceInlineStatisticsInlineV41InlineLatencyRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -6169,7 +6169,7 @@ type NfsServiceInlineStatisticsInlineV41InlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -6223,7 +6223,7 @@ type NfsServiceInlineStatisticsInlineV4InlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -6277,7 +6277,7 @@ type NfsServiceInlineStatisticsInlineV4InlineLatencyRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -6328,7 +6328,7 @@ type NfsServiceInlineStatisticsInlineV4InlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }

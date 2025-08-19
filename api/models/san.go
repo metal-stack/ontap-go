@@ -27,6 +27,9 @@ type San struct {
 	// Min Items: 1
 	ApplicationComponents []*SanApplicationComponentsItems0 `json:"application_components" yaml:"application_components"`
 
+	// exclude aggregates
+	ExcludeAggregates []*SanExcludeAggregatesItems0 `json:"exclude_aggregates" yaml:"exclude_aggregates"`
+
 	// The list of initiator groups to create.
 	// Max Items: 10
 	// Min Items: 0
@@ -45,6 +48,10 @@ func (m *San) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateApplicationComponents(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateExcludeAggregates(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -93,6 +100,32 @@ func (m *San) validateApplicationComponents(formats strfmt.Registry) error {
 					return ve.ValidateName("application_components" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("application_components" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *San) validateExcludeAggregates(formats strfmt.Registry) error {
+	if swag.IsZero(m.ExcludeAggregates) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ExcludeAggregates); i++ {
+		if swag.IsZero(m.ExcludeAggregates[i]) { // not required
+			continue
+		}
+
+		if m.ExcludeAggregates[i] != nil {
+			if err := m.ExcludeAggregates[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("exclude_aggregates" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("exclude_aggregates" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -241,6 +274,10 @@ func (m *San) ContextValidate(ctx context.Context, formats strfmt.Registry) erro
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateExcludeAggregates(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateNewIgroups(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -270,6 +307,31 @@ func (m *San) contextValidateApplicationComponents(ctx context.Context, formats 
 					return ve.ValidateName("application_components" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("application_components" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *San) contextValidateExcludeAggregates(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.ExcludeAggregates); i++ {
+
+		if m.ExcludeAggregates[i] != nil {
+
+			if swag.IsZero(m.ExcludeAggregates[i]) { // not required
+				return nil
+			}
+
+			if err := m.ExcludeAggregates[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("exclude_aggregates" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("exclude_aggregates" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -924,6 +986,116 @@ func (m *SanApplicationComponentsItems0StorageService) MarshalBinary() ([]byte, 
 // UnmarshalBinary interface implementation
 func (m *SanApplicationComponentsItems0StorageService) UnmarshalBinary(b []byte) error {
 	var res SanApplicationComponentsItems0StorageService
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// SanExcludeAggregatesItems0 san exclude aggregates items0
+//
+// swagger:model SanExcludeAggregatesItems0
+type SanExcludeAggregatesItems0 struct {
+
+	// The name of the aggregate to exclude.
+	// Enum: ["aggr0_fel_wps1_ba1_r01c800_a","aggr0_fel_wps1_ba1_r01c800_b","aggr0_stg_kkw7_ba1_r01c800_a","aggr0_stg_kkw7_ba1_r01c800_b","data01_mcc_renamed_20250617101056_2041346693","data02_mcc_renamed_20250617101056_2041346693","data03","data04"]
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
+
+	// The ID of the aggregate to exclude. Usage: &lt;UUID&gt;
+	UUID string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
+}
+
+// Validate validates this san exclude aggregates items0
+func (m *SanExcludeAggregatesItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+var sanExcludeAggregatesItems0TypeNamePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["aggr0_fel_wps1_ba1_r01c800_a","aggr0_fel_wps1_ba1_r01c800_b","aggr0_stg_kkw7_ba1_r01c800_a","aggr0_stg_kkw7_ba1_r01c800_b","data01_mcc_renamed_20250617101056_2041346693","data02_mcc_renamed_20250617101056_2041346693","data03","data04"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		sanExcludeAggregatesItems0TypeNamePropEnum = append(sanExcludeAggregatesItems0TypeNamePropEnum, v)
+	}
+}
+
+const (
+
+	// SanExcludeAggregatesItems0NameAggr0FelWps1Ba1R01c800a captures enum value "aggr0_fel_wps1_ba1_r01c800_a"
+	SanExcludeAggregatesItems0NameAggr0FelWps1Ba1R01c800a string = "aggr0_fel_wps1_ba1_r01c800_a"
+
+	// SanExcludeAggregatesItems0NameAggr0FelWps1Ba1R01c800b captures enum value "aggr0_fel_wps1_ba1_r01c800_b"
+	SanExcludeAggregatesItems0NameAggr0FelWps1Ba1R01c800b string = "aggr0_fel_wps1_ba1_r01c800_b"
+
+	// SanExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800a captures enum value "aggr0_stg_kkw7_ba1_r01c800_a"
+	SanExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800a string = "aggr0_stg_kkw7_ba1_r01c800_a"
+
+	// SanExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800b captures enum value "aggr0_stg_kkw7_ba1_r01c800_b"
+	SanExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800b string = "aggr0_stg_kkw7_ba1_r01c800_b"
+
+	// SanExcludeAggregatesItems0NameData01MccRenamed202506171010562041346693 captures enum value "data01_mcc_renamed_20250617101056_2041346693"
+	SanExcludeAggregatesItems0NameData01MccRenamed202506171010562041346693 string = "data01_mcc_renamed_20250617101056_2041346693"
+
+	// SanExcludeAggregatesItems0NameData02MccRenamed202506171010562041346693 captures enum value "data02_mcc_renamed_20250617101056_2041346693"
+	SanExcludeAggregatesItems0NameData02MccRenamed202506171010562041346693 string = "data02_mcc_renamed_20250617101056_2041346693"
+
+	// SanExcludeAggregatesItems0NameData03 captures enum value "data03"
+	SanExcludeAggregatesItems0NameData03 string = "data03"
+
+	// SanExcludeAggregatesItems0NameData04 captures enum value "data04"
+	SanExcludeAggregatesItems0NameData04 string = "data04"
+)
+
+// prop value enum
+func (m *SanExcludeAggregatesItems0) validateNameEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, sanExcludeAggregatesItems0TypeNamePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *SanExcludeAggregatesItems0) validateName(formats strfmt.Registry) error {
+	if swag.IsZero(m.Name) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateNameEnum("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this san exclude aggregates items0 based on context it is used
+func (m *SanExcludeAggregatesItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *SanExcludeAggregatesItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *SanExcludeAggregatesItems0) UnmarshalBinary(b []byte) error {
+	var res SanExcludeAggregatesItems0
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

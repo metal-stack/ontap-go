@@ -115,7 +115,7 @@ func NewFcpServiceDeleteDefault(code int) *FcpServiceDeleteDefault {
 | 2621462 | An SVM with the specified UUID does not exist. |
 | 5373960 | The Fibre Channel Protocol service cannot be removed while it is enabled. |
 | 5374083 | There is no Fibre Channel Protocol service for the specified SVM. |
-| 5376452 | Service POST and DELETE are not supported on ASA.next. |
+| 5376452 | Service POST and DELETE are not supported on ASA r2. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type FcpServiceDeleteDefault struct {

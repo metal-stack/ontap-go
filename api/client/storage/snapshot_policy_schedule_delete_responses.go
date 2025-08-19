@@ -113,7 +113,7 @@ func NewSnapshotPolicyScheduleDeleteDefault(code int) *SnapshotPolicyScheduleDel
 | Error Code | Description |
 | ---------- | ----------- |
 | 1638411    | At least minimum number of schedule must be specified for the policy. |
-| 1638412    | Schedule does not exist in Snapshot policy. |
+| 1638412    | Schedule does not exist in snapshot policy. |
 */
 type SnapshotPolicyScheduleDeleteDefault struct {
 	_statusCode int

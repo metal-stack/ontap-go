@@ -929,6 +929,8 @@ If not specified in POST, the following default property values are assigned:
 * `events.security_group` - _false_
 * `events.user_account` - _false_
 * `events.cifs_logon_logoff` - _true_
+* `events.audit_policy_change` - _true_
+* `events.async_delete` - _false_
 * `events.file_operations` - _true_
 * `log.format` - _evtx_
 * `log.retention.count` - _0_
@@ -936,6 +938,7 @@ If not specified in POST, the following default property values are assigned:
 * `log.rotation.size` - _100MB_
 * `log.rotation.now` - _false_
 * `guarantee` - _true_
+* `charge_qos` - _false_
 ### Related ONTAP commands
 * `vserver audit create`
 * `vserver audit enable`
@@ -1302,6 +1305,7 @@ func (a *Client) CifsDomainGet(params *CifsDomainGetParams, authInfo runtime.Cli
 * `vserver cifs domain password change`
 ### Important notes
 * If the query is set to cifs_password_operation=reset and ad_domain_user and ad_domain_password is included in the body,a CIFS password reset is executed.
+* If the query is set to cifs_password_operation=reset and tenant_id, client_id and client_certificate is included in the body,a CIFS password reset is executed in Azure EntraId for hybrid user.
 * If the body is empty when the query is set to cifs_password_operation=reset, a CIFS password change is executed.
 ### Learn more
 * [`DOC /protocols/cifs/domains/{svm.uuid}`](#docs-NAS-protocols_cifs_domains_{svm.uuid})
@@ -1941,10 +1945,11 @@ func (a *Client) CifsServiceCollectionGet(params *CifsServiceCollectionGetParams
 * `name` -  Name of the CIFS server.
 * `ad_domain.user` - User account with the access to add the CIFS server to the Active Directory.
 * `ad_domain.fqdn` - Fully qualified domain name of the Windows Active Directory to which this CIFS server belongs.
-* `client_id` - Application client ID of the deployed Azure application with appropriate access to an AKV.
-* `tenant_id` - Directory (tenant) ID of the deployed Azure application with appropriate access to an AKV.
+* `client_id` - Application client ID of the deployed Azure application with appropriate access to an AKV or EntraId.
+* `tenant_id` - Directory (tenant) ID of the deployed Azure application with appropriate access to an AKV or EntraId.
 * `key_vault_uri` - URI of the deployed AKV that is used by ONTAP for storing keys.
-* `authentication_method` - Authentication method used by the application to prove its identity to AKV. It can be either "client_secret" or "certificate".
+* `authentication_method` - Authentication method used by the application to prove its identity to AKV or EntraId. It can be either "client_secret" or "certificate".
+* `auth_user_type` - Type of user who can access the SMB Volume. It can be either "domain_user" or "hybrid_user". The default is domain_user. In the case of a hybrid-user, ONTAP cannot access on-premise ADDS.
 * `client_secret` - Secret used by the application to prove its identity to AKV.
 * `client_certificate` - Base64 encoded PKCS12 certificate used by the application to prove its identity to AKV.
 ### Recommended optional properties
@@ -1955,16 +1960,15 @@ func (a *Client) CifsServiceCollectionGet(params *CifsServiceCollectionGetParams
 If not specified in POST, the following default property values are assigned:
 * `ad_domain.organizational_unit` - _CN=Computers_
 * `enabled` - _true_
-* `restrict_anonymous` - _no_enumeration_
-* `smb_signing` - _false_
-* `smb_encryption` - _false_
-* `encrypt_dc_connection` - _false_
-* `kdc_encryption` - _false_
+* `security.restrict_anonymous` - _no_enumeration_
+* `security.smb_signing` - _false_
+* `security.smb_encryption` - _false_
+* `security.encrypt_dc_connection` - _false_
 * `default_unix_user` - _pcuser_
-* `netbios_enabled` - _false_ However, if either "netbios.wins-server" or "netbios.aliases" is set during POST and if `netbios_enabled` is not specified then `netbios_enabled` is set to true.
-* `aes_netlogon_enabled` - _false_
-* `try_ldap_channel_binding` - _true_
-* `ldap_referral_enabled` - _false_
+* `netbios.enabled` - _false_ However, if either "netbios.wins-server" or "netbios.aliases" is set during POST and if `netbios.enabled` is not specified then `netbios.enabled` is set to true.
+* `security.aes_netlogon_enabled` - _false_
+* `security.try_ldap_channel_binding` - _true_
+* `security.ldap_referral_enabled` - _false_
 ### Related ONTAP commands
 * `vserver cifs server create`
 * `vserver cifs server options modify`
@@ -2201,7 +2205,7 @@ func (a *Client) CifsSessionCollectionGet(params *CifsSessionCollectionGetParams
 /*
 	CifsSessionDelete Deletes SMB session information on a node for an SVM.
 
-* To delete the specific SMB session information, pass the relavant SMB session's identifier and connection Id.
+* To delete the specific SMB session information, pass the relevant SMB session's identifier and connection Id.
 * To delete all the SMB session information on specific node and SVM, pass the both SMB session's identifier and connection Id as zero(0)
 * To delete all the SMB session information on specific connection, pass the specific SMB session's Identifier value as zero(0).
 * To delete all the SMB session information on specific Identifier alone is not allowed.
@@ -4903,8 +4907,8 @@ func (a *Client) FpolicyPersistentStoreCollectionGet(params *FpolicyPersistentSt
 </br>Important notes:
 * FPolicy Persistent Store creation is allowed only on data SVMs.
 * In persistent mode, when the Persistent Store is full, event notifications are dropped.
-* There is flexibility to provide an existing volume or create a new volume for the persitent storage. The creation of new volume is handled internally.
-* For existing volumes, the Snapshot policy is set to 'none' and the size is adjusted to the specified value.
+* There is flexibility to provide an existing volume or create a new volume for the persistent storage. The creation of new volume is handled internally.
+* For existing volumes, the snapshot policy is set to 'none' and the size is adjusted to the specified value.
 ### Required properties
 * `svm.uuid` - Existing SVM in which to create the FPolicy Persistent Store.
 * `name` - Name of the FPolicy Persistent Store.
@@ -5044,7 +5048,7 @@ func (a *Client) FpolicyPersistentStoreGet(params *FpolicyPersistentStoreGetPara
 	FpolicyPersistentStoreModify Updates a specific FPolicy Persistent Store configuration for an SVM.
 
 </br>Important notes:
-* If the volume exists, it is set to the size specified and the Snapshot policy is set to "none". Otherwise, a new volume is created.
+* If the volume exists, it is set to the size specified and the snapshot policy is set to "none". Otherwise, a new volume is created.
 * The autosize parameter is not available in PATCH operations for this endpoint, use the the "autosize" parameter in PATCH for the "/storage/volumes/{uuid}" endpoint instead.
 * When the Persistent Store is updated with a new volume, the previous volume is not automatically deleted. An option is provided to delete the previous volume.
 ### Related ONTAP commands
@@ -5141,7 +5145,7 @@ func (a *Client) FpolicyPolicyCollectionGet(params *FpolicyPolicyCollectionGetPa
 * The "mandatory" field, if set to true, blocks the file access when the primary or secondary FPolicy servers are down.
 ### Required properties
 * `svm.uuid` - Existing SVM in which to create the FPolicy policy.
-* `events` - Name of the events to monitior.
+* `events` - Name of the events to monitor.
 * `name` - Name of the FPolicy policy.
 * `scope` - Scope of the policy. Can be limited to exports, volumes, shares or file extensions.
 * `priority`- Priority of the policy (ranging from 1 to 10).

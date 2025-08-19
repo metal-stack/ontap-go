@@ -2904,7 +2904,7 @@ func (m *AggregateInlineHomeNodeInlineLinks) UnmarshalBinary(b []byte) error {
 // swagger:model aggregate_inline_inactive_data_reporting
 type AggregateInlineInactiveDataReporting struct {
 
-	// Specifes whether or not inactive data reporting is enabled on the aggregate.
+	// Specifies whether or not inactive data reporting is enabled on the aggregate.
 	Enabled *bool `json:"enabled,omitempty" yaml:"enabled,omitempty"`
 
 	// Timestamp at which inactive data reporting was enabled on the aggregate.
@@ -2987,7 +2987,7 @@ func (m *AggregateInlineInactiveDataReporting) UnmarshalBinary(b []byte) error {
 type AggregateInlineInodeAttributes struct {
 
 	// Number of files that can currently be stored on disk for system metadata files. This number will dynamically increase as more system files are created.
-	// This is an advanced property; there is an added computationl cost to retrieving its value. The field is not populated for either a collection GET or an instance GET unless it is explicitly requested using the <i>fields</i> query parameter containing either footprint or **.
+	// This is an advanced property; there is an added computational cost to retrieving its value. The field is not populated for either a collection GET or an instance GET unless it is explicitly requested using the <i>fields</i> query parameter containing either footprint or **.
 	//
 	// Example: 31136
 	FilePrivateCapacity *int64 `json:"file_private_capacity,omitempty" yaml:"file_private_capacity,omitempty"`
@@ -3659,7 +3659,7 @@ type AggregateInlineMetricInlineIops struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3713,7 +3713,7 @@ type AggregateInlineMetricInlineLatency struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3862,7 +3862,7 @@ type AggregateInlineMetricInlineThroughput struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -4103,22 +4103,22 @@ func (m *AggregateInlineNodeInlineLinks) UnmarshalBinary(b []byte) error {
 // swagger:model aggregate_inline_snapshot
 type AggregateInlineSnapshot struct {
 
-	// Total files allowed in Snapshot copies
+	// Total files allowed in snapshots
 	// Example: 10
 	// Read Only: true
 	FilesTotal *int64 `json:"files_total,omitempty" yaml:"files_total,omitempty"`
 
-	// Total files created in Snapshot copies
+	// Total files created in snapshots
 	// Example: 3
 	// Read Only: true
 	FilesUsed *int64 `json:"files_used,omitempty" yaml:"files_used,omitempty"`
 
-	// Maximum files available for Snapshot copies
+	// Maximum files available for snapshots
 	// Example: 5
 	// Read Only: true
 	MaxFilesAvailable *int64 `json:"max_files_available,omitempty" yaml:"max_files_available,omitempty"`
 
-	// Files in use by Snapshot copies
+	// Files in use by snapshots
 	// Example: 50
 	// Read Only: true
 	MaxFilesUsed *int64 `json:"max_files_used,omitempty" yaml:"max_files_used,omitempty"`
@@ -4641,7 +4641,7 @@ type AggregateInlineSpaceInlineBlockStorage struct {
 	// Read Only: true
 	PhysicalUsedPercent *int64 `json:"physical_used_percent,omitempty" yaml:"physical_used_percent,omitempty"`
 
-	// Total usable space in bytes, not including WAFL reserve and aggregate Snapshot copy reserve.
+	// Total usable space in bytes, not including WAFL reserve and aggregate snapshot reserve.
 	// Example: 10156769280
 	// Read Only: true
 	Size *int64 `json:"size,omitempty" yaml:"size,omitempty"`
@@ -4651,7 +4651,7 @@ type AggregateInlineSpaceInlineBlockStorage struct {
 	// Read Only: true
 	Used *int64 `json:"used,omitempty" yaml:"used,omitempty"`
 
-	// Total used including the Snapshot copy reserve, in bytes.
+	// Total used including the snapshot reserve, in bytes.
 	// Example: 674685
 	// Read Only: true
 	UsedIncludingSnapshotReserve *int64 `json:"used_including_snapshot_reserve,omitempty" yaml:"used_including_snapshot_reserve,omitempty"`
@@ -5201,7 +5201,7 @@ func (m *AggregateInlineSpaceInlineEfficiency) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// AggregateInlineSpaceInlineEfficiencyWithoutSnapshots Storage efficiency that does not include the savings provided by Snapshot copies.
+// AggregateInlineSpaceInlineEfficiencyWithoutSnapshots Storage efficiency that does not include the savings provided by snapshots.
 //
 // swagger:model aggregate_inline_space_inline_efficiency_without_snapshots
 type AggregateInlineSpaceInlineEfficiencyWithoutSnapshots struct {
@@ -5291,7 +5291,7 @@ func (m *AggregateInlineSpaceInlineEfficiencyWithoutSnapshots) UnmarshalBinary(b
 	return nil
 }
 
-// AggregateInlineSpaceInlineEfficiencyWithoutSnapshotsFlexclones Storage efficiency that does not include the savings provided by Snapshot copies and Flexclone volumes.
+// AggregateInlineSpaceInlineEfficiencyWithoutSnapshotsFlexclones Storage efficiency that does not include the savings provided by snapshots and Flexclone volumes.
 //
 // swagger:model aggregate_inline_space_inline_efficiency_without_snapshots_flexclones
 type AggregateInlineSpaceInlineEfficiencyWithoutSnapshotsFlexclones struct {
@@ -5386,27 +5386,27 @@ func (m *AggregateInlineSpaceInlineEfficiencyWithoutSnapshotsFlexclones) Unmarsh
 // swagger:model aggregate_inline_space_inline_snapshot
 type AggregateInlineSpaceInlineSnapshot struct {
 
-	// Available space for Snapshot copies in bytes
+	// Available space for snapshots in bytes
 	// Example: 2000
 	// Read Only: true
 	Available *int64 `json:"available,omitempty" yaml:"available,omitempty"`
 
-	// Percentage of space reserved for Snapshot copies
+	// Percentage of space reserved for snapshots
 	// Example: 20
 	// Read Only: true
 	ReservePercent *int64 `json:"reserve_percent,omitempty" yaml:"reserve_percent,omitempty"`
 
-	// Total space for Snapshot copies in bytes
+	// Total space for snapshots in bytes
 	// Example: 5000
 	// Read Only: true
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Space used by Snapshot copies in bytes
+	// Space used by snapshots in bytes
 	// Example: 3000
 	// Read Only: true
 	Used *int64 `json:"used,omitempty" yaml:"used,omitempty"`
 
-	// Percentage of disk space used by Snapshot copies
+	// Percentage of disk space used by snapshots
 	// Example: 45
 	// Read Only: true
 	UsedPercent *int64 `json:"used_percent,omitempty" yaml:"used_percent,omitempty"`
@@ -5850,7 +5850,7 @@ type AggregateInlineStatisticsInlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -5904,7 +5904,7 @@ type AggregateInlineStatisticsInlineLatencyRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -5958,7 +5958,7 @@ type AggregateInlineStatisticsInlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }

@@ -180,6 +180,7 @@ func NewIgroupCreateDefault(code int) *IgroupCreateDefault {
 | 5376059 | Setting initiator proximity to a peer that is either the destination of an SVM DR relationship or in a Metrocluster configuration is not supported. |
 | 5376253 | Initiator group replication requires an effective cluster version of 9.15.1. |
 | 5376255 | Initiator group replication requires the peer cluster to have an effective cluster version of 9.15.1. |
+| 5376488 | An NVMe over Fabrics subsystem already exists with the requested name. |
 | 6620376 | SVM peering information is unavailable. |
 | 6620384 | The supplied SVMs are not peered. |
 | 26345672 | The specified SVM peering relationship was not found. |

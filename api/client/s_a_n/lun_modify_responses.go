@@ -30,6 +30,12 @@ func (o *LunModifyReader) ReadResponse(response runtime.ClientResponse, consumer
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewLunModifyAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewLunModifyDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -98,6 +104,76 @@ func (o *LunModifyOK) readResponse(response runtime.ClientResponse, consumer run
 	return nil
 }
 
+// NewLunModifyAccepted creates a LunModifyAccepted with default headers values
+func NewLunModifyAccepted() *LunModifyAccepted {
+	return &LunModifyAccepted{}
+}
+
+/*
+LunModifyAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type LunModifyAccepted struct {
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this lun modify accepted response has a 2xx status code
+func (o *LunModifyAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this lun modify accepted response has a 3xx status code
+func (o *LunModifyAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this lun modify accepted response has a 4xx status code
+func (o *LunModifyAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this lun modify accepted response has a 5xx status code
+func (o *LunModifyAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this lun modify accepted response a status code equal to that given
+func (o *LunModifyAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the lun modify accepted response
+func (o *LunModifyAccepted) Code() int {
+	return 202
+}
+
+func (o *LunModifyAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /storage/luns/{uuid}][%d] lunModifyAccepted %s", 202, payload)
+}
+
+func (o *LunModifyAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /storage/luns/{uuid}][%d] lunModifyAccepted %s", 202, payload)
+}
+
+func (o *LunModifyAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *LunModifyAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewLunModifyDefault creates a LunModifyDefault with default headers values
 func NewLunModifyDefault(code int) *LunModifyDefault {
 	return &LunModifyDefault{
@@ -114,11 +190,13 @@ func NewLunModifyDefault(code int) *LunModifyDefault {
 | ---------- | ----------- |
 | 917927 | The specified volume was not found. |
 | 918236 | The specified `location.volume.uuid` and `location.volume.name` do not refer to the same volume. |
+| 1254196 | A LUN already exists at the specified path. |
+| 1254226 | Cannot patch a LUN's size to its current size. |
 | 5242927 | The specified qtree was not found. |
 | 5242950 | The specified `location.qtree.id` and `location.qtree.name` do not refer to the same qtree. |
 | 5374124 | The specified LUN size is too small. |
 | 5374125 | The specified LUN size is too large. |
-| 5374127 | An invalid LUN name was specified. |
+| 5374127 | The specified LUN name is invalid. |
 | 5374130 | An invalid size value was provided. |
 | 5374241 | A size value with invalid units was provided. |
 | 5374480 | Modifying the LUN is not allowed because it is in a foreign LUN import relationship. |
@@ -136,8 +214,16 @@ func NewLunModifyDefault(code int) *LunModifyDefault {
 | 5374892 | An attempt was made to reduce the size of a LUN. |
 | 5374904 | The destination volume is not online. |
 | 5375059 | An unsuitable QoS policy was specified. |
+| 5376461 | The specified LUN name is invalid. |
+| 5376462 | The specified LUN name is too long. |
+| 5376463 | The snapshot portion of the specified LUN name is too long. |
+| 5376466 | An attempt was made to rename a LUN to a snapshot name. |
+| 5376467 | An attempt was made to rename a primary LUN to a secondary name. |
+| 5376468 | An attempt was made to rename a LUN to a reserved name. |
+| 5376470 | The property cannot be set during the LUN modify operation on this platform. |
 | 7018877 | Maximum combined total (50) of file and LUN copy and move operations reached. When one or more of the operations has completed, try the command again. |
 | 7018919 | A copy or move job exists with the same destination LUN. |
+| 8454243 | The specified QoS policy does not exist while modifying a LUN. |
 | 13565952 | The LUN clone request failed. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */

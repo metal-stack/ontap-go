@@ -226,7 +226,8 @@ func NewFileCloneCreateDefault(code int) *FileCloneCreateDefault {
 
 | Error Code | Description |
 | ---------- | ----------- |
-| 917898 | Invalid value `value` for the field -range. Value must be provided in the format \<source start block\>:\<destination start block\>:\<block length\>. |
+| 917864 | Failed to get the file handle. |
+| 917898 | Invalid `value` for the field -range. Value must be provided in the format \<source start block\>:\<destination start block\>:\<block length\>. |
 | 918236 | The specified `volume.uuid` and `volume.name` refer to different volumes. |
 | 13565952 | Clone start failed. |
 | 13565988 | The destination file cannot be marked as a backup clone as only a full-file clone can be a backup clone. |

@@ -307,6 +307,7 @@ func NewAggregateModifyDefault(code int) *AggregateModifyDefault {
 | 19726402 | Internal error. Unable to determine the MetroCluster configuration state. |
 | 19726538 | Cannot perform the operation because the aggregate is not in a healthy state. |
 | 19726541 | Cannot perform the operation because the specified aggregate is a root aggregate. |
+| 19726544 | PATCH on the aggregate endpoint is not supported on this version of ONTAP. |
 | 26542083 | Destination node is at higher Data ONTAP version than source node. |
 | 26542084 | Source node is at higher Data ONTAP version than destination node. |
 | 26542097 | Unable to get D-blade ID of destination. |

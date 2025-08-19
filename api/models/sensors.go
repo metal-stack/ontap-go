@@ -60,7 +60,7 @@ type Sensors struct {
 	// Enum: ["bad","crit_high","crit_low","disabled","failed","fault","ignored","init_failed","invalid","normal","not_available","not_present","retry","uninitialized","unknown","warn_high","warn_low"]
 	ThresholdState *string `json:"threshold_state,omitempty" yaml:"threshold_state,omitempty"`
 
-	// Used to detrmine the type of the sensor.
+	// Used to determine the type of the sensor.
 	// Read Only: true
 	// Enum: ["agent","battery_life","counter","current","discrete","fan","fru","minutes","nvmem","percent","thermal","unknown","voltage"]
 	Type *string `json:"type,omitempty" yaml:"type,omitempty"`

@@ -295,11 +295,11 @@ func (m *ApplicationProtectionGroupsInlineRpo) UnmarshalBinary(b []byte) error {
 // swagger:model application_protection_groups_inline_rpo_inline_local
 type ApplicationProtectionGroupsInlineRpoInlineLocal struct {
 
-	// A detailed description of the local RPO. This includes details on the Snapshot copy schedule.
+	// A detailed description of the local RPO. This includes details on the snapshot schedule.
 	// Read Only: true
 	Description *string `json:"description,omitempty" yaml:"description,omitempty"`
 
-	// The local RPO of the component. This indicates how often component Snapshot copies are automatically created.
+	// The local RPO of the component. This indicates how often component snapshots are automatically created.
 	// Read Only: true
 	// Enum: ["none","hourly","6_hourly","15_minutely"]
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`

@@ -120,6 +120,7 @@ func NewCifsShareModifyDefault(code int) *CifsShareModifyDefault {
 | 656422     | Failed to modify the home directory share because the directory shares must specify a path relative to one or more home directory search paths |
 | 656423     | Failed to modify CIFS share. The Shares must define an absolute share path |
 | 656425     | Failed to modify the CIFS share because the path for an administrative share cannot be modified |
+| 656486     | Failed to modify CIFS share because the share cannot be made continuously available for FlexCache volumes. |
 | 655395     | Failed to modify the CIFS share because share cannot be made continuously available unless running SMB3 or later. |
 | 4849678    | Failed to modify the CIFS share because the specified UNIX group does not exist |
 | 655622     | Invalid value for parameter {max-connections-per-share}. Maximum connections on CIFS share {name} must be between 1 to 4294967295.|

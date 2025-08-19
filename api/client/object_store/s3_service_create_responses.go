@@ -144,16 +144,29 @@ func NewS3ServiceCreateDefault(code int) *S3ServiceCreateDefault {
 | 92405839   | Creating an object store server requires an effective cluster version of data ONTAP 9.7.0 or later. Upgrade all the nodes to 9.7.0 or later and try the operation again. |
 | 92405853   | Failed to create the object store server because Cloud Volumes ONTAP does not support object store servers. |
 | 92405863   | An error occurs when creating an S3 user or bucket. The reason for failure is detailed in the error message. Follow the error codes specified for the user or bucket endpoints to see details for the failure. |
-| 92405863   | Failed to create bucket \\\"{bucket name}\\\". Reason: \"Failed to create bucket \\\"{bucket name}\\\" for SVM \\\"{svm.name}\\\". Reason: Bucket name \\\"{bucket name}\\\" contains invalid characters. Valid characters for a bucket name are 0-9, a-z, \".\", and \"-\". \". Resolve all the issues and retry the operation. |
+| 92405863   | Failed to create bucket \\\"{bucket name}\\\". Reason: \"Failed to create bucket \\\"{bucket name}\\\" for SVM \\\"{svm.name}\\\". Reason: Bucket name \\\"{bucket name}\\\" contains invalid characters or invalid character combinations. Valid characters for a bucket name are 0-9, a-z, \".\", and \"-\". Invalid character combinations are \".-\", \"-.\", and \"..\". \". Resolve all the issues and retry the operation. |
 | 92405863   | Failed to create bucket \\\"{bucket name}\\\". Reason: \"Failed to create bucket \\\"{bucket name}\\\" for SVM \\\"{svm.name}\\\". Reason: Invalid QoS policy group specified \\\"{qos policy}\\\". The specified QoS policy group has a min-throughput value set, and the workload being assigned resides on a platform that does not support min-throughput or the cluster is in a mixed version state and the effective cluster version of ONTAP does not support min-throughput on this platform. Resolve all the issues and retry the operation.  |
 | 92405863   | Failed to create bucket \\\"{bucket name}\\\". Reason: \"User(s) \"{user name(s)}\\\" specified in the principal list do not exist for SVM \\\"{svm.name}\\\". Use the \"object-store-server user create\" command to create a user.\". Resolve all the issues and retry the operation. |
 | 92405863   | Failed to create user \\\"{user name}\\\". Reason: \"SVM \"Cluster\" is not a data SVM. Specify a data SVM.\". Resolve all the issues and retry the operation. |
 | 92405884   | An object store server can only be created on a data SVM. An object store server can also be created on a system SVM on a mixed platform cluster. |
 | 92405903   | Failed to configure HTTPS on an object store server for SVM \\\"{svm.name}\\\". Reason: {Reason of failure}.  |
 | 92405900   | Certificate not found for SVM \\\"{svm.name}\\\".  |
+| 92405917   | The specified certificate name and UUID do not refer to the same certificate.   |
+| 92406020   | Only certificates of type \\\"server\\\" are supported.  |
 | 92406044   | Failed to set default UNIX user for SVM \\\"{svm.name}\\\". Reason: UNIX user can only be created on a Data SVM.  |
+| 92406071   | S3 protocol is not present in the allowed protocol list for SVM \"{svm.name}\".  |
 | 92406196   | The specified value for the \"key_time_to_live\" field cannot be greater than the maximum limit specified for the \"max_key_time_to_live\" field in the object store server. |
 | 92406197   | Object store user \"user-2\" must have a non-zero value for the \"key_time_to_live\" field because the maximum limit specified for the \"max_key_time_to_live\" field in the object store server is not zero.
+| 92406230   | The value for \\\"retention.default_period\\\" parameter for object store bucket \\\"<bucket>\\\" cannot be greater than the maximum lock retention period set in the object store server for SVM \\\"<SVM>\\\". Check the maximum allowed lock retention period present in the object store server for SVM \\\"<SVM>\\\" and try the operation again.
+| 92406231   | One or more object store buckets exist with a default retention period greater than the \\\"max_lock_retention_period\\\" specified. Check the default retention period set for each bucket in the specified SVM and try the operation again.
+| 92406236   | The value for \\\"retention.default_period\\\" parameter for object store bucket \\\"<bucket>\\\" cannot be less than the minimum lock retention period set in the object store server for SVM \\\"<SVM>\\\". Check the minimum allowed lock retention period present in the object store server for SVM \\\"<SVM>\\\" and try the operation again.
+| 92406237   | One or more object store buckets exist with a default retention period less than the \\\"min_lock_retention_period\\\" specified. Check the default retention period set for each bucket in the specified SVM and try the operation again.
+| 92406238   | The value for the \\\"min_lock_retention_period\\\" parameter cannot be greater than the \\\"max_lock_retention_period\\\" parameter for the object store server for SVM \\\"vs1\\\".
+| 92406217   | The specified \"-allowed-headers\" in not valid because it contains more than one wild card (\"*\") character.;
+| 92406224   | A Cross-Origin Resource Sharing (CORS) rule must have an origin and HTTP method specified.;
+| 92406211   | The specified method \"DONE\" is not valid. Valid methods are GET, PUT, DELETE, HEAD, and POST.;
+| 92405863   | Failed to create CORS rules for bucket \"bb1\". Reason: \"Field \"index\" cannot be specified for this operation.\". Resolve all the issues and retry the operation.;
+| 92406228   | Cannot exceed the maximum limit of 100 Cross-Origin Resource Sharing (CORS) rules per S3 bucket \\\"<bucket>\\\" in SVM \\\"<SVM>\\\".;
 */
 type S3ServiceCreateDefault struct {
 	_statusCode int

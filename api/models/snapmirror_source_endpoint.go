@@ -23,6 +23,9 @@ type SnapmirrorSourceEndpoint struct {
 	// cluster
 	Cluster *SnapmirrorSourceEndpointInlineCluster `json:"cluster,omitempty" yaml:"cluster,omitempty"`
 
+	// luns
+	Luns *SnapmirrorSourceEndpointInlineLuns `json:"luns,omitempty" yaml:"luns,omitempty"`
+
 	// ONTAP FlexVol/FlexGroup - svm1:volume1
 	// ONTAP SVM               - svm1:
 	// ONTAP Consistency Group - svm1:/cg/cg_name
@@ -32,7 +35,7 @@ type SnapmirrorSourceEndpoint struct {
 	// Example: svm1:volume1
 	Path *string `json:"path,omitempty" yaml:"path,omitempty"`
 
-	// Mandatory property for a Consistency Group endpoint. Specifies the list of FlexVol volumes for a Consistency Group.
+	// This property specifies the list of FlexVol volumes or LUNs of a Consistency Group. Optional on the ASA r2 platform. Mandatory for all other platforms.
 	SnapmirrorSourceEndpointInlineConsistencyGroupVolumes []*SnapmirrorSourceEndpointInlineConsistencyGroupVolumesInlineArrayItem `json:"consistency_group_volumes,omitempty" yaml:"consistency_group_volumes,omitempty"`
 
 	// svm
@@ -44,6 +47,10 @@ func (m *SnapmirrorSourceEndpoint) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateCluster(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLuns(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -72,6 +79,25 @@ func (m *SnapmirrorSourceEndpoint) validateCluster(formats strfmt.Registry) erro
 				return ve.ValidateName("cluster")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cluster")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SnapmirrorSourceEndpoint) validateLuns(formats strfmt.Registry) error {
+	if swag.IsZero(m.Luns) { // not required
+		return nil
+	}
+
+	if m.Luns != nil {
+		if err := m.Luns.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("luns")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("luns")
 			}
 			return err
 		}
@@ -133,6 +159,10 @@ func (m *SnapmirrorSourceEndpoint) ContextValidate(ctx context.Context, formats 
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateLuns(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSnapmirrorSourceEndpointInlineConsistencyGroupVolumes(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -160,6 +190,27 @@ func (m *SnapmirrorSourceEndpoint) contextValidateCluster(ctx context.Context, f
 				return ve.ValidateName("cluster")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cluster")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SnapmirrorSourceEndpoint) contextValidateLuns(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Luns != nil {
+
+		if swag.IsZero(m.Luns) { // not required
+			return nil
+		}
+
+		if err := m.Luns.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("luns")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("luns")
 			}
 			return err
 		}
@@ -482,6 +533,209 @@ func (m *SnapmirrorSourceEndpointInlineConsistencyGroupVolumesInlineArrayItem) M
 // UnmarshalBinary interface implementation
 func (m *SnapmirrorSourceEndpointInlineConsistencyGroupVolumesInlineArrayItem) UnmarshalBinary(b []byte) error {
 	var res SnapmirrorSourceEndpointInlineConsistencyGroupVolumesInlineArrayItem
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// SnapmirrorSourceEndpointInlineLuns Optional property for a SnapMirror endpoint. Specifies the list of source LUNs and optionally list of destination LUNs during SnapMirror Consistency Group LUN restore operation.
+//
+// swagger:model snapmirror_source_endpoint_inline_luns
+type SnapmirrorSourceEndpointInlineLuns struct {
+
+	// links
+	Links *SnapmirrorSourceEndpointInlineLunsInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
+
+	// The name of a LUN.
+	// A LUN is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+	// LUN names are paths of the form "/vol/\<volume>[/\<qtree>]/\<namespace>" where the qtree name is optional.
+	//
+	//
+	// Example: /vol/volume1/lun1
+	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
+
+	// The unique identifier of the LUN.
+	//
+	// Example: 1cd8a442-86d1-11e0-ae1c-123478563412
+	UUID *string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
+}
+
+// Validate validates this snapmirror source endpoint inline luns
+func (m *SnapmirrorSourceEndpointInlineLuns) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLinks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SnapmirrorSourceEndpointInlineLuns) validateLinks(formats strfmt.Registry) error {
+	if swag.IsZero(m.Links) { // not required
+		return nil
+	}
+
+	if m.Links != nil {
+		if err := m.Links.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("luns" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("luns" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this snapmirror source endpoint inline luns based on the context it is used
+func (m *SnapmirrorSourceEndpointInlineLuns) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SnapmirrorSourceEndpointInlineLuns) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Links != nil {
+
+		if swag.IsZero(m.Links) { // not required
+			return nil
+		}
+
+		if err := m.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("luns" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("luns" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *SnapmirrorSourceEndpointInlineLuns) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *SnapmirrorSourceEndpointInlineLuns) UnmarshalBinary(b []byte) error {
+	var res SnapmirrorSourceEndpointInlineLuns
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// SnapmirrorSourceEndpointInlineLunsInlineLinks snapmirror source endpoint inline luns inline links
+//
+// swagger:model snapmirror_source_endpoint_inline_luns_inline__links
+type SnapmirrorSourceEndpointInlineLunsInlineLinks struct {
+
+	// self
+	Self *Href `json:"self,omitempty" yaml:"self,omitempty"`
+}
+
+// Validate validates this snapmirror source endpoint inline luns inline links
+func (m *SnapmirrorSourceEndpointInlineLunsInlineLinks) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateSelf(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SnapmirrorSourceEndpointInlineLunsInlineLinks) validateSelf(formats strfmt.Registry) error {
+	if swag.IsZero(m.Self) { // not required
+		return nil
+	}
+
+	if m.Self != nil {
+		if err := m.Self.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("luns" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("luns" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this snapmirror source endpoint inline luns inline links based on the context it is used
+func (m *SnapmirrorSourceEndpointInlineLunsInlineLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SnapmirrorSourceEndpointInlineLunsInlineLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Self != nil {
+
+		if swag.IsZero(m.Self) { // not required
+			return nil
+		}
+
+		if err := m.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("luns" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("luns" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *SnapmirrorSourceEndpointInlineLunsInlineLinks) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *SnapmirrorSourceEndpointInlineLunsInlineLinks) UnmarshalBinary(b []byte) error {
+	var res SnapmirrorSourceEndpointInlineLunsInlineLinks
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

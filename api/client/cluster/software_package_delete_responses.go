@@ -59,6 +59,7 @@ SoftwarePackageDeleteOK describes a response with status code 200, with default 
 OK
 */
 type SoftwarePackageDeleteOK struct {
+	Payload *models.JobLinkResponse
 }
 
 // IsSuccess returns true when this software package delete o k response has a 2xx status code
@@ -92,14 +93,27 @@ func (o *SoftwarePackageDeleteOK) Code() int {
 }
 
 func (o *SoftwarePackageDeleteOK) Error() string {
-	return fmt.Sprintf("[DELETE /cluster/software/packages/{version}][%d] softwarePackageDeleteOK", 200)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /cluster/software/packages/{version}][%d] softwarePackageDeleteOK %s", 200, payload)
 }
 
 func (o *SoftwarePackageDeleteOK) String() string {
-	return fmt.Sprintf("[DELETE /cluster/software/packages/{version}][%d] softwarePackageDeleteOK", 200)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /cluster/software/packages/{version}][%d] softwarePackageDeleteOK %s", 200, payload)
+}
+
+func (o *SoftwarePackageDeleteOK) GetPayload() *models.JobLinkResponse {
+	return o.Payload
 }
 
 func (o *SoftwarePackageDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -115,6 +129,7 @@ SoftwarePackageDeleteAccepted describes a response with status code 202, with de
 Accepted
 */
 type SoftwarePackageDeleteAccepted struct {
+	Payload *models.JobLinkResponse
 }
 
 // IsSuccess returns true when this software package delete accepted response has a 2xx status code
@@ -148,14 +163,27 @@ func (o *SoftwarePackageDeleteAccepted) Code() int {
 }
 
 func (o *SoftwarePackageDeleteAccepted) Error() string {
-	return fmt.Sprintf("[DELETE /cluster/software/packages/{version}][%d] softwarePackageDeleteAccepted", 202)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /cluster/software/packages/{version}][%d] softwarePackageDeleteAccepted %s", 202, payload)
 }
 
 func (o *SoftwarePackageDeleteAccepted) String() string {
-	return fmt.Sprintf("[DELETE /cluster/software/packages/{version}][%d] softwarePackageDeleteAccepted", 202)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /cluster/software/packages/{version}][%d] softwarePackageDeleteAccepted %s", 202, payload)
+}
+
+func (o *SoftwarePackageDeleteAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
 }
 
 func (o *SoftwarePackageDeleteAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -170,20 +198,20 @@ func NewSoftwarePackageDeleteDefault(code int) *SoftwarePackageDeleteDefault {
 /*
 	SoftwarePackageDeleteDefault describes a response with status code -1, with default header values.
 
-	ONTAP error response codes
+	ONTAP Error Response Codes
 
-| Error codes | Description |
-| ----------- | ----------- |
-| 10551315    | Package store is empty |
-| 10551322    | Error in retrieving package cleanup status |
-| 10551323    | Error in cleaning up package information on a node |
-| 10551324    | Error in cleaning up package information on multiple nodes |
-| 10551325    | Package does not exist on the system |
-| 10551326    | Error in deleting older package cleanup tasks. Clean up images from the store and retry |
-| 10551346    | Package delete failed since a validation is in progress |
-| 10551347    | Package delete failed since an update is in progress |
-| 10551367    | A package synchronization is in progress |
-| 10551388    | Package delete operation timed out |
+| Error Code | Description |
+| ---------- | ----------- |
+| 10551315 | The repository does not contain any packages. |
+| 10551322 | An internal error occurred while retrieving the package cleanup status. |
+| 10551323 | An internal error occurred while removing the package information on a node. |
+| 10551324 | An internal error occurred while removing the package information on multiple nodes. |
+| 10551325 | The required package could not be found in the repository. |
+| 10551326 | An error occurred while deleting older package cleanup tasks. |
+| 10551346 | A validation is in progress, retry command after it is completed. |
+| 10551367 | The repository is busy, retry the operation later. |
+| 10551388 | The package delete operation timed out. |
+Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SoftwarePackageDeleteDefault struct {
 	_statusCode int

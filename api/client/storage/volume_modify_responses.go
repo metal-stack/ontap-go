@@ -203,7 +203,7 @@ func NewVolumeModifyDefault(code int) *VolumeModifyDefault {
 | Error Code | Description |
 | ---------- | ----------- |
 | 262256 | Tags cannot be modified for the volume because of the specified reason. |
-| 524511 | Failed to restore Snapshot copy \"restore_to.snapshot.name\". |
+| 524511 | Failed to restore snapshot \"restore_to.snapshot.name\". |
 | 524849 | Attribute cannot be modified for the target volume because of the specified reason. |
 | 787141 | The specified \"aggregates.name\" and \"aggregates.uuid\" refer to different aggregates. |
 | 787144 | The volume is on an aggregate that is not part of a FabricPool. |
@@ -221,7 +221,7 @@ func NewVolumeModifyDefault(code int) *VolumeModifyDefault {
 | 918195 | Tiering min cooling days not supported for non data volumes. |
 | 918196 | Tiering min cooling days not allowed for the provided tiering policy. |
 | 918248 | Specifying a value is not valid for initiating volume FlexClone split operation. |
-| 918251 | Specifying a value is not valid for a Snapshot copy restore operation. |
+| 918251 | Specifying a value is not valid for a snapshot restore operation. |
 | 918252 | specified \"nas.path\" is invalid. |
 | 918265 | Volume is on the same aggregate. |
 | 918266 | \"movement.destination_aggregate\" and \"movement.state\" are mutually exclusive, unless the state is \"cutover-wait\". |
@@ -252,17 +252,19 @@ func NewVolumeModifyDefault(code int) *VolumeModifyDefault {
 | 918625 | Tiering storage class is only supported for volumes in a FabricPool on FSx for ONTAP or Cloud Volumes ONTAP for AWS. |
 | 918626 | Tiering storage class is not supported for volumes in a FlexGroup. |
 | 918627 | The specified value for \"tiering.storage_class\" is not supported. |
-| 918636 | Volume \"name\" in SVM \"svm.name\" is part of a Consistency Group. Snapshot copy locking cannot be enabled on a volume that is part of a Consistency Group. |
-| 918639 | One or more of the fields \"-max-size\",\"-max-autosize\",\"-size\" are being set/modified. Set the values such that \"-max-size\" is always greater than or equal to \"-max-autosize\" and \"-size\". |
+| 918636 | Volume \"name\" in SVM \"svm.name\" is part of a Consistency Group. Snapshot locking cannot be enabled on a volume that is part of a Consistency Group. |
+| 918639 | One or more of the fields \"-max-size\",\"-max-autosize\",\"-size\" are being set or modified. Set the values so that \"-max-size\" is always greater than or equal to \"-max-autosize\" and \"-size\". |
 | 918641 | The value passed for \"-max-size\" is invalid. Valid values for the current platform are specified. |
+| 918647 | One or more of the fields \"-max-autosize\",\"-size\" are being set or modified. Set the values so that \"-max-autosize\" and \"-size\" are always less than or equal to the specified value. |
 | 918650 | The asynchronous directory delete trash bin name cannot be specified unless asynchronous directory delete from the client is being enabled. |
 | 918652 | \"error\" is an invalid value for field \"-state\". Valid values are \"online\", \"offline\" and \"restricted\". |
 | 918655 | Cloud write is not supported on the current configuration. |
 | 918658 | Volume is on a FabricPool-enabled aggregate. CIFS applications might time out when cloud write is enabled on a volume that is on a FabricPool-enabled aggregate. |
 | 918659 | Cloud write can only be enabled on FabricPool-enabled aggregates. |
 | 918660 | Cloud write enabled volumes can only be moved to FabricPool-enabled aggregates. Disable cloud write to move the volume to a non-FabricPool aggregates. |
-| 1638480 | Failed to promote Snapshot copy \"restore_to.snapshot.name\" because one or more newer Snapshot copies are currently used as a reference Snapshot copy for data protection operations. |
-| 1638590 | Promoting a \"-pre-conversion\" Snapshot copy is not supported. |
+| 918703 | Modification of the specified volume properties are not supported on this platform. |
+| 1638480 | Failed to promote snapshot \"restore_to.snapshot.name\" because one or more newer snapshots are currently used as a reference snapshot for data protection operations. |
+| 1638590 | Promoting a \"-pre-conversion\" snapshot is not supported. |
 | 2424998 | Unable to determine whether MetroCluster is configured. |
 | 2621572 | Modification of the specified field is not permitted on an SVM that is configured as the destination for identity discard SVM DR. |
 | 6488103 | Async directory delete from the client is already enabled on volume \"name\" in SVM \"svm.name\". |
@@ -270,23 +272,29 @@ func NewVolumeModifyDefault(code int) *VolumeModifyDefault {
 | 6881612 | Cannot enable inline deduplication on a non AFF Platform or on non HYA aggregate. |
 | 6881640 | The \"efficiency.state\" field is only supported on read-write volumes on FSx for ONTAP and Cloud Volumes ONTAP. |
 | 6881651 | File compression is not supported on volumes with \"max-size > 300TB\". Modify the volume max-size, then retry. |
+| 6881659 | Changing \"storage-efficiency-mode\" from \"efficient\" to \"default\" is not supported. |
+| 6881661 | Volume efficiency scanner cannot be started on volume with efficiency policy set as inline-only. |
 | 8454210 | Failed to complete the operation because a QoS workload could not be created, modified or deleted. Wait a few seconds, and then try the operation again. |
 | 9437885 | The volume is not online. |
-| 9437886 | Volume Snapshot copy restore failed because there are newer unexpired locked Snapshot copies in the volume. |
+| 9437886 | Volume snapshot restore failed because there are newer unexpired locked snapshots in the volume. |
 | 13107256 | Operation is only supported on FlexGroup volumes. |
 | 13107349 | Operation is only supported on flexible volumes and FlexGroup volumes. |
 | 13107371 | Operation is only supported on read-write FlexGroup volumes. |
 | 13107404 | When adding new resources to a FlexGroup by specifying \"aggregates.name\" or \"aggregates.uuid\", the FlexGroup cannot be resized using \"size\". These operations must be done separately. |
 | 13107415 | Failed to lookup a volume property. |
 | 13107431 | Failed to lookup an SVM property. |
-| 13107433 | A Snapshot copy is scheduled to be taken within the volume capacity rebalancing runtime. |
+| 13107433 | A snapshot is scheduled to be taken within the volume capacity rebalancing runtime. |
 | 13107434 | A SnapMirror update is scheduled within the volume capacity rebalancing runtime. |
 | 13109187 | When adding new resources to a FlexGroup using \"sizing_method\", \"size\" must be specified.  Neither \"aggregates.name\" nor \"aggregates.uuid\" are allowed to be specified, as the aggregates are selected automatically by the system. |
 | 13109198 | Resizing by adding new resources is only supported for FlexGroups. |
 | 13109258 | Cannot enable granular data on volume \"name\" in Vserver \"svm.name\". This setting can only be enabled on FlexGroups. |
-| 13109259 | Granular data cannot be disabled on volume \"name\" in Vserver \"svm.name\". This property can only be disabled by restoring a Snapshot copy. |
+| 13109259 | Granular data cannot be disabled on volume \"name\" in Vserver \"svm.name\". This property can only be disabled by restoring a snapshot. |
 | 13109260 | Failed to enable granular data on the volume. |
 | 13763477 | Cannot modify the SnapLock configuration on volume "name" in SVM "svm.name" because the volume is a part of a consistency group. |
+| 65536965 | The key manager on data Vserver \\\"{0}\\\" is in the blocked state due to key access errors. Possible reasons for a blocked state include the top-level external key protection key is disabled or not found or the current user does not have access to perform the requested action. Fix the issues with the key manager that manages the top-level external key protection key on data Vserver \\\"{0}\\\" to bring the key manager to the active state and then try to bring the volume online again. |
+| 65539432 | Cannot online volume \\\"{1}\\\" on Vserver \\\"{0}\\\" while the keystore is being initialized. Wait until the keystore is in the active state, and rerun the volume operation. |
+| 65539433 | Cannot online volume \\\"{1}\\\" on Vserver \\\"{0}\\\" while the keystore is being disabled. |
+| 66846758 | Modification of the specified fields is not allowed for FlexCache volumes. |
 | 66846772 | Modification of the specified fields is not allowed for origin of FlexCache volumes. |
 | 111411201 | File system analytics cannot be enabled on the target volume because of the specified reason. |
 | 111411202 | File system analytics cannot be disabled on the target volume because of the specified reason. |

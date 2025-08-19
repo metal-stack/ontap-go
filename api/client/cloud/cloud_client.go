@@ -116,6 +116,7 @@ type ClientService interface {
 
 ### Related ONTAP commands
 * `storage aggregate object-store config show`
+* `snapmirror object-store config show`
 */
 func (a *Client) CloudTargetCollectionGet(params *CloudTargetCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CloudTargetCollectionGetOK, error) {
 	// TODO: Validate the params before sending
@@ -167,6 +168,7 @@ func (a *Client) CloudTargetCollectionGet(params *CloudTargetCollectionGetParams
 * `azure_private_key` - Azure access key if `provider_type` is _Azure_Cloud_.
 * `cap_url` - Full URL of the request to a CAP server for retrieving temporary credentials if `authentication_type` is _cap_.
 * `snapmirror_use` - Use of the cloud target if `owner` is _snapmirror_: data, metadata.
+* `azure_msi_token` - Azure Managed Service Identity (MSI) token if `owner` is _fabricpool_ or _snapmirror_, `provider_type` is _Azure_Cloud_,  `authentication_type` if specified must be  _azure_msi_ and platform is Azure Netapp Files.
 ### Recommended optional properties
 * `authentication_type` - Authentication used to access the target: _key_, _cap_, _ec2_iam_, _gcp_sa_, _azure_msi_.
 * `ssl_enabled` - SSL/HTTPS enabled or disabled.
@@ -180,7 +182,7 @@ func (a *Client) CloudTargetCollectionGet(params *CloudTargetCollectionGetParams
 * `authentication_type`
   - _ec2_iam_ - if running in Cloud Volumes ONTAP in AWS
   - _gcp_sa_ - if running in Cloud Volumes ONTAP in GCP
-  - _azure_msi_ - if running in Cloud Volumes ONTAP in Azure
+  - _azure_msi_ - if running in Cloud Volumes ONTAP in Azure or if running on Azure NetApp Files platform with a Managed Service Identity (MSI) token.
   - _key_  - in all other cases.
 
 * `server`

@@ -33,6 +33,10 @@ type CloudTarget struct {
 	// Azure account
 	AzureAccount *string `json:"azure_account,omitempty" yaml:"azure_account,omitempty"`
 
+	// Managed Service Identity (MSI) token required to authenticate to the Azure object store. This form of authentication is only supported on Azure NetApp Files.
+	// Format: password
+	AzureMsiToken *strfmt.Password `json:"azure_msi_token,omitempty" yaml:"azure_msi_token,omitempty"`
+
 	// Azure access key
 	// Format: password
 	AzurePrivateKey *strfmt.Password `json:"azure_private_key,omitempty" yaml:"azure_private_key,omitempty"`
@@ -41,7 +45,7 @@ type CloudTarget struct {
 	// Format: password
 	AzureSasToken *strfmt.Password `json:"azure_sas_token,omitempty" yaml:"azure_sas_token,omitempty"`
 
-	// This parameter is available only when auth-type is CAP. It specifies a full URL of the request to a CAP server for retrieving temporary credentials (access-key, secret-pasword, and session token) for accessing the object store.
+	// This parameter is available only when auth-type is CAP. It specifies a full URL of the request to a CAP server for retrieving temporary credentials (access-key, secret-password, and session token) for accessing the object store.
 	// Example: https://123.45.67.89:1234/CAP/api/v1/credentials?agency=myagency\u0026mission=mymission\u0026role=myrole
 	CapURL *string `json:"cap_url,omitempty" yaml:"cap_url,omitempty"`
 
@@ -125,6 +129,10 @@ func (m *CloudTarget) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAuthenticationType(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAzureMsiToken(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -242,6 +250,18 @@ func (m *CloudTarget) validateAuthenticationType(formats strfmt.Registry) error 
 
 	// value enum
 	if err := m.validateAuthenticationTypeEnum("authentication_type", "body", *m.AuthenticationType); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *CloudTarget) validateAzureMsiToken(formats strfmt.Registry) error {
+	if swag.IsZero(m.AzureMsiToken) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("azure_msi_token", "body", "password", m.AzureMsiToken.String(), formats); err != nil {
 		return err
 	}
 
@@ -1060,7 +1080,7 @@ func (m *CloudTargetInlineLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// CloudTargetInlineSvm This field is only applicable when used for SnapMirror and FabricLink. For POST and PATCH, SVM information is required for SnapMirror and FabricLink targets and not allowed for FabricPool targets.
+// CloudTargetInlineSvm This field is only applicable when used for SnapMirror and FabricLink. For POST and PATCH, SVM information is required for SnapMirror and FabricLink targets when the scope is svm and is not allowed for FabricPool targets. For GET, this field is not set if the scope of the cloud target is "cluster".
 //
 // swagger:model cloud_target_inline_svm
 type CloudTargetInlineSvm struct {

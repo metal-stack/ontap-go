@@ -216,6 +216,7 @@ func NewNetworkIPInterfacesCreateDefault(code int) *NetworkIPInterfacesCreateDef
 | 53281104 | The specified address is in use by the Service Processor |
 | 53281106 | Failed checking the cluster capabilities. |
 | 53281114 | The specified parameter is only supported on data SVMs. |
+| 53281468 | Failed to update external route tables for IP. |
 | 53281680 | Invalid value for the specified field. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */

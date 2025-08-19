@@ -20,7 +20,7 @@ import (
 type ShadowcopySet struct {
 
 	// Request the storage system to keep the snapshot copies taken as a part of the shadow copy set creation.
-	// Example: false
+	// Example: true
 	KeepSnapshots *bool `json:"keep_snapshots,omitempty" yaml:"keep_snapshots,omitempty"`
 
 	// svm

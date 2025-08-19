@@ -234,12 +234,12 @@ func NewSnapmirrorPolicyCreateDefault(code int) *SnapmirrorPolicyCreateDefault {
 | 13304085    | The specified property does not support the specified value. |
 | 13304092    | Input value of the retention period property is invalid. For relationships with FlexVol volume or FlexGroup volume destinations, the duration must be in ISO 6801 format or can be infinite. For relationships with object store destinations, only duration values with Y, M or D and supported and must be in the specified range. |
 
-| 6621045     | The property rentention.warn is not supported for a policy when the retention.preserve property is false.
+| 6621045     | The property retention.warn is not supported for a policy when the retention.preserve property is false.
 | 13304129    | The property retention.warn value must be less than the property retention.count value for a rule in a policy.
 | 13304130    | The total retention.count value for all rules in a policy cannot exceed the value indicated in the error message.
 | 6621060     | Failed to create specified policy. Reason: A policy with this name already exists. |
 | 13304118    | The specified properties cannot be both set at the same time:  retention.creation_schedule and retention.period |
-| 6621972     | Schedule specified is not supported by SnapMirror Synchronous. The allowed time interval for the creation of common Snapshot copies can range between 30 minutes and 24 hours. |
+| 6621972     | Schedule specified is not supported by SnapMirror Synchronous. The allowed time interval for the creation of common snapshots can range between 30 minutes and 24 hours. |
 | 13304011    | Failed to create or modify the specified SnapMirror policy. Reason: The property retention.count cannot have a value greater than 1. |
 | 6621091     | The specified SnapMirror policy cannot have a rule with a preserve value of true. |
 | 6621088     | The specified SnapMirror policy must have at least one rule without a schedule. |

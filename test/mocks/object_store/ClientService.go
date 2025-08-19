@@ -503,6 +503,163 @@ func (_m *ClientService) S3BucketModify(params *clientobject_store.S3BucketModif
 	return r0, r1, r2
 }
 
+// S3BucketSnapshotCollectionGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) S3BucketSnapshotCollectionGet(params *clientobject_store.S3BucketSnapshotCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientobject_store.ClientOption) (*clientobject_store.S3BucketSnapshotCollectionGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for S3BucketSnapshotCollectionGet")
+	}
+
+	var r0 *clientobject_store.S3BucketSnapshotCollectionGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientobject_store.S3BucketSnapshotCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientobject_store.ClientOption) (*clientobject_store.S3BucketSnapshotCollectionGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientobject_store.S3BucketSnapshotCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientobject_store.ClientOption) *clientobject_store.S3BucketSnapshotCollectionGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientobject_store.S3BucketSnapshotCollectionGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientobject_store.S3BucketSnapshotCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientobject_store.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// S3BucketSnapshotCreate provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) S3BucketSnapshotCreate(params *clientobject_store.S3BucketSnapshotCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientobject_store.ClientOption) (*clientobject_store.S3BucketSnapshotCreateCreated, *clientobject_store.S3BucketSnapshotCreateAccepted, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for S3BucketSnapshotCreate")
+	}
+
+	var r0 *clientobject_store.S3BucketSnapshotCreateCreated
+	var r1 *clientobject_store.S3BucketSnapshotCreateAccepted
+	var r2 error
+	if rf, ok := ret.Get(0).(func(*clientobject_store.S3BucketSnapshotCreateParams, runtime.ClientAuthInfoWriter, ...clientobject_store.ClientOption) (*clientobject_store.S3BucketSnapshotCreateCreated, *clientobject_store.S3BucketSnapshotCreateAccepted, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientobject_store.S3BucketSnapshotCreateParams, runtime.ClientAuthInfoWriter, ...clientobject_store.ClientOption) *clientobject_store.S3BucketSnapshotCreateCreated); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientobject_store.S3BucketSnapshotCreateCreated)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientobject_store.S3BucketSnapshotCreateParams, runtime.ClientAuthInfoWriter, ...clientobject_store.ClientOption) *clientobject_store.S3BucketSnapshotCreateAccepted); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*clientobject_store.S3BucketSnapshotCreateAccepted)
+		}
+	}
+
+	if rf, ok := ret.Get(2).(func(*clientobject_store.S3BucketSnapshotCreateParams, runtime.ClientAuthInfoWriter, ...clientobject_store.ClientOption) error); ok {
+		r2 = rf(params, authInfo, opts...)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
+}
+
+// S3BucketSnapshotDelete provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) S3BucketSnapshotDelete(params *clientobject_store.S3BucketSnapshotDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientobject_store.ClientOption) (*clientobject_store.S3BucketSnapshotDeleteOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for S3BucketSnapshotDelete")
+	}
+
+	var r0 *clientobject_store.S3BucketSnapshotDeleteOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientobject_store.S3BucketSnapshotDeleteParams, runtime.ClientAuthInfoWriter, ...clientobject_store.ClientOption) (*clientobject_store.S3BucketSnapshotDeleteOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientobject_store.S3BucketSnapshotDeleteParams, runtime.ClientAuthInfoWriter, ...clientobject_store.ClientOption) *clientobject_store.S3BucketSnapshotDeleteOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientobject_store.S3BucketSnapshotDeleteOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientobject_store.S3BucketSnapshotDeleteParams, runtime.ClientAuthInfoWriter, ...clientobject_store.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// S3BucketSnapshotGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) S3BucketSnapshotGet(params *clientobject_store.S3BucketSnapshotGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientobject_store.ClientOption) (*clientobject_store.S3BucketSnapshotGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for S3BucketSnapshotGet")
+	}
+
+	var r0 *clientobject_store.S3BucketSnapshotGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientobject_store.S3BucketSnapshotGetParams, runtime.ClientAuthInfoWriter, ...clientobject_store.ClientOption) (*clientobject_store.S3BucketSnapshotGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientobject_store.S3BucketSnapshotGetParams, runtime.ClientAuthInfoWriter, ...clientobject_store.ClientOption) *clientobject_store.S3BucketSnapshotGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientobject_store.S3BucketSnapshotGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientobject_store.S3BucketSnapshotGetParams, runtime.ClientAuthInfoWriter, ...clientobject_store.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // S3BucketSvmCreate provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) S3BucketSvmCreate(params *clientobject_store.S3BucketSvmCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientobject_store.ClientOption) (*clientobject_store.S3BucketSvmCreateCreated, *clientobject_store.S3BucketSvmCreateAccepted, error) {
 	_va := make([]interface{}, len(opts))

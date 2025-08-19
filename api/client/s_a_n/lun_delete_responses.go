@@ -30,6 +30,12 @@ func (o *LunDeleteReader) ReadResponse(response runtime.ClientResponse, consumer
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewLunDeleteAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewLunDeleteDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -94,6 +100,76 @@ func (o *LunDeleteOK) String() string {
 }
 
 func (o *LunDeleteOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	return nil
+}
+
+// NewLunDeleteAccepted creates a LunDeleteAccepted with default headers values
+func NewLunDeleteAccepted() *LunDeleteAccepted {
+	return &LunDeleteAccepted{}
+}
+
+/*
+LunDeleteAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type LunDeleteAccepted struct {
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this lun delete accepted response has a 2xx status code
+func (o *LunDeleteAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this lun delete accepted response has a 3xx status code
+func (o *LunDeleteAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this lun delete accepted response has a 4xx status code
+func (o *LunDeleteAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this lun delete accepted response has a 5xx status code
+func (o *LunDeleteAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this lun delete accepted response a status code equal to that given
+func (o *LunDeleteAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the lun delete accepted response
+func (o *LunDeleteAccepted) Code() int {
+	return 202
+}
+
+func (o *LunDeleteAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /storage/luns/{uuid}][%d] lunDeleteAccepted %s", 202, payload)
+}
+
+func (o *LunDeleteAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /storage/luns/{uuid}][%d] lunDeleteAccepted %s", 202, payload)
+}
+
+func (o *LunDeleteAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *LunDeleteAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

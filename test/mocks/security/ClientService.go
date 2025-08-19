@@ -384,6 +384,89 @@ func (_m *ClientService) AccountTotpDelete(params *clientsecurity.AccountTotpDel
 	return r0, r1
 }
 
+// AntiRansomwareGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) AntiRansomwareGet(params *clientsecurity.AntiRansomwareGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.AntiRansomwareGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for AntiRansomwareGet")
+	}
+
+	var r0 *clientsecurity.AntiRansomwareGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.AntiRansomwareGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.AntiRansomwareGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.AntiRansomwareGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.AntiRansomwareGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.AntiRansomwareGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.AntiRansomwareGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// AntiRansomwareModify provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) AntiRansomwareModify(params *clientsecurity.AntiRansomwareModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.AntiRansomwareModifyOK, *clientsecurity.AntiRansomwareModifyAccepted, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for AntiRansomwareModify")
+	}
+
+	var r0 *clientsecurity.AntiRansomwareModifyOK
+	var r1 *clientsecurity.AntiRansomwareModifyAccepted
+	var r2 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.AntiRansomwareModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.AntiRansomwareModifyOK, *clientsecurity.AntiRansomwareModifyAccepted, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.AntiRansomwareModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.AntiRansomwareModifyOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.AntiRansomwareModifyOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.AntiRansomwareModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.AntiRansomwareModifyAccepted); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*clientsecurity.AntiRansomwareModifyAccepted)
+		}
+	}
+
+	if rf, ok := ret.Get(2).(func(*clientsecurity.AntiRansomwareModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r2 = rf(params, authInfo, opts...)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
+}
+
 // AntiRansomwareSuspectCollectionGet provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) AntiRansomwareSuspectCollectionGet(params *clientsecurity.AntiRansomwareSuspectCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.AntiRansomwareSuspectCollectionGetOK, error) {
 	_va := make([]interface{}, len(opts))
@@ -2329,6 +2412,191 @@ func (_m *ClientService) GcpKmsRestore(params *clientsecurity.GcpKmsRestoreParam
 	}
 
 	return r0, r1, r2
+}
+
+// GroupRoleMappingsCollectionGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) GroupRoleMappingsCollectionGet(params *clientsecurity.GroupRoleMappingsCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.GroupRoleMappingsCollectionGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GroupRoleMappingsCollectionGet")
+	}
+
+	var r0 *clientsecurity.GroupRoleMappingsCollectionGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.GroupRoleMappingsCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.GroupRoleMappingsCollectionGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.GroupRoleMappingsCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.GroupRoleMappingsCollectionGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.GroupRoleMappingsCollectionGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.GroupRoleMappingsCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// GroupRoleMappingsCreate provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) GroupRoleMappingsCreate(params *clientsecurity.GroupRoleMappingsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.GroupRoleMappingsCreateCreated, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GroupRoleMappingsCreate")
+	}
+
+	var r0 *clientsecurity.GroupRoleMappingsCreateCreated
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.GroupRoleMappingsCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.GroupRoleMappingsCreateCreated, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.GroupRoleMappingsCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.GroupRoleMappingsCreateCreated); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.GroupRoleMappingsCreateCreated)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.GroupRoleMappingsCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// GroupRoleMappingsDelete provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) GroupRoleMappingsDelete(params *clientsecurity.GroupRoleMappingsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.GroupRoleMappingsDeleteOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GroupRoleMappingsDelete")
+	}
+
+	var r0 *clientsecurity.GroupRoleMappingsDeleteOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.GroupRoleMappingsDeleteParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.GroupRoleMappingsDeleteOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.GroupRoleMappingsDeleteParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.GroupRoleMappingsDeleteOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.GroupRoleMappingsDeleteOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.GroupRoleMappingsDeleteParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// GroupRoleMappingsGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) GroupRoleMappingsGet(params *clientsecurity.GroupRoleMappingsGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.GroupRoleMappingsGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GroupRoleMappingsGet")
+	}
+
+	var r0 *clientsecurity.GroupRoleMappingsGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.GroupRoleMappingsGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.GroupRoleMappingsGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.GroupRoleMappingsGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.GroupRoleMappingsGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.GroupRoleMappingsGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.GroupRoleMappingsGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// GroupRoleMappingsModify provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) GroupRoleMappingsModify(params *clientsecurity.GroupRoleMappingsModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.GroupRoleMappingsModifyOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for GroupRoleMappingsModify")
+	}
+
+	var r0 *clientsecurity.GroupRoleMappingsModifyOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.GroupRoleMappingsModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.GroupRoleMappingsModifyOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.GroupRoleMappingsModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.GroupRoleMappingsModifyOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.GroupRoleMappingsModifyOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.GroupRoleMappingsModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
 }
 
 // IpsecCaCertificateCollectionGet provides a mock function with given fields: params, authInfo, opts
@@ -4782,6 +5050,376 @@ func (_m *ClientService) SecurityConfigModify(params *clientsecurity.SecurityCon
 	return r0, r1, r2
 }
 
+// SecurityExternalRoleMappingCollectionGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) SecurityExternalRoleMappingCollectionGet(params *clientsecurity.SecurityExternalRoleMappingCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityExternalRoleMappingCollectionGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SecurityExternalRoleMappingCollectionGet")
+	}
+
+	var r0 *clientsecurity.SecurityExternalRoleMappingCollectionGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityExternalRoleMappingCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityExternalRoleMappingCollectionGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityExternalRoleMappingCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityExternalRoleMappingCollectionGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.SecurityExternalRoleMappingCollectionGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityExternalRoleMappingCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SecurityExternalRoleMappingCreate provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) SecurityExternalRoleMappingCreate(params *clientsecurity.SecurityExternalRoleMappingCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityExternalRoleMappingCreateCreated, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SecurityExternalRoleMappingCreate")
+	}
+
+	var r0 *clientsecurity.SecurityExternalRoleMappingCreateCreated
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityExternalRoleMappingCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityExternalRoleMappingCreateCreated, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityExternalRoleMappingCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityExternalRoleMappingCreateCreated); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.SecurityExternalRoleMappingCreateCreated)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityExternalRoleMappingCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SecurityExternalRoleMappingDelete provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) SecurityExternalRoleMappingDelete(params *clientsecurity.SecurityExternalRoleMappingDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityExternalRoleMappingDeleteOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SecurityExternalRoleMappingDelete")
+	}
+
+	var r0 *clientsecurity.SecurityExternalRoleMappingDeleteOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityExternalRoleMappingDeleteParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityExternalRoleMappingDeleteOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityExternalRoleMappingDeleteParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityExternalRoleMappingDeleteOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.SecurityExternalRoleMappingDeleteOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityExternalRoleMappingDeleteParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SecurityExternalRoleMappingGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) SecurityExternalRoleMappingGet(params *clientsecurity.SecurityExternalRoleMappingGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityExternalRoleMappingGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SecurityExternalRoleMappingGet")
+	}
+
+	var r0 *clientsecurity.SecurityExternalRoleMappingGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityExternalRoleMappingGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityExternalRoleMappingGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityExternalRoleMappingGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityExternalRoleMappingGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.SecurityExternalRoleMappingGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityExternalRoleMappingGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SecurityExternalRoleMappingModify provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) SecurityExternalRoleMappingModify(params *clientsecurity.SecurityExternalRoleMappingModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityExternalRoleMappingModifyOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SecurityExternalRoleMappingModify")
+	}
+
+	var r0 *clientsecurity.SecurityExternalRoleMappingModifyOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityExternalRoleMappingModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityExternalRoleMappingModifyOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityExternalRoleMappingModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityExternalRoleMappingModifyOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.SecurityExternalRoleMappingModifyOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityExternalRoleMappingModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SecurityGroupCollectionGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) SecurityGroupCollectionGet(params *clientsecurity.SecurityGroupCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityGroupCollectionGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SecurityGroupCollectionGet")
+	}
+
+	var r0 *clientsecurity.SecurityGroupCollectionGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityGroupCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityGroupCollectionGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityGroupCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityGroupCollectionGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.SecurityGroupCollectionGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityGroupCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SecurityGroupCreate provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) SecurityGroupCreate(params *clientsecurity.SecurityGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityGroupCreateCreated, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SecurityGroupCreate")
+	}
+
+	var r0 *clientsecurity.SecurityGroupCreateCreated
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityGroupCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityGroupCreateCreated, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityGroupCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityGroupCreateCreated); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.SecurityGroupCreateCreated)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityGroupCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SecurityGroupDelete provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) SecurityGroupDelete(params *clientsecurity.SecurityGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityGroupDeleteOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SecurityGroupDelete")
+	}
+
+	var r0 *clientsecurity.SecurityGroupDeleteOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityGroupDeleteParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityGroupDeleteOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityGroupDeleteParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityGroupDeleteOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.SecurityGroupDeleteOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityGroupDeleteParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SecurityGroupGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) SecurityGroupGet(params *clientsecurity.SecurityGroupGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityGroupGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SecurityGroupGet")
+	}
+
+	var r0 *clientsecurity.SecurityGroupGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityGroupGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityGroupGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityGroupGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityGroupGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.SecurityGroupGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityGroupGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SecurityGroupModify provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) SecurityGroupModify(params *clientsecurity.SecurityGroupModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityGroupModifyOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SecurityGroupModify")
+	}
+
+	var r0 *clientsecurity.SecurityGroupModifyOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityGroupModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityGroupModifyOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityGroupModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityGroupModifyOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.SecurityGroupModifyOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityGroupModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // SecurityKeyManagerCollectionGet provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) SecurityKeyManagerCollectionGet(params *clientsecurity.SecurityKeyManagerCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityKeyManagerCollectionGetOK, error) {
 	_va := make([]interface{}, len(opts))
@@ -4820,7 +5458,7 @@ func (_m *ClientService) SecurityKeyManagerCollectionGet(params *clientsecurity.
 }
 
 // SecurityKeyManagerCreate provides a mock function with given fields: params, authInfo, opts
-func (_m *ClientService) SecurityKeyManagerCreate(params *clientsecurity.SecurityKeyManagerCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityKeyManagerCreateCreated, error) {
+func (_m *ClientService) SecurityKeyManagerCreate(params *clientsecurity.SecurityKeyManagerCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityKeyManagerCreateCreated, *clientsecurity.SecurityKeyManagerCreateAccepted, error) {
 	_va := make([]interface{}, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
@@ -4835,8 +5473,9 @@ func (_m *ClientService) SecurityKeyManagerCreate(params *clientsecurity.Securit
 	}
 
 	var r0 *clientsecurity.SecurityKeyManagerCreateCreated
-	var r1 error
-	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityKeyManagerCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityKeyManagerCreateCreated, error)); ok {
+	var r1 *clientsecurity.SecurityKeyManagerCreateAccepted
+	var r2 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityKeyManagerCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityKeyManagerCreateCreated, *clientsecurity.SecurityKeyManagerCreateAccepted, error)); ok {
 		return rf(params, authInfo, opts...)
 	}
 	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityKeyManagerCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityKeyManagerCreateCreated); ok {
@@ -4847,13 +5486,21 @@ func (_m *ClientService) SecurityKeyManagerCreate(params *clientsecurity.Securit
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityKeyManagerCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityKeyManagerCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityKeyManagerCreateAccepted); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
-		r1 = ret.Error(1)
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*clientsecurity.SecurityKeyManagerCreateAccepted)
+		}
 	}
 
-	return r0, r1
+	if rf, ok := ret.Get(2).(func(*clientsecurity.SecurityKeyManagerCreateParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r2 = rf(params, authInfo, opts...)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
 }
 
 // SecurityKeyManagerDelete provides a mock function with given fields: params, authInfo, opts
@@ -5162,7 +5809,7 @@ func (_m *ClientService) SecurityKeyManagerMigrate(params *clientsecurity.Securi
 }
 
 // SecurityKeyManagerModify provides a mock function with given fields: params, authInfo, opts
-func (_m *ClientService) SecurityKeyManagerModify(params *clientsecurity.SecurityKeyManagerModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityKeyManagerModifyOK, error) {
+func (_m *ClientService) SecurityKeyManagerModify(params *clientsecurity.SecurityKeyManagerModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SecurityKeyManagerModifyOK, *clientsecurity.SecurityKeyManagerModifyAccepted, error) {
 	_va := make([]interface{}, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
@@ -5177,8 +5824,9 @@ func (_m *ClientService) SecurityKeyManagerModify(params *clientsecurity.Securit
 	}
 
 	var r0 *clientsecurity.SecurityKeyManagerModifyOK
-	var r1 error
-	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityKeyManagerModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityKeyManagerModifyOK, error)); ok {
+	var r1 *clientsecurity.SecurityKeyManagerModifyAccepted
+	var r2 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityKeyManagerModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SecurityKeyManagerModifyOK, *clientsecurity.SecurityKeyManagerModifyAccepted, error)); ok {
 		return rf(params, authInfo, opts...)
 	}
 	if rf, ok := ret.Get(0).(func(*clientsecurity.SecurityKeyManagerModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityKeyManagerModifyOK); ok {
@@ -5189,13 +5837,21 @@ func (_m *ClientService) SecurityKeyManagerModify(params *clientsecurity.Securit
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityKeyManagerModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SecurityKeyManagerModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SecurityKeyManagerModifyAccepted); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
-		r1 = ret.Error(1)
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*clientsecurity.SecurityKeyManagerModifyAccepted)
+		}
 	}
 
-	return r0, r1
+	if rf, ok := ret.Get(2).(func(*clientsecurity.SecurityKeyManagerModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r2 = rf(params, authInfo, opts...)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
 }
 
 // SecurityKeyManagerRestore provides a mock function with given fields: params, authInfo, opts
@@ -5951,6 +6607,80 @@ func (_m *ClientService) SetTransport(transport runtime.ClientTransport) {
 	_m.Called(transport)
 }
 
+// SupportedAlgorithmsCollectionGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) SupportedAlgorithmsCollectionGet(params *clientsecurity.SupportedAlgorithmsCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SupportedAlgorithmsCollectionGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SupportedAlgorithmsCollectionGet")
+	}
+
+	var r0 *clientsecurity.SupportedAlgorithmsCollectionGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SupportedAlgorithmsCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SupportedAlgorithmsCollectionGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SupportedAlgorithmsCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SupportedAlgorithmsCollectionGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.SupportedAlgorithmsCollectionGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SupportedAlgorithmsCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// SupportedAlgorithmsGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) SupportedAlgorithmsGet(params *clientsecurity.SupportedAlgorithmsGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SupportedAlgorithmsGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for SupportedAlgorithmsGet")
+	}
+
+	var r0 *clientsecurity.SupportedAlgorithmsGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SupportedAlgorithmsGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.SupportedAlgorithmsGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.SupportedAlgorithmsGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.SupportedAlgorithmsGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.SupportedAlgorithmsGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.SupportedAlgorithmsGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // SvmSSHServerCollectionGet provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) SvmSSHServerCollectionGet(params *clientsecurity.SvmSSHServerCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.SvmSSHServerCollectionGetOK, error) {
 	_va := make([]interface{}, len(opts))
@@ -6202,6 +6932,191 @@ func (_m *ClientService) TotpModify(params *clientsecurity.TotpModifyParams, aut
 	}
 
 	if rf, ok := ret.Get(1).(func(*clientsecurity.TotpModifyParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// WebauthnCredentialsCollectionGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) WebauthnCredentialsCollectionGet(params *clientsecurity.WebauthnCredentialsCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.WebauthnCredentialsCollectionGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for WebauthnCredentialsCollectionGet")
+	}
+
+	var r0 *clientsecurity.WebauthnCredentialsCollectionGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.WebauthnCredentialsCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.WebauthnCredentialsCollectionGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.WebauthnCredentialsCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.WebauthnCredentialsCollectionGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.WebauthnCredentialsCollectionGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.WebauthnCredentialsCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// WebauthnCredentialsDelete provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) WebauthnCredentialsDelete(params *clientsecurity.WebauthnCredentialsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.WebauthnCredentialsDeleteOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for WebauthnCredentialsDelete")
+	}
+
+	var r0 *clientsecurity.WebauthnCredentialsDeleteOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.WebauthnCredentialsDeleteParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.WebauthnCredentialsDeleteOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.WebauthnCredentialsDeleteParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.WebauthnCredentialsDeleteOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.WebauthnCredentialsDeleteOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.WebauthnCredentialsDeleteParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// WebauthnCredentialsGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) WebauthnCredentialsGet(params *clientsecurity.WebauthnCredentialsGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.WebauthnCredentialsGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for WebauthnCredentialsGet")
+	}
+
+	var r0 *clientsecurity.WebauthnCredentialsGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.WebauthnCredentialsGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.WebauthnCredentialsGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.WebauthnCredentialsGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.WebauthnCredentialsGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.WebauthnCredentialsGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.WebauthnCredentialsGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// WebauthnGlobalCollectionGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) WebauthnGlobalCollectionGet(params *clientsecurity.WebauthnGlobalCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.WebauthnGlobalCollectionGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for WebauthnGlobalCollectionGet")
+	}
+
+	var r0 *clientsecurity.WebauthnGlobalCollectionGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.WebauthnGlobalCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.WebauthnGlobalCollectionGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.WebauthnGlobalCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.WebauthnGlobalCollectionGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.WebauthnGlobalCollectionGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.WebauthnGlobalCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
+// WebauthnGlobalGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) WebauthnGlobalGet(params *clientsecurity.WebauthnGlobalGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientsecurity.ClientOption) (*clientsecurity.WebauthnGlobalGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for WebauthnGlobalGet")
+	}
+
+	var r0 *clientsecurity.WebauthnGlobalGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientsecurity.WebauthnGlobalGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) (*clientsecurity.WebauthnGlobalGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientsecurity.WebauthnGlobalGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) *clientsecurity.WebauthnGlobalGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientsecurity.WebauthnGlobalGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientsecurity.WebauthnGlobalGetParams, runtime.ClientAuthInfoWriter, ...clientsecurity.ClientOption) error); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
 		r1 = ret.Error(1)

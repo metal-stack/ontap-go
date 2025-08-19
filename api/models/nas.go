@@ -33,6 +33,9 @@ type Nas struct {
 	// The name of the CIFS share. Usage: &lt;Share&gt;
 	CifsShareName string `json:"cifs_share_name,omitempty" yaml:"cifs_share_name,omitempty"`
 
+	// exclude aggregates
+	ExcludeAggregates []*NasExcludeAggregatesItems0 `json:"exclude_aggregates" yaml:"exclude_aggregates"`
+
 	// The list of NFS access controls. You must provide either 'host' or 'access' to enable NFS access.
 	NfsAccess []*AppNfsAccess `json:"nfs_access" yaml:"nfs_access"`
 
@@ -49,6 +52,10 @@ func (m *Nas) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCifsAccess(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateExcludeAggregates(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -129,6 +136,32 @@ func (m *Nas) validateCifsAccess(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Nas) validateExcludeAggregates(formats strfmt.Registry) error {
+	if swag.IsZero(m.ExcludeAggregates) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.ExcludeAggregates); i++ {
+		if swag.IsZero(m.ExcludeAggregates[i]) { // not required
+			continue
+		}
+
+		if m.ExcludeAggregates[i] != nil {
+			if err := m.ExcludeAggregates[i].Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("exclude_aggregates" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("exclude_aggregates" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
 func (m *Nas) validateNfsAccess(formats strfmt.Registry) error {
 	if swag.IsZero(m.NfsAccess) { // not required
 		return nil
@@ -186,6 +219,10 @@ func (m *Nas) ContextValidate(ctx context.Context, formats strfmt.Registry) erro
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateExcludeAggregates(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateNfsAccess(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -240,6 +277,31 @@ func (m *Nas) contextValidateCifsAccess(ctx context.Context, formats strfmt.Regi
 					return ve.ValidateName("cifs_access" + "." + strconv.Itoa(i))
 				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("cifs_access" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *Nas) contextValidateExcludeAggregates(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.ExcludeAggregates); i++ {
+
+		if m.ExcludeAggregates[i] != nil {
+
+			if swag.IsZero(m.ExcludeAggregates[i]) { // not required
+				return nil
+			}
+
+			if err := m.ExcludeAggregates[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("exclude_aggregates" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("exclude_aggregates" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -1702,6 +1764,116 @@ func (m *NasApplicationComponentsItems0StorageService) MarshalBinary() ([]byte, 
 // UnmarshalBinary interface implementation
 func (m *NasApplicationComponentsItems0StorageService) UnmarshalBinary(b []byte) error {
 	var res NasApplicationComponentsItems0StorageService
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// NasExcludeAggregatesItems0 nas exclude aggregates items0
+//
+// swagger:model NasExcludeAggregatesItems0
+type NasExcludeAggregatesItems0 struct {
+
+	// The name of the aggregate to exclude.
+	// Enum: ["aggr0_fel_wps1_ba1_r01c800_a","aggr0_fel_wps1_ba1_r01c800_b","aggr0_stg_kkw7_ba1_r01c800_a","aggr0_stg_kkw7_ba1_r01c800_b","data01_mcc_renamed_20250617101056_2041346693","data02_mcc_renamed_20250617101056_2041346693","data03","data04"]
+	Name string `json:"name,omitempty" yaml:"name,omitempty"`
+
+	// The ID of the aggregate to exclude. Usage: &lt;UUID&gt;
+	UUID string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
+}
+
+// Validate validates this nas exclude aggregates items0
+func (m *NasExcludeAggregatesItems0) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+var nasExcludeAggregatesItems0TypeNamePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["aggr0_fel_wps1_ba1_r01c800_a","aggr0_fel_wps1_ba1_r01c800_b","aggr0_stg_kkw7_ba1_r01c800_a","aggr0_stg_kkw7_ba1_r01c800_b","data01_mcc_renamed_20250617101056_2041346693","data02_mcc_renamed_20250617101056_2041346693","data03","data04"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		nasExcludeAggregatesItems0TypeNamePropEnum = append(nasExcludeAggregatesItems0TypeNamePropEnum, v)
+	}
+}
+
+const (
+
+	// NasExcludeAggregatesItems0NameAggr0FelWps1Ba1R01c800a captures enum value "aggr0_fel_wps1_ba1_r01c800_a"
+	NasExcludeAggregatesItems0NameAggr0FelWps1Ba1R01c800a string = "aggr0_fel_wps1_ba1_r01c800_a"
+
+	// NasExcludeAggregatesItems0NameAggr0FelWps1Ba1R01c800b captures enum value "aggr0_fel_wps1_ba1_r01c800_b"
+	NasExcludeAggregatesItems0NameAggr0FelWps1Ba1R01c800b string = "aggr0_fel_wps1_ba1_r01c800_b"
+
+	// NasExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800a captures enum value "aggr0_stg_kkw7_ba1_r01c800_a"
+	NasExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800a string = "aggr0_stg_kkw7_ba1_r01c800_a"
+
+	// NasExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800b captures enum value "aggr0_stg_kkw7_ba1_r01c800_b"
+	NasExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800b string = "aggr0_stg_kkw7_ba1_r01c800_b"
+
+	// NasExcludeAggregatesItems0NameData01MccRenamed202506171010562041346693 captures enum value "data01_mcc_renamed_20250617101056_2041346693"
+	NasExcludeAggregatesItems0NameData01MccRenamed202506171010562041346693 string = "data01_mcc_renamed_20250617101056_2041346693"
+
+	// NasExcludeAggregatesItems0NameData02MccRenamed202506171010562041346693 captures enum value "data02_mcc_renamed_20250617101056_2041346693"
+	NasExcludeAggregatesItems0NameData02MccRenamed202506171010562041346693 string = "data02_mcc_renamed_20250617101056_2041346693"
+
+	// NasExcludeAggregatesItems0NameData03 captures enum value "data03"
+	NasExcludeAggregatesItems0NameData03 string = "data03"
+
+	// NasExcludeAggregatesItems0NameData04 captures enum value "data04"
+	NasExcludeAggregatesItems0NameData04 string = "data04"
+)
+
+// prop value enum
+func (m *NasExcludeAggregatesItems0) validateNameEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, nasExcludeAggregatesItems0TypeNamePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *NasExcludeAggregatesItems0) validateName(formats strfmt.Registry) error {
+	if swag.IsZero(m.Name) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateNameEnum("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this nas exclude aggregates items0 based on context it is used
+func (m *NasExcludeAggregatesItems0) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *NasExcludeAggregatesItems0) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *NasExcludeAggregatesItems0) UnmarshalBinary(b []byte) error {
+	var res NasExcludeAggregatesItems0
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

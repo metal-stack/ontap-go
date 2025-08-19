@@ -118,6 +118,8 @@ func NewDiskModifyDefault(code int) *DiskModifyDefault {
 | 721066 | Node is outside the list of controllers for disk. |
 | 721084 | An invalid pool name was specified. |
 | 721085 | The node name was not specified. |
+| 721093 | Operation not supported on this platform. |
+| 721095 | Failed to sanitize the spare disk (non-cryptographically). |
 | 1441795 | Setting the data key ID to the manufacture secure ID is not allowed when in FIPS-compliance mode. |
 | 1441825 | The system does not support maintenance of the controls of encrypting disks. |
 | 14155777 | The operation failed on one or more disks. |

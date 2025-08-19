@@ -112,10 +112,15 @@ func NewNfsTLSInterfaceModifyDefault(code int) *NfsTLSInterfaceModifyDefault {
 
 | Error codes | Description |
 | ----------- | ----------- |
+| 2           | The value provided is an invalid value for field \"interface.uuid\".|
 | 4           | The entry doesn't exist|
 | 3277204     | TLS already enabled/disabled on this LIF.|
 | 3277205     | Cannot enable TLS because no certificate was provided.|
 | 3277206     | The "enabled" is a required field.|
+| 3277210     | The FQDN of the LIF IP address and the common name present in the certificate do not match. Update the certificate so that the common name and LIF FQDN match and retry the operation.|
+| 3277217     | Failed to enable TLS on LIF on vserver because the certificate does not have LIF as subject alternate name.|
+| 92405900    | Certificate not found for the SVM.|
+| 92406020    | Only certificates of type 'server' are supported on the SVM.|
 */
 type NfsTLSInterfaceModifyDefault struct {
 	_statusCode int

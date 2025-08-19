@@ -191,6 +191,7 @@ func NewNetworkIPInterfaceModifyDefault(code int) *NetworkIPInterfaceModifyDefau
 | 53281111 | Cannot update the service policy because the interface is associated with a BGP peer-group. |
 | 53281113 | Configuration details for LIF were modified but an error was encountered while updating the LIF's operational status. |
 | 53281114 | The specified parameter is only supported on data SVMs. |
+| 53281468 | Failed to update external route tables for IP. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type NetworkIPInterfaceModifyDefault struct {

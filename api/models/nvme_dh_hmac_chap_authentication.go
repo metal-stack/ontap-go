@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// NvmeDhHmacChapAuthentication A container for properties of NVMe in-band authentication with the DH-HMAC-CHAP protocol.
+// NvmeDhHmacChapAuthentication A container for the configuration of NVMe in-band authentication using the DH-HMAC-CHAP protocol for a host.
 //
 // swagger:model nvme_dh_hmac_chap_authentication
 type NvmeDhHmacChapAuthentication struct {

@@ -226,20 +226,22 @@ func NewSnapshotCreateDefault(code int) *SnapshotCreateDefault {
 
 | Error Code | Description |
 | ---------- | ----------- |
-| 524479     | The specified volume is not online or does not have enough space to create a Snapshot copy. |
-| 525062     | Cannot exceed maximum number of Snapshot copies. |
+| 524479     | The specified volume is not online or does not have enough space to create a snapshot. |
+| 1520351    | Snapshot operation is not allowed. |
+| 525062     | Cannot exceed maximum number of snapshots. |
 | 2621462    | The specified SVM name does not exist. |
-| 525059     | A Snapshot copy with the specified name already exists. |
-| 1638461    | Snapshot copies can only be created on read/write (RW) volumes. |
-| 1638477    | User-created Snapshot copy names cannot begin with the specified prefix. |
-| 1638518    | The specified Snapshot copy name is invalid. |
-| 1638532    | Failed to create the Snapshot copy on the specified volume because a revert operation is in progress. |
-| 1638537    | Cannot determine the status of the Snapshot copy create operation for the specified volume. |
+| 525059     | A snapshot with the specified name already exists. |
+| 1638461    | Snapshots can only be created on read/write (RW) volumes. |
+| 1638477    | User-created snapshot names cannot begin with the specified prefix. |
+| 1638518    | The specified snapshot name is invalid. |
+| 1638532    | Failed to create the snapshot on the specified volume because a revert operation is in progress. |
+| 1638537    | Cannot determine the status of the snapshot create operation for the specified volume. |
 | 1638574    | The \"expiry-time\" parameter is not supported for FlexGroup volumes. |
-| 1638616    | Bulk Snapshot copy create is not supported with multiple Snapshot copy names. |
-| 1638617    | Bulk Snapshot copy create is not supported with volume names in a mixed-version cluster. |
-| 1638618    | The property cannot be specified for Snapshot copy create. |
-| 1638630    | Snapshot copy create operation is not supported on destination of SnapMirror active sync relationship with policy-type "automated-failover-duplex". |
+| 1638616    | Bulk snapshot create is not supported with multiple snapshot names. |
+| 1638617    | Bulk snapshot create is not supported with volume names in a mixed-version cluster. |
+| 1638618    | The property cannot be specified for snapshot create. |
+| 1638630    | Snapshot create operation is not supported on destination of SnapMirror active sync relationship with policy-type "automated-failover-duplex". |
+| 1638644    | POST, DELETE, and PATCH requests on the snapshot session endpoint are not supported on this platform. |
 */
 type SnapshotCreateDefault struct {
 	_statusCode int

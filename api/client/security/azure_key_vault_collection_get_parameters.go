@@ -228,6 +228,12 @@ type AzureKeyVaultCollectionGetParams struct {
 	*/
 	Scope *string
 
+	/* SkipVerification.
+
+	   Filter by skip_verification
+	*/
+	SkipVerification *bool
+
 	/* StateAvailable.
 
 	   Filter by state.available
@@ -650,6 +656,17 @@ func (o *AzureKeyVaultCollectionGetParams) WithScope(scope *string) *AzureKeyVau
 // SetScope adds the scope to the azure key vault collection get params
 func (o *AzureKeyVaultCollectionGetParams) SetScope(scope *string) {
 	o.Scope = scope
+}
+
+// WithSkipVerification adds the skipVerification to the azure key vault collection get params
+func (o *AzureKeyVaultCollectionGetParams) WithSkipVerification(skipVerification *bool) *AzureKeyVaultCollectionGetParams {
+	o.SetSkipVerification(skipVerification)
+	return o
+}
+
+// SetSkipVerification adds the skipVerification to the azure key vault collection get params
+func (o *AzureKeyVaultCollectionGetParams) SetSkipVerification(skipVerification *bool) {
+	o.SkipVerification = skipVerification
 }
 
 // WithStateAvailable adds the stateAvailable to the azure key vault collection get params
@@ -1212,6 +1229,23 @@ func (o *AzureKeyVaultCollectionGetParams) WriteToRequest(r runtime.ClientReques
 		if qScope != "" {
 
 			if err := r.SetQueryParam("scope", qScope); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.SkipVerification != nil {
+
+		// query param skip_verification
+		var qrSkipVerification bool
+
+		if o.SkipVerification != nil {
+			qrSkipVerification = *o.SkipVerification
+		}
+		qSkipVerification := swag.FormatBool(qrSkipVerification)
+		if qSkipVerification != "" {
+
+			if err := r.SetQueryParam("skip_verification", qSkipVerification); err != nil {
 				return err
 			}
 		}

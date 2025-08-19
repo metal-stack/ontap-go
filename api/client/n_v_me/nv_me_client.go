@@ -104,13 +104,13 @@ type ClientService interface {
 
 	NvmeNamespaceCollectionGet(params *NvmeNamespaceCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceCollectionGetOK, error)
 
-	NvmeNamespaceCreate(params *NvmeNamespaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceCreateCreated, error)
+	NvmeNamespaceCreate(params *NvmeNamespaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceCreateCreated, *NvmeNamespaceCreateAccepted, error)
 
-	NvmeNamespaceDelete(params *NvmeNamespaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceDeleteOK, error)
+	NvmeNamespaceDelete(params *NvmeNamespaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceDeleteOK, *NvmeNamespaceDeleteAccepted, error)
 
 	NvmeNamespaceGet(params *NvmeNamespaceGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceGetOK, error)
 
-	NvmeNamespaceModify(params *NvmeNamespaceModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceModifyOK, error)
+	NvmeNamespaceModify(params *NvmeNamespaceModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceModifyOK, *NvmeNamespaceModifyAccepted, error)
 
 	NvmeServiceCollectionGet(params *NvmeServiceCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeServiceCollectionGetOK, error)
 
@@ -255,6 +255,9 @@ func (a *Client) NvmeInterfaceGet(params *NvmeInterfaceGetParams, authInfo runti
 ### Expensive properties
 There is an added computational cost to retrieving values for these properties. They are not included by default in GET results and must be explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
 * `auto_delete`
+* `space.physical_used`
+* `space.physical_used_by_snapshots`
+* `space.efficiency_ratio`
 * `subsystem_map.*`
 * `status.mapped`
 * `statistics.*`
@@ -318,10 +321,12 @@ If not specified in POST, the following default property values are assigned:
 * `volume file clone create`
 * `vserver nvme namespace convert-from-lun`
 * `vserver nvme namespace create`
+
+POST is asynchronous when creating a new namespace. It is synchronous when converting a LUN to a namespace via the `convert` property.
 ### Learn more
 * [`DOC /storage/namespaces`](#docs-NVMe-storage_namespaces)
 */
-func (a *Client) NvmeNamespaceCreate(params *NvmeNamespaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceCreateCreated, error) {
+func (a *Client) NvmeNamespaceCreate(params *NvmeNamespaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceCreateCreated, *NvmeNamespaceCreateAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNvmeNamespaceCreateParams()
@@ -345,15 +350,17 @@ func (a *Client) NvmeNamespaceCreate(params *NvmeNamespaceCreateParams, authInfo
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*NvmeNamespaceCreateCreated)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *NvmeNamespaceCreateCreated:
+		return value, nil, nil
+	case *NvmeNamespaceCreateAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*NvmeNamespaceCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -361,10 +368,11 @@ func (a *Client) NvmeNamespaceCreate(params *NvmeNamespaceCreateParams, authInfo
 
 ### Related ONTAP commands
 * `vserver nvme namespace delete`
+
 ### Learn more
 * [`DOC /storage/namespaces`](#docs-NVMe-storage_namespaces)
 */
-func (a *Client) NvmeNamespaceDelete(params *NvmeNamespaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceDeleteOK, error) {
+func (a *Client) NvmeNamespaceDelete(params *NvmeNamespaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceDeleteOK, *NvmeNamespaceDeleteAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNvmeNamespaceDeleteParams()
@@ -388,15 +396,17 @@ func (a *Client) NvmeNamespaceDelete(params *NvmeNamespaceDeleteParams, authInfo
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*NvmeNamespaceDeleteOK)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *NvmeNamespaceDeleteOK:
+		return value, nil, nil
+	case *NvmeNamespaceDeleteAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*NvmeNamespaceDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -405,6 +415,9 @@ func (a *Client) NvmeNamespaceDelete(params *NvmeNamespaceDeleteParams, authInfo
 ### Expensive properties
 There is an added computational cost to retrieving values for these properties. They are not included by default in GET results and must be explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
 * `auto_delete`
+* `space.physical_used`
+* `space.physical_used_by_snapshots`
+* `space.efficiency_ratio`
 * `subsystem_map.*`
 * `status.mapped`
 * `statistics.*`
@@ -456,10 +469,11 @@ func (a *Client) NvmeNamespaceGet(params *NvmeNamespaceGetParams, authInfo runti
 ### Related ONTAP commands
 * `volume file clone autodelete`
 * `vserver nvme namespace modify`
+
 ### Learn more
 * [`DOC /storage/namespaces`](#docs-NVMe-storage_namespaces)
 */
-func (a *Client) NvmeNamespaceModify(params *NvmeNamespaceModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceModifyOK, error) {
+func (a *Client) NvmeNamespaceModify(params *NvmeNamespaceModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*NvmeNamespaceModifyOK, *NvmeNamespaceModifyAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewNvmeNamespaceModifyParams()
@@ -483,15 +497,17 @@ func (a *Client) NvmeNamespaceModify(params *NvmeNamespaceModifyParams, authInfo
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*NvmeNamespaceModifyOK)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *NvmeNamespaceModifyOK:
+		return value, nil, nil
+	case *NvmeNamespaceModifyAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*NvmeNamespaceModifyDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -1388,7 +1404,7 @@ func (a *Client) NvmeSubsystemModify(params *NvmeSubsystemModifyParams, authInfo
 }
 
 /*
-	PerformanceNamespaceMetricCollectionGet Retrieves historical performance metrics for an NVMe namespace.
+	PerformanceNamespaceMetricCollectionGet Retrieves historical space and performance metrics for an NVMe namespace.
 
 ### Related ONTAP commands
 * `statistics namespace show`
@@ -1429,7 +1445,7 @@ func (a *Client) PerformanceNamespaceMetricCollectionGet(params *PerformanceName
 }
 
 /*
-	PerformanceNamespaceMetricGet Retrieves historical performance metrics for a NVMe namespace for a specific time.
+	PerformanceNamespaceMetricGet Retrieves historical space and performance metrics for an NVMe namespace for a specific time.
 
 ### Related ONTAP commands
 * `statistics namespace show`

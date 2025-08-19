@@ -27,7 +27,7 @@ type SnaplockLitigationResponse struct {
 	NumRecords *int64 `json:"num_records,omitempty" yaml:"num_records,omitempty"`
 
 	// snaplock litigation response inline records
-	SnaplockLitigationResponseInlineRecords []*SnaplockLitigation `json:"records,omitempty" yaml:"records,omitempty"`
+	SnaplockLitigationResponseInlineRecords []*SnaplockLitigationGet `json:"records,omitempty" yaml:"records,omitempty"`
 }
 
 // Validate validates this snaplock litigation response

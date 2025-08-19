@@ -182,6 +182,78 @@ type VolumeCollectionGetParams struct {
 	*/
 	AnalyticsUnsupportedReasonMessage *string
 
+	/* AntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate.
+
+	   Filter by anti_ransomware.attack_detection_parameters.based_on_file_create_op_rate
+	*/
+	AntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate *bool
+
+	/* AntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate.
+
+	   Filter by anti_ransomware.attack_detection_parameters.based_on_file_delete_op_rate
+	*/
+	AntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate *bool
+
+	/* AntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate.
+
+	   Filter by anti_ransomware.attack_detection_parameters.based_on_file_rename_op_rate
+	*/
+	AntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate *bool
+
+	/* AntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate.
+
+	   Filter by anti_ransomware.attack_detection_parameters.based_on_high_entropy_data_rate
+	*/
+	AntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate *bool
+
+	/* AntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension.
+
+	   Filter by anti_ransomware.attack_detection_parameters.based_on_never_seen_before_file_extension
+	*/
+	AntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension *bool
+
+	/* AntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent.
+
+	   Filter by anti_ransomware.attack_detection_parameters.file_create_op_rate_surge_notify_percent
+	*/
+	AntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent *int64
+
+	/* AntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent.
+
+	   Filter by anti_ransomware.attack_detection_parameters.file_delete_op_rate_surge_notify_percent
+	*/
+	AntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent *int64
+
+	/* AntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent.
+
+	   Filter by anti_ransomware.attack_detection_parameters.file_rename_op_rate_surge_notify_percent
+	*/
+	AntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent *int64
+
+	/* AntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent.
+
+	   Filter by anti_ransomware.attack_detection_parameters.high_entropy_data_surge_notify_percent
+	*/
+	AntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent *int64
+
+	/* AntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold.
+
+	   Filter by anti_ransomware.attack_detection_parameters.never_seen_before_file_extension_count_notify_threshold
+	*/
+	AntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold *int64
+
+	/* AntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours.
+
+	   Filter by anti_ransomware.attack_detection_parameters.never_seen_before_file_extension_duration_in_hours
+	*/
+	AntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours *int64
+
+	/* AntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions.
+
+	   Filter by anti_ransomware.attack_detection_parameters.relaxing_popular_file_extensions
+	*/
+	AntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions *bool
+
 	/* AntiRansomwareAttackProbability.
 
 	   Filter by anti_ransomware.attack_probability
@@ -248,6 +320,42 @@ type VolumeCollectionGetParams struct {
 	*/
 	AntiRansomwareSurgeAsNormal *bool
 
+	/* AntiRansomwareSurgeUsageFileCreatePeakRatePerMinute.
+
+	   Filter by anti_ransomware.surge_usage.file_create_peak_rate_per_minute
+	*/
+	AntiRansomwareSurgeUsageFileCreatePeakRatePerMinute *int64
+
+	/* AntiRansomwareSurgeUsageFileDeletePeakRatePerMinute.
+
+	   Filter by anti_ransomware.surge_usage.file_delete_peak_rate_per_minute
+	*/
+	AntiRansomwareSurgeUsageFileDeletePeakRatePerMinute *int64
+
+	/* AntiRansomwareSurgeUsageFileRenamePeakRatePerMinute.
+
+	   Filter by anti_ransomware.surge_usage.file_rename_peak_rate_per_minute
+	*/
+	AntiRansomwareSurgeUsageFileRenamePeakRatePerMinute *int64
+
+	/* AntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent.
+
+	   Filter by anti_ransomware.surge_usage.high_entropy_data_write_peak_percent
+	*/
+	AntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent *int64
+
+	/* AntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute.
+
+	   Filter by anti_ransomware.surge_usage.high_entropy_data_write_peak_rate_kb_per_minute
+	*/
+	AntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute *int64
+
+	/* AntiRansomwareSurgeUsageTime.
+
+	   Filter by anti_ransomware.surge_usage.time
+	*/
+	AntiRansomwareSurgeUsageTime *string
+
 	/* AntiRansomwareSuspectFilesCount.
 
 	   Filter by anti_ransomware.suspect_files.count
@@ -266,11 +374,209 @@ type VolumeCollectionGetParams struct {
 	*/
 	AntiRansomwareSuspectFilesFormat *string
 
+	/* AntiRansomwareTypicalUsageFileCreatePeakRatePerMinute.
+
+	   Filter by anti_ransomware.typical_usage.file_create_peak_rate_per_minute
+	*/
+	AntiRansomwareTypicalUsageFileCreatePeakRatePerMinute *int64
+
+	/* AntiRansomwareTypicalUsageFileDeletePeakRatePerMinute.
+
+	   Filter by anti_ransomware.typical_usage.file_delete_peak_rate_per_minute
+	*/
+	AntiRansomwareTypicalUsageFileDeletePeakRatePerMinute *int64
+
+	/* AntiRansomwareTypicalUsageFileRenamePeakRatePerMinute.
+
+	   Filter by anti_ransomware.typical_usage.file_rename_peak_rate_per_minute
+	*/
+	AntiRansomwareTypicalUsageFileRenamePeakRatePerMinute *int64
+
+	/* AntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent.
+
+	   Filter by anti_ransomware.typical_usage.high_entropy_data_write_peak_percent
+	*/
+	AntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent *int64
+
+	/* AntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute.
+
+	   Filter by anti_ransomware.typical_usage.high_entropy_data_write_peak_rate_kb_per_minute
+	*/
+	AntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute *int64
+
 	/* AntiRansomwareUpdateBaselineFromSurge.
 
 	   Filter by anti_ransomware.update_baseline_from_surge
 	*/
 	AntiRansomwareUpdateBaselineFromSurge *bool
+
+	/* AntiRansomwareWorkloadFileExtensionTypesCount.
+
+	   Filter by anti_ransomware.workload.file_extension_types_count
+	*/
+	AntiRansomwareWorkloadFileExtensionTypesCount *int64
+
+	/* AntiRansomwareWorkloadFileExtensionsObserved.
+
+	   Filter by anti_ransomware.workload.file_extensions_observed
+	*/
+	AntiRansomwareWorkloadFileExtensionsObserved *string
+
+	/* AntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute.
+
+	   Filter by anti_ransomware.workload.historical_statistics.file_create_peak_rate_per_minute
+	*/
+	AntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute *int64
+
+	/* AntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute.
+
+	   Filter by anti_ransomware.workload.historical_statistics.file_delete_peak_rate_per_minute
+	*/
+	AntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute *int64
+
+	/* AntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute.
+
+	   Filter by anti_ransomware.workload.historical_statistics.file_rename_peak_rate_per_minute
+	*/
+	AntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute *int64
+
+	/* AntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent.
+
+	   Filter by anti_ransomware.workload.historical_statistics.high_entropy_data_write_peak_percent
+	*/
+	AntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent *int64
+
+	/* AntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute.
+
+	   Filter by anti_ransomware.workload.historical_statistics.high_entropy_data_write_peak_rate_kb_per_minute
+	*/
+	AntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute *int64
+
+	/* AntiRansomwareWorkloadNewlyObservedFileExtensionsCount.
+
+	   Filter by anti_ransomware.workload.newly_observed_file_extensions.count
+	*/
+	AntiRansomwareWorkloadNewlyObservedFileExtensionsCount *int64
+
+	/* AntiRansomwareWorkloadNewlyObservedFileExtensionsName.
+
+	   Filter by anti_ransomware.workload.newly_observed_file_extensions.name
+	*/
+	AntiRansomwareWorkloadNewlyObservedFileExtensionsName *string
+
+	/* AntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute.
+
+	   Filter by anti_ransomware.workload.surge_statistics.file_create_peak_rate_per_minute
+	*/
+	AntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute *int64
+
+	/* AntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute.
+
+	   Filter by anti_ransomware.workload.surge_statistics.file_delete_peak_rate_per_minute
+	*/
+	AntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute *int64
+
+	/* AntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute.
+
+	   Filter by anti_ransomware.workload.surge_statistics.file_rename_peak_rate_per_minute
+	*/
+	AntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute *int64
+
+	/* AntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent.
+
+	   Filter by anti_ransomware.workload.surge_statistics.high_entropy_data_write_peak_percent
+	*/
+	AntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent *int64
+
+	/* AntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute.
+
+	   Filter by anti_ransomware.workload.surge_statistics.high_entropy_data_write_peak_rate_kb_per_minute
+	*/
+	AntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute *int64
+
+	/* AntiRansomwareWorkloadSurgeStatisticsTime.
+
+	   Filter by anti_ransomware.workload.surge_statistics.time
+	*/
+	AntiRansomwareWorkloadSurgeStatisticsTime *string
+
+	/* AntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute.
+
+	   Filter by anti_ransomware.workload.surge_usage.file_create_peak_rate_per_minute
+	*/
+	AntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute *int64
+
+	/* AntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute.
+
+	   Filter by anti_ransomware.workload.surge_usage.file_delete_peak_rate_per_minute
+	*/
+	AntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute *int64
+
+	/* AntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute.
+
+	   Filter by anti_ransomware.workload.surge_usage.file_rename_peak_rate_per_minute
+	*/
+	AntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute *int64
+
+	/* AntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent.
+
+	   Filter by anti_ransomware.workload.surge_usage.high_entropy_data_write_peak_percent
+	*/
+	AntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent *int64
+
+	/* AntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute.
+
+	   Filter by anti_ransomware.workload.surge_usage.high_entropy_data_write_peak_rate_kb_per_minute
+	*/
+	AntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute *int64
+
+	/* AntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount.
+
+	   Filter by anti_ransomware.workload.surge_usage.newly_observed_file_extensions.count
+	*/
+	AntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount *int64
+
+	/* AntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName.
+
+	   Filter by anti_ransomware.workload.surge_usage.newly_observed_file_extensions.name
+	*/
+	AntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName *string
+
+	/* AntiRansomwareWorkloadSurgeUsageTime.
+
+	   Filter by anti_ransomware.workload.surge_usage.time
+	*/
+	AntiRansomwareWorkloadSurgeUsageTime *string
+
+	/* AntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute.
+
+	   Filter by anti_ransomware.workload.typical_usage.file_create_peak_rate_per_minute
+	*/
+	AntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute *int64
+
+	/* AntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute.
+
+	   Filter by anti_ransomware.workload.typical_usage.file_delete_peak_rate_per_minute
+	*/
+	AntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute *int64
+
+	/* AntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute.
+
+	   Filter by anti_ransomware.workload.typical_usage.file_rename_peak_rate_per_minute
+	*/
+	AntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute *int64
+
+	/* AntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent.
+
+	   Filter by anti_ransomware.workload.typical_usage.high_entropy_data_write_peak_percent
+	*/
+	AntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent *int64
+
+	/* AntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute.
+
+	   Filter by anti_ransomware.workload.typical_usage.high_entropy_data_write_peak_rate_kb_per_minute
+	*/
+	AntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute *int64
 
 	/* ApplicationName.
 
@@ -325,6 +631,12 @@ type VolumeCollectionGetParams struct {
 	   Filter by autosize.shrink_threshold
 	*/
 	AutosizeShrinkThreshold *int64
+
+	/* CloneHasFlexclone.
+
+	   Filter by clone.has_flexclone
+	*/
+	CloneHasFlexclone *bool
 
 	/* CloneInheritedPhysicalUsed.
 
@@ -991,6 +1303,12 @@ type VolumeCollectionGetParams struct {
 	   Filter by granular_data
 	*/
 	GranularData *bool
+
+	/* GranularDataMode.
+
+	   Filter by granular_data_mode
+	*/
+	GranularDataMode *string
 
 	/* GuaranteeHonored.
 
@@ -3320,6 +3638,138 @@ func (o *VolumeCollectionGetParams) SetAnalyticsUnsupportedReasonMessage(analyti
 	o.AnalyticsUnsupportedReasonMessage = analyticsUnsupportedReasonMessage
 }
 
+// WithAntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate adds the antiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate(antiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate *bool) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate(antiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate)
+	return o
+}
+
+// SetAntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate adds the antiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate(antiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate *bool) {
+	o.AntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate = antiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate
+}
+
+// WithAntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate adds the antiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate(antiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate *bool) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate(antiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate)
+	return o
+}
+
+// SetAntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate adds the antiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate(antiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate *bool) {
+	o.AntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate = antiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate
+}
+
+// WithAntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate adds the antiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate(antiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate *bool) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate(antiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate)
+	return o
+}
+
+// SetAntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate adds the antiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate(antiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate *bool) {
+	o.AntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate = antiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate
+}
+
+// WithAntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate adds the antiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate(antiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate *bool) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate(antiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate)
+	return o
+}
+
+// SetAntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate adds the antiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate(antiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate *bool) {
+	o.AntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate = antiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate
+}
+
+// WithAntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension adds the antiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension(antiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension *bool) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension(antiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension)
+	return o
+}
+
+// SetAntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension adds the antiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension(antiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension *bool) {
+	o.AntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension = antiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension
+}
+
+// WithAntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent adds the antiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent(antiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent(antiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent)
+	return o
+}
+
+// SetAntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent adds the antiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent(antiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent *int64) {
+	o.AntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent = antiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent
+}
+
+// WithAntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent adds the antiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent(antiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent(antiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent)
+	return o
+}
+
+// SetAntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent adds the antiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent(antiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent *int64) {
+	o.AntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent = antiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent
+}
+
+// WithAntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent adds the antiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent(antiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent(antiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent)
+	return o
+}
+
+// SetAntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent adds the antiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent(antiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent *int64) {
+	o.AntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent = antiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent
+}
+
+// WithAntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent adds the antiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent(antiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent(antiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent)
+	return o
+}
+
+// SetAntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent adds the antiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent(antiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent *int64) {
+	o.AntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent = antiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent
+}
+
+// WithAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold adds the antiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold(antiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold(antiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold)
+	return o
+}
+
+// SetAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold adds the antiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold(antiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold *int64) {
+	o.AntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold = antiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold
+}
+
+// WithAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours adds the antiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours(antiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours(antiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours)
+	return o
+}
+
+// SetAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours adds the antiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours(antiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours *int64) {
+	o.AntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours = antiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours
+}
+
+// WithAntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions adds the antiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions(antiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions *bool) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions(antiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions)
+	return o
+}
+
+// SetAntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions adds the antiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions(antiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions *bool) {
+	o.AntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions = antiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions
+}
+
 // WithAntiRansomwareAttackProbability adds the antiRansomwareAttackProbability to the volume collection get params
 func (o *VolumeCollectionGetParams) WithAntiRansomwareAttackProbability(antiRansomwareAttackProbability *string) *VolumeCollectionGetParams {
 	o.SetAntiRansomwareAttackProbability(antiRansomwareAttackProbability)
@@ -3441,6 +3891,72 @@ func (o *VolumeCollectionGetParams) SetAntiRansomwareSurgeAsNormal(antiRansomwar
 	o.AntiRansomwareSurgeAsNormal = antiRansomwareSurgeAsNormal
 }
 
+// WithAntiRansomwareSurgeUsageFileCreatePeakRatePerMinute adds the antiRansomwareSurgeUsageFileCreatePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareSurgeUsageFileCreatePeakRatePerMinute(antiRansomwareSurgeUsageFileCreatePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareSurgeUsageFileCreatePeakRatePerMinute(antiRansomwareSurgeUsageFileCreatePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareSurgeUsageFileCreatePeakRatePerMinute adds the antiRansomwareSurgeUsageFileCreatePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareSurgeUsageFileCreatePeakRatePerMinute(antiRansomwareSurgeUsageFileCreatePeakRatePerMinute *int64) {
+	o.AntiRansomwareSurgeUsageFileCreatePeakRatePerMinute = antiRansomwareSurgeUsageFileCreatePeakRatePerMinute
+}
+
+// WithAntiRansomwareSurgeUsageFileDeletePeakRatePerMinute adds the antiRansomwareSurgeUsageFileDeletePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareSurgeUsageFileDeletePeakRatePerMinute(antiRansomwareSurgeUsageFileDeletePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareSurgeUsageFileDeletePeakRatePerMinute(antiRansomwareSurgeUsageFileDeletePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareSurgeUsageFileDeletePeakRatePerMinute adds the antiRansomwareSurgeUsageFileDeletePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareSurgeUsageFileDeletePeakRatePerMinute(antiRansomwareSurgeUsageFileDeletePeakRatePerMinute *int64) {
+	o.AntiRansomwareSurgeUsageFileDeletePeakRatePerMinute = antiRansomwareSurgeUsageFileDeletePeakRatePerMinute
+}
+
+// WithAntiRansomwareSurgeUsageFileRenamePeakRatePerMinute adds the antiRansomwareSurgeUsageFileRenamePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareSurgeUsageFileRenamePeakRatePerMinute(antiRansomwareSurgeUsageFileRenamePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareSurgeUsageFileRenamePeakRatePerMinute(antiRansomwareSurgeUsageFileRenamePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareSurgeUsageFileRenamePeakRatePerMinute adds the antiRansomwareSurgeUsageFileRenamePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareSurgeUsageFileRenamePeakRatePerMinute(antiRansomwareSurgeUsageFileRenamePeakRatePerMinute *int64) {
+	o.AntiRansomwareSurgeUsageFileRenamePeakRatePerMinute = antiRansomwareSurgeUsageFileRenamePeakRatePerMinute
+}
+
+// WithAntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent adds the antiRansomwareSurgeUsageHighEntropyDataWritePeakPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent(antiRansomwareSurgeUsageHighEntropyDataWritePeakPercent *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent(antiRansomwareSurgeUsageHighEntropyDataWritePeakPercent)
+	return o
+}
+
+// SetAntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent adds the antiRansomwareSurgeUsageHighEntropyDataWritePeakPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent(antiRansomwareSurgeUsageHighEntropyDataWritePeakPercent *int64) {
+	o.AntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent = antiRansomwareSurgeUsageHighEntropyDataWritePeakPercent
+}
+
+// WithAntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute adds the antiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute)
+	return o
+}
+
+// SetAntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute adds the antiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute *int64) {
+	o.AntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute = antiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute
+}
+
+// WithAntiRansomwareSurgeUsageTime adds the antiRansomwareSurgeUsageTime to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareSurgeUsageTime(antiRansomwareSurgeUsageTime *string) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareSurgeUsageTime(antiRansomwareSurgeUsageTime)
+	return o
+}
+
+// SetAntiRansomwareSurgeUsageTime adds the antiRansomwareSurgeUsageTime to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareSurgeUsageTime(antiRansomwareSurgeUsageTime *string) {
+	o.AntiRansomwareSurgeUsageTime = antiRansomwareSurgeUsageTime
+}
+
 // WithAntiRansomwareSuspectFilesCount adds the antiRansomwareSuspectFilesCount to the volume collection get params
 func (o *VolumeCollectionGetParams) WithAntiRansomwareSuspectFilesCount(antiRansomwareSuspectFilesCount *int64) *VolumeCollectionGetParams {
 	o.SetAntiRansomwareSuspectFilesCount(antiRansomwareSuspectFilesCount)
@@ -3474,6 +3990,61 @@ func (o *VolumeCollectionGetParams) SetAntiRansomwareSuspectFilesFormat(antiRans
 	o.AntiRansomwareSuspectFilesFormat = antiRansomwareSuspectFilesFormat
 }
 
+// WithAntiRansomwareTypicalUsageFileCreatePeakRatePerMinute adds the antiRansomwareTypicalUsageFileCreatePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareTypicalUsageFileCreatePeakRatePerMinute(antiRansomwareTypicalUsageFileCreatePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareTypicalUsageFileCreatePeakRatePerMinute(antiRansomwareTypicalUsageFileCreatePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareTypicalUsageFileCreatePeakRatePerMinute adds the antiRansomwareTypicalUsageFileCreatePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareTypicalUsageFileCreatePeakRatePerMinute(antiRansomwareTypicalUsageFileCreatePeakRatePerMinute *int64) {
+	o.AntiRansomwareTypicalUsageFileCreatePeakRatePerMinute = antiRansomwareTypicalUsageFileCreatePeakRatePerMinute
+}
+
+// WithAntiRansomwareTypicalUsageFileDeletePeakRatePerMinute adds the antiRansomwareTypicalUsageFileDeletePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareTypicalUsageFileDeletePeakRatePerMinute(antiRansomwareTypicalUsageFileDeletePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareTypicalUsageFileDeletePeakRatePerMinute(antiRansomwareTypicalUsageFileDeletePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareTypicalUsageFileDeletePeakRatePerMinute adds the antiRansomwareTypicalUsageFileDeletePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareTypicalUsageFileDeletePeakRatePerMinute(antiRansomwareTypicalUsageFileDeletePeakRatePerMinute *int64) {
+	o.AntiRansomwareTypicalUsageFileDeletePeakRatePerMinute = antiRansomwareTypicalUsageFileDeletePeakRatePerMinute
+}
+
+// WithAntiRansomwareTypicalUsageFileRenamePeakRatePerMinute adds the antiRansomwareTypicalUsageFileRenamePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareTypicalUsageFileRenamePeakRatePerMinute(antiRansomwareTypicalUsageFileRenamePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareTypicalUsageFileRenamePeakRatePerMinute(antiRansomwareTypicalUsageFileRenamePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareTypicalUsageFileRenamePeakRatePerMinute adds the antiRansomwareTypicalUsageFileRenamePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareTypicalUsageFileRenamePeakRatePerMinute(antiRansomwareTypicalUsageFileRenamePeakRatePerMinute *int64) {
+	o.AntiRansomwareTypicalUsageFileRenamePeakRatePerMinute = antiRansomwareTypicalUsageFileRenamePeakRatePerMinute
+}
+
+// WithAntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent adds the antiRansomwareTypicalUsageHighEntropyDataWritePeakPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent(antiRansomwareTypicalUsageHighEntropyDataWritePeakPercent *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent(antiRansomwareTypicalUsageHighEntropyDataWritePeakPercent)
+	return o
+}
+
+// SetAntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent adds the antiRansomwareTypicalUsageHighEntropyDataWritePeakPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent(antiRansomwareTypicalUsageHighEntropyDataWritePeakPercent *int64) {
+	o.AntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent = antiRansomwareTypicalUsageHighEntropyDataWritePeakPercent
+}
+
+// WithAntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute adds the antiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute)
+	return o
+}
+
+// SetAntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute adds the antiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute *int64) {
+	o.AntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute = antiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute
+}
+
 // WithAntiRansomwareUpdateBaselineFromSurge adds the antiRansomwareUpdateBaselineFromSurge to the volume collection get params
 func (o *VolumeCollectionGetParams) WithAntiRansomwareUpdateBaselineFromSurge(antiRansomwareUpdateBaselineFromSurge *bool) *VolumeCollectionGetParams {
 	o.SetAntiRansomwareUpdateBaselineFromSurge(antiRansomwareUpdateBaselineFromSurge)
@@ -3483,6 +4054,314 @@ func (o *VolumeCollectionGetParams) WithAntiRansomwareUpdateBaselineFromSurge(an
 // SetAntiRansomwareUpdateBaselineFromSurge adds the antiRansomwareUpdateBaselineFromSurge to the volume collection get params
 func (o *VolumeCollectionGetParams) SetAntiRansomwareUpdateBaselineFromSurge(antiRansomwareUpdateBaselineFromSurge *bool) {
 	o.AntiRansomwareUpdateBaselineFromSurge = antiRansomwareUpdateBaselineFromSurge
+}
+
+// WithAntiRansomwareWorkloadFileExtensionTypesCount adds the antiRansomwareWorkloadFileExtensionTypesCount to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadFileExtensionTypesCount(antiRansomwareWorkloadFileExtensionTypesCount *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadFileExtensionTypesCount(antiRansomwareWorkloadFileExtensionTypesCount)
+	return o
+}
+
+// SetAntiRansomwareWorkloadFileExtensionTypesCount adds the antiRansomwareWorkloadFileExtensionTypesCount to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadFileExtensionTypesCount(antiRansomwareWorkloadFileExtensionTypesCount *int64) {
+	o.AntiRansomwareWorkloadFileExtensionTypesCount = antiRansomwareWorkloadFileExtensionTypesCount
+}
+
+// WithAntiRansomwareWorkloadFileExtensionsObserved adds the antiRansomwareWorkloadFileExtensionsObserved to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadFileExtensionsObserved(antiRansomwareWorkloadFileExtensionsObserved *string) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadFileExtensionsObserved(antiRansomwareWorkloadFileExtensionsObserved)
+	return o
+}
+
+// SetAntiRansomwareWorkloadFileExtensionsObserved adds the antiRansomwareWorkloadFileExtensionsObserved to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadFileExtensionsObserved(antiRansomwareWorkloadFileExtensionsObserved *string) {
+	o.AntiRansomwareWorkloadFileExtensionsObserved = antiRansomwareWorkloadFileExtensionsObserved
+}
+
+// WithAntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute adds the antiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute(antiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute(antiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute adds the antiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute(antiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute *int64) {
+	o.AntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute = antiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute
+}
+
+// WithAntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute adds the antiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute(antiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute(antiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute adds the antiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute(antiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute *int64) {
+	o.AntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute = antiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute
+}
+
+// WithAntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute adds the antiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute(antiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute(antiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute adds the antiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute(antiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute *int64) {
+	o.AntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute = antiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute
+}
+
+// WithAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent adds the antiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent(antiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent(antiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent)
+	return o
+}
+
+// SetAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent adds the antiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent(antiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent *int64) {
+	o.AntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent = antiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent
+}
+
+// WithAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute adds the antiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute adds the antiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute *int64) {
+	o.AntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute = antiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute
+}
+
+// WithAntiRansomwareWorkloadNewlyObservedFileExtensionsCount adds the antiRansomwareWorkloadNewlyObservedFileExtensionsCount to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadNewlyObservedFileExtensionsCount(antiRansomwareWorkloadNewlyObservedFileExtensionsCount *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadNewlyObservedFileExtensionsCount(antiRansomwareWorkloadNewlyObservedFileExtensionsCount)
+	return o
+}
+
+// SetAntiRansomwareWorkloadNewlyObservedFileExtensionsCount adds the antiRansomwareWorkloadNewlyObservedFileExtensionsCount to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadNewlyObservedFileExtensionsCount(antiRansomwareWorkloadNewlyObservedFileExtensionsCount *int64) {
+	o.AntiRansomwareWorkloadNewlyObservedFileExtensionsCount = antiRansomwareWorkloadNewlyObservedFileExtensionsCount
+}
+
+// WithAntiRansomwareWorkloadNewlyObservedFileExtensionsName adds the antiRansomwareWorkloadNewlyObservedFileExtensionsName to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadNewlyObservedFileExtensionsName(antiRansomwareWorkloadNewlyObservedFileExtensionsName *string) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadNewlyObservedFileExtensionsName(antiRansomwareWorkloadNewlyObservedFileExtensionsName)
+	return o
+}
+
+// SetAntiRansomwareWorkloadNewlyObservedFileExtensionsName adds the antiRansomwareWorkloadNewlyObservedFileExtensionsName to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadNewlyObservedFileExtensionsName(antiRansomwareWorkloadNewlyObservedFileExtensionsName *string) {
+	o.AntiRansomwareWorkloadNewlyObservedFileExtensionsName = antiRansomwareWorkloadNewlyObservedFileExtensionsName
+}
+
+// WithAntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute adds the antiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute(antiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute(antiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute adds the antiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute(antiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute *int64) {
+	o.AntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute = antiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute
+}
+
+// WithAntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute adds the antiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute(antiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute(antiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute adds the antiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute(antiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute *int64) {
+	o.AntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute = antiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute
+}
+
+// WithAntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute adds the antiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute(antiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute(antiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute adds the antiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute(antiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute *int64) {
+	o.AntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute = antiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute
+}
+
+// WithAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent adds the antiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent(antiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent(antiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent adds the antiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent(antiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent *int64) {
+	o.AntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent = antiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent
+}
+
+// WithAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute adds the antiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute adds the antiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute *int64) {
+	o.AntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute = antiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute
+}
+
+// WithAntiRansomwareWorkloadSurgeStatisticsTime adds the antiRansomwareWorkloadSurgeStatisticsTime to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeStatisticsTime(antiRansomwareWorkloadSurgeStatisticsTime *string) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeStatisticsTime(antiRansomwareWorkloadSurgeStatisticsTime)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeStatisticsTime adds the antiRansomwareWorkloadSurgeStatisticsTime to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeStatisticsTime(antiRansomwareWorkloadSurgeStatisticsTime *string) {
+	o.AntiRansomwareWorkloadSurgeStatisticsTime = antiRansomwareWorkloadSurgeStatisticsTime
+}
+
+// WithAntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute adds the antiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute(antiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute(antiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute adds the antiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute(antiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute *int64) {
+	o.AntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute = antiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute
+}
+
+// WithAntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute adds the antiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute(antiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute(antiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute adds the antiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute(antiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute *int64) {
+	o.AntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute = antiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute
+}
+
+// WithAntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute adds the antiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute(antiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute(antiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute adds the antiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute(antiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute *int64) {
+	o.AntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute = antiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute
+}
+
+// WithAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent adds the antiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent(antiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent(antiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent adds the antiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent(antiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent *int64) {
+	o.AntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent = antiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent
+}
+
+// WithAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute adds the antiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute adds the antiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute *int64) {
+	o.AntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute = antiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute
+}
+
+// WithAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount adds the antiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount(antiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount(antiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount adds the antiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount(antiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount *int64) {
+	o.AntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount = antiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount
+}
+
+// WithAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName adds the antiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName(antiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName *string) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName(antiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName adds the antiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName(antiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName *string) {
+	o.AntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName = antiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName
+}
+
+// WithAntiRansomwareWorkloadSurgeUsageTime adds the antiRansomwareWorkloadSurgeUsageTime to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadSurgeUsageTime(antiRansomwareWorkloadSurgeUsageTime *string) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadSurgeUsageTime(antiRansomwareWorkloadSurgeUsageTime)
+	return o
+}
+
+// SetAntiRansomwareWorkloadSurgeUsageTime adds the antiRansomwareWorkloadSurgeUsageTime to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadSurgeUsageTime(antiRansomwareWorkloadSurgeUsageTime *string) {
+	o.AntiRansomwareWorkloadSurgeUsageTime = antiRansomwareWorkloadSurgeUsageTime
+}
+
+// WithAntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute adds the antiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute(antiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute(antiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute adds the antiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute(antiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute *int64) {
+	o.AntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute = antiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute
+}
+
+// WithAntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute adds the antiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute(antiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute(antiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute adds the antiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute(antiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute *int64) {
+	o.AntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute = antiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute
+}
+
+// WithAntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute adds the antiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute(antiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute(antiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute adds the antiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute(antiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute *int64) {
+	o.AntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute = antiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute
+}
+
+// WithAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent adds the antiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent(antiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent(antiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent)
+	return o
+}
+
+// SetAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent adds the antiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent(antiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent *int64) {
+	o.AntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent = antiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent
+}
+
+// WithAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute adds the antiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) WithAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute *int64) *VolumeCollectionGetParams {
+	o.SetAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute)
+	return o
+}
+
+// SetAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute adds the antiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute to the volume collection get params
+func (o *VolumeCollectionGetParams) SetAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute(antiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute *int64) {
+	o.AntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute = antiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute
 }
 
 // WithApplicationName adds the applicationName to the volume collection get params
@@ -3582,6 +4461,17 @@ func (o *VolumeCollectionGetParams) WithAutosizeShrinkThreshold(autosizeShrinkTh
 // SetAutosizeShrinkThreshold adds the autosizeShrinkThreshold to the volume collection get params
 func (o *VolumeCollectionGetParams) SetAutosizeShrinkThreshold(autosizeShrinkThreshold *int64) {
 	o.AutosizeShrinkThreshold = autosizeShrinkThreshold
+}
+
+// WithCloneHasFlexclone adds the cloneHasFlexclone to the volume collection get params
+func (o *VolumeCollectionGetParams) WithCloneHasFlexclone(cloneHasFlexclone *bool) *VolumeCollectionGetParams {
+	o.SetCloneHasFlexclone(cloneHasFlexclone)
+	return o
+}
+
+// SetCloneHasFlexclone adds the cloneHasFlexclone to the volume collection get params
+func (o *VolumeCollectionGetParams) SetCloneHasFlexclone(cloneHasFlexclone *bool) {
+	o.CloneHasFlexclone = cloneHasFlexclone
 }
 
 // WithCloneInheritedPhysicalUsed adds the cloneInheritedPhysicalUsed to the volume collection get params
@@ -4803,6 +5693,17 @@ func (o *VolumeCollectionGetParams) WithGranularData(granularData *bool) *Volume
 // SetGranularData adds the granularData to the volume collection get params
 func (o *VolumeCollectionGetParams) SetGranularData(granularData *bool) {
 	o.GranularData = granularData
+}
+
+// WithGranularDataMode adds the granularDataMode to the volume collection get params
+func (o *VolumeCollectionGetParams) WithGranularDataMode(granularDataMode *string) *VolumeCollectionGetParams {
+	o.SetGranularDataMode(granularDataMode)
+	return o
+}
+
+// SetGranularDataMode adds the granularDataMode to the volume collection get params
+func (o *VolumeCollectionGetParams) SetGranularDataMode(granularDataMode *string) {
+	o.GranularDataMode = granularDataMode
 }
 
 // WithGuaranteeHonored adds the guaranteeHonored to the volume collection get params
@@ -8882,6 +9783,210 @@ func (o *VolumeCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg 
 		}
 	}
 
+	if o.AntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate != nil {
+
+		// query param anti_ransomware.attack_detection_parameters.based_on_file_create_op_rate
+		var qrAntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate bool
+
+		if o.AntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate != nil {
+			qrAntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate = *o.AntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate
+		}
+		qAntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate := swag.FormatBool(qrAntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate)
+		if qAntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.attack_detection_parameters.based_on_file_create_op_rate", qAntiRansomwareAttackDetectionParametersBasedOnFileCreateOpRate); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate != nil {
+
+		// query param anti_ransomware.attack_detection_parameters.based_on_file_delete_op_rate
+		var qrAntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate bool
+
+		if o.AntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate != nil {
+			qrAntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate = *o.AntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate
+		}
+		qAntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate := swag.FormatBool(qrAntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate)
+		if qAntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.attack_detection_parameters.based_on_file_delete_op_rate", qAntiRansomwareAttackDetectionParametersBasedOnFileDeleteOpRate); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate != nil {
+
+		// query param anti_ransomware.attack_detection_parameters.based_on_file_rename_op_rate
+		var qrAntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate bool
+
+		if o.AntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate != nil {
+			qrAntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate = *o.AntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate
+		}
+		qAntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate := swag.FormatBool(qrAntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate)
+		if qAntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.attack_detection_parameters.based_on_file_rename_op_rate", qAntiRansomwareAttackDetectionParametersBasedOnFileRenameOpRate); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate != nil {
+
+		// query param anti_ransomware.attack_detection_parameters.based_on_high_entropy_data_rate
+		var qrAntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate bool
+
+		if o.AntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate != nil {
+			qrAntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate = *o.AntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate
+		}
+		qAntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate := swag.FormatBool(qrAntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate)
+		if qAntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.attack_detection_parameters.based_on_high_entropy_data_rate", qAntiRansomwareAttackDetectionParametersBasedOnHighEntropyDataRate); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension != nil {
+
+		// query param anti_ransomware.attack_detection_parameters.based_on_never_seen_before_file_extension
+		var qrAntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension bool
+
+		if o.AntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension != nil {
+			qrAntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension = *o.AntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension
+		}
+		qAntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension := swag.FormatBool(qrAntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension)
+		if qAntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.attack_detection_parameters.based_on_never_seen_before_file_extension", qAntiRansomwareAttackDetectionParametersBasedOnNeverSeenBeforeFileExtension); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent != nil {
+
+		// query param anti_ransomware.attack_detection_parameters.file_create_op_rate_surge_notify_percent
+		var qrAntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent int64
+
+		if o.AntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent != nil {
+			qrAntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent = *o.AntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent
+		}
+		qAntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent := swag.FormatInt64(qrAntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent)
+		if qAntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.attack_detection_parameters.file_create_op_rate_surge_notify_percent", qAntiRansomwareAttackDetectionParametersFileCreateOpRateSurgeNotifyPercent); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent != nil {
+
+		// query param anti_ransomware.attack_detection_parameters.file_delete_op_rate_surge_notify_percent
+		var qrAntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent int64
+
+		if o.AntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent != nil {
+			qrAntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent = *o.AntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent
+		}
+		qAntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent := swag.FormatInt64(qrAntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent)
+		if qAntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.attack_detection_parameters.file_delete_op_rate_surge_notify_percent", qAntiRansomwareAttackDetectionParametersFileDeleteOpRateSurgeNotifyPercent); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent != nil {
+
+		// query param anti_ransomware.attack_detection_parameters.file_rename_op_rate_surge_notify_percent
+		var qrAntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent int64
+
+		if o.AntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent != nil {
+			qrAntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent = *o.AntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent
+		}
+		qAntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent := swag.FormatInt64(qrAntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent)
+		if qAntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.attack_detection_parameters.file_rename_op_rate_surge_notify_percent", qAntiRansomwareAttackDetectionParametersFileRenameOpRateSurgeNotifyPercent); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent != nil {
+
+		// query param anti_ransomware.attack_detection_parameters.high_entropy_data_surge_notify_percent
+		var qrAntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent int64
+
+		if o.AntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent != nil {
+			qrAntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent = *o.AntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent
+		}
+		qAntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent := swag.FormatInt64(qrAntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent)
+		if qAntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.attack_detection_parameters.high_entropy_data_surge_notify_percent", qAntiRansomwareAttackDetectionParametersHighEntropyDataSurgeNotifyPercent); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold != nil {
+
+		// query param anti_ransomware.attack_detection_parameters.never_seen_before_file_extension_count_notify_threshold
+		var qrAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold int64
+
+		if o.AntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold != nil {
+			qrAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold = *o.AntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold
+		}
+		qAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold := swag.FormatInt64(qrAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold)
+		if qAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.attack_detection_parameters.never_seen_before_file_extension_count_notify_threshold", qAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionCountNotifyThreshold); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours != nil {
+
+		// query param anti_ransomware.attack_detection_parameters.never_seen_before_file_extension_duration_in_hours
+		var qrAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours int64
+
+		if o.AntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours != nil {
+			qrAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours = *o.AntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours
+		}
+		qAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours := swag.FormatInt64(qrAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours)
+		if qAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.attack_detection_parameters.never_seen_before_file_extension_duration_in_hours", qAntiRansomwareAttackDetectionParametersNeverSeenBeforeFileExtensionDurationInHours); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions != nil {
+
+		// query param anti_ransomware.attack_detection_parameters.relaxing_popular_file_extensions
+		var qrAntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions bool
+
+		if o.AntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions != nil {
+			qrAntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions = *o.AntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions
+		}
+		qAntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions := swag.FormatBool(qrAntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions)
+		if qAntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.attack_detection_parameters.relaxing_popular_file_extensions", qAntiRansomwareAttackDetectionParametersRelaxingPopularFileExtensions); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.AntiRansomwareAttackProbability != nil {
 
 		// query param anti_ransomware.attack_probability
@@ -9069,6 +10174,108 @@ func (o *VolumeCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg 
 		}
 	}
 
+	if o.AntiRansomwareSurgeUsageFileCreatePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.surge_usage.file_create_peak_rate_per_minute
+		var qrAntiRansomwareSurgeUsageFileCreatePeakRatePerMinute int64
+
+		if o.AntiRansomwareSurgeUsageFileCreatePeakRatePerMinute != nil {
+			qrAntiRansomwareSurgeUsageFileCreatePeakRatePerMinute = *o.AntiRansomwareSurgeUsageFileCreatePeakRatePerMinute
+		}
+		qAntiRansomwareSurgeUsageFileCreatePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareSurgeUsageFileCreatePeakRatePerMinute)
+		if qAntiRansomwareSurgeUsageFileCreatePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.surge_usage.file_create_peak_rate_per_minute", qAntiRansomwareSurgeUsageFileCreatePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareSurgeUsageFileDeletePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.surge_usage.file_delete_peak_rate_per_minute
+		var qrAntiRansomwareSurgeUsageFileDeletePeakRatePerMinute int64
+
+		if o.AntiRansomwareSurgeUsageFileDeletePeakRatePerMinute != nil {
+			qrAntiRansomwareSurgeUsageFileDeletePeakRatePerMinute = *o.AntiRansomwareSurgeUsageFileDeletePeakRatePerMinute
+		}
+		qAntiRansomwareSurgeUsageFileDeletePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareSurgeUsageFileDeletePeakRatePerMinute)
+		if qAntiRansomwareSurgeUsageFileDeletePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.surge_usage.file_delete_peak_rate_per_minute", qAntiRansomwareSurgeUsageFileDeletePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareSurgeUsageFileRenamePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.surge_usage.file_rename_peak_rate_per_minute
+		var qrAntiRansomwareSurgeUsageFileRenamePeakRatePerMinute int64
+
+		if o.AntiRansomwareSurgeUsageFileRenamePeakRatePerMinute != nil {
+			qrAntiRansomwareSurgeUsageFileRenamePeakRatePerMinute = *o.AntiRansomwareSurgeUsageFileRenamePeakRatePerMinute
+		}
+		qAntiRansomwareSurgeUsageFileRenamePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareSurgeUsageFileRenamePeakRatePerMinute)
+		if qAntiRansomwareSurgeUsageFileRenamePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.surge_usage.file_rename_peak_rate_per_minute", qAntiRansomwareSurgeUsageFileRenamePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent != nil {
+
+		// query param anti_ransomware.surge_usage.high_entropy_data_write_peak_percent
+		var qrAntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent int64
+
+		if o.AntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent != nil {
+			qrAntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent = *o.AntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent
+		}
+		qAntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent := swag.FormatInt64(qrAntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent)
+		if qAntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.surge_usage.high_entropy_data_write_peak_percent", qAntiRansomwareSurgeUsageHighEntropyDataWritePeakPercent); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute != nil {
+
+		// query param anti_ransomware.surge_usage.high_entropy_data_write_peak_rate_kb_per_minute
+		var qrAntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute int64
+
+		if o.AntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute != nil {
+			qrAntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute = *o.AntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute
+		}
+		qAntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute := swag.FormatInt64(qrAntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute)
+		if qAntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.surge_usage.high_entropy_data_write_peak_rate_kb_per_minute", qAntiRansomwareSurgeUsageHighEntropyDataWritePeakRateKbPerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareSurgeUsageTime != nil {
+
+		// query param anti_ransomware.surge_usage.time
+		var qrAntiRansomwareSurgeUsageTime string
+
+		if o.AntiRansomwareSurgeUsageTime != nil {
+			qrAntiRansomwareSurgeUsageTime = *o.AntiRansomwareSurgeUsageTime
+		}
+		qAntiRansomwareSurgeUsageTime := qrAntiRansomwareSurgeUsageTime
+		if qAntiRansomwareSurgeUsageTime != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.surge_usage.time", qAntiRansomwareSurgeUsageTime); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.AntiRansomwareSuspectFilesCount != nil {
 
 		// query param anti_ransomware.suspect_files.count
@@ -9120,6 +10327,91 @@ func (o *VolumeCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg 
 		}
 	}
 
+	if o.AntiRansomwareTypicalUsageFileCreatePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.typical_usage.file_create_peak_rate_per_minute
+		var qrAntiRansomwareTypicalUsageFileCreatePeakRatePerMinute int64
+
+		if o.AntiRansomwareTypicalUsageFileCreatePeakRatePerMinute != nil {
+			qrAntiRansomwareTypicalUsageFileCreatePeakRatePerMinute = *o.AntiRansomwareTypicalUsageFileCreatePeakRatePerMinute
+		}
+		qAntiRansomwareTypicalUsageFileCreatePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareTypicalUsageFileCreatePeakRatePerMinute)
+		if qAntiRansomwareTypicalUsageFileCreatePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.typical_usage.file_create_peak_rate_per_minute", qAntiRansomwareTypicalUsageFileCreatePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareTypicalUsageFileDeletePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.typical_usage.file_delete_peak_rate_per_minute
+		var qrAntiRansomwareTypicalUsageFileDeletePeakRatePerMinute int64
+
+		if o.AntiRansomwareTypicalUsageFileDeletePeakRatePerMinute != nil {
+			qrAntiRansomwareTypicalUsageFileDeletePeakRatePerMinute = *o.AntiRansomwareTypicalUsageFileDeletePeakRatePerMinute
+		}
+		qAntiRansomwareTypicalUsageFileDeletePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareTypicalUsageFileDeletePeakRatePerMinute)
+		if qAntiRansomwareTypicalUsageFileDeletePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.typical_usage.file_delete_peak_rate_per_minute", qAntiRansomwareTypicalUsageFileDeletePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareTypicalUsageFileRenamePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.typical_usage.file_rename_peak_rate_per_minute
+		var qrAntiRansomwareTypicalUsageFileRenamePeakRatePerMinute int64
+
+		if o.AntiRansomwareTypicalUsageFileRenamePeakRatePerMinute != nil {
+			qrAntiRansomwareTypicalUsageFileRenamePeakRatePerMinute = *o.AntiRansomwareTypicalUsageFileRenamePeakRatePerMinute
+		}
+		qAntiRansomwareTypicalUsageFileRenamePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareTypicalUsageFileRenamePeakRatePerMinute)
+		if qAntiRansomwareTypicalUsageFileRenamePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.typical_usage.file_rename_peak_rate_per_minute", qAntiRansomwareTypicalUsageFileRenamePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent != nil {
+
+		// query param anti_ransomware.typical_usage.high_entropy_data_write_peak_percent
+		var qrAntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent int64
+
+		if o.AntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent != nil {
+			qrAntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent = *o.AntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent
+		}
+		qAntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent := swag.FormatInt64(qrAntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent)
+		if qAntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.typical_usage.high_entropy_data_write_peak_percent", qAntiRansomwareTypicalUsageHighEntropyDataWritePeakPercent); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute != nil {
+
+		// query param anti_ransomware.typical_usage.high_entropy_data_write_peak_rate_kb_per_minute
+		var qrAntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute int64
+
+		if o.AntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute != nil {
+			qrAntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute = *o.AntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute
+		}
+		qAntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute := swag.FormatInt64(qrAntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute)
+		if qAntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.typical_usage.high_entropy_data_write_peak_rate_kb_per_minute", qAntiRansomwareTypicalUsageHighEntropyDataWritePeakRateKbPerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.AntiRansomwareUpdateBaselineFromSurge != nil {
 
 		// query param anti_ransomware.update_baseline_from_surge
@@ -9132,6 +10424,482 @@ func (o *VolumeCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg 
 		if qAntiRansomwareUpdateBaselineFromSurge != "" {
 
 			if err := r.SetQueryParam("anti_ransomware.update_baseline_from_surge", qAntiRansomwareUpdateBaselineFromSurge); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadFileExtensionTypesCount != nil {
+
+		// query param anti_ransomware.workload.file_extension_types_count
+		var qrAntiRansomwareWorkloadFileExtensionTypesCount int64
+
+		if o.AntiRansomwareWorkloadFileExtensionTypesCount != nil {
+			qrAntiRansomwareWorkloadFileExtensionTypesCount = *o.AntiRansomwareWorkloadFileExtensionTypesCount
+		}
+		qAntiRansomwareWorkloadFileExtensionTypesCount := swag.FormatInt64(qrAntiRansomwareWorkloadFileExtensionTypesCount)
+		if qAntiRansomwareWorkloadFileExtensionTypesCount != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.file_extension_types_count", qAntiRansomwareWorkloadFileExtensionTypesCount); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadFileExtensionsObserved != nil {
+
+		// query param anti_ransomware.workload.file_extensions_observed
+		var qrAntiRansomwareWorkloadFileExtensionsObserved string
+
+		if o.AntiRansomwareWorkloadFileExtensionsObserved != nil {
+			qrAntiRansomwareWorkloadFileExtensionsObserved = *o.AntiRansomwareWorkloadFileExtensionsObserved
+		}
+		qAntiRansomwareWorkloadFileExtensionsObserved := qrAntiRansomwareWorkloadFileExtensionsObserved
+		if qAntiRansomwareWorkloadFileExtensionsObserved != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.file_extensions_observed", qAntiRansomwareWorkloadFileExtensionsObserved); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.workload.historical_statistics.file_create_peak_rate_per_minute
+		var qrAntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute int64
+
+		if o.AntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute != nil {
+			qrAntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute = *o.AntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute
+		}
+		qAntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute)
+		if qAntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.historical_statistics.file_create_peak_rate_per_minute", qAntiRansomwareWorkloadHistoricalStatisticsFileCreatePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.workload.historical_statistics.file_delete_peak_rate_per_minute
+		var qrAntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute int64
+
+		if o.AntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute != nil {
+			qrAntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute = *o.AntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute
+		}
+		qAntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute)
+		if qAntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.historical_statistics.file_delete_peak_rate_per_minute", qAntiRansomwareWorkloadHistoricalStatisticsFileDeletePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.workload.historical_statistics.file_rename_peak_rate_per_minute
+		var qrAntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute int64
+
+		if o.AntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute != nil {
+			qrAntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute = *o.AntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute
+		}
+		qAntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute)
+		if qAntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.historical_statistics.file_rename_peak_rate_per_minute", qAntiRansomwareWorkloadHistoricalStatisticsFileRenamePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent != nil {
+
+		// query param anti_ransomware.workload.historical_statistics.high_entropy_data_write_peak_percent
+		var qrAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent int64
+
+		if o.AntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent != nil {
+			qrAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent = *o.AntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent
+		}
+		qAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent := swag.FormatInt64(qrAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent)
+		if qAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.historical_statistics.high_entropy_data_write_peak_percent", qAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakPercent); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute != nil {
+
+		// query param anti_ransomware.workload.historical_statistics.high_entropy_data_write_peak_rate_kb_per_minute
+		var qrAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute int64
+
+		if o.AntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute != nil {
+			qrAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute = *o.AntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute
+		}
+		qAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute)
+		if qAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.historical_statistics.high_entropy_data_write_peak_rate_kb_per_minute", qAntiRansomwareWorkloadHistoricalStatisticsHighEntropyDataWritePeakRateKbPerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadNewlyObservedFileExtensionsCount != nil {
+
+		// query param anti_ransomware.workload.newly_observed_file_extensions.count
+		var qrAntiRansomwareWorkloadNewlyObservedFileExtensionsCount int64
+
+		if o.AntiRansomwareWorkloadNewlyObservedFileExtensionsCount != nil {
+			qrAntiRansomwareWorkloadNewlyObservedFileExtensionsCount = *o.AntiRansomwareWorkloadNewlyObservedFileExtensionsCount
+		}
+		qAntiRansomwareWorkloadNewlyObservedFileExtensionsCount := swag.FormatInt64(qrAntiRansomwareWorkloadNewlyObservedFileExtensionsCount)
+		if qAntiRansomwareWorkloadNewlyObservedFileExtensionsCount != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.newly_observed_file_extensions.count", qAntiRansomwareWorkloadNewlyObservedFileExtensionsCount); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadNewlyObservedFileExtensionsName != nil {
+
+		// query param anti_ransomware.workload.newly_observed_file_extensions.name
+		var qrAntiRansomwareWorkloadNewlyObservedFileExtensionsName string
+
+		if o.AntiRansomwareWorkloadNewlyObservedFileExtensionsName != nil {
+			qrAntiRansomwareWorkloadNewlyObservedFileExtensionsName = *o.AntiRansomwareWorkloadNewlyObservedFileExtensionsName
+		}
+		qAntiRansomwareWorkloadNewlyObservedFileExtensionsName := qrAntiRansomwareWorkloadNewlyObservedFileExtensionsName
+		if qAntiRansomwareWorkloadNewlyObservedFileExtensionsName != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.newly_observed_file_extensions.name", qAntiRansomwareWorkloadNewlyObservedFileExtensionsName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.workload.surge_statistics.file_create_peak_rate_per_minute
+		var qrAntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute int64
+
+		if o.AntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute != nil {
+			qrAntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute = *o.AntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute
+		}
+		qAntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute)
+		if qAntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_statistics.file_create_peak_rate_per_minute", qAntiRansomwareWorkloadSurgeStatisticsFileCreatePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.workload.surge_statistics.file_delete_peak_rate_per_minute
+		var qrAntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute int64
+
+		if o.AntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute != nil {
+			qrAntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute = *o.AntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute
+		}
+		qAntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute)
+		if qAntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_statistics.file_delete_peak_rate_per_minute", qAntiRansomwareWorkloadSurgeStatisticsFileDeletePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.workload.surge_statistics.file_rename_peak_rate_per_minute
+		var qrAntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute int64
+
+		if o.AntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute != nil {
+			qrAntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute = *o.AntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute
+		}
+		qAntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute)
+		if qAntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_statistics.file_rename_peak_rate_per_minute", qAntiRansomwareWorkloadSurgeStatisticsFileRenamePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent != nil {
+
+		// query param anti_ransomware.workload.surge_statistics.high_entropy_data_write_peak_percent
+		var qrAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent int64
+
+		if o.AntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent != nil {
+			qrAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent = *o.AntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent
+		}
+		qAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent := swag.FormatInt64(qrAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent)
+		if qAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_statistics.high_entropy_data_write_peak_percent", qAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakPercent); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute != nil {
+
+		// query param anti_ransomware.workload.surge_statistics.high_entropy_data_write_peak_rate_kb_per_minute
+		var qrAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute int64
+
+		if o.AntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute != nil {
+			qrAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute = *o.AntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute
+		}
+		qAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute)
+		if qAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_statistics.high_entropy_data_write_peak_rate_kb_per_minute", qAntiRansomwareWorkloadSurgeStatisticsHighEntropyDataWritePeakRateKbPerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeStatisticsTime != nil {
+
+		// query param anti_ransomware.workload.surge_statistics.time
+		var qrAntiRansomwareWorkloadSurgeStatisticsTime string
+
+		if o.AntiRansomwareWorkloadSurgeStatisticsTime != nil {
+			qrAntiRansomwareWorkloadSurgeStatisticsTime = *o.AntiRansomwareWorkloadSurgeStatisticsTime
+		}
+		qAntiRansomwareWorkloadSurgeStatisticsTime := qrAntiRansomwareWorkloadSurgeStatisticsTime
+		if qAntiRansomwareWorkloadSurgeStatisticsTime != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_statistics.time", qAntiRansomwareWorkloadSurgeStatisticsTime); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.workload.surge_usage.file_create_peak_rate_per_minute
+		var qrAntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute int64
+
+		if o.AntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute != nil {
+			qrAntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute = *o.AntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute
+		}
+		qAntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute)
+		if qAntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_usage.file_create_peak_rate_per_minute", qAntiRansomwareWorkloadSurgeUsageFileCreatePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.workload.surge_usage.file_delete_peak_rate_per_minute
+		var qrAntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute int64
+
+		if o.AntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute != nil {
+			qrAntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute = *o.AntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute
+		}
+		qAntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute)
+		if qAntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_usage.file_delete_peak_rate_per_minute", qAntiRansomwareWorkloadSurgeUsageFileDeletePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.workload.surge_usage.file_rename_peak_rate_per_minute
+		var qrAntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute int64
+
+		if o.AntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute != nil {
+			qrAntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute = *o.AntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute
+		}
+		qAntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute)
+		if qAntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_usage.file_rename_peak_rate_per_minute", qAntiRansomwareWorkloadSurgeUsageFileRenamePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent != nil {
+
+		// query param anti_ransomware.workload.surge_usage.high_entropy_data_write_peak_percent
+		var qrAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent int64
+
+		if o.AntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent != nil {
+			qrAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent = *o.AntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent
+		}
+		qAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent := swag.FormatInt64(qrAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent)
+		if qAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_usage.high_entropy_data_write_peak_percent", qAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakPercent); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute != nil {
+
+		// query param anti_ransomware.workload.surge_usage.high_entropy_data_write_peak_rate_kb_per_minute
+		var qrAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute int64
+
+		if o.AntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute != nil {
+			qrAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute = *o.AntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute
+		}
+		qAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute)
+		if qAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_usage.high_entropy_data_write_peak_rate_kb_per_minute", qAntiRansomwareWorkloadSurgeUsageHighEntropyDataWritePeakRateKbPerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount != nil {
+
+		// query param anti_ransomware.workload.surge_usage.newly_observed_file_extensions.count
+		var qrAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount int64
+
+		if o.AntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount != nil {
+			qrAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount = *o.AntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount
+		}
+		qAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount := swag.FormatInt64(qrAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount)
+		if qAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_usage.newly_observed_file_extensions.count", qAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsCount); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName != nil {
+
+		// query param anti_ransomware.workload.surge_usage.newly_observed_file_extensions.name
+		var qrAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName string
+
+		if o.AntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName != nil {
+			qrAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName = *o.AntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName
+		}
+		qAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName := qrAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName
+		if qAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_usage.newly_observed_file_extensions.name", qAntiRansomwareWorkloadSurgeUsageNewlyObservedFileExtensionsName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadSurgeUsageTime != nil {
+
+		// query param anti_ransomware.workload.surge_usage.time
+		var qrAntiRansomwareWorkloadSurgeUsageTime string
+
+		if o.AntiRansomwareWorkloadSurgeUsageTime != nil {
+			qrAntiRansomwareWorkloadSurgeUsageTime = *o.AntiRansomwareWorkloadSurgeUsageTime
+		}
+		qAntiRansomwareWorkloadSurgeUsageTime := qrAntiRansomwareWorkloadSurgeUsageTime
+		if qAntiRansomwareWorkloadSurgeUsageTime != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.surge_usage.time", qAntiRansomwareWorkloadSurgeUsageTime); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.workload.typical_usage.file_create_peak_rate_per_minute
+		var qrAntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute int64
+
+		if o.AntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute != nil {
+			qrAntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute = *o.AntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute
+		}
+		qAntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute)
+		if qAntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.typical_usage.file_create_peak_rate_per_minute", qAntiRansomwareWorkloadTypicalUsageFileCreatePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.workload.typical_usage.file_delete_peak_rate_per_minute
+		var qrAntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute int64
+
+		if o.AntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute != nil {
+			qrAntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute = *o.AntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute
+		}
+		qAntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute)
+		if qAntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.typical_usage.file_delete_peak_rate_per_minute", qAntiRansomwareWorkloadTypicalUsageFileDeletePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute != nil {
+
+		// query param anti_ransomware.workload.typical_usage.file_rename_peak_rate_per_minute
+		var qrAntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute int64
+
+		if o.AntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute != nil {
+			qrAntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute = *o.AntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute
+		}
+		qAntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute)
+		if qAntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.typical_usage.file_rename_peak_rate_per_minute", qAntiRansomwareWorkloadTypicalUsageFileRenamePeakRatePerMinute); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent != nil {
+
+		// query param anti_ransomware.workload.typical_usage.high_entropy_data_write_peak_percent
+		var qrAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent int64
+
+		if o.AntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent != nil {
+			qrAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent = *o.AntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent
+		}
+		qAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent := swag.FormatInt64(qrAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent)
+		if qAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.typical_usage.high_entropy_data_write_peak_percent", qAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakPercent); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute != nil {
+
+		// query param anti_ransomware.workload.typical_usage.high_entropy_data_write_peak_rate_kb_per_minute
+		var qrAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute int64
+
+		if o.AntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute != nil {
+			qrAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute = *o.AntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute
+		}
+		qAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute := swag.FormatInt64(qrAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute)
+		if qAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute != "" {
+
+			if err := r.SetQueryParam("anti_ransomware.workload.typical_usage.high_entropy_data_write_peak_rate_kb_per_minute", qAntiRansomwareWorkloadTypicalUsageHighEntropyDataWritePeakRateKbPerMinute); err != nil {
 				return err
 			}
 		}
@@ -9285,6 +11053,23 @@ func (o *VolumeCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg 
 		if qAutosizeShrinkThreshold != "" {
 
 			if err := r.SetQueryParam("autosize.shrink_threshold", qAutosizeShrinkThreshold); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.CloneHasFlexclone != nil {
+
+		// query param clone.has_flexclone
+		var qrCloneHasFlexclone bool
+
+		if o.CloneHasFlexclone != nil {
+			qrCloneHasFlexclone = *o.CloneHasFlexclone
+		}
+		qCloneHasFlexclone := swag.FormatBool(qrCloneHasFlexclone)
+		if qCloneHasFlexclone != "" {
+
+			if err := r.SetQueryParam("clone.has_flexclone", qCloneHasFlexclone); err != nil {
 				return err
 			}
 		}
@@ -11166,6 +12951,23 @@ func (o *VolumeCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg 
 		if qGranularData != "" {
 
 			if err := r.SetQueryParam("granular_data", qGranularData); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.GranularDataMode != nil {
+
+		// query param granular_data_mode
+		var qrGranularDataMode string
+
+		if o.GranularDataMode != nil {
+			qrGranularDataMode = *o.GranularDataMode
+		}
+		qGranularDataMode := qrGranularDataMode
+		if qGranularDataMode != "" {
+
+			if err := r.SetQueryParam("granular_data_mode", qGranularDataMode); err != nil {
 				return err
 			}
 		}

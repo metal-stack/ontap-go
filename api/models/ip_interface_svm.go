@@ -654,6 +654,9 @@ type IPInterfaceSvmInlineLocation struct {
 
 	// home node
 	HomeNode *IPInterfaceSvmInlineLocationInlineHomeNode `json:"home_node,omitempty" yaml:"home_node,omitempty"`
+
+	// home port
+	HomePort *PortSvm `json:"home_port,omitempty" yaml:"home_port,omitempty"`
 }
 
 // Validate validates this ip interface svm inline location
@@ -665,6 +668,10 @@ func (m *IPInterfaceSvmInlineLocation) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateHomeNode(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateHomePort(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -712,6 +719,25 @@ func (m *IPInterfaceSvmInlineLocation) validateHomeNode(formats strfmt.Registry)
 	return nil
 }
 
+func (m *IPInterfaceSvmInlineLocation) validateHomePort(formats strfmt.Registry) error {
+	if swag.IsZero(m.HomePort) { // not required
+		return nil
+	}
+
+	if m.HomePort != nil {
+		if err := m.HomePort.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location" + "." + "home_port")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location" + "." + "home_port")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 // ContextValidate validate this ip interface svm inline location based on the context it is used
 func (m *IPInterfaceSvmInlineLocation) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
@@ -721,6 +747,10 @@ func (m *IPInterfaceSvmInlineLocation) ContextValidate(ctx context.Context, form
 	}
 
 	if err := m.contextValidateHomeNode(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHomePort(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -764,6 +794,27 @@ func (m *IPInterfaceSvmInlineLocation) contextValidateHomeNode(ctx context.Conte
 				return ve.ValidateName("location" + "." + "home_node")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("location" + "." + "home_node")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *IPInterfaceSvmInlineLocation) contextValidateHomePort(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.HomePort != nil {
+
+		if swag.IsZero(m.HomePort) { // not required
+			return nil
+		}
+
+		if err := m.HomePort.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("location" + "." + "home_port")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("location" + "." + "home_port")
 			}
 			return err
 		}

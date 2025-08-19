@@ -120,9 +120,40 @@ func NewNetworkIPInterfacesGetDefault(code int) *NetworkIPInterfacesGetDefault {
 }
 
 /*
-NetworkIPInterfacesGetDefault describes a response with status code -1, with default header values.
+	NetworkIPInterfacesGetDefault describes a response with status code -1, with default header values.
 
-Error
+	ONTAP Error Response Codes
+
+| Error Code | Description |
+| ---------- | ----------- |
+| 53282769 | Not all nodes support enabling the LIF recommendations feature. |
+| 53282770 | No matching subnets are configured in IPspace. |
+| 53282772 | Not enough available IPs in subnet. |
+| 53282773 | Not enough locations available on node for subnet. |
+| 53282774 | The specified SVM UUID is invalid. |
+| 53282775 | The specified SVM name is invalid. |
+| 53282776 | The specified SVM name and UUID do not match. |
+| 53282777 | The specified SVM does not exist in the IPspace. |
+| 53282778 | The specified SVM does not exist in the IPspace. |
+| 53282779 | The specified IPspace UUID is invalid. |
+| 53282780 | The specified IPspace name is invalid. |
+| 53282781 | The specified IPspace UUID and name do not match. |
+| 53282782 | The specified service policy UUID does not exist. |
+| 53282783 | THe specified service policy UUID and name do not match. |
+| 53282784 | The specified service policy does not exist in the SVM. |
+| 53282785 | The specified service policy does not exist in the IPspace. |
+| 53282786 | The specified broadcast domain does not exist. |
+| 53282787 | The specified broadcast domain UUID and name do not match. |
+| 53282788 | The specified broadcast domain UUID does not exist in the IPspace. |
+| 53282789 | The specified broadcast domain name does not exist in the IPspace. |
+| 53282790 | The specified subnet UUID does not exist. |
+| 53282791 | The specified subnet UUID and name do not match. |
+| 53282792 | The specified subnet does not exist in the IPspace. |
+| 53282793 | The specified subnet does not match the specified broadcast domain. |
+| 53282794 | The specified subnet name does not exist in the IPspace. |
+| 53282795 | The specified subnet name does not exist in the broadcast domain. |
+| 53282796 | The specified SVM has a type that is not supported. |
+Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type NetworkIPInterfacesGetDefault struct {
 	_statusCode int

@@ -228,6 +228,30 @@ type NvmeSubsystemControllerCollectionGetParams struct {
 	*/
 	SvmUUID *string
 
+	/* TLSCipher.
+
+	   Filter by tls.cipher
+	*/
+	TLSCipher *string
+
+	/* TLSKeyType.
+
+	   Filter by tls.key_type
+	*/
+	TLSKeyType *string
+
+	/* TLSPskIdentity.
+
+	   Filter by tls.psk_identity
+	*/
+	TLSPskIdentity *string
+
+	/* TransportProtocol.
+
+	   Filter by transport_protocol
+	*/
+	TransportProtocol *string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -590,6 +614,50 @@ func (o *NvmeSubsystemControllerCollectionGetParams) WithSvmUUID(svmUUID *string
 // SetSvmUUID adds the svmUuid to the nvme subsystem controller collection get params
 func (o *NvmeSubsystemControllerCollectionGetParams) SetSvmUUID(svmUUID *string) {
 	o.SvmUUID = svmUUID
+}
+
+// WithTLSCipher adds the tLSCipher to the nvme subsystem controller collection get params
+func (o *NvmeSubsystemControllerCollectionGetParams) WithTLSCipher(tLSCipher *string) *NvmeSubsystemControllerCollectionGetParams {
+	o.SetTLSCipher(tLSCipher)
+	return o
+}
+
+// SetTLSCipher adds the tlsCipher to the nvme subsystem controller collection get params
+func (o *NvmeSubsystemControllerCollectionGetParams) SetTLSCipher(tLSCipher *string) {
+	o.TLSCipher = tLSCipher
+}
+
+// WithTLSKeyType adds the tLSKeyType to the nvme subsystem controller collection get params
+func (o *NvmeSubsystemControllerCollectionGetParams) WithTLSKeyType(tLSKeyType *string) *NvmeSubsystemControllerCollectionGetParams {
+	o.SetTLSKeyType(tLSKeyType)
+	return o
+}
+
+// SetTLSKeyType adds the tlsKeyType to the nvme subsystem controller collection get params
+func (o *NvmeSubsystemControllerCollectionGetParams) SetTLSKeyType(tLSKeyType *string) {
+	o.TLSKeyType = tLSKeyType
+}
+
+// WithTLSPskIdentity adds the tLSPskIdentity to the nvme subsystem controller collection get params
+func (o *NvmeSubsystemControllerCollectionGetParams) WithTLSPskIdentity(tLSPskIdentity *string) *NvmeSubsystemControllerCollectionGetParams {
+	o.SetTLSPskIdentity(tLSPskIdentity)
+	return o
+}
+
+// SetTLSPskIdentity adds the tlsPskIdentity to the nvme subsystem controller collection get params
+func (o *NvmeSubsystemControllerCollectionGetParams) SetTLSPskIdentity(tLSPskIdentity *string) {
+	o.TLSPskIdentity = tLSPskIdentity
+}
+
+// WithTransportProtocol adds the transportProtocol to the nvme subsystem controller collection get params
+func (o *NvmeSubsystemControllerCollectionGetParams) WithTransportProtocol(transportProtocol *string) *NvmeSubsystemControllerCollectionGetParams {
+	o.SetTransportProtocol(transportProtocol)
+	return o
+}
+
+// SetTransportProtocol adds the transportProtocol to the nvme subsystem controller collection get params
+func (o *NvmeSubsystemControllerCollectionGetParams) SetTransportProtocol(transportProtocol *string) {
+	o.TransportProtocol = transportProtocol
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -1042,6 +1110,74 @@ func (o *NvmeSubsystemControllerCollectionGetParams) WriteToRequest(r runtime.Cl
 		if qSvmUUID != "" {
 
 			if err := r.SetQueryParam("svm.uuid", qSvmUUID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.TLSCipher != nil {
+
+		// query param tls.cipher
+		var qrTLSCipher string
+
+		if o.TLSCipher != nil {
+			qrTLSCipher = *o.TLSCipher
+		}
+		qTLSCipher := qrTLSCipher
+		if qTLSCipher != "" {
+
+			if err := r.SetQueryParam("tls.cipher", qTLSCipher); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.TLSKeyType != nil {
+
+		// query param tls.key_type
+		var qrTLSKeyType string
+
+		if o.TLSKeyType != nil {
+			qrTLSKeyType = *o.TLSKeyType
+		}
+		qTLSKeyType := qrTLSKeyType
+		if qTLSKeyType != "" {
+
+			if err := r.SetQueryParam("tls.key_type", qTLSKeyType); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.TLSPskIdentity != nil {
+
+		// query param tls.psk_identity
+		var qrTLSPskIdentity string
+
+		if o.TLSPskIdentity != nil {
+			qrTLSPskIdentity = *o.TLSPskIdentity
+		}
+		qTLSPskIdentity := qrTLSPskIdentity
+		if qTLSPskIdentity != "" {
+
+			if err := r.SetQueryParam("tls.psk_identity", qTLSPskIdentity); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.TransportProtocol != nil {
+
+		// query param transport_protocol
+		var qrTransportProtocol string
+
+		if o.TransportProtocol != nil {
+			qrTransportProtocol = *o.TransportProtocol
+		}
+		qTransportProtocol := qrTransportProtocol
+		if qTransportProtocol != "" {
+
+			if err := r.SetQueryParam("transport_protocol", qTransportProtocol); err != nil {
 				return err
 			}
 		}

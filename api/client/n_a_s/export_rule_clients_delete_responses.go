@@ -127,6 +127,7 @@ func NewExportRuleClientsDeleteDefault(code int) *ExportRuleClientsDeleteDefault
 | 1704054    | Invalid clientmatch: invalid characters in netgroup name. Valid characters for a netgroup name are 0-9, A-Z, a-z, ".", "_" and "-" |
 | 1704064    | Clientmatch host name too long |
 | 1704065    | Clientmatch domain name too long |
+| 6691623    | User is not authorized |
 */
 type ExportRuleClientsDeleteDefault struct {
 	_statusCode int

@@ -62,6 +62,12 @@ CifsDomainCollectionGetParams contains all the parameters to send to the API end
 */
 type CifsDomainCollectionGetParams struct {
 
+	/* ClientID.
+
+	   Filter by client_id
+	*/
+	ClientID *string
+
 	/* DiscoveredServersDomain.
 
 	   Filter by discovered_servers.domain
@@ -216,6 +222,12 @@ type CifsDomainCollectionGetParams struct {
 	*/
 	SvmUUID *string
 
+	/* TenantID.
+
+	   Filter by tenant_id
+	*/
+	TenantID *string
+
 	/* TrustRelationshipsHomeDomain.
 
 	   Filter by trust_relationships.home_domain
@@ -305,6 +317,17 @@ func (o *CifsDomainCollectionGetParams) WithHTTPClient(client *http.Client) *Cif
 // SetHTTPClient adds the HTTPClient to the cifs domain collection get params
 func (o *CifsDomainCollectionGetParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
+}
+
+// WithClientID adds the clientID to the cifs domain collection get params
+func (o *CifsDomainCollectionGetParams) WithClientID(clientID *string) *CifsDomainCollectionGetParams {
+	o.SetClientID(clientID)
+	return o
+}
+
+// SetClientID adds the clientId to the cifs domain collection get params
+func (o *CifsDomainCollectionGetParams) SetClientID(clientID *string) {
+	o.ClientID = clientID
 }
 
 // WithDiscoveredServersDomain adds the discoveredServersDomain to the cifs domain collection get params
@@ -582,6 +605,17 @@ func (o *CifsDomainCollectionGetParams) SetSvmUUID(svmUUID *string) {
 	o.SvmUUID = svmUUID
 }
 
+// WithTenantID adds the tenantID to the cifs domain collection get params
+func (o *CifsDomainCollectionGetParams) WithTenantID(tenantID *string) *CifsDomainCollectionGetParams {
+	o.SetTenantID(tenantID)
+	return o
+}
+
+// SetTenantID adds the tenantId to the cifs domain collection get params
+func (o *CifsDomainCollectionGetParams) SetTenantID(tenantID *string) {
+	o.TenantID = tenantID
+}
+
 // WithTrustRelationshipsHomeDomain adds the trustRelationshipsHomeDomain to the cifs domain collection get params
 func (o *CifsDomainCollectionGetParams) WithTrustRelationshipsHomeDomain(trustRelationshipsHomeDomain *string) *CifsDomainCollectionGetParams {
 	o.SetTrustRelationshipsHomeDomain(trustRelationshipsHomeDomain)
@@ -633,6 +667,23 @@ func (o *CifsDomainCollectionGetParams) WriteToRequest(r runtime.ClientRequest, 
 		return err
 	}
 	var res []error
+
+	if o.ClientID != nil {
+
+		// query param client_id
+		var qrClientID string
+
+		if o.ClientID != nil {
+			qrClientID = *o.ClientID
+		}
+		qClientID := qrClientID
+		if qClientID != "" {
+
+			if err := r.SetQueryParam("client_id", qClientID); err != nil {
+				return err
+			}
+		}
+	}
 
 	if o.DiscoveredServersDomain != nil {
 
@@ -1042,6 +1093,23 @@ func (o *CifsDomainCollectionGetParams) WriteToRequest(r runtime.ClientRequest, 
 		if qSvmUUID != "" {
 
 			if err := r.SetQueryParam("svm.uuid", qSvmUUID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.TenantID != nil {
+
+		// query param tenant_id
+		var qrTenantID string
+
+		if o.TenantID != nil {
+			qrTenantID = *o.TenantID
+		}
+		qTenantID := qrTenantID
+		if qTenantID != "" {
+
+			if err := r.SetQueryParam("tenant_id", qTenantID); err != nil {
 				return err
 			}
 		}

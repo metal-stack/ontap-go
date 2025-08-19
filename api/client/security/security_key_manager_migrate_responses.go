@@ -213,9 +213,12 @@ func NewSecurityKeyManagerMigrateDefault(code int) *SecurityKeyManagerMigrateDef
 | 65537551 | Top-level internal key protection key (KEK) is unavailable on one or more nodes. |
 | 65537552 | Embedded KMIP server status is not available. |
 | 65537564 | Check that the Azure Key Vault Service is healthy and retry the operation. |
+| 65537611 | Key migration cannot be performed on the SVM while the enabled keystore configuration is being switched. If a previous attempt to switch the keystore configuration failed, or was interrupted, the system will continue to prevent key migration for the SVM. Use the REST API PATCH method "/api/security/key-stores/{uuid}" to re-run and complete the operation. |
 | 65537720 | Failed to configure the Google Cloud Key Management Service for an SVM because a key manager is already configured. |
 | 65537736 | Check that the Google Cloud Key Management Service is healthy and retry the operation. |
 | 65538107 | Key migration to an IBM Key Lore key manager is not supported. |
+| 65539434 | Cannot perform key migration on the SVM while the keystore is being initialized. Wait until the keystore is in the active state, and rerun the key migration operation. |
+| 65539435 | Cannot perform key migration on the SVM while the keystore is being disabled. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SecurityKeyManagerMigrateDefault struct {

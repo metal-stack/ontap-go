@@ -58,13 +58,18 @@ type SecurityOauth2 struct {
 	// Example: https://johndoe:secretpass@proxy.example.com:8080
 	OutgoingProxy *string `json:"outgoing_proxy,omitempty" yaml:"outgoing_proxy,omitempty"`
 
+	// The Identity Provider type.
+	// Example: entra
+	// Enum: ["basic","keycloak","auth0","adfs","entra"]
+	Provider *string `json:"provider,omitempty" yaml:"provider,omitempty"`
+
 	// The remote user claim.
 	RemoteUserClaim *string `json:"remote_user_claim,omitempty" yaml:"remote_user_claim,omitempty"`
 
 	// Indicates whether or not to validate the input URIs. Default value is false.
 	SkipURIValidation *bool `json:"skip_uri_validation,omitempty" yaml:"skip_uri_validation,omitempty"`
 
-	// Indicates whether or not to use locally confgiured roles, if present. Default value is false.
+	// Indicates whether or not to use locally configured roles, if present. Default value is false.
 	UseLocalRolesIfPresent *bool `json:"use_local_roles_if_present,omitempty" yaml:"use_local_roles_if_present,omitempty"`
 
 	// OAuth 2.0 mutual TLS authentication setting. Set this value to \"none\" to disable mutual TLS authentication. Set this value to \"required\" to enforce mutual TLS authentication for all access tokens and reject any token that does not have x5t#S256 property in the cnf section. The default value is \"request\" which means mutual TLS authentication is enforced only if the x5t#S256 property is present in the cnf section of the access token.
@@ -89,6 +94,10 @@ func (m *SecurityOauth2) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateJwks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateProvider(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -193,6 +202,57 @@ func (m *SecurityOauth2) validateJwks(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+var securityOauth2TypeProviderPropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["basic","keycloak","auth0","adfs","entra"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		securityOauth2TypeProviderPropEnum = append(securityOauth2TypeProviderPropEnum, v)
+	}
+}
+
+const (
+
+	// SecurityOauth2ProviderBasic captures enum value "basic"
+	SecurityOauth2ProviderBasic string = "basic"
+
+	// SecurityOauth2ProviderKeycloak captures enum value "keycloak"
+	SecurityOauth2ProviderKeycloak string = "keycloak"
+
+	// SecurityOauth2ProviderAuth0 captures enum value "auth0"
+	SecurityOauth2ProviderAuth0 string = "auth0"
+
+	// SecurityOauth2ProviderAdfs captures enum value "adfs"
+	SecurityOauth2ProviderAdfs string = "adfs"
+
+	// SecurityOauth2ProviderEntra captures enum value "entra"
+	SecurityOauth2ProviderEntra string = "entra"
+)
+
+// prop value enum
+func (m *SecurityOauth2) validateProviderEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, securityOauth2TypeProviderPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *SecurityOauth2) validateProvider(formats strfmt.Registry) error {
+	if swag.IsZero(m.Provider) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateProviderEnum("provider", "body", *m.Provider); err != nil {
+		return err
 	}
 
 	return nil

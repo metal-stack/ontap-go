@@ -307,9 +307,6 @@ func (m *Duo) UnmarshalBinary(b []byte) error {
 // swagger:model duo_inline__links
 type DuoInlineLinks struct {
 
-	// next
-	Next *Href `json:"next,omitempty" yaml:"next,omitempty"`
-
 	// self
 	Self *Href `json:"self,omitempty" yaml:"self,omitempty"`
 }
@@ -318,10 +315,6 @@ type DuoInlineLinks struct {
 func (m *DuoInlineLinks) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateNext(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateSelf(formats); err != nil {
 		res = append(res, err)
 	}
@@ -329,25 +322,6 @@ func (m *DuoInlineLinks) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *DuoInlineLinks) validateNext(formats strfmt.Registry) error {
-	if swag.IsZero(m.Next) { // not required
-		return nil
-	}
-
-	if m.Next != nil {
-		if err := m.Next.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("_links" + "." + "next")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("_links" + "." + "next")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -374,10 +348,6 @@ func (m *DuoInlineLinks) validateSelf(formats strfmt.Registry) error {
 func (m *DuoInlineLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateNext(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateSelf(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -385,27 +355,6 @@ func (m *DuoInlineLinks) ContextValidate(ctx context.Context, formats strfmt.Reg
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *DuoInlineLinks) contextValidateNext(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Next != nil {
-
-		if swag.IsZero(m.Next) { // not required
-			return nil
-		}
-
-		if err := m.Next.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("_links" + "." + "next")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("_links" + "." + "next")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 

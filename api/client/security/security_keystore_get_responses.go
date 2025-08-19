@@ -120,9 +120,14 @@ func NewSecurityKeystoreGetDefault(code int) *SecurityKeystoreGetDefault {
 }
 
 /*
-SecurityKeystoreGetDefault describes a response with status code -1, with default header values.
+	SecurityKeystoreGetDefault describes a response with status code -1, with default header values.
 
-Error
+	ONTAP Error Response Codes
+
+| Error Code | Description |
+| ---------- | ----------- |
+| 65539523 | Internal error. The keymanager_config table is missing. |
+Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SecurityKeystoreGetDefault struct {
 	_statusCode int

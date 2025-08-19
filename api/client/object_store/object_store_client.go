@@ -122,6 +122,14 @@ type ClientService interface {
 
 	S3BucketModify(params *S3BucketModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3BucketModifyOK, *S3BucketModifyAccepted, error)
 
+	S3BucketSnapshotCollectionGet(params *S3BucketSnapshotCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3BucketSnapshotCollectionGetOK, error)
+
+	S3BucketSnapshotCreate(params *S3BucketSnapshotCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3BucketSnapshotCreateCreated, *S3BucketSnapshotCreateAccepted, error)
+
+	S3BucketSnapshotDelete(params *S3BucketSnapshotDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3BucketSnapshotDeleteOK, error)
+
+	S3BucketSnapshotGet(params *S3BucketSnapshotGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3BucketSnapshotGetOK, error)
+
 	S3BucketSvmCreate(params *S3BucketSvmCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3BucketSvmCreateCreated, *S3BucketSvmCreateAccepted, error)
 
 	S3BucketSvmDelete(params *S3BucketSvmDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3BucketSvmDeleteOK, *S3BucketSvmDeleteAccepted, error)
@@ -181,6 +189,7 @@ type ClientService interface {
 * `vserver object-store-server bucket policy statement show`
 * `vserver object-store-server bucket policy-statement-condition show`
 * `vserver object-store-server bucket lifecycle-management-rule show`
+* `vserver object-store-server bucket cors-rule show`
 ### Learn more
 * [`DOC /protocols/s3/buckets`](#docs-object-store-protocols_s3_buckets)
 */
@@ -313,6 +322,7 @@ func (a *Client) PerformanceS3MetricCollectionGet(params *PerformanceS3MetricCol
 - An access policy can be created along with a bucket create. If creating an access policy fails, bucket configurations are saved and the access policy can be created using the PATCH endpoint.
 - "qos_policy" can be specified if a bucket needs to be attached to a QoS group policy during creation time.
 - "audit_event_selector" can be specified if a bucket needs to be specify access and permission type for auditing.
+- A CORS configuration can be specified along with bucket creation.
 ### Required properties
 * `svm.uuid or svm.name` - Existing SVM in which to create the bucket configuration.
 * `name` - Bucket name that is to be created.
@@ -330,6 +340,8 @@ func (a *Client) PerformanceS3MetricCollectionGet(params *PerformanceS3MetricCol
 * `lifecycle_management` - Object store server lifecycle management policy.
 * `retention.mode` - Object lock mode supported on the bucket.
 * `retention.default_period` - Specifies the duration of default-retention applicable for objects on the object store bucket.
+* `cors' - Specifying CORS rules enables the bucket to service the cross-origin requests.
+* `snapshot_policy` - Snapshot policy for the bucket.
 ### Default property values
 * `size` - 800MB
 * `comment` - ""
@@ -347,6 +359,7 @@ func (a *Client) PerformanceS3MetricCollectionGet(params *PerformanceS3MetricCol
 * `vserver object-store-server bucket create`
 * `vserver object-store-server bucket policy statement create`
 * `vserver object-store-server bucket lifecycle-management-rule create`
+* `vserver object-store-server bucket cors-rule create`
 ### Learn more
 * [`DOC /protocols/s3/buckets`](#docs-object-store-protocols_s3_buckets)
 */
@@ -395,6 +408,7 @@ func (a *Client) S3BucketCreate(params *S3BucketCreateParams, authInfo runtime.C
 * `vserver object-store-server bucket policy statement delete`
 * `vserver object-store-server bucket policy-statement-condition delete`
 * `vserver object-store-server bucket lifecycle-management-rule delete`
+* `vserver object-store-server bucket cors-rule delete`
 ### Learn more
 * [`DOC /protocols/s3/buckets`](#docs-object-store-protocols_s3_buckets)
 */
@@ -443,6 +457,7 @@ func (a *Client) S3BucketDelete(params *S3BucketDeleteParams, authInfo runtime.C
 * `vserver object-store-server bucket policy statement show`
 * `vserver object-store-server bucket policy-statement-condition show`
 * `vserver object-store-server bucket lifecycle-management-rule show`
+* `vserver object-store-server bucket cors-rule show`
 ### Learn more
 * [`DOC /protocols/s3/buckets`](#docs-object-store-protocols_s3_buckets)
 */
@@ -482,7 +497,7 @@ func (a *Client) S3BucketGet(params *S3BucketGetParams, authInfo runtime.ClientA
 }
 
 /*
-	S3BucketLifecycleRuleCollectionGet Retrieves all S3 Lifecycle rules associated with a bucket. Note that in order to retrieve S3 bucket rule parametes, the 'fields' option should be set to '**'.
+	S3BucketLifecycleRuleCollectionGet Retrieves all S3 Lifecycle rules associated with a bucket. Note that in order to retrieve S3 bucket rule parameters, the 'fields' option should be set to '**'.
 
 ### Related ONTAP commands
 * `vserver object-store-server bucket lifecycle-management-rule show`
@@ -628,7 +643,7 @@ func (a *Client) S3BucketLifecycleRuleDelete(params *S3BucketLifecycleRuleDelete
 }
 
 /*
-	S3BucketLifecycleRuleGet Retrieves all S3 Lifecycle rules associated with a bucket. Note that in order to retrieve S3 bucket rule parametes, the 'fields' option should be set to '**'.
+	S3BucketLifecycleRuleGet Retrieves all S3 Lifecycle rules associated with a bucket. Note that in order to retrieve S3 bucket rule parameters, the 'fields' option should be set to '**'.
 
 ### Related ONTAP commands
 * `vserver object-store-server bucket lifecycle-management-rule show`
@@ -738,11 +753,15 @@ func (a *Client) S3BucketLifecycleRuleModify(params *S3BucketLifecycleRuleModify
   - `versioning-state` - Versioning state of the buckets.
   - `nas_path` - NAS path to which the bucket corresponds to.
   - `retention.default_period` - Specifies the duration of default-retention applicable for objects on the object store bucket.
+  - `cors' - Specifying CORS rules enables the bucket to service the cross-origin requests. Note that the new CORS configuration specified will replace the existing one. If you need to retain any of the existing CORS rules, specify those rules again as part of the new CORS rules. To remove all the existing rules, specify an empty CORS configuration as input.
+  - `snapshot_policy` - Snapshot policy for the bucket.
 
 ### Related ONTAP commands
 * `vserver object-store-server bucket modify`
 * `vserver object-store-server bucket policy statement modify`
 * `vserver object-store-server bucket policy-statement-condition modify`
+* `vserver object-store-server bucket cors-rule create`
+* `vserver object-store-server bucket cors-rule delete`
 ### Learn more
 * [`DOC /protocols/s3/buckets`](#docs-object-store-protocols_s3_buckets)
 */
@@ -784,6 +803,182 @@ func (a *Client) S3BucketModify(params *S3BucketModifyParams, authInfo runtime.C
 }
 
 /*
+	S3BucketSnapshotCollectionGet Retrieves a collection of S3 bucket snapshots.
+
+### Related ONTAP commands
+* `vserver object-store-server bucket snapshot show`
+### Learn more
+* [`DOC /protocols/s3/services/{svm.uuid}/buckets/{s3_bucket.uuid}/snapshots`](#docs-object-store-protocols_s3_services_{svm.uuid}_buckets_{s3_bucket.uuid}_snapshots)
+*/
+func (a *Client) S3BucketSnapshotCollectionGet(params *S3BucketSnapshotCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3BucketSnapshotCollectionGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewS3BucketSnapshotCollectionGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "s3_bucket_snapshot_collection_get",
+		Method:             "GET",
+		PathPattern:        "/protocols/s3/services/{svm.uuid}/buckets/{s3_bucket.uuid}/snapshots",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &S3BucketSnapshotCollectionGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*S3BucketSnapshotCollectionGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*S3BucketSnapshotCollectionGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	S3BucketSnapshotCreate Creates an S3 bucket snapshot.
+
+### Required properties
+* `name` - Name of the S3 bucket snapshot to be created.
+### Related ONTAP commands
+* `vserver object-store-server bucket snapshot create`
+### Learn more
+* [`DOC /protocols/s3/services/{svm.uuid}/buckets/{s3_bucket.uuid}/snapshots`](#docs-object-store-protocols_s3_services_{svm.uuid}_buckets_{s3_bucket.uuid}_snapshots)
+*/
+func (a *Client) S3BucketSnapshotCreate(params *S3BucketSnapshotCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3BucketSnapshotCreateCreated, *S3BucketSnapshotCreateAccepted, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewS3BucketSnapshotCreateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "s3_bucket_snapshot_create",
+		Method:             "POST",
+		PathPattern:        "/protocols/s3/services/{svm.uuid}/buckets/{s3_bucket.uuid}/snapshots",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &S3BucketSnapshotCreateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, nil, err
+	}
+	switch value := result.(type) {
+	case *S3BucketSnapshotCreateCreated:
+		return value, nil, nil
+	case *S3BucketSnapshotCreateAccepted:
+		return nil, value, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*S3BucketSnapshotCreateDefault)
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	S3BucketSnapshotDelete Deletes S3 bucket snapshot.
+
+### Related ONTAP commands
+* `vserver object-store-server bucket snapshot delete`
+### Learn more
+* [`DOC /protocols/s3/services/{svm.uuid}/buckets/{s3_bucket.uuid}/snapshots`](#docs-object-store-protocols_s3_services_{svm.uuid}_buckets_{s3_bucket.uuid}_snapshots)
+*/
+func (a *Client) S3BucketSnapshotDelete(params *S3BucketSnapshotDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3BucketSnapshotDeleteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewS3BucketSnapshotDeleteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "s3_bucket_snapshot_delete",
+		Method:             "DELETE",
+		PathPattern:        "/protocols/s3/services/{svm.uuid}/buckets/{s3_bucket.uuid}/snapshots/{uuid}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &S3BucketSnapshotDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*S3BucketSnapshotDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*S3BucketSnapshotDeleteDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	S3BucketSnapshotGet Retrieves details of a specific S3 bucket snapshot.
+
+### Related ONTAP commands
+* `vserver object-store-server bucket snapshot show`
+### Learn more
+* [`DOC /protocols/s3/services/{svm.uuid}/buckets/{s3_bucket.uuid}/snapshots`](#docs-object-store-protocols_s3_services_{svm.uuid}_buckets_{s3_bucket.uuid}_snapshots)
+*/
+func (a *Client) S3BucketSnapshotGet(params *S3BucketSnapshotGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*S3BucketSnapshotGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewS3BucketSnapshotGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "s3_bucket_snapshot_get",
+		Method:             "GET",
+		PathPattern:        "/protocols/s3/services/{svm.uuid}/buckets/{s3_bucket.uuid}/snapshots/{uuid}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &S3BucketSnapshotGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*S3BucketSnapshotGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*S3BucketSnapshotGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 	S3BucketSvmCreate Creates the S3 bucket configuration of an SVM.
 
 ### Important notes
@@ -793,6 +988,7 @@ func (a *Client) S3BucketModify(params *S3BucketModifyParams, authInfo runtime.C
 - An access policy can be created when a bucket is created.
 - "qos_policy" can be specified if a bucket needs to be attached to a QoS group policy during creation time.
 - "audit_event_selector" can be specified if a bucket needs to be specify access and permission type for auditing.
+- Cross-origin resource sharing (CORS) configuration can be specified when a bucket is created.
 ### Required properties
 * `svm.uuid` - Existing SVM in which to create the bucket configuration.
 * `name` - Bucket name that is to be created.
@@ -810,6 +1006,8 @@ func (a *Client) S3BucketModify(params *S3BucketModifyParams, authInfo runtime.C
 * `lifecycle_management` - Object store server lifecycle management policy.
 * `retention.mode` - Object lock mode supported on the bucket.
 * `retention.default_period` - Specifies the duration of default-retention applicable for objects on the object store bucket.
+* `cors` - Specifying CORS rules enables the bucket to service the cross-origin requests.
+* `snapshot_policy` - Snapshot policy for the bucket.
 ### Default property values
 * `size` - 800MB
 * `comment` - ""
@@ -829,6 +1027,7 @@ func (a *Client) S3BucketModify(params *S3BucketModifyParams, authInfo runtime.C
 * `vserver object-store-server bucket policy statement create`
 * `vserver object-store-server bucket policy-statement-condition create`
 * `vserver object-store-server bucket lifecycle-management-rule create`
+* `vserver object-store-server bucket cors-rule create`
 ### Learn more
 * [`DOC /protocols/s3/services/{svm.uuid}/buckets`](#docs-object-store-protocols_s3_services_{svm.uuid}_buckets)
 */
@@ -870,13 +1069,14 @@ func (a *Client) S3BucketSvmCreate(params *S3BucketSvmCreateParams, authInfo run
 }
 
 /*
-	S3BucketSvmDelete Deletes the S3 bucket configuration of an SVM. An access policy is also deleted on an S3 bucket "delete" command.
+	S3BucketSvmDelete Deletes the S3 bucket configuration of an SVM. An access policy is also deleted on an S3 bucket "delete" command. All CORS rules are also deleted on bucket deletion.
 
 ### Related ONTAP commands
 * `vserver object-store-server bucket delete`
 * `vserver object-store-server bucket policy statement delete`
 * `vserver object-store-server bucket policy-statement-condition delete`
 * `vserver object-store-server bucket lifecycle-management-rule delete`
+* `vserver object-store-server bucket cors-rule delete`
 ### Learn more
 * [`DOC /protocols/s3/services/{svm.uuid}/buckets`](#docs-object-store-protocols_s3_services_{svm.uuid}_buckets)
 */
@@ -925,6 +1125,7 @@ func (a *Client) S3BucketSvmDelete(params *S3BucketSvmDeleteParams, authInfo run
 * `vserver object-store-server bucket policy statement show`
 * `vserver object-store-server bucket policy-statement-condition show`
 * `vserver object-store-server bucket lifecycle-management-rule show`
+* `vserver object-store-server bucket cors-rule show`
 ### Learn more
 * [`DOC /protocols/s3/services/{svm.uuid}/buckets`](#docs-object-store-protocols_s3_services_{svm.uuid}_buckets)
 */
@@ -976,11 +1177,15 @@ func (a *Client) S3BucketSvmGet(params *S3BucketSvmGetParams, authInfo runtime.C
   - `versioning_state` - Versioning state for buckets.
   - `nas_path` - NAS path to which the NAS bucket corresponds to.
   - `retention.default_period` - Specifies the duration of default-retention applicable for objects on the object store bucket.
+  - `cors' - Specifying CORS rules enables the bucket to service the cross-origin requests. New CORS rules are created after existing rules are deleted. To retain any of the existing rules, you need to specify those CORS rules again. To remove all the existing CORS rules, specify an empty CORS rules list.
+  - `snapshot_policy` - Snapshot policy for the bucket.
 
 ### Related ONTAP commands
 * `vserver object-store-server bucket modify`
 * `vserver object-store-server bucket policy statement modify`
 * `vserver object-store-server bucket policy-statement-condition modify`
+* `vserver object-store-server bucket cors-rule create`
+* `vserver object-store-server bucket cors-rule delete`
 ### Learn more
 * [`DOC /protocols/s3/services/{svm.uuid}/buckets`](#docs-object-store-protocols_s3_services_{svm.uuid}_buckets)
 */
@@ -1554,6 +1759,7 @@ func (a *Client) S3ServiceCollectionGet(params *S3ServiceCollectionGetParams, au
 * `vserver object-store-server bucket create`
 * `vserver object-store-server bucket policy statement create`
 * `vserver object-store-server bucket policy-statement-condition create`
+* `vserver object-store-server bucket cors-rule create`
 * `vserver object-store-server user create`
 ### Learn more
 * [`DOC /protocols/s3/services`](#docs-object-store-protocols_s3_services)
@@ -1773,6 +1979,7 @@ func (a *Client) S3UserCollectionGet(params *S3UserCollectionGetParams, authInfo
 - If the user is a member of Active directory, the user name takes the format "user@FQDN". For example, "user1@domain1.com".
 - If user creation is successful, a user access_key and secret_key is returned as part of the response.
 - If user keys have expiry configuration, then "key_expiry_time" is also returned as part of the response.
+- User access and secret keys can be specified in the input. If not specified, keys are generated automatically.
 ### Required properties
 * `svm.uuid` - Existing SVM in which to create the user configuration.
 * `name` - User name that is to be created.
