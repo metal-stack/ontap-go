@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/validate"
 
-	"github.com/metal-stack/ontap-go/pkg/server/models"
+	"github.com/metal-stack/ontap-go/api/models"
 )
 
 // NewClusterLdapCreateParams creates a new ClusterLdapCreateParams object

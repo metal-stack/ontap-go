@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/swag"
 	"github.com/go-openapi/validate"
 
-	"github.com/metal-stack/ontap-go/pkg/server/models"
+	"github.com/metal-stack/ontap-go/api/models"
 )
 
 // NewS3GroupCreateParams creates a new S3GroupCreateParams object
