@@ -1,4 +1,4 @@
-release:: generate-client mocks gofmt test;
+release:: generate-client generate-server mocks gofmt test;
 
 .PHONY: generate-client
 generate-client:
@@ -10,6 +10,18 @@ generate-client:
 		-w /work \
 		ghcr.io/metal-stack/builder swagger generate client -A Ontap -f spec/ontap.yaml -t api --struct-tags json --struct-tags yaml
 	rm api/models/application_template.go # this redeclares ApplicationTemplate which is a BUG in the ontap swagger spec.
+
+
+.PHONY: generate-server
+generate-server:
+	# https://goswagger.io/go-swagger/generate/server/
+	rm -rf pkg/server/cmd pkg/server/models pkg/server/restapi
+	mkdir -p pkg/server/fake
+	docker run --rm \
+		--user $$(id -u):$$(id -g) \
+		-v ${PWD}:/work \
+		-w /work \
+		ghcr.io/metal-stack/builder swagger generate server -A ontap-fake-server -f spec/ontap.yaml -t pkg/server --existing-models=api/models
 
 .PHONY: mocks
 mocks:
