@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	"github.com/metal-stack/ontap-go/pkg/server/models"
+	"github.com/metal-stack/ontap-go/api/models"
 )
 
 // PerformanceS3MetricCollectionGetOKCode is the HTTP code returned for type PerformanceS3MetricCollectionGetOK

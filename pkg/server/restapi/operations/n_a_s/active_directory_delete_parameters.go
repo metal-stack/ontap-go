@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/validate"
 
-	"github.com/metal-stack/ontap-go/pkg/server/models"
+	"github.com/metal-stack/ontap-go/api/models"
 )
 
 // NewActiveDirectoryDeleteParams creates a new ActiveDirectoryDeleteParams object

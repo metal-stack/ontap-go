@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	"github.com/metal-stack/ontap-go/pkg/server/models"
+	"github.com/metal-stack/ontap-go/api/models"
 )
 
 // SensorsCollectionGetOKCode is the HTTP code returned for type SensorsCollectionGetOK

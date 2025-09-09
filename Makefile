@@ -21,7 +21,7 @@ generate-server:
 		--user $$(id -u):$$(id -g) \
 		-v ${PWD}:/work \
 		-w /work \
-		ghcr.io/metal-stack/builder swagger generate server -A ontap-fake-server -f spec/ontap.yaml -t pkg/server --existing-models=api/models
+		ghcr.io/metal-stack/builder swagger generate server -A ontap-fake-server -f spec/ontap.yaml -t pkg/server --skip-models --existing-models=github.com/metal-stack/ontap-go/api/models
 
 .PHONY: mocks
 mocks:

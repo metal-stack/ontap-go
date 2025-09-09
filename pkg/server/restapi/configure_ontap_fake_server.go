@@ -29,7 +29,7 @@ import (
 	"github.com/metal-stack/ontap-go/pkg/server/restapi/operations/support"
 )
 
-//go:generate swagger generate server --target ../../server --name OntapFakeServer --spec ../../../spec/ontap.yaml --principal interface{}
+//go:generate swagger generate server --target ../../server --name OntapFakeServer --spec ../../../spec/ontap.yaml --principal interface{} --skip-models
 
 func configureFlags(api *operations.OntapFakeServerAPI) {
 	// api.CommandLineOptionsGroups = []swag.CommandLineOptionsGroup{ ... }
