@@ -13,7 +13,7 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/metal-stack/metal-lib/pkg/pointer"
-	"github.com/metal-stack/ontap-go/pkg/server/models"
+	"github.com/metal-stack/ontap-go/api/models"
 
 	"github.com/metal-stack/ontap-go/pkg/server/restapi/operations"
 	"github.com/metal-stack/ontap-go/pkg/server/restapi/operations/cluster"
@@ -121,7 +121,7 @@ func configureAPI(api *operations.OntapFakeServerAPI) http.Handler {
 	api.Logger = log.Printf
 
 	api.UseSwaggerUI()
-	//initalize memory store
+	//initialize memory store
 	memoryStore := InitStore()
 
 	memoryStore.SetCluster(&models.Cluster{
@@ -207,7 +207,7 @@ func configureAPI(api *operations.OntapFakeServerAPI) http.Handler {
 
 		aggregate := memoryStore.GetAggregate("aggrUUID")
 		svmAggr := []*models.SvmInlineAggregatesInlineArrayItem{
-			&models.SvmInlineAggregatesInlineArrayItem{
+			{
 				UUID: aggregate.UUID,
 			},
 		}
