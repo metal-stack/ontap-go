@@ -42,3 +42,26 @@ func NewAPIClient(cfg Config) (*client.Ontap, error) {
 	client := client.New(transport, strfmt.Default)
 	return client, nil
 }
+
+// MetroClusterConfig holds the configuration for n clusters in a metro cluster.
+type MetroClusterConfig []Config
+
+// MetroClusterClient holds n API clients, one for each cluster in a metro cluster.
+type MetroClusterClient []client.Ontap
+
+// NewMetroClusterClient creates a new client for a metro cluster, which contains a client for each of the n clusters.
+func NewMetroClusterClient(cfg MetroClusterConfig) (*MetroClusterClient, error) {
+	var (
+		metroclients MetroClusterClient
+	)
+
+	for _, config := range cfg {
+		mccclient, err := NewAPIClient(config)
+		if err != nil {
+			return nil, err
+		}
+		metroclients = append(metroclients, *mccclient)
+	}
+
+	return &metroclients, nil
+}
