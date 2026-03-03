@@ -999,7 +999,7 @@ func (m *SanApplicationComponentsItems0StorageService) UnmarshalBinary(b []byte)
 type SanExcludeAggregatesItems0 struct {
 
 	// The name of the aggregate to exclude.
-	// Enum: ["aggr0_fel_wps1_ba1_r01c800_a","aggr0_fel_wps1_ba1_r01c800_b","aggr0_stg_kkw7_ba1_r01c800_a","aggr0_stg_kkw7_ba1_r01c800_b","data01_mcc_renamed_20250617101056_2041346693","data02_mcc_renamed_20250617101056_2041346693","data03","data04"]
+	// Enum: ["aggr0_fel_wps1_ba1_r01c800_a","aggr0_fel_wps1_ba1_r01c800_b","aggr0_stg_kkw7_ba1_r01c800_a","aggr0_stg_kkw7_ba1_r01c800_b","data01","data02","data03","data04"]
 	Name string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// The ID of the aggregate to exclude. Usage: &lt;UUID&gt;
@@ -1024,7 +1024,7 @@ var sanExcludeAggregatesItems0TypeNamePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["aggr0_fel_wps1_ba1_r01c800_a","aggr0_fel_wps1_ba1_r01c800_b","aggr0_stg_kkw7_ba1_r01c800_a","aggr0_stg_kkw7_ba1_r01c800_b","data01_mcc_renamed_20250617101056_2041346693","data02_mcc_renamed_20250617101056_2041346693","data03","data04"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["aggr0_fel_wps1_ba1_r01c800_a","aggr0_fel_wps1_ba1_r01c800_b","aggr0_stg_kkw7_ba1_r01c800_a","aggr0_stg_kkw7_ba1_r01c800_b","data01","data02","data03","data04"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -1046,11 +1046,11 @@ const (
 	// SanExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800b captures enum value "aggr0_stg_kkw7_ba1_r01c800_b"
 	SanExcludeAggregatesItems0NameAggr0StgKkw7Ba1R01c800b string = "aggr0_stg_kkw7_ba1_r01c800_b"
 
-	// SanExcludeAggregatesItems0NameData01MccRenamed202506171010562041346693 captures enum value "data01_mcc_renamed_20250617101056_2041346693"
-	SanExcludeAggregatesItems0NameData01MccRenamed202506171010562041346693 string = "data01_mcc_renamed_20250617101056_2041346693"
+	// SanExcludeAggregatesItems0NameData01 captures enum value "data01"
+	SanExcludeAggregatesItems0NameData01 string = "data01"
 
-	// SanExcludeAggregatesItems0NameData02MccRenamed202506171010562041346693 captures enum value "data02_mcc_renamed_20250617101056_2041346693"
-	SanExcludeAggregatesItems0NameData02MccRenamed202506171010562041346693 string = "data02_mcc_renamed_20250617101056_2041346693"
+	// SanExcludeAggregatesItems0NameData02 captures enum value "data02"
+	SanExcludeAggregatesItems0NameData02 string = "data02"
 
 	// SanExcludeAggregatesItems0NameData03 captures enum value "data03"
 	SanExcludeAggregatesItems0NameData03 string = "data03"

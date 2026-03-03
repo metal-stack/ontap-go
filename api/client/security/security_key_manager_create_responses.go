@@ -270,6 +270,7 @@ func NewSecurityKeyManagerCreateDefault(code int) *SecurityKeyManagerCreateDefau
 | 65539580 | Failed to create inactive Onboard Key Manager configuration. |
 | 65539581 | Cannot create an inactive Onboard Key Manager on the admin SVM because an inactive Onboard Key Manager configuration already exists on the admin SVM. |
 | 65539582 | Cannot specify the configuration name parameter. Only one Onboard Key Manager is supported for the admin SVM. |
+| 65539703 | The key manager cannot be configured because the SVM has NAE volumes. |
 | 66060338 | Failed to establish secure connection for a key management server due to incorrect server_ca certificates. |
 | 66060339 | Failed to establish secure connection for a key management server due to incorrect client certificates. |
 | 66060340 | Failed to establish secure connection for a key management server due to Cryptsoft error. |

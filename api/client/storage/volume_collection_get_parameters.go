@@ -1250,6 +1250,12 @@ type VolumeCollectionGetParams struct {
 	*/
 	Fields []string
 
+	/* FilesInodefileCapacity.
+
+	   Filter by files.inodefile_capacity
+	*/
+	FilesInodefileCapacity *int64
+
 	/* FilesMaximum.
 
 	   Filter by files.maximum
@@ -2474,7 +2480,7 @@ type VolumeCollectionGetParams struct {
 
 	/* SpaceSnapshotAutodeleteTrigger.
 
-	   Filter by space.snapshot.autodelete.trigger
+	   Filter by space.snapshot.autodelete_trigger
 	*/
 	SpaceSnapshotAutodeleteTrigger *string
 
@@ -5594,6 +5600,17 @@ func (o *VolumeCollectionGetParams) WithFields(fields []string) *VolumeCollectio
 // SetFields adds the fields to the volume collection get params
 func (o *VolumeCollectionGetParams) SetFields(fields []string) {
 	o.Fields = fields
+}
+
+// WithFilesInodefileCapacity adds the filesInodefileCapacity to the volume collection get params
+func (o *VolumeCollectionGetParams) WithFilesInodefileCapacity(filesInodefileCapacity *int64) *VolumeCollectionGetParams {
+	o.SetFilesInodefileCapacity(filesInodefileCapacity)
+	return o
+}
+
+// SetFilesInodefileCapacity adds the filesInodefileCapacity to the volume collection get params
+func (o *VolumeCollectionGetParams) SetFilesInodefileCapacity(filesInodefileCapacity *int64) {
+	o.FilesInodefileCapacity = filesInodefileCapacity
 }
 
 // WithFilesMaximum adds the filesMaximum to the volume collection get params
@@ -12803,6 +12820,23 @@ func (o *VolumeCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg 
 		}
 	}
 
+	if o.FilesInodefileCapacity != nil {
+
+		// query param files.inodefile_capacity
+		var qrFilesInodefileCapacity int64
+
+		if o.FilesInodefileCapacity != nil {
+			qrFilesInodefileCapacity = *o.FilesInodefileCapacity
+		}
+		qFilesInodefileCapacity := swag.FormatInt64(qrFilesInodefileCapacity)
+		if qFilesInodefileCapacity != "" {
+
+			if err := r.SetQueryParam("files.inodefile_capacity", qFilesInodefileCapacity); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.FilesMaximum != nil {
 
 		// query param files.maximum
@@ -16250,7 +16284,7 @@ func (o *VolumeCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg 
 
 	if o.SpaceSnapshotAutodeleteTrigger != nil {
 
-		// query param space.snapshot.autodelete.trigger
+		// query param space.snapshot.autodelete_trigger
 		var qrSpaceSnapshotAutodeleteTrigger string
 
 		if o.SpaceSnapshotAutodeleteTrigger != nil {
@@ -16259,7 +16293,7 @@ func (o *VolumeCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg 
 		qSpaceSnapshotAutodeleteTrigger := qrSpaceSnapshotAutodeleteTrigger
 		if qSpaceSnapshotAutodeleteTrigger != "" {
 
-			if err := r.SetQueryParam("space.snapshot.autodelete.trigger", qSpaceSnapshotAutodeleteTrigger); err != nil {
+			if err := r.SetQueryParam("space.snapshot.autodelete_trigger", qSpaceSnapshotAutodeleteTrigger); err != nil {
 				return err
 			}
 		}

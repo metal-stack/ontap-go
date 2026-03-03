@@ -30,6 +30,12 @@ func (o *DNSCreateReader) ReadResponse(response runtime.ClientResponse, consumer
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewDNSCreateAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewDNSCreateDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -115,6 +121,88 @@ func (o *DNSCreateCreated) readResponse(response runtime.ClientResponse, consume
 	}
 
 	o.Payload = new(models.DNSResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
+// NewDNSCreateAccepted creates a DNSCreateAccepted with default headers values
+func NewDNSCreateAccepted() *DNSCreateAccepted {
+	return &DNSCreateAccepted{}
+}
+
+/*
+DNSCreateAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type DNSCreateAccepted struct {
+
+	/* Useful for tracking the resource location
+	 */
+	Location string
+
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this dns create accepted response has a 2xx status code
+func (o *DNSCreateAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dns create accepted response has a 3xx status code
+func (o *DNSCreateAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dns create accepted response has a 4xx status code
+func (o *DNSCreateAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dns create accepted response has a 5xx status code
+func (o *DNSCreateAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dns create accepted response a status code equal to that given
+func (o *DNSCreateAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the dns create accepted response
+func (o *DNSCreateAccepted) Code() int {
+	return 202
+}
+
+func (o *DNSCreateAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /name-services/dns][%d] dnsCreateAccepted %s", 202, payload)
+}
+
+func (o *DNSCreateAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /name-services/dns][%d] dnsCreateAccepted %s", 202, payload)
+}
+
+func (o *DNSCreateAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *DNSCreateAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
+
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	o.Payload = new(models.JobLinkResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {

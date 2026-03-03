@@ -100,13 +100,13 @@ func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
 type ClientService interface {
 	DNSCollectionGet(params *DNSCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DNSCollectionGetOK, error)
 
-	DNSCreate(params *DNSCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DNSCreateCreated, error)
+	DNSCreate(params *DNSCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DNSCreateCreated, *DNSCreateAccepted, error)
 
 	DNSDelete(params *DNSDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DNSDeleteOK, error)
 
 	DNSGet(params *DNSGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DNSGetOK, error)
 
-	DNSModify(params *DNSModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DNSModifyOK, error)
+	DNSModify(params *DNSModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DNSModifyOK, *DNSModifyAccepted, error)
 
 	GlobalCacheSettingGet(params *GlobalCacheSettingGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GlobalCacheSettingGetOK, error)
 
@@ -306,8 +306,9 @@ func (a *Client) DNSCollectionGet(params *DNSCollectionGetParams, authInfo runti
 - tld_query_enabled
 - skip_config_validation
 - scope
+- async
 */
-func (a *Client) DNSCreate(params *DNSCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DNSCreateCreated, error) {
+func (a *Client) DNSCreate(params *DNSCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DNSCreateCreated, *DNSCreateAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDNSCreateParams()
@@ -331,15 +332,17 @@ func (a *Client) DNSCreate(params *DNSCreateParams, authInfo runtime.ClientAuthI
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*DNSCreateCreated)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *DNSCreateCreated:
+		return value, nil, nil
+	case *DNSCreateAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DNSCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -464,13 +467,14 @@ The validation fails in the following scenarios:<br/>
 - dynamic_dns.enabled
 - dynamic_dns.use_secure
 - dynamic_dns.time_to_live
+- async
 ### Related ONTAP commands
 * `vserver services name-service dns modify`
 * `vserver services name-service dns dynamic-update modify`
 ### Learn more
 * [`DOC /name-services/dns`](#docs-name-services-name-services_dns)
 */
-func (a *Client) DNSModify(params *DNSModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DNSModifyOK, error) {
+func (a *Client) DNSModify(params *DNSModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DNSModifyOK, *DNSModifyAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDNSModifyParams()
@@ -494,15 +498,17 @@ func (a *Client) DNSModify(params *DNSModifyParams, authInfo runtime.ClientAuthI
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*DNSModifyOK)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *DNSModifyOK:
+		return value, nil, nil
+	case *DNSModifyAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DNSModifyDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*

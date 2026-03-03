@@ -1471,6 +1471,8 @@ func (a *Client) EmsDestinationModify(params *EmsDestinationModifyParams, authIn
 /*
 	EmsEventCollectionGet Retrieves a collection of observed events.
 
+###
+Note: The default behavior is to filter 'DEBUG' severity events. If those events are required, a severity query must be provided.
 ### Related ONTAP commands
 * `event log show`
 */

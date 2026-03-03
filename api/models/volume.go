@@ -9238,6 +9238,10 @@ func (m *VolumeInlineErrorState) UnmarshalBinary(b []byte) error {
 // swagger:model volume_inline_files
 type VolumeInlineFiles struct {
 
+	// Number of inodes that can currently be stored on the volume for user-visible files.  This number dynamically increases as more user-visible files are created.
+	// Read Only: true
+	InodefileCapacity *int64 `json:"inodefile_capacity,omitempty" yaml:"inodefile_capacity,omitempty"`
+
 	// The maximum number of files (inodes) for user-visible data allowed on the volume. This value can be increased or decreased. Increasing the maximum number of files does not immediately cause additional disk space to be used to track files. Instead, as more files are created on the volume, the system dynamically increases the number of disk blocks that are used to track files. The space assigned to track files is never freed, and this value cannot be decreased below the current number of files that can be tracked within the assigned space for the volume. Valid in PATCH.
 	Maximum *int64 `json:"maximum,omitempty" yaml:"maximum,omitempty"`
 
@@ -9255,6 +9259,10 @@ func (m *VolumeInlineFiles) Validate(formats strfmt.Registry) error {
 func (m *VolumeInlineFiles) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateInodefileCapacity(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateUsed(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -9262,6 +9270,15 @@ func (m *VolumeInlineFiles) ContextValidate(ctx context.Context, formats strfmt.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *VolumeInlineFiles) contextValidateInodefileCapacity(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "files"+"."+"inodefile_capacity", "body", m.InodefileCapacity); err != nil {
+		return err
+	}
+
 	return nil
 }
 

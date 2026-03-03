@@ -219,6 +219,7 @@ func NewSecurityKeystoreModifyDefault(code int) *SecurityKeystoreModifyDefault {
 | 65539585 | Cannot enable an external key manager on the admin SVM because an inactive external key manager already exists on the admin SVM. |
 | 65539590 | Cannot switch to the Onboard Key Manager if there are more than two NSE-AKs in the cluster. |
 | 65539591 | Cannot switch to the Onboard Key Manager if there are fewer than two NSE-AKs in the cluster. |
+| 65539703 | The key manager cannot be configured because the SVM has NAE volumes. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SecurityKeystoreModifyDefault struct {
