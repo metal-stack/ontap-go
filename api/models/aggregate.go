@@ -98,7 +98,7 @@ type Aggregate struct {
 
 	// Number of volumes in the aggregate.
 	// Read Only: true
-	VolumeCount *int64 `json:"volume-count,omitempty" yaml:"volume-count,omitempty"`
+	VolumeCount *int64 `json:"volume_count,omitempty" yaml:"volume_count,omitempty"`
 }
 
 // Validate validates this aggregate
