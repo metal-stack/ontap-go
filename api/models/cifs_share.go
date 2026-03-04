@@ -61,8 +61,8 @@ type CifsShare struct {
 	ContinuouslyAvailable *bool `json:"continuously_available,omitempty" yaml:"continuously_available,omitempty"`
 
 	// Directory Mode Creation Mask to be viewed as an octal number.
-	// Example: 17
-	DirUmask *int64 `json:"dir_umask,omitempty" yaml:"dir_umask,omitempty"`
+	// Example: 21
+	DirUmask *string `json:"dir_umask,omitempty" yaml:"dir_umask,omitempty"`
 
 	// Specifies that SMB encryption must be used when accessing this share. Clients that do not support encryption are not
 	// able to access this share.
@@ -70,8 +70,8 @@ type CifsShare struct {
 	Encryption *bool `json:"encryption,omitempty" yaml:"encryption,omitempty"`
 
 	// File Mode Creation Mask to be viewed as an octal number.
-	// Example: 17
-	FileUmask *int64 `json:"file_umask,omitempty" yaml:"file_umask,omitempty"`
+	// Example: 21
+	FileUmask *string `json:"file_umask,omitempty" yaml:"file_umask,omitempty"`
 
 	// Specifies that all files that CIFS users create in a specific share belong to the same group
 	// (also called the "force-group"). The "force-group" must be a predefined group in the UNIX group
@@ -144,7 +144,7 @@ type CifsShare struct {
 	// Specifies that the previous version can be viewed and restored from the client.
 	ShowPreviousVersions *bool `json:"show_previous_versions,omitempty" yaml:"show_previous_versions,omitempty"`
 
-	// Specifies whether or not the Snapshot copies can be viewed and traversed by clients.
+	// Specifies whether or not the snapshots can be viewed and traversed by clients.
 	//
 	ShowSnapshot *bool `json:"show_snapshot,omitempty" yaml:"show_snapshot,omitempty"`
 
@@ -658,6 +658,9 @@ type CifsShareInlineAclsInlineArrayItem struct {
 	// Specifies the user or group name to add to the access control list of a CIFS share.
 	// Example: ENGDOMAIN\\ad_user
 	UserOrGroup *string `json:"user_or_group,omitempty" yaml:"user_or_group,omitempty"`
+
+	// Windows SID/UNIX ID depending on access-control type.
+	WinSidUnixID *string `json:"win_sid_unix_id,omitempty" yaml:"win_sid_unix_id,omitempty"`
 }
 
 // Validate validates this cifs share inline acls inline array item
@@ -1245,7 +1248,7 @@ type CifsShareInlineVolume struct {
 	// links
 	Links *CifsShareInlineVolumeInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 

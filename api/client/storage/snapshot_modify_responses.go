@@ -202,18 +202,19 @@ func NewSnapshotModifyDefault(code int) *SnapshotModifyDefault {
 
 | Error Code | Description |
 | ---------- | ----------- |
-| 524508     | The Snapshot copy was not renamed because the name entered is not valid. |
-| 542797     | The specified file or Snapshot copy does not exist. |
-| 1638455    | Failed to set comment for Snapshot copy. |
-| 1638476    | You cannot rename a Snapshot copy created for use as a reference Snapshot copy by other jobs. |
-| 1638477    | User-created Snapshot copy names cannot begin with the specified prefix. |
-| 1638518    | The specified Snapshot copy name is invalid. |
-| 1638522    | Snapshot copies can only be renamed on read/write (RW) volumes. |
-| 1638523    | Failed to set the specified SnapMirror label for the Snapshot copy. |
+| 524508     | The snapshot was not renamed because the name entered is not valid. |
+| 542797     | The specified file or snapshot does not exist. |
+| 1638455    | Failed to set comment for snapshot. |
+| 1638476    | You cannot rename a snapshot created for use as a reference snapshot by other jobs. |
+| 1638477    | User-created snapshot names cannot begin with the specified prefix. |
+| 1638518    | The specified snapshot name is invalid. |
+| 1638522    | Snapshots can only be renamed on read/write (RW) volumes. |
+| 1638523    | Failed to set the specified SnapMirror label for the snapshot. |
 | 1638524    | Adding SnapMirror labels is not allowed in a mixed version cluster. |
-| 1638539    | Cannot determine the status of the Snapshot copy rename operation for the specified volume. |
-| 1638554    | Failed to set expiry time for the Snapshot copy. |
-| 1638600    | The Snapshot copy does not exist. |
+| 1638539    | Cannot determine the status of the snapshot rename operation for the specified volume. |
+| 1638554    | Failed to set expiry time for the snapshot. |
+| 1638600    | The snapshot does not exist. |
+| 1638644    | POST, DELETE, and PATCH requests on the snapshot session endpoint are not supported on this platform. |
 */
 type SnapshotModifyDefault struct {
 	_statusCode int

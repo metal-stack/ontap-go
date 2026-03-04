@@ -146,6 +146,18 @@ type SnapmirrorRelationshipTransfersGetParams struct {
 	*/
 	RelationshipDestinationConsistencyGroupVolumesName *string
 
+	/* RelationshipDestinationLunsName.
+
+	   Filter by relationship.destination.luns.name
+	*/
+	RelationshipDestinationLunsName *string
+
+	/* RelationshipDestinationLunsUUID.
+
+	   Filter by relationship.destination.luns.uuid
+	*/
+	RelationshipDestinationLunsUUID *string
+
 	/* RelationshipDestinationPath.
 
 	   Filter by relationship.destination.path
@@ -441,6 +453,28 @@ func (o *SnapmirrorRelationshipTransfersGetParams) WithRelationshipDestinationCo
 // SetRelationshipDestinationConsistencyGroupVolumesName adds the relationshipDestinationConsistencyGroupVolumesName to the snapmirror relationship transfers get params
 func (o *SnapmirrorRelationshipTransfersGetParams) SetRelationshipDestinationConsistencyGroupVolumesName(relationshipDestinationConsistencyGroupVolumesName *string) {
 	o.RelationshipDestinationConsistencyGroupVolumesName = relationshipDestinationConsistencyGroupVolumesName
+}
+
+// WithRelationshipDestinationLunsName adds the relationshipDestinationLunsName to the snapmirror relationship transfers get params
+func (o *SnapmirrorRelationshipTransfersGetParams) WithRelationshipDestinationLunsName(relationshipDestinationLunsName *string) *SnapmirrorRelationshipTransfersGetParams {
+	o.SetRelationshipDestinationLunsName(relationshipDestinationLunsName)
+	return o
+}
+
+// SetRelationshipDestinationLunsName adds the relationshipDestinationLunsName to the snapmirror relationship transfers get params
+func (o *SnapmirrorRelationshipTransfersGetParams) SetRelationshipDestinationLunsName(relationshipDestinationLunsName *string) {
+	o.RelationshipDestinationLunsName = relationshipDestinationLunsName
+}
+
+// WithRelationshipDestinationLunsUUID adds the relationshipDestinationLunsUUID to the snapmirror relationship transfers get params
+func (o *SnapmirrorRelationshipTransfersGetParams) WithRelationshipDestinationLunsUUID(relationshipDestinationLunsUUID *string) *SnapmirrorRelationshipTransfersGetParams {
+	o.SetRelationshipDestinationLunsUUID(relationshipDestinationLunsUUID)
+	return o
+}
+
+// SetRelationshipDestinationLunsUUID adds the relationshipDestinationLunsUuid to the snapmirror relationship transfers get params
+func (o *SnapmirrorRelationshipTransfersGetParams) SetRelationshipDestinationLunsUUID(relationshipDestinationLunsUUID *string) {
+	o.RelationshipDestinationLunsUUID = relationshipDestinationLunsUUID
 }
 
 // WithRelationshipDestinationPath adds the relationshipDestinationPath to the snapmirror relationship transfers get params
@@ -804,6 +838,40 @@ func (o *SnapmirrorRelationshipTransfersGetParams) WriteToRequest(r runtime.Clie
 		if qRelationshipDestinationConsistencyGroupVolumesName != "" {
 
 			if err := r.SetQueryParam("relationship.destination.consistency_group_volumes.name", qRelationshipDestinationConsistencyGroupVolumesName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.RelationshipDestinationLunsName != nil {
+
+		// query param relationship.destination.luns.name
+		var qrRelationshipDestinationLunsName string
+
+		if o.RelationshipDestinationLunsName != nil {
+			qrRelationshipDestinationLunsName = *o.RelationshipDestinationLunsName
+		}
+		qRelationshipDestinationLunsName := qrRelationshipDestinationLunsName
+		if qRelationshipDestinationLunsName != "" {
+
+			if err := r.SetQueryParam("relationship.destination.luns.name", qRelationshipDestinationLunsName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.RelationshipDestinationLunsUUID != nil {
+
+		// query param relationship.destination.luns.uuid
+		var qrRelationshipDestinationLunsUUID string
+
+		if o.RelationshipDestinationLunsUUID != nil {
+			qrRelationshipDestinationLunsUUID = *o.RelationshipDestinationLunsUUID
+		}
+		qRelationshipDestinationLunsUUID := qrRelationshipDestinationLunsUUID
+		if qRelationshipDestinationLunsUUID != "" {
+
+			if err := r.SetQueryParam("relationship.destination.luns.uuid", qRelationshipDestinationLunsUUID); err != nil {
 				return err
 			}
 		}

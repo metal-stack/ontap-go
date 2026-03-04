@@ -158,7 +158,7 @@ type ClientService interface {
 }
 
 /*
-	SvmCollectionGet Retrieves a list of SVMs and individual SVM properties. This includes protocol configurations such as CIFS and NFS, export policies, name service configurations, and network services.
+	SvmCollectionGet Retrieves a list of SVMs and individual SVM properties. This includes protocol configurations such as CIFS, NFS and S3, export policies, name service configurations, and network services.
 
 ### Important notes
 * The SVM object includes a large set of fields and can be expensive to retrieve. Use this API to list the collection of SVMs, and to retrieve only the full details of individual SVMs as needed.
@@ -275,6 +275,8 @@ func (a *Client) SvmCollectionGet(params *SvmCollectionGetParams, authInfo runti
 * `ip_interfaces.ip.address` - IP address
 * `ip_interfaces.ip.netmask` - Netmask length or IP address
 * `ip_interfaces.location.broadcast_domain.uuid` or `ip_interfaces.location.broadcast_domain.name` - Broadcast domain name or UUID belonging to the same IPspace of the SVM.
+* `ip_interfaces.location.home_port.name` - Home port name
+* `ip_interfaces.location.home_port.uuid` - Home port uuid
 * `subnet.uuid` or `subnet.name` - Either name or UUID of the subnet to create.
 * `routes` - If provided, the following field is required:
   - `routes.gateway` - Gateway IP address
@@ -305,6 +307,12 @@ func (a *Client) SvmCollectionGet(params *SvmCollectionGetParams, authInfo runti
 
 * `s3` - If provided, the following field should also be specified:
   - `s3.name` - Name of the S3 server. If `s3.name' is not specified while `s3.enabled` is set to 'true', the S3 server will be created with the default name '<svm.name>_S3Server'.
+  - `s3.port` - S3 server listener port.
+  - `s3.secure_port` - S3 server listener port for HTTPS.
+  - `s3.is_http_enabled` - S3 server connections over HTTP.
+  - `s3.is_https_enabled` - S3 server connections over HTTPS.
+  - `s3.certificate.name` - S3 server certificate name. This is required if the S3 server runs over HTTPS.
+  - `s3.certificate.uuid` - S3 server certificate UUID. This is required if the S3 server runs over HTTPS.
 
 * `auto_enable_analytics` - Auto-enable file system analytics on new volumes created in the SVM.
 * `auto_enable_activity_tracking` - Auto-enable volume activity-tracking on new volumes created in the SVM.
@@ -317,6 +325,7 @@ If not specified in POST, the following default property values are assigned:
 * `snapshot_policy.name` - _Default_
 * `subtype` - _Default_ ( _sync-source_ if MetroCluster configuration )
 * `anti_ransomware_default_volume_state` - _disabled_
+* `qos_adaptive_policy_group_template` - _extreme_ ( if running ONTAP X and neither qos_policy_group_template nor qos_adaptive_policy_group_template are provided)
 ### Related ONTAP commands
 * `vserver create`
 * `vserver add-aggregates`
@@ -389,10 +398,10 @@ If not specified in POST, the following default property values are assigned:
     POST "/api/svm/svms" '{"name":"testVs", "cifs":{"name":"CIFDOC", "ad_domain":{"fqdn":"abc.def.com", "organizational_unit":"CN=Computers", "user":"cif_admin", "password":"abc123"}}, "ip_interfaces":[{"name":"lif1", "ip":{"address":"10.10.10.7", "netmask": "255.255.255.0"}, "location":{"broadcast_domain":{"name":"bd1"}, "home_node":{"name":"node1"}}, "service_policy": "default-management"}],"routes": [{"destination": {"address": "0.0.0.0", "netmask": "0"}, "gateway": "10.10.10.7"}], "dns":{"domains":["abc.def.com", "def.com"], "servers":["10.224.223.130", "10.224.223.131"]}}'
     ```
     <br/>
- 10. Creates an SVM and configures an S3 server
+ 10. Creates an SVM with an S3 server enabled and configured
     <br/>
     ```
-    POST "/api/svm/svms" '{"name":"svm5", "s3":{"name":"s3-server-1", "enabled":true}}'
+    POST "/api/svm/svms" '{"name":"svm5", "s3":{"name":"s3-server-1", "enabled":true, "allowed":true, "is_http_enabled": true, "is_https_enabled":false}}'
     ```
     <br/>
  11. Creates an SVM and disallows NVMe service for the SVM
@@ -447,6 +456,24 @@ If not specified in POST, the following default property values are assigned:
     <br/>
     ```
     POST "/api/svm/svms" '{"name":"testVs", "storage": {"limit":"20GB", "limit_threshold_alert":"95"}}'
+    ```
+    <br/>
+ 20. Creates an SVM and specifies the QoS policy group template to be assigned to the SVM.
+    <br/>
+    ```
+    POST "/api/svm/svms" '{"name":"testVs", "qos_policy_group_template":{"name":"performance-fixed"}}'
+    ```
+    <br/>
+ 21. Creates an SVM and specifies the QoS adaptive policy group template to be assigned to the SVM.
+    <br/>
+    ```
+    POST "/api/svm/svms" '{"name":"testVs", "qos_adaptive_policy_group_template":{"name":"performance"}}'
+    ```
+    <br/>
+ 22. On ASA r2 platforms, _fcp_, _iscsi_, and _nvme_ services are enabled and allowed by default, and are not necessary in the POST request.
+    <br/>
+    ```
+    POST "/api/svm/svms" '{"name":"testVs"}'
     ```
     <br/>
 
@@ -653,7 +680,7 @@ Optionally, you can specify the aggregate list for creating the volumes, and IPs
 * `destination.volume_placement.volume_aggregate_pairs` - List of volume aggregate pairs indicating where the migrating volumes should go on the destination.
 * `ip_interface_placement` -  List of source SVM's IP interface and port pairs on the destination for migrating the SVM's IP interfaces.
 * `auto_cutover` - Option to specify whether to perform cutover automatically. Default is true.
-* `auto_source_cleanup` - Option to specify whether to perform souce cleanup automatically. Default is true.
+* `auto_source_cleanup` - Option to specify whether to perform source cleanup automatically. Default is true.
 * `check_only` - Option to perform all the prechecks for migrate without actually starting the migrate. Default is false.
 * `throttle` - Option to specify a throttle value in KB/s. Defaults to unlimited.
 ### Related ONTAP commands
@@ -960,7 +987,7 @@ func (a *Client) SvmMigrationVolumeGet(params *SvmMigrationVolumeGetParams, auth
     PATCH "/api/svm/svms/f16f0935-5281-11e8-b94d-005056b46485" '{"aggregates":["{"name":aggr1"},{"name":"aggr2"},{"name":"aggr3"}]}'
     ```
     <br/>
- 6. Updates the Snapshot copy policy for an individual SVM
+ 6. Updates the snapshot policy for an individual SVM
     <br/>
     ```
     PATCH "/api/svm/svms/f16f0935-5281-11e8-b94d-005056b46485" '{"snapshot_policy":{"name":"custom1"}}'
@@ -1018,6 +1045,12 @@ func (a *Client) SvmMigrationVolumeGet(params *SvmMigrationVolumeGetParams, auth
     <br/>
     ```
     PATCH "/api/svm/svms/f16f0935-5281-11e8-b94d-005056b46485" '{"storage":{"limit":"400MB", "limit_threshold_alert":"98"}}'
+    ```
+    <br/>
+ 16. Updates the QoS policy group template for the SVM.
+    <br/>
+    ```
+    PATCH "/api/svm/svms/f16f0935-5281-11e8-b94d-005056b46485" '{"qos_policy_group_template":{"name":"policy1"}}'
     ```
     <br/>
 
@@ -1488,7 +1521,7 @@ func (a *Client) SvmPeerPermissionCreate(params *SvmPeerPermissionCreateParams, 
 	SvmPeerPermissionDelete Deletes the SVM peer permissions.
 
 ### Related ONTAP commands
-* `verver peer permission delete`
+* `vserver peer permission delete`
 ### Example
 Deletes an SVM peer permission.
 <br/>

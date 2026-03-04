@@ -27,7 +27,7 @@ type ClientLock struct {
 	// Example: 0.0.0.0
 	ClientAddress *string `json:"client_address,omitempty" yaml:"client_address,omitempty"`
 
-	// Indicate if volume is contituent or not.
+	// Indicate if volume is constituent or not.
 	// Read Only: true
 	Constituent *bool `json:"constituent,omitempty" yaml:"constituent,omitempty"`
 
@@ -1570,7 +1570,7 @@ type ClientLockInlineVolume struct {
 	// links
 	Links *ClientLockInlineVolumeInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 

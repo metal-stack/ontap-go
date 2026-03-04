@@ -212,6 +212,7 @@ func NewAggregateDeleteDefault(code int) *AggregateDeleteDefault {
 | 786771 | Aggregate does not exist. |
 | 786867 | Specified aggregate resides on the remote cluster. |
 | 786897 | Specified aggregate cannot be deleted as it is a switched-over root aggregate. |
+| 19726544 | DELETE on the aggregate endpoint is not supported on this version of ONTAP. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type AggregateDeleteDefault struct {

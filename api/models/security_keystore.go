@@ -35,6 +35,12 @@ type SecurityKeystore struct {
 	// scope
 	Scope *NetworkScopeReadonly `json:"scope,omitempty" yaml:"scope,omitempty"`
 
+	// State of the keystore: * 'active' - The key manager is active and serving new and existing keys. * 'mixed' - The key manager has a mixed configuration. New keys can't be created. * 'svm_kek_rekey' - An SVM key encryption key (KEK) rekey is in progress. New keys can't be created. * 'blocked' - The key manager is blocked and cannot serve new and existing keys. * 'switching' - Switching the enabled key manager keystore configuration. Some operations are blocked. * 'initializing' - The key manager is being initialized. All operations are blocked. * 'disabling' - The key manager is being disabled. All operations are blocked.
+	//
+	// Read Only: true
+	// Enum: ["active","mixed","svm_kek_rekey","blocked","switching","initializing","disabling"]
+	State *string `json:"state,omitempty" yaml:"state,omitempty"`
+
 	// svm
 	Svm *SecurityKeystoreInlineSvm `json:"svm,omitempty" yaml:"svm,omitempty"`
 
@@ -62,6 +68,10 @@ func (m *SecurityKeystore) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateScope(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateState(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -159,6 +169,63 @@ func (m *SecurityKeystore) validateScope(formats strfmt.Registry) error {
 	return nil
 }
 
+var securityKeystoreTypeStatePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["active","mixed","svm_kek_rekey","blocked","switching","initializing","disabling"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		securityKeystoreTypeStatePropEnum = append(securityKeystoreTypeStatePropEnum, v)
+	}
+}
+
+const (
+
+	// SecurityKeystoreStateActive captures enum value "active"
+	SecurityKeystoreStateActive string = "active"
+
+	// SecurityKeystoreStateMixed captures enum value "mixed"
+	SecurityKeystoreStateMixed string = "mixed"
+
+	// SecurityKeystoreStateSvmKekRekey captures enum value "svm_kek_rekey"
+	SecurityKeystoreStateSvmKekRekey string = "svm_kek_rekey"
+
+	// SecurityKeystoreStateBlocked captures enum value "blocked"
+	SecurityKeystoreStateBlocked string = "blocked"
+
+	// SecurityKeystoreStateSwitching captures enum value "switching"
+	SecurityKeystoreStateSwitching string = "switching"
+
+	// SecurityKeystoreStateInitializing captures enum value "initializing"
+	SecurityKeystoreStateInitializing string = "initializing"
+
+	// SecurityKeystoreStateDisabling captures enum value "disabling"
+	SecurityKeystoreStateDisabling string = "disabling"
+)
+
+// prop value enum
+func (m *SecurityKeystore) validateStateEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, securityKeystoreTypeStatePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *SecurityKeystore) validateState(formats strfmt.Registry) error {
+	if swag.IsZero(m.State) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateStateEnum("state", "body", *m.State); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func (m *SecurityKeystore) validateSvm(formats strfmt.Registry) error {
 	if swag.IsZero(m.Svm) { // not required
 		return nil
@@ -248,6 +315,10 @@ func (m *SecurityKeystore) ContextValidate(ctx context.Context, formats strfmt.R
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateState(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateSvm(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -312,6 +383,15 @@ func (m *SecurityKeystore) contextValidateScope(ctx context.Context, formats str
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *SecurityKeystore) contextValidateState(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "state", "body", m.State); err != nil {
+		return err
 	}
 
 	return nil

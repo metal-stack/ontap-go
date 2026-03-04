@@ -320,11 +320,53 @@ type LunCollectionGetParams struct {
 	*/
 	LocationVolumeUUID *string
 
+	/* LunMapsIgroupComment.
+
+	   Filter by lun_maps.igroup.comment
+	*/
+	LunMapsIgroupComment *string
+
+	/* LunMapsIgroupIgroupsName.
+
+	   Filter by lun_maps.igroup.igroups.name
+	*/
+	LunMapsIgroupIgroupsName *string
+
+	/* LunMapsIgroupIgroupsUUID.
+
+	   Filter by lun_maps.igroup.igroups.uuid
+	*/
+	LunMapsIgroupIgroupsUUID *string
+
+	/* LunMapsIgroupInitiatorsComment.
+
+	   Filter by lun_maps.igroup.initiators.comment
+	*/
+	LunMapsIgroupInitiatorsComment *string
+
+	/* LunMapsIgroupInitiatorsName.
+
+	   Filter by lun_maps.igroup.initiators.name
+	*/
+	LunMapsIgroupInitiatorsName *string
+
 	/* LunMapsIgroupName.
 
 	   Filter by lun_maps.igroup.name
 	*/
 	LunMapsIgroupName *string
+
+	/* LunMapsIgroupOsType.
+
+	   Filter by lun_maps.igroup.os_type
+	*/
+	LunMapsIgroupOsType *string
+
+	/* LunMapsIgroupProtocol.
+
+	   Filter by lun_maps.igroup.protocol
+	*/
+	LunMapsIgroupProtocol *string
 
 	/* LunMapsIgroupUUID.
 
@@ -552,6 +594,12 @@ type LunCollectionGetParams struct {
 	*/
 	SerialNumber *string
 
+	/* SpaceEfficiencyRatio.
+
+	   Filter by space.efficiency_ratio
+	*/
+	SpaceEfficiencyRatio *float64
+
 	/* SpaceGuaranteeRequested.
 
 	   Filter by space.guarantee.requested
@@ -563,6 +611,18 @@ type LunCollectionGetParams struct {
 	   Filter by space.guarantee.reserved
 	*/
 	SpaceGuaranteeReserved *bool
+
+	/* SpacePhysicalUsed.
+
+	   Filter by space.physical_used
+	*/
+	SpacePhysicalUsed *int64
+
+	/* SpacePhysicalUsedBySnapshots.
+
+	   Filter by space.physical_used_by_snapshots
+	*/
+	SpacePhysicalUsedBySnapshots *int64
 
 	/* SpaceScsiThinProvisioningSupportEnabled.
 
@@ -1278,6 +1338,61 @@ func (o *LunCollectionGetParams) SetLocationVolumeUUID(locationVolumeUUID *strin
 	o.LocationVolumeUUID = locationVolumeUUID
 }
 
+// WithLunMapsIgroupComment adds the lunMapsIgroupComment to the lun collection get params
+func (o *LunCollectionGetParams) WithLunMapsIgroupComment(lunMapsIgroupComment *string) *LunCollectionGetParams {
+	o.SetLunMapsIgroupComment(lunMapsIgroupComment)
+	return o
+}
+
+// SetLunMapsIgroupComment adds the lunMapsIgroupComment to the lun collection get params
+func (o *LunCollectionGetParams) SetLunMapsIgroupComment(lunMapsIgroupComment *string) {
+	o.LunMapsIgroupComment = lunMapsIgroupComment
+}
+
+// WithLunMapsIgroupIgroupsName adds the lunMapsIgroupIgroupsName to the lun collection get params
+func (o *LunCollectionGetParams) WithLunMapsIgroupIgroupsName(lunMapsIgroupIgroupsName *string) *LunCollectionGetParams {
+	o.SetLunMapsIgroupIgroupsName(lunMapsIgroupIgroupsName)
+	return o
+}
+
+// SetLunMapsIgroupIgroupsName adds the lunMapsIgroupIgroupsName to the lun collection get params
+func (o *LunCollectionGetParams) SetLunMapsIgroupIgroupsName(lunMapsIgroupIgroupsName *string) {
+	o.LunMapsIgroupIgroupsName = lunMapsIgroupIgroupsName
+}
+
+// WithLunMapsIgroupIgroupsUUID adds the lunMapsIgroupIgroupsUUID to the lun collection get params
+func (o *LunCollectionGetParams) WithLunMapsIgroupIgroupsUUID(lunMapsIgroupIgroupsUUID *string) *LunCollectionGetParams {
+	o.SetLunMapsIgroupIgroupsUUID(lunMapsIgroupIgroupsUUID)
+	return o
+}
+
+// SetLunMapsIgroupIgroupsUUID adds the lunMapsIgroupIgroupsUuid to the lun collection get params
+func (o *LunCollectionGetParams) SetLunMapsIgroupIgroupsUUID(lunMapsIgroupIgroupsUUID *string) {
+	o.LunMapsIgroupIgroupsUUID = lunMapsIgroupIgroupsUUID
+}
+
+// WithLunMapsIgroupInitiatorsComment adds the lunMapsIgroupInitiatorsComment to the lun collection get params
+func (o *LunCollectionGetParams) WithLunMapsIgroupInitiatorsComment(lunMapsIgroupInitiatorsComment *string) *LunCollectionGetParams {
+	o.SetLunMapsIgroupInitiatorsComment(lunMapsIgroupInitiatorsComment)
+	return o
+}
+
+// SetLunMapsIgroupInitiatorsComment adds the lunMapsIgroupInitiatorsComment to the lun collection get params
+func (o *LunCollectionGetParams) SetLunMapsIgroupInitiatorsComment(lunMapsIgroupInitiatorsComment *string) {
+	o.LunMapsIgroupInitiatorsComment = lunMapsIgroupInitiatorsComment
+}
+
+// WithLunMapsIgroupInitiatorsName adds the lunMapsIgroupInitiatorsName to the lun collection get params
+func (o *LunCollectionGetParams) WithLunMapsIgroupInitiatorsName(lunMapsIgroupInitiatorsName *string) *LunCollectionGetParams {
+	o.SetLunMapsIgroupInitiatorsName(lunMapsIgroupInitiatorsName)
+	return o
+}
+
+// SetLunMapsIgroupInitiatorsName adds the lunMapsIgroupInitiatorsName to the lun collection get params
+func (o *LunCollectionGetParams) SetLunMapsIgroupInitiatorsName(lunMapsIgroupInitiatorsName *string) {
+	o.LunMapsIgroupInitiatorsName = lunMapsIgroupInitiatorsName
+}
+
 // WithLunMapsIgroupName adds the lunMapsIgroupName to the lun collection get params
 func (o *LunCollectionGetParams) WithLunMapsIgroupName(lunMapsIgroupName *string) *LunCollectionGetParams {
 	o.SetLunMapsIgroupName(lunMapsIgroupName)
@@ -1287,6 +1402,28 @@ func (o *LunCollectionGetParams) WithLunMapsIgroupName(lunMapsIgroupName *string
 // SetLunMapsIgroupName adds the lunMapsIgroupName to the lun collection get params
 func (o *LunCollectionGetParams) SetLunMapsIgroupName(lunMapsIgroupName *string) {
 	o.LunMapsIgroupName = lunMapsIgroupName
+}
+
+// WithLunMapsIgroupOsType adds the lunMapsIgroupOsType to the lun collection get params
+func (o *LunCollectionGetParams) WithLunMapsIgroupOsType(lunMapsIgroupOsType *string) *LunCollectionGetParams {
+	o.SetLunMapsIgroupOsType(lunMapsIgroupOsType)
+	return o
+}
+
+// SetLunMapsIgroupOsType adds the lunMapsIgroupOsType to the lun collection get params
+func (o *LunCollectionGetParams) SetLunMapsIgroupOsType(lunMapsIgroupOsType *string) {
+	o.LunMapsIgroupOsType = lunMapsIgroupOsType
+}
+
+// WithLunMapsIgroupProtocol adds the lunMapsIgroupProtocol to the lun collection get params
+func (o *LunCollectionGetParams) WithLunMapsIgroupProtocol(lunMapsIgroupProtocol *string) *LunCollectionGetParams {
+	o.SetLunMapsIgroupProtocol(lunMapsIgroupProtocol)
+	return o
+}
+
+// SetLunMapsIgroupProtocol adds the lunMapsIgroupProtocol to the lun collection get params
+func (o *LunCollectionGetParams) SetLunMapsIgroupProtocol(lunMapsIgroupProtocol *string) {
+	o.LunMapsIgroupProtocol = lunMapsIgroupProtocol
 }
 
 // WithLunMapsIgroupUUID adds the lunMapsIgroupUUID to the lun collection get params
@@ -1696,6 +1833,17 @@ func (o *LunCollectionGetParams) SetSerialNumber(serialNumber *string) {
 	o.SerialNumber = serialNumber
 }
 
+// WithSpaceEfficiencyRatio adds the spaceEfficiencyRatio to the lun collection get params
+func (o *LunCollectionGetParams) WithSpaceEfficiencyRatio(spaceEfficiencyRatio *float64) *LunCollectionGetParams {
+	o.SetSpaceEfficiencyRatio(spaceEfficiencyRatio)
+	return o
+}
+
+// SetSpaceEfficiencyRatio adds the spaceEfficiencyRatio to the lun collection get params
+func (o *LunCollectionGetParams) SetSpaceEfficiencyRatio(spaceEfficiencyRatio *float64) {
+	o.SpaceEfficiencyRatio = spaceEfficiencyRatio
+}
+
 // WithSpaceGuaranteeRequested adds the spaceGuaranteeRequested to the lun collection get params
 func (o *LunCollectionGetParams) WithSpaceGuaranteeRequested(spaceGuaranteeRequested *bool) *LunCollectionGetParams {
 	o.SetSpaceGuaranteeRequested(spaceGuaranteeRequested)
@@ -1716,6 +1864,28 @@ func (o *LunCollectionGetParams) WithSpaceGuaranteeReserved(spaceGuaranteeReserv
 // SetSpaceGuaranteeReserved adds the spaceGuaranteeReserved to the lun collection get params
 func (o *LunCollectionGetParams) SetSpaceGuaranteeReserved(spaceGuaranteeReserved *bool) {
 	o.SpaceGuaranteeReserved = spaceGuaranteeReserved
+}
+
+// WithSpacePhysicalUsed adds the spacePhysicalUsed to the lun collection get params
+func (o *LunCollectionGetParams) WithSpacePhysicalUsed(spacePhysicalUsed *int64) *LunCollectionGetParams {
+	o.SetSpacePhysicalUsed(spacePhysicalUsed)
+	return o
+}
+
+// SetSpacePhysicalUsed adds the spacePhysicalUsed to the lun collection get params
+func (o *LunCollectionGetParams) SetSpacePhysicalUsed(spacePhysicalUsed *int64) {
+	o.SpacePhysicalUsed = spacePhysicalUsed
+}
+
+// WithSpacePhysicalUsedBySnapshots adds the spacePhysicalUsedBySnapshots to the lun collection get params
+func (o *LunCollectionGetParams) WithSpacePhysicalUsedBySnapshots(spacePhysicalUsedBySnapshots *int64) *LunCollectionGetParams {
+	o.SetSpacePhysicalUsedBySnapshots(spacePhysicalUsedBySnapshots)
+	return o
+}
+
+// SetSpacePhysicalUsedBySnapshots adds the spacePhysicalUsedBySnapshots to the lun collection get params
+func (o *LunCollectionGetParams) SetSpacePhysicalUsedBySnapshots(spacePhysicalUsedBySnapshots *int64) {
+	o.SpacePhysicalUsedBySnapshots = spacePhysicalUsedBySnapshots
 }
 
 // WithSpaceScsiThinProvisioningSupportEnabled adds the spaceScsiThinProvisioningSupportEnabled to the lun collection get params
@@ -2770,6 +2940,91 @@ func (o *LunCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg str
 		}
 	}
 
+	if o.LunMapsIgroupComment != nil {
+
+		// query param lun_maps.igroup.comment
+		var qrLunMapsIgroupComment string
+
+		if o.LunMapsIgroupComment != nil {
+			qrLunMapsIgroupComment = *o.LunMapsIgroupComment
+		}
+		qLunMapsIgroupComment := qrLunMapsIgroupComment
+		if qLunMapsIgroupComment != "" {
+
+			if err := r.SetQueryParam("lun_maps.igroup.comment", qLunMapsIgroupComment); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.LunMapsIgroupIgroupsName != nil {
+
+		// query param lun_maps.igroup.igroups.name
+		var qrLunMapsIgroupIgroupsName string
+
+		if o.LunMapsIgroupIgroupsName != nil {
+			qrLunMapsIgroupIgroupsName = *o.LunMapsIgroupIgroupsName
+		}
+		qLunMapsIgroupIgroupsName := qrLunMapsIgroupIgroupsName
+		if qLunMapsIgroupIgroupsName != "" {
+
+			if err := r.SetQueryParam("lun_maps.igroup.igroups.name", qLunMapsIgroupIgroupsName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.LunMapsIgroupIgroupsUUID != nil {
+
+		// query param lun_maps.igroup.igroups.uuid
+		var qrLunMapsIgroupIgroupsUUID string
+
+		if o.LunMapsIgroupIgroupsUUID != nil {
+			qrLunMapsIgroupIgroupsUUID = *o.LunMapsIgroupIgroupsUUID
+		}
+		qLunMapsIgroupIgroupsUUID := qrLunMapsIgroupIgroupsUUID
+		if qLunMapsIgroupIgroupsUUID != "" {
+
+			if err := r.SetQueryParam("lun_maps.igroup.igroups.uuid", qLunMapsIgroupIgroupsUUID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.LunMapsIgroupInitiatorsComment != nil {
+
+		// query param lun_maps.igroup.initiators.comment
+		var qrLunMapsIgroupInitiatorsComment string
+
+		if o.LunMapsIgroupInitiatorsComment != nil {
+			qrLunMapsIgroupInitiatorsComment = *o.LunMapsIgroupInitiatorsComment
+		}
+		qLunMapsIgroupInitiatorsComment := qrLunMapsIgroupInitiatorsComment
+		if qLunMapsIgroupInitiatorsComment != "" {
+
+			if err := r.SetQueryParam("lun_maps.igroup.initiators.comment", qLunMapsIgroupInitiatorsComment); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.LunMapsIgroupInitiatorsName != nil {
+
+		// query param lun_maps.igroup.initiators.name
+		var qrLunMapsIgroupInitiatorsName string
+
+		if o.LunMapsIgroupInitiatorsName != nil {
+			qrLunMapsIgroupInitiatorsName = *o.LunMapsIgroupInitiatorsName
+		}
+		qLunMapsIgroupInitiatorsName := qrLunMapsIgroupInitiatorsName
+		if qLunMapsIgroupInitiatorsName != "" {
+
+			if err := r.SetQueryParam("lun_maps.igroup.initiators.name", qLunMapsIgroupInitiatorsName); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.LunMapsIgroupName != nil {
 
 		// query param lun_maps.igroup.name
@@ -2782,6 +3037,40 @@ func (o *LunCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg str
 		if qLunMapsIgroupName != "" {
 
 			if err := r.SetQueryParam("lun_maps.igroup.name", qLunMapsIgroupName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.LunMapsIgroupOsType != nil {
+
+		// query param lun_maps.igroup.os_type
+		var qrLunMapsIgroupOsType string
+
+		if o.LunMapsIgroupOsType != nil {
+			qrLunMapsIgroupOsType = *o.LunMapsIgroupOsType
+		}
+		qLunMapsIgroupOsType := qrLunMapsIgroupOsType
+		if qLunMapsIgroupOsType != "" {
+
+			if err := r.SetQueryParam("lun_maps.igroup.os_type", qLunMapsIgroupOsType); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.LunMapsIgroupProtocol != nil {
+
+		// query param lun_maps.igroup.protocol
+		var qrLunMapsIgroupProtocol string
+
+		if o.LunMapsIgroupProtocol != nil {
+			qrLunMapsIgroupProtocol = *o.LunMapsIgroupProtocol
+		}
+		qLunMapsIgroupProtocol := qrLunMapsIgroupProtocol
+		if qLunMapsIgroupProtocol != "" {
+
+			if err := r.SetQueryParam("lun_maps.igroup.protocol", qLunMapsIgroupProtocol); err != nil {
 				return err
 			}
 		}
@@ -3410,6 +3699,23 @@ func (o *LunCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg str
 		}
 	}
 
+	if o.SpaceEfficiencyRatio != nil {
+
+		// query param space.efficiency_ratio
+		var qrSpaceEfficiencyRatio float64
+
+		if o.SpaceEfficiencyRatio != nil {
+			qrSpaceEfficiencyRatio = *o.SpaceEfficiencyRatio
+		}
+		qSpaceEfficiencyRatio := swag.FormatFloat64(qrSpaceEfficiencyRatio)
+		if qSpaceEfficiencyRatio != "" {
+
+			if err := r.SetQueryParam("space.efficiency_ratio", qSpaceEfficiencyRatio); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.SpaceGuaranteeRequested != nil {
 
 		// query param space.guarantee.requested
@@ -3439,6 +3745,40 @@ func (o *LunCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg str
 		if qSpaceGuaranteeReserved != "" {
 
 			if err := r.SetQueryParam("space.guarantee.reserved", qSpaceGuaranteeReserved); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.SpacePhysicalUsed != nil {
+
+		// query param space.physical_used
+		var qrSpacePhysicalUsed int64
+
+		if o.SpacePhysicalUsed != nil {
+			qrSpacePhysicalUsed = *o.SpacePhysicalUsed
+		}
+		qSpacePhysicalUsed := swag.FormatInt64(qrSpacePhysicalUsed)
+		if qSpacePhysicalUsed != "" {
+
+			if err := r.SetQueryParam("space.physical_used", qSpacePhysicalUsed); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.SpacePhysicalUsedBySnapshots != nil {
+
+		// query param space.physical_used_by_snapshots
+		var qrSpacePhysicalUsedBySnapshots int64
+
+		if o.SpacePhysicalUsedBySnapshots != nil {
+			qrSpacePhysicalUsedBySnapshots = *o.SpacePhysicalUsedBySnapshots
+		}
+		qSpacePhysicalUsedBySnapshots := swag.FormatInt64(qrSpacePhysicalUsedBySnapshots)
+		if qSpacePhysicalUsedBySnapshots != "" {
+
+			if err := r.SetQueryParam("space.physical_used_by_snapshots", qSpacePhysicalUsedBySnapshots); err != nil {
 				return err
 			}
 		}

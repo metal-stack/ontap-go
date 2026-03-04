@@ -39,6 +39,15 @@ type CifsDomain struct {
 	// Read Only: true
 	CifsDomainInlineTrustRelationships []*CifsDomainInlineTrustRelationshipsInlineArrayItem `json:"trust_relationships,omitempty" yaml:"trust_relationships,omitempty"`
 
+	// PKCS12 certificate used by the application to prove its identity to AKV.
+	// Example: PEM Cert
+	// Format: password
+	ClientCertificate *strfmt.Password `json:"client_certificate,omitempty" yaml:"client_certificate,omitempty"`
+
+	// Application client ID of the deployed Azure application with appropriate access to an AKV or EntraId.
+	// Example: e959d1b5-5a63-4284-9268-851e30e3eceb
+	ClientID *string `json:"client_id,omitempty" yaml:"client_id,omitempty"`
+
 	// name mapping
 	NameMapping *CifsDomainInlineNameMapping `json:"name_mapping,omitempty" yaml:"name_mapping,omitempty"`
 
@@ -52,6 +61,10 @@ type CifsDomain struct {
 
 	// svm
 	Svm *CifsDomainInlineSvm `json:"svm,omitempty" yaml:"svm,omitempty"`
+
+	// Directory (tenant) ID of the deployed Azure application with appropriate access to an AKV or EntraId.
+	// Example: c9f32fcb-4ab7-40fe-af1b-1850d46cfbbe
+	TenantID *string `json:"tenant_id,omitempty" yaml:"tenant_id,omitempty"`
 }
 
 // Validate validates this cifs domain
@@ -71,6 +84,10 @@ func (m *CifsDomain) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateCifsDomainInlineTrustRelationships(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateClientCertificate(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -188,6 +205,18 @@ func (m *CifsDomain) validateCifsDomainInlineTrustRelationships(formats strfmt.R
 			}
 		}
 
+	}
+
+	return nil
+}
+
+func (m *CifsDomain) validateClientCertificate(formats strfmt.Registry) error {
+	if swag.IsZero(m.ClientCertificate) { // not required
+		return nil
+	}
+
+	if err := validate.FormatOf("client_certificate", "body", "password", m.ClientCertificate.String(), formats); err != nil {
+		return err
 	}
 
 	return nil

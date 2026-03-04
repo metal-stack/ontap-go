@@ -34,7 +34,7 @@ type AccountApplication struct {
 	// Optional property that specifies whether the user is an LDAP or NIS group.
 	IsNsSwitchGroup *bool `json:"is_ns_switch_group,omitempty" yaml:"is_ns_switch_group,omitempty"`
 
-	// An optional additional authentication method for multifactor authentication (MFA). This property is only supported for SSH (_ssh_) and Service Processor (_service_processor_) applications. It is ignored for all other applications. Time-based One-Time Passwords (TOTPs) are only supported with the authentication method password or public key. For the Service Processor (_service_processor_) application, _none_ and _publickey_ are the only supported enum values.
+	// An optional additional authentication method for multi-factor authentication (MFA). This property is only supported for SSH (_ssh_) and Service Processor (_service_processor_) applications. It is ignored for all other applications. Time-based One-Time Passwords (TOTPs) are only supported with the authentication method password or public key. For the Service Processor (_service_processor_) application, _none_ and _publickey_ are the only supported enum values.
 	// Enum: ["none","password","publickey","nsswitch","domain","totp"]
 	SecondAuthenticationMethod *string `json:"second_authentication_method,omitempty" yaml:"second_authentication_method,omitempty"`
 }

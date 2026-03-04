@@ -118,6 +118,11 @@ func NewFpolicyPersistentStoreModifyDefault(code int) *FpolicyPersistentStoreMod
 | 9765072    | Volume is not of type RW. Only volumes of type RW are supported. |
 | 9765074    | Size is a required parameter for the creation of the Persistent Store. |
 | 9765077    | The SVM is not associated with any aggregates. |
+| 524849     | Attribute cannot be modified for the target volume because of the specified reason. |
+| 917533     | The target volume is not eligible for modification due to certain constraints, such as the volume being offline or currently engaged in a volume move operation. |
+| 917826     | Volume minimum autosize must be greater than zero. |
+| 918647     | The designated size exceeds the maximum available capacity of the intended volume. |
+| 917534     | The value specified for the field \\"-size\\" is too small. Update the field \\"-size\\" with the minimum size allowed and retry the operation. |
 */
 type FpolicyPersistentStoreModifyDefault struct {
 	_statusCode int

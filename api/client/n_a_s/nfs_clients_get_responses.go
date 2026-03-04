@@ -120,9 +120,14 @@ func NewNfsClientsGetDefault(code int) *NfsClientsGetDefault {
 }
 
 /*
-NfsClientsGetDefault describes a response with status code -1, with default header values.
+	NfsClientsGetDefault describes a response with status code -1, with default header values.
 
-Error
+	ONTAP Error Response Codes
+
+| Error Code | Description |
+| ---------- | ----------- |
+| 917887     | The first character of the volume name must be a letter or underscore.|
+| 917888     | Invalid character in volume name. It can have '_' and alphanumeric characters.|
 */
 type NfsClientsGetDefault struct {
 	_statusCode int

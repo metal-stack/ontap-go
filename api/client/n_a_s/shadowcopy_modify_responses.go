@@ -120,9 +120,13 @@ func NewShadowcopyModifyDefault(code int) *ShadowcopyModifyDefault {
 }
 
 /*
-ShadowcopyModifyDefault describes a response with status code -1, with default header values.
+	ShadowcopyModifyDefault describes a response with status code -1, with default header values.
 
-Error
+	ONTAP Error Response Codes
+
+| Error Code | Description |
+| ---------- | ----------- |
+| 262196     | The 'svm' field is not supported in the body of a PATCH request. |
 */
 type ShadowcopyModifyDefault struct {
 	_statusCode int

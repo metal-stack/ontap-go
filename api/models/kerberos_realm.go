@@ -540,7 +540,7 @@ type KerberosRealmInlineKdc struct {
 	// Minimum: 1
 	Port *int64 `json:"port,omitempty" yaml:"port,omitempty"`
 
-	// Key Distribution Center (KDC) vendor. Following values are suported:
+	// Key Distribution Center (KDC) vendor. Following values are supported:
 	// * microsoft - Microsoft Active Directory KDC
 	// * other - MIT Kerberos KDC or other KDC
 	//

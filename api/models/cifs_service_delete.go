@@ -23,6 +23,11 @@ type CifsServiceDelete struct {
 	// ad domain
 	AdDomain *AdDomainDelete `json:"ad_domain,omitempty" yaml:"ad_domain,omitempty"`
 
+	// Specifies the type of user who can access the SMB Volume. The default is domain_user. In the case of a hybrid-user, ONTAP won't contact on-premise ADDS.
+	//
+	// Enum: ["domain_user","hybrid_user"]
+	AuthUserType *string `json:"auth_user_type,omitempty" yaml:"auth_user_type,omitempty"`
+
 	// Specifies the authentication method.
 	// The available values are:
 	//   * client_secret
@@ -36,7 +41,7 @@ type CifsServiceDelete struct {
 	// Format: password
 	ClientCertificate *strfmt.Password `json:"client_certificate,omitempty" yaml:"client_certificate,omitempty"`
 
-	// Application client ID of the deployed Azure application with appropriate access to an AKV.
+	// Application client ID of the deployed Azure application with appropriate access to an AKV or EntraId.
 	// Example: e959d1b5-5a63-4284-9268-851e30e3eceb
 	ClientID *string `json:"client_id,omitempty" yaml:"client_id,omitempty"`
 
@@ -74,7 +79,7 @@ type CifsServiceDelete struct {
 	// Example: proxyuser
 	ProxyUsername *string `json:"proxy_username,omitempty" yaml:"proxy_username,omitempty"`
 
-	// Directory (tenant) ID of the deployed Azure application with appropriate access to an AKV.
+	// Directory (tenant) ID of the deployed Azure application with appropriate access to an AKV or EntraId.
 	// Example: c9f32fcb-4ab7-40fe-af1b-1850d46cfbbe
 	TenantID *string `json:"tenant_id,omitempty" yaml:"tenant_id,omitempty"`
 
@@ -97,6 +102,10 @@ func (m *CifsServiceDelete) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateAdDomain(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAuthUserType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -144,6 +153,48 @@ func (m *CifsServiceDelete) validateAdDomain(formats strfmt.Registry) error {
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+var cifsServiceDeleteTypeAuthUserTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["domain_user","hybrid_user"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		cifsServiceDeleteTypeAuthUserTypePropEnum = append(cifsServiceDeleteTypeAuthUserTypePropEnum, v)
+	}
+}
+
+const (
+
+	// CifsServiceDeleteAuthUserTypeDomainUser captures enum value "domain_user"
+	CifsServiceDeleteAuthUserTypeDomainUser string = "domain_user"
+
+	// CifsServiceDeleteAuthUserTypeHybridUser captures enum value "hybrid_user"
+	CifsServiceDeleteAuthUserTypeHybridUser string = "hybrid_user"
+)
+
+// prop value enum
+func (m *CifsServiceDelete) validateAuthUserTypeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, cifsServiceDeleteTypeAuthUserTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *CifsServiceDelete) validateAuthUserType(formats strfmt.Registry) error {
+	if swag.IsZero(m.AuthUserType) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateAuthUserTypeEnum("auth_user_type", "body", *m.AuthUserType); err != nil {
+		return err
 	}
 
 	return nil

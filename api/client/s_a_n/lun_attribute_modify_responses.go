@@ -115,6 +115,7 @@ func NewLunAttributeModifyDefault(code int) *LunAttributeModifyDefault {
 | 5374875 | The specified LUN was not found. |
 | 5374929 | The combined sizes of an attribute name and value are too large. |
 | 5374931 | The specified attribute was not found. |
+| 5375060 | The move start operation failed. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type LunAttributeModifyDefault struct {

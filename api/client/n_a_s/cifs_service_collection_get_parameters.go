@@ -86,6 +86,12 @@ type CifsServiceCollectionGetParams struct {
 	*/
 	AuthStyle *string
 
+	/* AuthUserType.
+
+	   Filter by auth_user_type
+	*/
+	AuthUserType *string
+
 	/* AuthenticationMethod.
 
 	   Filter by authentication_method
@@ -272,6 +278,18 @@ type CifsServiceCollectionGetParams struct {
 	*/
 	OptionsBackupSymlinkEnabled *bool
 
+	/* OptionsClientDupDetectionEnabled.
+
+	   Filter by options.client_dup_detection_enabled
+	*/
+	OptionsClientDupDetectionEnabled *bool
+
+	/* OptionsClientVersionReportingEnabled.
+
+	   Filter by options.client_version_reporting_enabled
+	*/
+	OptionsClientVersionReportingEnabled *bool
+
 	/* OptionsCopyOffload.
 
 	   Filter by options.copy_offload
@@ -314,6 +332,42 @@ type CifsServiceCollectionGetParams struct {
 	*/
 	OptionsLargeMtu *bool
 
+	/* OptionsMaxConnectionsPerSession.
+
+	   Filter by options.max_connections_per_session
+	*/
+	OptionsMaxConnectionsPerSession *int64
+
+	/* OptionsMaxLifsPerSession.
+
+	   Filter by options.max_lifs_per_session
+	*/
+	OptionsMaxLifsPerSession *int64
+
+	/* OptionsMaxOpensSameFilePerTree.
+
+	   Filter by options.max_opens_same_file_per_tree
+	*/
+	OptionsMaxOpensSameFilePerTree *int64
+
+	/* OptionsMaxSameTreeConnectPerSession.
+
+	   Filter by options.max_same_tree_connect_per_session
+	*/
+	OptionsMaxSameTreeConnectPerSession *int64
+
+	/* OptionsMaxSameUserSessionsPerConnection.
+
+	   Filter by options.max_same_user_sessions_per_connection
+	*/
+	OptionsMaxSameUserSessionsPerConnection *int64
+
+	/* OptionsMaxWatchesSetPerTree.
+
+	   Filter by options.max_watches_set_per_tree
+	*/
+	OptionsMaxWatchesSetPerTree *int64
+
 	/* OptionsMultichannel.
 
 	   Filter by options.multichannel
@@ -355,6 +409,12 @@ type CifsServiceCollectionGetParams struct {
 	   Filter by options.smb_credits
 	*/
 	OptionsSmbCredits *int64
+
+	/* OptionsTrustedDomainEnumSearchEnabled.
+
+	   Filter by options.trusted_domain_enum_search_enabled
+	*/
+	OptionsTrustedDomainEnumSearchEnabled *bool
 
 	/* OptionsWidelinkReparseVersions.
 
@@ -711,6 +771,17 @@ func (o *CifsServiceCollectionGetParams) SetAuthStyle(authStyle *string) {
 	o.AuthStyle = authStyle
 }
 
+// WithAuthUserType adds the authUserType to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) WithAuthUserType(authUserType *string) *CifsServiceCollectionGetParams {
+	o.SetAuthUserType(authUserType)
+	return o
+}
+
+// SetAuthUserType adds the authUserType to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) SetAuthUserType(authUserType *string) {
+	o.AuthUserType = authUserType
+}
+
 // WithAuthenticationMethod adds the authenticationMethod to the cifs service collection get params
 func (o *CifsServiceCollectionGetParams) WithAuthenticationMethod(authenticationMethod *string) *CifsServiceCollectionGetParams {
 	o.SetAuthenticationMethod(authenticationMethod)
@@ -1052,6 +1123,28 @@ func (o *CifsServiceCollectionGetParams) SetOptionsBackupSymlinkEnabled(optionsB
 	o.OptionsBackupSymlinkEnabled = optionsBackupSymlinkEnabled
 }
 
+// WithOptionsClientDupDetectionEnabled adds the optionsClientDupDetectionEnabled to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) WithOptionsClientDupDetectionEnabled(optionsClientDupDetectionEnabled *bool) *CifsServiceCollectionGetParams {
+	o.SetOptionsClientDupDetectionEnabled(optionsClientDupDetectionEnabled)
+	return o
+}
+
+// SetOptionsClientDupDetectionEnabled adds the optionsClientDupDetectionEnabled to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) SetOptionsClientDupDetectionEnabled(optionsClientDupDetectionEnabled *bool) {
+	o.OptionsClientDupDetectionEnabled = optionsClientDupDetectionEnabled
+}
+
+// WithOptionsClientVersionReportingEnabled adds the optionsClientVersionReportingEnabled to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) WithOptionsClientVersionReportingEnabled(optionsClientVersionReportingEnabled *bool) *CifsServiceCollectionGetParams {
+	o.SetOptionsClientVersionReportingEnabled(optionsClientVersionReportingEnabled)
+	return o
+}
+
+// SetOptionsClientVersionReportingEnabled adds the optionsClientVersionReportingEnabled to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) SetOptionsClientVersionReportingEnabled(optionsClientVersionReportingEnabled *bool) {
+	o.OptionsClientVersionReportingEnabled = optionsClientVersionReportingEnabled
+}
+
 // WithOptionsCopyOffload adds the optionsCopyOffload to the cifs service collection get params
 func (o *CifsServiceCollectionGetParams) WithOptionsCopyOffload(optionsCopyOffload *bool) *CifsServiceCollectionGetParams {
 	o.SetOptionsCopyOffload(optionsCopyOffload)
@@ -1129,6 +1222,72 @@ func (o *CifsServiceCollectionGetParams) SetOptionsLargeMtu(optionsLargeMtu *boo
 	o.OptionsLargeMtu = optionsLargeMtu
 }
 
+// WithOptionsMaxConnectionsPerSession adds the optionsMaxConnectionsPerSession to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) WithOptionsMaxConnectionsPerSession(optionsMaxConnectionsPerSession *int64) *CifsServiceCollectionGetParams {
+	o.SetOptionsMaxConnectionsPerSession(optionsMaxConnectionsPerSession)
+	return o
+}
+
+// SetOptionsMaxConnectionsPerSession adds the optionsMaxConnectionsPerSession to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) SetOptionsMaxConnectionsPerSession(optionsMaxConnectionsPerSession *int64) {
+	o.OptionsMaxConnectionsPerSession = optionsMaxConnectionsPerSession
+}
+
+// WithOptionsMaxLifsPerSession adds the optionsMaxLifsPerSession to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) WithOptionsMaxLifsPerSession(optionsMaxLifsPerSession *int64) *CifsServiceCollectionGetParams {
+	o.SetOptionsMaxLifsPerSession(optionsMaxLifsPerSession)
+	return o
+}
+
+// SetOptionsMaxLifsPerSession adds the optionsMaxLifsPerSession to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) SetOptionsMaxLifsPerSession(optionsMaxLifsPerSession *int64) {
+	o.OptionsMaxLifsPerSession = optionsMaxLifsPerSession
+}
+
+// WithOptionsMaxOpensSameFilePerTree adds the optionsMaxOpensSameFilePerTree to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) WithOptionsMaxOpensSameFilePerTree(optionsMaxOpensSameFilePerTree *int64) *CifsServiceCollectionGetParams {
+	o.SetOptionsMaxOpensSameFilePerTree(optionsMaxOpensSameFilePerTree)
+	return o
+}
+
+// SetOptionsMaxOpensSameFilePerTree adds the optionsMaxOpensSameFilePerTree to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) SetOptionsMaxOpensSameFilePerTree(optionsMaxOpensSameFilePerTree *int64) {
+	o.OptionsMaxOpensSameFilePerTree = optionsMaxOpensSameFilePerTree
+}
+
+// WithOptionsMaxSameTreeConnectPerSession adds the optionsMaxSameTreeConnectPerSession to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) WithOptionsMaxSameTreeConnectPerSession(optionsMaxSameTreeConnectPerSession *int64) *CifsServiceCollectionGetParams {
+	o.SetOptionsMaxSameTreeConnectPerSession(optionsMaxSameTreeConnectPerSession)
+	return o
+}
+
+// SetOptionsMaxSameTreeConnectPerSession adds the optionsMaxSameTreeConnectPerSession to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) SetOptionsMaxSameTreeConnectPerSession(optionsMaxSameTreeConnectPerSession *int64) {
+	o.OptionsMaxSameTreeConnectPerSession = optionsMaxSameTreeConnectPerSession
+}
+
+// WithOptionsMaxSameUserSessionsPerConnection adds the optionsMaxSameUserSessionsPerConnection to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) WithOptionsMaxSameUserSessionsPerConnection(optionsMaxSameUserSessionsPerConnection *int64) *CifsServiceCollectionGetParams {
+	o.SetOptionsMaxSameUserSessionsPerConnection(optionsMaxSameUserSessionsPerConnection)
+	return o
+}
+
+// SetOptionsMaxSameUserSessionsPerConnection adds the optionsMaxSameUserSessionsPerConnection to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) SetOptionsMaxSameUserSessionsPerConnection(optionsMaxSameUserSessionsPerConnection *int64) {
+	o.OptionsMaxSameUserSessionsPerConnection = optionsMaxSameUserSessionsPerConnection
+}
+
+// WithOptionsMaxWatchesSetPerTree adds the optionsMaxWatchesSetPerTree to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) WithOptionsMaxWatchesSetPerTree(optionsMaxWatchesSetPerTree *int64) *CifsServiceCollectionGetParams {
+	o.SetOptionsMaxWatchesSetPerTree(optionsMaxWatchesSetPerTree)
+	return o
+}
+
+// SetOptionsMaxWatchesSetPerTree adds the optionsMaxWatchesSetPerTree to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) SetOptionsMaxWatchesSetPerTree(optionsMaxWatchesSetPerTree *int64) {
+	o.OptionsMaxWatchesSetPerTree = optionsMaxWatchesSetPerTree
+}
+
 // WithOptionsMultichannel adds the optionsMultichannel to the cifs service collection get params
 func (o *CifsServiceCollectionGetParams) WithOptionsMultichannel(optionsMultichannel *bool) *CifsServiceCollectionGetParams {
 	o.SetOptionsMultichannel(optionsMultichannel)
@@ -1204,6 +1363,17 @@ func (o *CifsServiceCollectionGetParams) WithOptionsSmbCredits(optionsSmbCredits
 // SetOptionsSmbCredits adds the optionsSmbCredits to the cifs service collection get params
 func (o *CifsServiceCollectionGetParams) SetOptionsSmbCredits(optionsSmbCredits *int64) {
 	o.OptionsSmbCredits = optionsSmbCredits
+}
+
+// WithOptionsTrustedDomainEnumSearchEnabled adds the optionsTrustedDomainEnumSearchEnabled to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) WithOptionsTrustedDomainEnumSearchEnabled(optionsTrustedDomainEnumSearchEnabled *bool) *CifsServiceCollectionGetParams {
+	o.SetOptionsTrustedDomainEnumSearchEnabled(optionsTrustedDomainEnumSearchEnabled)
+	return o
+}
+
+// SetOptionsTrustedDomainEnumSearchEnabled adds the optionsTrustedDomainEnumSearchEnabled to the cifs service collection get params
+func (o *CifsServiceCollectionGetParams) SetOptionsTrustedDomainEnumSearchEnabled(optionsTrustedDomainEnumSearchEnabled *bool) {
+	o.OptionsTrustedDomainEnumSearchEnabled = optionsTrustedDomainEnumSearchEnabled
 }
 
 // WithOptionsWidelinkReparseVersions adds the optionsWidelinkReparseVersions to the cifs service collection get params
@@ -1717,6 +1887,23 @@ func (o *CifsServiceCollectionGetParams) WriteToRequest(r runtime.ClientRequest,
 		if qAuthStyle != "" {
 
 			if err := r.SetQueryParam("auth-style", qAuthStyle); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.AuthUserType != nil {
+
+		// query param auth_user_type
+		var qrAuthUserType string
+
+		if o.AuthUserType != nil {
+			qrAuthUserType = *o.AuthUserType
+		}
+		qAuthUserType := qrAuthUserType
+		if qAuthUserType != "" {
+
+			if err := r.SetQueryParam("auth_user_type", qAuthUserType); err != nil {
 				return err
 			}
 		}
@@ -2243,6 +2430,40 @@ func (o *CifsServiceCollectionGetParams) WriteToRequest(r runtime.ClientRequest,
 		}
 	}
 
+	if o.OptionsClientDupDetectionEnabled != nil {
+
+		// query param options.client_dup_detection_enabled
+		var qrOptionsClientDupDetectionEnabled bool
+
+		if o.OptionsClientDupDetectionEnabled != nil {
+			qrOptionsClientDupDetectionEnabled = *o.OptionsClientDupDetectionEnabled
+		}
+		qOptionsClientDupDetectionEnabled := swag.FormatBool(qrOptionsClientDupDetectionEnabled)
+		if qOptionsClientDupDetectionEnabled != "" {
+
+			if err := r.SetQueryParam("options.client_dup_detection_enabled", qOptionsClientDupDetectionEnabled); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.OptionsClientVersionReportingEnabled != nil {
+
+		// query param options.client_version_reporting_enabled
+		var qrOptionsClientVersionReportingEnabled bool
+
+		if o.OptionsClientVersionReportingEnabled != nil {
+			qrOptionsClientVersionReportingEnabled = *o.OptionsClientVersionReportingEnabled
+		}
+		qOptionsClientVersionReportingEnabled := swag.FormatBool(qrOptionsClientVersionReportingEnabled)
+		if qOptionsClientVersionReportingEnabled != "" {
+
+			if err := r.SetQueryParam("options.client_version_reporting_enabled", qOptionsClientVersionReportingEnabled); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.OptionsCopyOffload != nil {
 
 		// query param options.copy_offload
@@ -2362,6 +2583,108 @@ func (o *CifsServiceCollectionGetParams) WriteToRequest(r runtime.ClientRequest,
 		}
 	}
 
+	if o.OptionsMaxConnectionsPerSession != nil {
+
+		// query param options.max_connections_per_session
+		var qrOptionsMaxConnectionsPerSession int64
+
+		if o.OptionsMaxConnectionsPerSession != nil {
+			qrOptionsMaxConnectionsPerSession = *o.OptionsMaxConnectionsPerSession
+		}
+		qOptionsMaxConnectionsPerSession := swag.FormatInt64(qrOptionsMaxConnectionsPerSession)
+		if qOptionsMaxConnectionsPerSession != "" {
+
+			if err := r.SetQueryParam("options.max_connections_per_session", qOptionsMaxConnectionsPerSession); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.OptionsMaxLifsPerSession != nil {
+
+		// query param options.max_lifs_per_session
+		var qrOptionsMaxLifsPerSession int64
+
+		if o.OptionsMaxLifsPerSession != nil {
+			qrOptionsMaxLifsPerSession = *o.OptionsMaxLifsPerSession
+		}
+		qOptionsMaxLifsPerSession := swag.FormatInt64(qrOptionsMaxLifsPerSession)
+		if qOptionsMaxLifsPerSession != "" {
+
+			if err := r.SetQueryParam("options.max_lifs_per_session", qOptionsMaxLifsPerSession); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.OptionsMaxOpensSameFilePerTree != nil {
+
+		// query param options.max_opens_same_file_per_tree
+		var qrOptionsMaxOpensSameFilePerTree int64
+
+		if o.OptionsMaxOpensSameFilePerTree != nil {
+			qrOptionsMaxOpensSameFilePerTree = *o.OptionsMaxOpensSameFilePerTree
+		}
+		qOptionsMaxOpensSameFilePerTree := swag.FormatInt64(qrOptionsMaxOpensSameFilePerTree)
+		if qOptionsMaxOpensSameFilePerTree != "" {
+
+			if err := r.SetQueryParam("options.max_opens_same_file_per_tree", qOptionsMaxOpensSameFilePerTree); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.OptionsMaxSameTreeConnectPerSession != nil {
+
+		// query param options.max_same_tree_connect_per_session
+		var qrOptionsMaxSameTreeConnectPerSession int64
+
+		if o.OptionsMaxSameTreeConnectPerSession != nil {
+			qrOptionsMaxSameTreeConnectPerSession = *o.OptionsMaxSameTreeConnectPerSession
+		}
+		qOptionsMaxSameTreeConnectPerSession := swag.FormatInt64(qrOptionsMaxSameTreeConnectPerSession)
+		if qOptionsMaxSameTreeConnectPerSession != "" {
+
+			if err := r.SetQueryParam("options.max_same_tree_connect_per_session", qOptionsMaxSameTreeConnectPerSession); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.OptionsMaxSameUserSessionsPerConnection != nil {
+
+		// query param options.max_same_user_sessions_per_connection
+		var qrOptionsMaxSameUserSessionsPerConnection int64
+
+		if o.OptionsMaxSameUserSessionsPerConnection != nil {
+			qrOptionsMaxSameUserSessionsPerConnection = *o.OptionsMaxSameUserSessionsPerConnection
+		}
+		qOptionsMaxSameUserSessionsPerConnection := swag.FormatInt64(qrOptionsMaxSameUserSessionsPerConnection)
+		if qOptionsMaxSameUserSessionsPerConnection != "" {
+
+			if err := r.SetQueryParam("options.max_same_user_sessions_per_connection", qOptionsMaxSameUserSessionsPerConnection); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.OptionsMaxWatchesSetPerTree != nil {
+
+		// query param options.max_watches_set_per_tree
+		var qrOptionsMaxWatchesSetPerTree int64
+
+		if o.OptionsMaxWatchesSetPerTree != nil {
+			qrOptionsMaxWatchesSetPerTree = *o.OptionsMaxWatchesSetPerTree
+		}
+		qOptionsMaxWatchesSetPerTree := swag.FormatInt64(qrOptionsMaxWatchesSetPerTree)
+		if qOptionsMaxWatchesSetPerTree != "" {
+
+			if err := r.SetQueryParam("options.max_watches_set_per_tree", qOptionsMaxWatchesSetPerTree); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.OptionsMultichannel != nil {
 
 		// query param options.multichannel
@@ -2476,6 +2799,23 @@ func (o *CifsServiceCollectionGetParams) WriteToRequest(r runtime.ClientRequest,
 		if qOptionsSmbCredits != "" {
 
 			if err := r.SetQueryParam("options.smb_credits", qOptionsSmbCredits); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.OptionsTrustedDomainEnumSearchEnabled != nil {
+
+		// query param options.trusted_domain_enum_search_enabled
+		var qrOptionsTrustedDomainEnumSearchEnabled bool
+
+		if o.OptionsTrustedDomainEnumSearchEnabled != nil {
+			qrOptionsTrustedDomainEnumSearchEnabled = *o.OptionsTrustedDomainEnumSearchEnabled
+		}
+		qOptionsTrustedDomainEnumSearchEnabled := swag.FormatBool(qrOptionsTrustedDomainEnumSearchEnabled)
+		if qOptionsTrustedDomainEnumSearchEnabled != "" {
+
+			if err := r.SetQueryParam("options.trusted_domain_enum_search_enabled", qOptionsTrustedDomainEnumSearchEnabled); err != nil {
 				return err
 			}
 		}

@@ -68,6 +68,12 @@ type ResourceTagResourceCollectionGetParams struct {
 	*/
 	Fields []string
 
+	/* Href.
+
+	   Filter by href
+	*/
+	Href *string
+
 	/* Label.
 
 	   Filter by label
@@ -118,6 +124,12 @@ type ResourceTagResourceCollectionGetParams struct {
 	   Filter by svm.uuid
 	*/
 	SvmUUID *string
+
+	/* Value.
+
+	   Filter by value
+	*/
+	Value *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -195,6 +207,17 @@ func (o *ResourceTagResourceCollectionGetParams) WithFields(fields []string) *Re
 // SetFields adds the fields to the resource tag resource collection get params
 func (o *ResourceTagResourceCollectionGetParams) SetFields(fields []string) {
 	o.Fields = fields
+}
+
+// WithHref adds the href to the resource tag resource collection get params
+func (o *ResourceTagResourceCollectionGetParams) WithHref(href *string) *ResourceTagResourceCollectionGetParams {
+	o.SetHref(href)
+	return o
+}
+
+// SetHref adds the href to the resource tag resource collection get params
+func (o *ResourceTagResourceCollectionGetParams) SetHref(href *string) {
+	o.Href = href
 }
 
 // WithLabel adds the label to the resource tag resource collection get params
@@ -285,6 +308,17 @@ func (o *ResourceTagResourceCollectionGetParams) SetSvmUUID(svmUUID *string) {
 	o.SvmUUID = svmUUID
 }
 
+// WithValue adds the value to the resource tag resource collection get params
+func (o *ResourceTagResourceCollectionGetParams) WithValue(value *string) *ResourceTagResourceCollectionGetParams {
+	o.SetValue(value)
+	return o
+}
+
+// SetValue adds the value to the resource tag resource collection get params
+func (o *ResourceTagResourceCollectionGetParams) SetValue(value *string) {
+	o.Value = value
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ResourceTagResourceCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -301,6 +335,23 @@ func (o *ResourceTagResourceCollectionGetParams) WriteToRequest(r runtime.Client
 		// query array param fields
 		if err := r.SetQueryParam("fields", joinedFields...); err != nil {
 			return err
+		}
+	}
+
+	if o.Href != nil {
+
+		// query param href
+		var qrHref string
+
+		if o.Href != nil {
+			qrHref = *o.Href
+		}
+		qHref := qrHref
+		if qHref != "" {
+
+			if err := r.SetQueryParam("href", qHref); err != nil {
+				return err
+			}
 		}
 	}
 
@@ -417,6 +468,23 @@ func (o *ResourceTagResourceCollectionGetParams) WriteToRequest(r runtime.Client
 		if qSvmUUID != "" {
 
 			if err := r.SetQueryParam("svm.uuid", qSvmUUID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Value != nil {
+
+		// query param value
+		var qrValue string
+
+		if o.Value != nil {
+			qrValue = *o.Value
+		}
+		qValue := qrValue
+		if qValue != "" {
+
+			if err := r.SetQueryParam("value", qValue); err != nil {
 				return err
 			}
 		}

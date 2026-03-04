@@ -166,6 +166,9 @@ type Disk struct {
 	// Read Only: true
 	Rpm *int64 `json:"rpm,omitempty" yaml:"rpm,omitempty"`
 
+	// Confirms spare disk sanitization (non-cryptographically).
+	SanitizeSpare *bool `json:"sanitize_spare,omitempty" yaml:"sanitize_spare,omitempty"`
+
 	// Number of sectors on the disk.
 	// Example: 1172123568
 	// Read Only: true

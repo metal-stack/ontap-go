@@ -203,12 +203,13 @@ func NewSnapshotDeleteDefault(code int) *SnapshotDeleteDefault {
 | Error Code | Description |
 | ---------- | ----------- |
 | 2          | An invalid value was entered for one of the fields. |
-| 524481     | Snapshot copy was not deleted because the associated volume is locked or fenced. |
-| 1638521    | Snapshot copies can only be deleted on read/write (RW) volumes. |
-| 1638538    | Cannot determine the status of the Snapshot copy delete operation for the specified volume. |
-| 1638543    | Failed to delete Snapshot copy because it has an owner. |
-| 1638555    | The specified Snapshot copy has not expired or is locked. |
-| 1638600    | The Snapshot copy does not exist. |
+| 524481     | Snapshot was not deleted because the associated volume is locked or fenced. |
+| 1638521    | Snapshots can only be deleted on read/write (RW) volumes. |
+| 1638538    | Cannot determine the status of the snapshot delete operation for the specified volume. |
+| 1638543    | Failed to delete snapshot because it has an owner. |
+| 1638555    | The specified snapshot has not expired or is locked. |
+| 1638600    | The snapshot does not exist. |
+| 1638644    | POST, DELETE, and PATCH requests on the snapshot session endpoint are not supported on this platform. |
 */
 type SnapshotDeleteDefault struct {
 	_statusCode int

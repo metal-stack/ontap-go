@@ -1388,7 +1388,7 @@ type NvmeServiceInlineMetricInlineFcInlineIops struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1442,7 +1442,7 @@ type NvmeServiceInlineMetricInlineFcInlineLatency struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1588,7 +1588,7 @@ type NvmeServiceInlineMetricInlineFcInlineThroughput struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1642,7 +1642,7 @@ type NvmeServiceInlineMetricInlineIops struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1696,7 +1696,7 @@ type NvmeServiceInlineMetricInlineLatency struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -2298,7 +2298,7 @@ type NvmeServiceInlineMetricInlineTCPInlineIops struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -2352,7 +2352,7 @@ type NvmeServiceInlineMetricInlineTCPInlineLatency struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -2498,7 +2498,7 @@ type NvmeServiceInlineMetricInlineTCPInlineThroughput struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -2549,7 +2549,7 @@ type NvmeServiceInlineMetricInlineThroughput struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3353,7 +3353,7 @@ type NvmeServiceInlineStatisticsInlineFcInlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3407,7 +3407,7 @@ type NvmeServiceInlineStatisticsInlineFcInlineLatencyRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3458,7 +3458,7 @@ type NvmeServiceInlineStatisticsInlineFcInlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3512,7 +3512,7 @@ type NvmeServiceInlineStatisticsInlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3566,7 +3566,7 @@ type NvmeServiceInlineStatisticsInlineLatencyRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3944,7 +3944,7 @@ type NvmeServiceInlineStatisticsInlineTCPInlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -3998,7 +3998,7 @@ type NvmeServiceInlineStatisticsInlineTCPInlineLatencyRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -4049,7 +4049,7 @@ type NvmeServiceInlineStatisticsInlineTCPInlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -4100,7 +4100,7 @@ type NvmeServiceInlineStatisticsInlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }

@@ -112,8 +112,8 @@ func NewVolumeEfficiencyPolicyDeleteDefault(code int) *VolumeEfficiencyPolicyDel
 
 | Error Code | Description |
 | ---------  | ----------- |
+|  918702    | The specified operation on the volume efficiency policies endpoint is not supported on this platform. |
 |  6881346   | The policy was not deleted because the policy is in use by at least one volume. |
-|  6881347   | This operation cannot be performed because the specified policy is owned by the cluster admin. |
 |  6881431   | The specified policy is a predefined policy and cannot be deleted. |
 */
 type VolumeEfficiencyPolicyDeleteDefault struct {

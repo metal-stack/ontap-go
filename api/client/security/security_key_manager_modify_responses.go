@@ -30,6 +30,12 @@ func (o *SecurityKeyManagerModifyReader) ReadResponse(response runtime.ClientRes
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewSecurityKeyManagerModifyAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewSecurityKeyManagerModifyDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -98,6 +104,76 @@ func (o *SecurityKeyManagerModifyOK) readResponse(response runtime.ClientRespons
 	return nil
 }
 
+// NewSecurityKeyManagerModifyAccepted creates a SecurityKeyManagerModifyAccepted with default headers values
+func NewSecurityKeyManagerModifyAccepted() *SecurityKeyManagerModifyAccepted {
+	return &SecurityKeyManagerModifyAccepted{}
+}
+
+/*
+SecurityKeyManagerModifyAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type SecurityKeyManagerModifyAccepted struct {
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this security key manager modify accepted response has a 2xx status code
+func (o *SecurityKeyManagerModifyAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this security key manager modify accepted response has a 3xx status code
+func (o *SecurityKeyManagerModifyAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this security key manager modify accepted response has a 4xx status code
+func (o *SecurityKeyManagerModifyAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this security key manager modify accepted response has a 5xx status code
+func (o *SecurityKeyManagerModifyAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this security key manager modify accepted response a status code equal to that given
+func (o *SecurityKeyManagerModifyAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the security key manager modify accepted response
+func (o *SecurityKeyManagerModifyAccepted) Code() int {
+	return 202
+}
+
+func (o *SecurityKeyManagerModifyAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /security/key-managers/{uuid}][%d] securityKeyManagerModifyAccepted %s", 202, payload)
+}
+
+func (o *SecurityKeyManagerModifyAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /security/key-managers/{uuid}][%d] securityKeyManagerModifyAccepted %s", 202, payload)
+}
+
+func (o *SecurityKeyManagerModifyAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *SecurityKeyManagerModifyAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewSecurityKeyManagerModifyDefault creates a SecurityKeyManagerModifyDefault with default headers values
 func NewSecurityKeyManagerModifyDefault(code int) *SecurityKeyManagerModifyDefault {
 	return &SecurityKeyManagerModifyDefault{
@@ -122,10 +198,11 @@ func NewSecurityKeyManagerModifyDefault(code int) *SecurityKeyManagerModifyDefau
 | 65536828 | External key management is not enabled for the SVM. |
 | 65536850 | New client certificate public or private keys are different from the existing client certificate. |
 | 65536852 | Failed to query supported KMIP protocol versions. |
-| 65536917 | Updating an onboard passhrase requires both new and existing cluster passphrase. |
+| 65536917 | Updating an onboard passphrase requires both new and existing cluster passphrase. |
 | 65537242 | The Onboard Key Manager existing_passphrase must be provided when performing a PATCH/synchronize operation. |
 | 65537243 | The Onboard Key Manager passphrase must not be provided when performing a PATCH/synchronize operation. |
 | 65538120 | The key manager policy is not supported on the admin SVM. |
+| 65539586 | Cannot modify an inactive key manager configuration. |
 | 66060338 | Failed to establish secure connection for a key management server due to incorrect server_ca certificates. |
 | 66060339 | Failed to establish secure connection for a key management server due to incorrect client certificates. |
 | 66060340 | Failed to establish secure connection for a key management server due to Cryptsoft error. |

@@ -45,6 +45,12 @@ const (
 
 	// KeyExchangeAlgorithmEcdhSha2Nistp521 captures enum value "ecdh_sha2_nistp521"
 	KeyExchangeAlgorithmEcdhSha2Nistp521 KeyExchangeAlgorithm = "ecdh_sha2_nistp521"
+
+	// KeyExchangeAlgorithmDiffieHellmanGroup16Sha512 captures enum value "diffie_hellman_group16_sha512"
+	KeyExchangeAlgorithmDiffieHellmanGroup16Sha512 KeyExchangeAlgorithm = "diffie_hellman_group16_sha512"
+
+	// KeyExchangeAlgorithmDiffieHellmanGroup18Sha512 captures enum value "diffie_hellman_group18_sha512"
+	KeyExchangeAlgorithmDiffieHellmanGroup18Sha512 KeyExchangeAlgorithm = "diffie_hellman_group18_sha512"
 )
 
 // for schema
@@ -52,7 +58,7 @@ var keyExchangeAlgorithmEnum []interface{}
 
 func init() {
 	var res []KeyExchangeAlgorithm
-	if err := json.Unmarshal([]byte(`["diffie_hellman_group_exchange_sha256","curve25519-sha256","ecdh_sha2_nistp256","ecdh_sha2_nistp384","ecdh_sha2_nistp521"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["diffie_hellman_group_exchange_sha256","curve25519-sha256","ecdh_sha2_nistp256","ecdh_sha2_nistp384","ecdh_sha2_nistp521","diffie_hellman_group16_sha512","diffie_hellman_group18_sha512"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {

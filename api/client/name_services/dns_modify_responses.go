@@ -30,6 +30,12 @@ func (o *DNSModifyReader) ReadResponse(response runtime.ClientResponse, consumer
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewDNSModifyAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewDNSModifyDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -98,6 +104,76 @@ func (o *DNSModifyOK) readResponse(response runtime.ClientResponse, consumer run
 	return nil
 }
 
+// NewDNSModifyAccepted creates a DNSModifyAccepted with default headers values
+func NewDNSModifyAccepted() *DNSModifyAccepted {
+	return &DNSModifyAccepted{}
+}
+
+/*
+DNSModifyAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type DNSModifyAccepted struct {
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this dns modify accepted response has a 2xx status code
+func (o *DNSModifyAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this dns modify accepted response has a 3xx status code
+func (o *DNSModifyAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this dns modify accepted response has a 4xx status code
+func (o *DNSModifyAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this dns modify accepted response has a 5xx status code
+func (o *DNSModifyAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this dns modify accepted response a status code equal to that given
+func (o *DNSModifyAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the dns modify accepted response
+func (o *DNSModifyAccepted) Code() int {
+	return 202
+}
+
+func (o *DNSModifyAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /name-services/dns/{uuid}][%d] dnsModifyAccepted %s", 202, payload)
+}
+
+func (o *DNSModifyAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /name-services/dns/{uuid}][%d] dnsModifyAccepted %s", 202, payload)
+}
+
+func (o *DNSModifyAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *DNSModifyAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewDNSModifyDefault creates a DNSModifyDefault with default headers values
 func NewDNSModifyDefault(code int) *DNSModifyDefault {
 	return &DNSModifyDefault{
@@ -121,7 +197,7 @@ func NewDNSModifyDefault(code int) *DNSModifyDefault {
 | 8847383    | The specified TTL exceeds the maximum supported value of 720 hours. |
 | 8847392    | Domain name cannot be an IP address |
 | 8847393    | Top level domain name is invalid |
-| 8847394    | FQDN name voilated the limitations |
+| 8847394    | FQDN name violated the limitations |
 | 8847399    | One or more of the specified DNS servers do not exist or cannot be reached |
 | 8847404    | Dynamic DNS is applicable only for data SVMs |
 | 8847405    | DNS parameters updated successfully; however the update of Dynamic DNS-related parameters has failed. |

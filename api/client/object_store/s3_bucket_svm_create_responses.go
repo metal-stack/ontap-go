@@ -227,7 +227,7 @@ func NewS3BucketSvmCreateDefault(code int) *S3BucketSvmCreateDefault {
 | Error code | Message |
 | ---------- | ------- |
 | 92405777   | "Failed to create bucket \\\"{bucket name}\\\" for SVM \\\"{svm.name}\\\". Reason: {Reason of failure}. ";
-| 92405785   | "Bucket name \\\"{bucket name}\\\" contains invalid characters. Valid characters for a bucket name are 0-9, a-z, \\\".\\\", and \\\"-\\\". ";
+| 92405785   | "Bucket name \\\"{bucket name}\\\" contains invalid characters or invalid character combinations. Valid characters for a bucket name are 0-9, a-z, \\\".\\\", and \\\"-\\\". Invalid character combinations are \\\".-\\\", \\\"-.\\\", and \\\"..\\\". ";
 | 92405786   | "Bucket name \\\"{bucket name}\\\" is not valid. Bucket names must have between 3 and 63 characters. ";
 | 92405811   | "Failed to create bucket \\\"{bucket name}\\\" for SVM \\\"{svm.name}\\\". Wait a few minutes and try the operation again.";
 | 92405812   | "Failed to create the object store volume. Reason: {Reason for failure}.";
@@ -258,6 +258,14 @@ func NewS3BucketSvmCreateDefault(code int) *S3BucketSvmCreateDefault {
 | 92406174   | "Internal error. Failed to complete bucket create workflow with \\\"-retention-mode\\\" set to \\\"compliance\\\" or \\\"governance\\\". Reason: {0}";
 | 92406175   | "The SnapLock compliance clock is not running. Use the \\\"snaplock compliance-clock initialize\\\" command to initialize the compliance clock, and then try the operation again.";
 | 92406176   | "The SnapLock compliance clock is not running on the MetroCluster partner cluster. Use the \\\"snaplock compliance-clock initialize\\\" command to initialize the compliance clock on the MetroCluster partner cluster, and then try the operation again.";
+| 92406230   | "The value for \\\"retention.default_period\\\" parameter for object store bucket \\\"<bucket>\\\" cannot be greater than the maximum lock retention period set in the object store server for SVM \\\"<SVM>\\\". Check the maximum allowed lock retention period present in the object store server for SVM \\\"<SVM>\\\" and try the operation again.";
+| 92406236   | "The value for \\\"retention.default_period\\\" parameter for object store bucket \\\"<bucket>\\\" cannot be less than the minimum lock retention period set in the object store server for SVM \\\"<SVM>\\\". Check the minimum allowed lock retention period present in the object store server for SVM \\\"<SVM>\\\" and try the operation again.";
+| 92406217   | "The specified \"allowed_headers\" is not valid because it contains more than one wild card (\"*\") character.";
+| 92406224   | "A Cross-Origin Resource Sharing (CORS) rule must have an origin and HTTP method specified.";
+| 92406222   | "Cannot specify Cross-Origin Resource Sharing (CORS) configuration for object store bucket \\\"<bucket>\\\" on SVM \\\"<SVM>\\\". Specifying such configuration is supported on object store volumes created in ONTAP 9.8 or later releases only.";
+| 92406211   | "The specified method \"DONE\" is not valid. Valid methods are GET, PUT, DELETE, HEAD, and POST.";
+| 92405863   | "Failed to create CORS rules for bucket \"bb1\". Reason: \"Field \"index\" cannot be specified for this operation.\". Resolve all the issues and retry the operation.";
+| 92406228   | "Cannot exceed the maximum limit of 100 Cross-Origin Resource Sharing (CORS) rules per S3 bucket \\\"<bucket>\\\" in SVM \\\"<SVM>\\\".";;
 */
 type S3BucketSvmCreateDefault struct {
 	_statusCode int

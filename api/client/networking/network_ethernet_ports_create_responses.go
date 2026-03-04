@@ -163,6 +163,7 @@ func NewNetworkEthernetPortsCreateDefault(code int) *NetworkEthernetPortsCreateD
 | 1967100 | LAG POST operation failed because admin status could not be set. |
 | 1967101 | Partial success of the LAG POST operation. Verify the state of the created LAG for more information. |
 | 1967102 | POST operation might have left the configuration in an inconsistent state. Check the configuration. |
+| 1967126 | A LAG requires at least one member port. |
 | 1967148 | Failure to remove port from broadcast domain. |
 | 1967149 | Failure to add port to broadcast domain. |
 | 1967175 | VLANs cannot be created on ports in the Cluster IPspace. |

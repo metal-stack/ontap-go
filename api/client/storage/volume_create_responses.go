@@ -229,6 +229,7 @@ func NewVolumeCreateDefault(code int) *VolumeCreateDefault {
 | 460770 | \[Job \"jobid\"\] Job failed. |
 | 524561 | Unable to get the information for the specified SVM's root volume because of the specified reason. |
 | 524597 | Failed to create the clone volume on the node. |
+| 524597 | Failed to create clone volume on the node. |
 | 524601 | Parent volume \"name\" not found. |
 | 524819 | Failed to create the clone volume. |
 | 787140 | One of \"aggregates.uuid\", \"aggregates.name\", or \"style\" must be provided. |
@@ -237,7 +238,7 @@ func NewVolumeCreateDefault(code int) *VolumeCreateDefault {
 | 917526 | The volume name specified is a duplicate. |
 | 917534 | The value specified for field \"-size\" is too small. Update the field \"-size\" with the minimum size allowed and retry. |
 | 917536 | Job completed with specified error. |
-| 917551 | Specified Snapshot copy policy not found. |
+| 917551 | Specified snapshot policy not found. |
 | 917597 | Provisioning a volume on a root aggregate is not supported. |
 | 917775 | Volume \\\"{0}:{1}\\\" is not online. |
 | 917829 | Volume autosize grow threshold must be larger than autosize shrink threshold. |
@@ -250,14 +251,14 @@ func NewVolumeCreateDefault(code int) *VolumeCreateDefault {
 | 918195 | Tiering min cooling days not supported for non data volumes. |
 | 918196 | Tiering min cooling days not allowed for the provided tiering policy. |
 | 918215 | FlexGroup tiering min cooling days requires an effective cluster version of ONTAP 9.5 or later. |
+| 918232 | The specified volume identifier fields must be provided. |
 | 918233 | The target field cannot be specified for this operation. |
 | 918236 | The specified \"parent_volume.uuid\" and \"parent_volume.name\" do not refer to the same volume. |
 | 918240 | The target style is an invalid volume style. |
 | 918241 | The target style is an unsupported volume style for volume creation. |
 | 918242 | When creating a flexible volume, exactly one aggregate must be specified via either \"aggregates.name\" or \"aggregates.uuid\". |
-| 918243 | The specified Snapshot copy UUID is not correct for the specified Snapshot copy name. |
+| 918243 | The specified snapshot UUID is not correct for the specified snapshot name. |
 | 918244 | Invalid \"volume.type\" for clone volume. |
-| 918246 | \"volume.clone.parent_volume.name\" or \"volume.clone.parent_volume.uuid\" must be provided. |
 | 918247 | Specifying a value is not valid for a volume FlexClone creation. |
 | 918252 | \"nas.path\" is invalid. |
 | 918271 | Failed to get valid export policy. |
@@ -268,7 +269,11 @@ func NewVolumeCreateDefault(code int) *VolumeCreateDefault {
 | 918521 | The volume maximum autosize must be smaller than or equal to the maximum volume size. |
 | 918524 | Volume minimum autosize must be less than or equal to the current volume size. |
 | 918652 | \"error\" is an invalid value for field \"-state\". Valid values are \"online\", \"offline\" and \"restricted\". |
+| 918701 | The specified operation on the volume endpoint is not supported on this platform. |
+| 1638400 | Failed to retrieve snapshot information. |
+| 1638587 | The specified snapshot_policy.name and snapshot_policy.uuid refer to different snapshot policies. |
 | 1638593 | Operation failed because "snapdb" is disabled. |
+| 1638624 | Internal error. Failed to lookup snapshot tags for \\\"{0}\\\". |
 | 2621462 | The target SVM does not exist. |
 | 2621706 | The specified \"svm.uuid\" and \"svm.name\" do not refer to the same SVM. |
 | 2621707 | No SVM was specified. Either \"svm.name\" or \"svm.uuid\" must be supplied. |
@@ -276,11 +281,18 @@ func NewVolumeCreateDefault(code int) *VolumeCreateDefault {
 | 13107245 | The specified FlexGroup volume layout exceeds the maximum number of volumes on node. |
 | 13107307 | specifying this parameter when creating a flexible volume is not supported. |
 | 13107326 | Request to provision FlexGroup volume \"name\" failed because the requested size is greater than the maximum size. |
+| 13107341 | At least one valid aggregate assigned to SVM \\\"{0}\\\" with sufficient space and a homogeneous storage type is required on every node on the cluster to provision a FlexGroup volume. |
 | 13107349 | Operation is only supported on flexible volumes and FlexGroup volumes. |
 | 13107405 | Another volume is currently being created with the name \"name\" in SVM \"svm.name\". |
 | 13107413 | Creating a FlexGroup volume is not supported on All SAN Arrays and systems that support large LUNs. |
 | 13109258 | Cannot enable granular data on volume \"name\" in Vserver \"svm.name\". This setting can only be enabled on FlexGroups. |
 | 13109260 | Failed to enable granular data on the volume. |
+| 13565983 | A value of zero is not supported for \\\"-uid\\\" or \\\"-gid\\\". |
+| 65537463 | Volume encryption keys (VEK) cannot be created or deleted for data Vserver \\\"{0}\\\". External key management has been configured for data Vserver \\\"{0}\\\" but ONTAP is not able to encrypt or decrypt with the key manager. Resolve the external key manager key issues at the key manager's portal before creating any new encrypted volumes. |
+| 65537529 | Encrypted volumes cannot be created or deleted for Vserver \\\"{0}\\\" as a rekey operation for the vserver is in progress. Try creating the encrypted volume again after some time. If the problem persists, run the rekey operation again after some time. |
+| 65537600 | Encrypted volumes cannot be created or deleted for Vserver \\\"{0}\\\" while the enabled keystore configuration is being switched. If a previous attempt to switch the keystore configuration failed, or was interrupted, the system will continue to prevent encrypted volume creation for Vserver \\\"{0}\\\". Use the \\\"security key-manager keystore enable\\\" command to re-run and complete the operation. |
+| 65539430 | Cannot create or delete volumes on Vserver \\\"{0}\\\" while the keystore is being initialized. Wait until the keystore is in the active state, and rerun the volume operation. |
+| 65539431 | Cannot create or delete volumes on Vserver \\\"{0}\\\" while the keystore is being disabled. |
 | 111411205 | File system analytics requires an effective cluster version of 9.8 or later. |
 | 111411206 | The specified \"analytics.state\" is invalid. |
 | 111411207 | File system analytics cannot be enabled on volumes that contain LUNs. |

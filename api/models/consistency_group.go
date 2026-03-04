@@ -44,7 +44,7 @@ type ConsistencyGroup struct {
 
 	// The LUNs array can be used to create or modify LUNs in a consistency group on a new or existing volume that is a member of the consistency group. LUNs are considered members of a consistency group if they are located on a volume that is a member of the consistency group.
 	//
-	// Max Items: 16
+	//
 	// Min Items: 0
 	// Unique: true
 	ConsistencyGroupInlineLuns []*ConsistencyGroupInlineLunsInlineArrayItem `json:"luns,omitempty" yaml:"luns,omitempty"`
@@ -54,7 +54,7 @@ type ConsistencyGroup struct {
 	// An NVMe namespace is created to a specified size using thin or thick provisioning as determined by the volume on which it is created. NVMe namespaces support being cloned. An NVMe namespace cannot be renamed, resized, or moved to a different volume. NVMe namespaces do not support the assignment of a QoS policy for performance management, but a QoS policy can be assigned to the volume containing the namespace. See the NVMe namespace object model to learn more about each of the properties supported by the NVMe namespace REST API.<br/>
 	// An NVMe namespace must be mapped to an NVMe subsystem to grant access to the subsystem's hosts. Hosts can then access the NVMe namespace and perform I/O using the NVMe over Fabrics protocol.
 	//
-	// Max Items: 16
+	//
 	// Min Items: 0
 	// Unique: true
 	ConsistencyGroupInlineNamespaces []*ConsistencyGroupInlineNamespacesInlineArrayItem `json:"namespaces,omitempty" yaml:"namespaces,omitempty"`
@@ -65,7 +65,7 @@ type ConsistencyGroup struct {
 	ConsistencyGroupInlineReplicationRelationships []*ConsistencyGroupInlineReplicationRelationshipsInlineArrayItem `json:"replication_relationships,omitempty" yaml:"replication_relationships,omitempty"`
 
 	// A consistency group is a mutually exclusive aggregation of volumes or other consistency groups. A volume can only be associated with one direct parent consistency group.<br/>
-	// The volumes array can be used to create new volumes in the consistency group, add existing volumes to the consistency group, or modify existing volumes that are already members of the consistency group.<br/>
+	//
 	// The total number of volumes across all child consistency groups contained in a consistency group is constrained by the same limit.
 	//
 	// Max Items: 80
@@ -77,7 +77,7 @@ type ConsistencyGroup struct {
 	Metric *ConsistencyGroupInlineMetric `json:"metric,omitempty" yaml:"metric,omitempty"`
 
 	// Name of the consistency group. The consistency group name must be unique within an SVM.<br/>
-	// If not provided and the consistency group contains only one volume, the name will be generated based on the volume name. If the consistency group contains more than one volume, the name is required.
+	//
 	//
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
@@ -103,8 +103,8 @@ type ConsistencyGroup struct {
 	// restore to
 	RestoreTo *ConsistencyGroupInlineRestoreTo `json:"restore_to,omitempty" yaml:"restore_to,omitempty"`
 
-	// The Snapshot copy policy of the consistency group.<br/>
-	// This is the dedicated consistency group Snapshot copy policy, not an aggregation of the volume granular Snapshot copy policy.
+	// The snapshot policy of the consistency group.<br/>
+	// This is the dedicated consistency group snapshot policy, not an aggregation of the volume granular snapshot policy.
 	//
 	SnapshotPolicy *SnapshotPolicyReference `json:"snapshot_policy,omitempty" yaml:"snapshot_policy,omitempty"`
 
@@ -335,10 +335,6 @@ func (m *ConsistencyGroup) validateConsistencyGroupInlineLuns(formats strfmt.Reg
 		return err
 	}
 
-	if err := validate.MaxItems("luns", "body", iConsistencyGroupInlineLunsSize, 16); err != nil {
-		return err
-	}
-
 	if err := validate.UniqueItems("luns", "body", m.ConsistencyGroupInlineLuns); err != nil {
 		return err
 	}
@@ -372,10 +368,6 @@ func (m *ConsistencyGroup) validateConsistencyGroupInlineNamespaces(formats strf
 	iConsistencyGroupInlineNamespacesSize := int64(len(m.ConsistencyGroupInlineNamespaces))
 
 	if err := validate.MinItems("namespaces", "body", iConsistencyGroupInlineNamespacesSize, 0); err != nil {
-		return err
-	}
-
-	if err := validate.MaxItems("namespaces", "body", iConsistencyGroupInlineNamespacesSize, 16); err != nil {
 		return err
 	}
 
@@ -1373,7 +1365,7 @@ func (m *ConsistencyGroupInlineApplication) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// ConsistencyGroupInlineClone Creates a clone of an existing consistency group from the current contents or an existing Snapshot copy.
+// ConsistencyGroupInlineClone Creates a clone of an existing consistency group from the current contents or an existing snapshot.
 //
 // swagger:model consistency_group_inline_clone
 type ConsistencyGroupInlineClone struct {
@@ -1382,6 +1374,7 @@ type ConsistencyGroupInlineClone struct {
 	Guarantee *ConsistencyGroupInlineCloneInlineGuarantee `json:"guarantee,omitempty" yaml:"guarantee,omitempty"`
 
 	// Specifies if this consistency group is a FlexClone of a consistency group.
+	// Read Only: true
 	IsFlexclone *bool `json:"is_flexclone,omitempty" yaml:"is_flexclone,omitempty"`
 
 	// parent consistency group
@@ -1401,7 +1394,7 @@ type ConsistencyGroupInlineClone struct {
 	// Read Only: true
 	SplitEstimate *int64 `json:"split_estimate,omitempty" yaml:"split_estimate,omitempty"`
 
-	// Splits volumes after cloning. Default is false.
+	// Splits volumes after cloning. Defaults to false during POST. Only accepts true during a PATCH.
 	SplitInitiated *bool `json:"split_initiated,omitempty" yaml:"split_initiated,omitempty"`
 
 	// volume
@@ -1541,6 +1534,10 @@ func (m *ConsistencyGroupInlineClone) ContextValidate(ctx context.Context, forma
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateIsFlexclone(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateParentConsistencyGroup(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -1587,6 +1584,15 @@ func (m *ConsistencyGroupInlineClone) contextValidateGuarantee(ctx context.Conte
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *ConsistencyGroupInlineClone) contextValidateIsFlexclone(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "clone"+"."+"is_flexclone", "body", m.IsFlexclone); err != nil {
+		return err
 	}
 
 	return nil
@@ -1810,11 +1816,9 @@ type ConsistencyGroupInlineCloneInlineParentConsistencyGroup struct {
 	Links *SelfLink `json:"_links,omitempty" yaml:"_links,omitempty"`
 
 	// The name of the consistency group.
-	// Example: my_consistency_group
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// The unique identifier of the consistency group.
-	// Example: 02c9e252-41be-11e9-81d5-00a0986138f7
 	UUID *string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 }
 
@@ -2360,13 +2364,13 @@ type ConsistencyGroupInlineConsistencyGroupsInlineArrayItem struct {
 
 	// The LUNs array can be used to create or modify LUNs in a consistency group on a new or existing volume that is a member of the consistency group. LUNs are considered members of a consistency group if they are located on a volume that is a member of the consistency group.
 	//
-	// Max Items: 16
+	//
 	// Min Items: 0
 	// Unique: true
 	Luns []*ConsistencyGroupConsistencyGroupsItems0LunsItems0 `json:"luns" yaml:"luns"`
 
 	// Name of the consistency group. The consistency group name must be unique within an SVM.<br/>
-	// If not provided and the consistency group contains only one volume, the name will be generated based on the volume name. If the consistency group contains more than one volume, the name is required.
+	//
 	//
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
@@ -2375,7 +2379,7 @@ type ConsistencyGroupInlineConsistencyGroupsInlineArrayItem struct {
 	// An NVMe namespace is created to a specified size using thin or thick provisioning as determined by the volume on which it is created. NVMe namespaces support being cloned. An NVMe namespace cannot be renamed, resized, or moved to a different volume. NVMe namespaces do not support the assignment of a QoS policy for performance management, but a QoS policy can be assigned to the volume containing the namespace. See the NVMe namespace object model to learn more about each of the properties supported by the NVMe namespace REST API.<br/>
 	// An NVMe namespace must be mapped to an NVMe subsystem to grant access to the subsystem's hosts. Hosts can then access the NVMe namespace and perform I/O using the NVMe over Fabrics protocol.
 	//
-	// Max Items: 16
+	//
 	// Min Items: 0
 	// Unique: true
 	Namespaces []*ConsistencyGroupConsistencyGroupsItems0NamespacesItems0 `json:"namespaces" yaml:"namespaces"`
@@ -2392,8 +2396,8 @@ type ConsistencyGroupInlineConsistencyGroupsInlineArrayItem struct {
 	// restore to
 	RestoreTo *ConsistencyGroupInlineConsistencyGroupsInlineArrayItemInlineRestoreTo `json:"restore_to,omitempty" yaml:"restore_to,omitempty"`
 
-	// The Snapshot copy policy of the consistency group.<br/>
-	// This is the dedicated consistency group Snapshot copy policy, not an aggregation of the volume granular Snapshot copy policy.
+	// The snapshot policy of the consistency group.<br/>
+	// This is the dedicated consistency group snapshot policy, not an aggregation of the volume granular snapshot policy.
 	//
 	SnapshotPolicy *SnapshotPolicyReference `json:"snapshot_policy,omitempty" yaml:"snapshot_policy,omitempty"`
 
@@ -2413,7 +2417,7 @@ type ConsistencyGroupInlineConsistencyGroupsInlineArrayItem struct {
 	UUID *string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 
 	// A consistency group is a mutually exclusive aggregation of volumes or other consistency groups. A volume can only be associated with one direct parent consistency group.<br/>
-	// The volumes array can be used to create new volumes in the consistency group, add existing volumes to the consistency group, or modify existing volumes that are already members of the consistency group.<br/>
+	//
 	// The total number of volumes across all child consistency groups contained in a consistency group is constrained by the same limit.
 	//
 	// Max Items: 80
@@ -2551,10 +2555,6 @@ func (m *ConsistencyGroupInlineConsistencyGroupsInlineArrayItem) validateLuns(fo
 		return err
 	}
 
-	if err := validate.MaxItems("luns", "body", iLunsSize, 16); err != nil {
-		return err
-	}
-
 	if err := validate.UniqueItems("luns", "body", m.Luns); err != nil {
 		return err
 	}
@@ -2588,10 +2588,6 @@ func (m *ConsistencyGroupInlineConsistencyGroupsInlineArrayItem) validateNamespa
 	iNamespacesSize := int64(len(m.Namespaces))
 
 	if err := validate.MinItems("namespaces", "body", iNamespacesSize, 0); err != nil {
-		return err
-	}
-
-	if err := validate.MaxItems("namespaces", "body", iNamespacesSize, 16); err != nil {
 		return err
 	}
 
@@ -3363,9 +3359,11 @@ func (m *ConsistencyGroupInlineConsistencyGroupsInlineArrayItemInlineApplication
 }
 
 // ConsistencyGroupConsistencyGroupsItems0LunsItems0 A LUN is the logical representation of storage in a storage area network (SAN).<br/>
-// In ONTAP, a LUN is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
-// A LUN can be created to a specified size using thin or thick provisioning. A LUN can then be renamed, resized, cloned, and moved to a different volume. LUNs support the assignment of a quality of service (QoS) policy for performance management or a QoS policy can be assigned to the volume containing the LUN. See the LUN object model to learn more about each of the properties supported by the LUN REST API.<br/>
-// A LUN must be mapped to an initiator group to grant access to the initiator group's initiators (client hosts). Initiators can then access the LUN and perform I/O over a Fibre Channel (FC) fabric using the Fibre Channel Protocol or a TCP/IP network using iSCSI.
+// A LUN must be mapped to an initiator group to grant access to the initiator group's initiators (client hosts). Initiators can then access the LUN and perform I/O over a Fibre Channel (FC) fabric using the FC Protocol or a TCP/IP network using iSCSI.<br/>
+// See the LUN object model to learn more about each of the properties supported by the LUN REST API.<br/>
+// A LUN is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+// LUN names are paths of the form "/vol/\<volume>[/\<qtree>]/\<lun>" where the qtree name is optional.<br/>
+// A LUN can be created to a specified size using thin or thick provisioning. A LUN can then be renamed, resized, cloned, moved to a different volume and copied. LUNs support the assignment of a QoS policy for performance management or a QoS policy can be assigned to a volume containing one or more LUNs.
 //
 // swagger:model ConsistencyGroupConsistencyGroupsItems0LunsItems0
 type ConsistencyGroupConsistencyGroupsItems0LunsItems0 struct {
@@ -3422,7 +3420,7 @@ type ConsistencyGroupConsistencyGroupsItems0LunsItems0 struct {
 	// space
 	Space *ConsistencyGroupConsistencyGroupsItems0LunsItems0Space `json:"space,omitempty" yaml:"space,omitempty"`
 
-	// The unique identifier of the LUN.  The UUID is generated by ONTAP when the LUN is created.
+	// The unique identifier of the LUN. The UUID is generated by ONTAP when the LUN is created.
 	//
 	// Example: 1cd8a442-86d1-11e0-ae1c-123478563412
 	// Read Only: true
@@ -4009,12 +4007,18 @@ func (m *ConsistencyGroupConsistencyGroupsItems0LunsItems0Clone) UnmarshalBinary
 // swagger:model ConsistencyGroupConsistencyGroupsItems0LunsItems0CloneSource
 type ConsistencyGroupConsistencyGroupsItems0LunsItems0CloneSource struct {
 
-	// The fully qualified path name of the clone source LUN composed of a "/vol" prefix, the volume name, the (optional) qtree name, and base name of the LUN. Valid in POST and PATCH.
+	// The name of the clone source LUN.
+	// A LUN is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+	// LUN names are paths of the form "/vol/\<volume>[/\<qtree>]/\<namespace>" where the qtree name is optional.<br/>
+	// Valid in POST and PATCH.
+	//
 	//
 	// Example: /vol/volume1/lun1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
-	// The unique identifier of the clone source LUN. Valid in POST and PATCH.
+	// The unique identifier of the clone source LUN.
+	// Valid in POST and PATCH.
+	//
 	//
 	// Example: 1cd8a442-86d1-11e0-ae1c-123478563412
 	UUID *string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
@@ -4057,7 +4061,7 @@ type ConsistencyGroupConsistencyGroupsItems0LunsItems0LunMapsItems0 struct {
 	// igroup
 	Igroup *ConsistencyGroupConsistencyGroupsItems0LunsItems0LunMapsItems0Igroup `json:"igroup,omitempty" yaml:"igroup,omitempty"`
 
-	// The logical unit number assigned to the LUN when mapped to the specified initiator group. The number is used to identify the LUN to initiators in the initiator group when communicating through the Fibre Channel Protocol or iSCSI. Optional in POST; if no value is provided, ONTAP assigns the lowest available value.
+	// The logical unit number assigned to the LUN when mapped to the specified initiator group. The number is used to identify the LUN to initiators in the initiator group when communicating through the Fibre Channel Protocol or iSCSI. Optional in POST; if no value is provided, ONTAP assigns the lowest available value. This property is not supported when the _provisioning_options.count_ property is 2 or more.
 	//
 	LogicalUnitNumber *int64 `json:"logical_unit_number,omitempty" yaml:"logical_unit_number,omitempty"`
 }
@@ -4159,7 +4163,11 @@ type ConsistencyGroupConsistencyGroupsItems0LunsItems0LunMapsItems0Igroup struct
 	// Min Length: 0
 	Comment *string `json:"comment,omitempty" yaml:"comment,omitempty"`
 
-	// Separate igroup definitions to include in this igroup.
+	// The existing initiator groups that are members of the group. Optional in POST.<br/>
+	// This property is mutually exclusive with the _initiators_ property during POST.<br/>
+	// This array contains only the direct children of the initiator group. If the member initiator groups have further nested initiator groups, those are reported in the `igroups` property of the child initiator group.<br/>
+	// Zero or more nested initiator groups can be supplied when the initiator group is created. The initiator group will act as if it contains the aggregation of all initiators in any nested initiator groups.<br/>
+	// After creation, nested initiator groups can be added or removed from the initiator group using the `/protocols/san/igroups/{igroup.uuid}/igroups` endpoint. See [`POST /protocols/san/igroups/{igroup.uuid}/igroups`](#/SAN/igroup_nested_create) and [`DELETE /protocols/san/igroups/{igroup.uuid}/igroups/{uuid}`](#/SAN/igroup_nested_delete) for more details.
 	//
 	Igroups []*ConsistencyGroupConsistencyGroupsItems0LunsItems0LunMapsItems0IgroupIgroupsItems0 `json:"igroups" yaml:"igroups"`
 
@@ -5202,7 +5210,7 @@ type ConsistencyGroupConsistencyGroupsItems0LunsItems0Space struct {
 	Guarantee *ConsistencyGroupConsistencyGroupsItems0LunsItems0SpaceGuarantee `json:"guarantee,omitempty" yaml:"guarantee,omitempty"`
 
 	// The total provisioned size of the LUN. The LUN size can be increased but not reduced using the REST interface.
-	// The maximum and minimum sizes listed here are the absolute maximum and absolute minimum sizes, in bytes. The actual minimum and maxiumum sizes vary depending on the ONTAP version, ONTAP platform, and the available space in the containing volume and aggregate.
+	// The maximum and minimum sizes listed here are the absolute maximum and absolute minimum sizes, in bytes. The actual minimum and maximum sizes vary depending on the ONTAP version, ONTAP platform, and the available space in the containing volume and aggregate.
 	// For more information, see _Size properties_ in the _docs_ section of the ONTAP REST API documentation.
 	//
 	// Example: 1073741824
@@ -5344,6 +5352,7 @@ type ConsistencyGroupConsistencyGroupsItems0LunsItems0SpaceGuarantee struct {
 
 	// The requested space reservation policy for the LUN. If _true_, a space reservation is requested for the LUN; if _false_, the LUN is thin provisioned. Guaranteeing a space reservation request for a LUN requires that the volume in which the LUN resides is also space reserved and that the fractional reserve for the volume is 100%. Valid in POST and PATCH.
 	//
+	//
 	Requested *bool `json:"requested,omitempty" yaml:"requested,omitempty"`
 
 	// Reports if the LUN is space guaranteed.<br/>
@@ -5400,9 +5409,11 @@ func (m *ConsistencyGroupConsistencyGroupsItems0LunsItems0SpaceGuarantee) Unmars
 }
 
 // ConsistencyGroupConsistencyGroupsItems0NamespacesItems0 An NVMe namespace is a collection of addressable logical blocks presented to hosts connected to the storage virtual machine using the NVMe over Fabrics protocol.<br/>
-// In ONTAP, an NVMe namespace is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
-// An NVMe namespace is created to a specified size using thin or thick provisioning as determined by the volume on which it is created. NVMe namespaces support being cloned. An NVMe namespace cannot be renamed, resized, or moved to a different volume. NVMe namespaces do not support the assignment of a QoS policy for performance management, but a QoS policy can be assigned to the volume containing the namespace. See the NVMe namespace object model to learn more about each of the properties supported by the NVMe namespace REST API.<br/>
-// An NVMe namespace must be mapped to an NVMe subsystem to grant access to the subsystem's hosts. Hosts can then access the NVMe namespace and perform I/O using the NVMe over Fabrics protocol.
+// An NVMe namespace must be mapped to an NVMe subsystem to grant access to the subsystem's hosts. Hosts can then access the NVMe namespace and perform I/O using the NVMe over Fabrics protocol.<br/>
+// See the NVMe namespace object model to learn more about each of the properties supported by the NVMe namespace REST API.
+// An NVMe namespace is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+// NVMe namespace names are paths of the form "/vol/\<volume>[/\<qtree>]/\<namespace>" where the qtree name is optional.<br/>
+// An NVMe namespace is created to a specified size using thin or thick provisioning as determined by the volume on which it is created. An NVMe namespace can then be resized or cloned. An NVMe namespace cannot be renamed, or moved to a different volume. NVMe namespaces do not support the assignment of a QoS policy for performance management, but a QoS policy can be assigned to the volume containing the namespace.
 //
 // swagger:model ConsistencyGroupConsistencyGroupsItems0NamespacesItems0
 type ConsistencyGroupConsistencyGroupsItems0NamespacesItems0 struct {
@@ -5410,7 +5421,8 @@ type ConsistencyGroupConsistencyGroupsItems0NamespacesItems0 struct {
 	// This property marks the NVMe namespace for auto deletion when the volume containing the namespace runs out of space. This is most commonly set on namespace clones.<br/>
 	// When set to _true_, the NVMe namespace becomes eligible for automatic deletion when the volume runs out of space. Auto deletion only occurs when the volume containing the namespace is also configured for auto deletion and free space in the volume decreases below a particular threshold.<br/>
 	// This property is optional in POST and PATCH. The default value for a new NVMe namespace is _false_.<br/>
-	// There is an added computational cost to retrieving this property's value. It is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
+	// There is an added computational cost to retrieving this property's value. It is not populated for a GET request unless it is explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
+	//
 	//
 	AutoDelete *bool `json:"auto_delete,omitempty" yaml:"auto_delete,omitempty"`
 
@@ -5426,13 +5438,16 @@ type ConsistencyGroupConsistencyGroupsItems0NamespacesItems0 struct {
 	// Format: date-time
 	CreateTime *strfmt.DateTime `json:"create_time,omitempty" yaml:"create_time,omitempty"`
 
-	// The enabled state of the NVMe namespace. Certain error conditions cause the namespace to become disabled. If the namespace is disabled, you can check the `state` property to determine what error disabled the namespace. An NVMe namespace is enabled automatically when it is created.
+	// The enabled state of the NVMe namespace. Certain error conditions cause the namespace to become disabled. If the namespace is disabled, check the `status.state` property to determine what error disabled the namespace. An NVMe namespace is enabled automatically when it is created.
 	//
 	// Read Only: true
 	Enabled *bool `json:"enabled,omitempty" yaml:"enabled,omitempty"`
 
-	// The fully qualified path name of the NVMe namespace composed of a "/vol" prefix, the volume name, the (optional) qtree name and base name of the namespace. Valid in POST.<br/>
-	// NVMe namespaces do not support rename, or movement between volumes.
+	// The name of the NVMe namespace.
+	// An NVMe namespace is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+	// NVMe namespace names are paths of the form "/vol/\<volume>[/\<qtree>]/\<namespace>" where the qtree name is optional.<br/>
+	// Renaming an NVMe namespace is not supported. Valid in POST.
+	//
 	//
 	// Example: /vol/volume1/qtree1/namespace1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
@@ -6331,7 +6346,7 @@ type ConsistencyGroupConsistencyGroupsItems0NamespacesItems0SubsystemMap struct 
 
 	// The Asymmetric Namespace Access Group ID (ANAGRPID) of the NVMe namespace.<br/>
 	// The format for an ANAGRPID is 8 hexadecimal digits (zero-filled) followed by a lower case "h".<br/>
-	// There is an added computational cost to retrieving this property's value. It is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
+	// There is an added computational cost to retrieving this property's value. It is not populated for a GET request unless it is explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
 	//
 	// Example: 00103050h
 	// Read Only: true
@@ -7061,7 +7076,7 @@ func (m *ConsistencyGroupInlineConsistencyGroupsInlineArrayItemInlineQosInlinePo
 	return nil
 }
 
-// ConsistencyGroupInlineConsistencyGroupsInlineArrayItemInlineRestoreTo Use to restore a consistency group to a previous Snapshot copy
+// ConsistencyGroupInlineConsistencyGroupsInlineArrayItemInlineRestoreTo Use to restore a consistency group to a previous snapshot
 //
 // swagger:model consistency_group_inline_consistency_groups_inline_array_item_inline_restore_to
 type ConsistencyGroupInlineConsistencyGroupsInlineArrayItemInlineRestoreTo struct {
@@ -7156,15 +7171,15 @@ func (m *ConsistencyGroupInlineConsistencyGroupsInlineArrayItemInlineRestoreTo) 
 	return nil
 }
 
-// ConsistencyGroupInlineConsistencyGroupsInlineArrayItemInlineRestoreToInlineSnapshot A consistency group's Snapshot copy
+// ConsistencyGroupInlineConsistencyGroupsInlineArrayItemInlineRestoreToInlineSnapshot A consistency group's snapshot
 //
 // swagger:model consistency_group_inline_consistency_groups_inline_array_item_inline_restore_to_inline_snapshot
 type ConsistencyGroupInlineConsistencyGroupsInlineArrayItemInlineRestoreToInlineSnapshot struct {
 
-	// The name of the consistency group's Snapshot copy to restore to.
+	// The name of the consistency group's snapshot to restore to.
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
-	// The UUID of the consistency group's Snapshot copy to restore to.
+	// The UUID of the consistency group's snapshot to restore to.
 	UUID *string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 }
 
@@ -7461,7 +7476,7 @@ type ConsistencyGroupInlineConsistencyGroupsInlineArrayItemInlineTiering struct 
 	ObjectStores []*ConsistencyGroupConsistencyGroupsItems0TieringObjectStoresItems0 `json:"object_stores" yaml:"object_stores"`
 
 	// Policy that determines whether the user data blocks of a volume in a FabricPool will be tiered to the cloud store when they become cold.
-	// <br>FabricPool combines flash (performance tier) with a cloud store into a single aggregate. Temperature of a volume block increases if it is accessed frequently and decreases when it is not. Valid in POST or PATCH.<br/>all &dash; Allows tiering of both Snapshot copies and active file system user data to the cloud store as soon as possible by ignoring the temperature on the volume blocks.<br/>auto &dash; Allows tiering of both snapshot and active file system user data to the cloud store<br/>none &dash; Volume blocks are not be tiered to the cloud store.<br/>snapshot_only &dash; Allows tiering of only the volume Snapshot copies not associated with the active file system.
+	// <br>FabricPool combines flash (performance tier) with a cloud store into a single aggregate. Temperature of a volume block increases if it is accessed frequently and decreases when it is not. Valid in POST or PATCH.<br/>all &dash; Allows tiering of both snapshots and active file system user data to the cloud store as soon as possible by ignoring the temperature on the volume blocks.<br/>auto &dash; Allows tiering of both snapshot and active file system user data to the cloud store<br/>none &dash; Volume blocks are not be tiered to the cloud store.<br/>snapshot_only &dash; Allows tiering of only the volume snapshots not associated with the active file system.
 	// <br>The default tiering policy is "snapshot-only" for a FlexVol volume and "none" for a FlexGroup volume. The default minimum cooling period for the "snapshot-only" tiering policy is 2 days and for the "auto" tiering policy it is 31 days.
 	//
 	// Enum: ["all","auto","backup","none","snapshot_only"]
@@ -7729,7 +7744,7 @@ type ConsistencyGroupConsistencyGroupsItems0VolumesItems0 struct {
 	// Min Length: 0
 	Comment *string `json:"comment,omitempty" yaml:"comment,omitempty"`
 
-	// Volume name. The name of volume must start with an alphabetic character (a to z or A to Z) or an underscore (_). The name must be 197 or fewer characters in length for FlexGroups, and 203 or fewer characters in length for all other types of volumes. Volume names must be unique within an SVM. Required on POST.
+	// Volume name. The name of volume must start with an alphabetic character (a to z or A to Z) or an underscore (_). The name must be 197 or fewer characters in length for FlexGroup volumes, and 203 or fewer characters in length for all other types of volumes. Volume names must be unique within an SVM. Required on POST.
 	// Example: vol_cs_dept
 	// Max Length: 203
 	// Min Length: 1
@@ -7744,7 +7759,7 @@ type ConsistencyGroupConsistencyGroupsItems0VolumesItems0 struct {
 	// qos
 	Qos *ConsistencyGroupConsistencyGroupsItems0VolumesItems0Qos `json:"qos,omitempty" yaml:"qos,omitempty"`
 
-	// The Snapshot copy policy for this volume.
+	// The snapshot policy for this volume.
 	//
 	SnapshotPolicy *SnapshotPolicyReference `json:"snapshot_policy,omitempty" yaml:"snapshot_policy,omitempty"`
 
@@ -9329,7 +9344,7 @@ type ConsistencyGroupConsistencyGroupsItems0VolumesItems0Tiering struct {
 	ObjectStores []*ConsistencyGroupConsistencyGroupsItems0VolumesItems0TieringObjectStoresItems0 `json:"object_stores" yaml:"object_stores"`
 
 	// Policy that determines whether the user data blocks of a volume in a FabricPool will be tiered to the cloud store when they become cold.
-	// <br>FabricPool combines flash (performance tier) with a cloud store into a single aggregate. Temperature of a volume block increases if it is accessed frequently and decreases when it is not. Valid in POST or PATCH.<br/>all &dash; Allows tiering of both Snapshot copies and active file system user data to the cloud store as soon as possible by ignoring the temperature on the volume blocks.<br/>auto &dash; Allows tiering of both snapshot and active file system user data to the cloud store<br/>none &dash; Volume blocks are not be tiered to the cloud store.<br/>snapshot_only &dash; Allows tiering of only the volume Snapshot copies not associated with the active file system.
+	// <br>FabricPool combines flash (performance tier) with a cloud store into a single aggregate. Temperature of a volume block increases if it is accessed frequently and decreases when it is not. Valid in POST or PATCH.<br/>all &dash; Allows tiering of both snapshots and active file system user data to the cloud store as soon as possible by ignoring the temperature on the volume blocks.<br/>auto &dash; Allows tiering of both snapshot and active file system user data to the cloud store<br/>none &dash; Volume blocks are not be tiered to the cloud store.<br/>snapshot_only &dash; Allows tiering of only the volume snapshots not associated with the active file system.
 	// <br>The default tiering policy is "snapshot-only" for a FlexVol volume and "none" for a FlexGroup volume. The default minimum cooling period for the "snapshot-only" tiering policy is 2 days and for the "auto" tiering policy it is 31 days.
 	//
 	// Enum: ["all","auto","backup","none","snapshot_only"]
@@ -9588,9 +9603,11 @@ func (m *ConsistencyGroupConsistencyGroupsItems0VolumesItems0TieringObjectStores
 }
 
 // ConsistencyGroupInlineLunsInlineArrayItem A LUN is the logical representation of storage in a storage area network (SAN).<br/>
-// In ONTAP, a LUN is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
-// A LUN can be created to a specified size using thin or thick provisioning. A LUN can then be renamed, resized, cloned, and moved to a different volume. LUNs support the assignment of a quality of service (QoS) policy for performance management or a QoS policy can be assigned to the volume containing the LUN. See the LUN object model to learn more about each of the properties supported by the LUN REST API.<br/>
-// A LUN must be mapped to an initiator group to grant access to the initiator group's initiators (client hosts). Initiators can then access the LUN and perform I/O over a Fibre Channel (FC) fabric using the Fibre Channel Protocol or a TCP/IP network using iSCSI.
+// A LUN must be mapped to an initiator group to grant access to the initiator group's initiators (client hosts). Initiators can then access the LUN and perform I/O over a Fibre Channel (FC) fabric using the FC Protocol or a TCP/IP network using iSCSI.<br/>
+// See the LUN object model to learn more about each of the properties supported by the LUN REST API.<br/>
+// A LUN is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+// LUN names are paths of the form "/vol/\<volume>[/\<qtree>]/\<lun>" where the qtree name is optional.<br/>
+// A LUN can be created to a specified size using thin or thick provisioning. A LUN can then be renamed, resized, cloned, moved to a different volume and copied. LUNs support the assignment of a QoS policy for performance management or a QoS policy can be assigned to a volume containing one or more LUNs.
 //
 // swagger:model consistency_group_inline_luns_inline_array_item
 type ConsistencyGroupInlineLunsInlineArrayItem struct {
@@ -9647,7 +9664,7 @@ type ConsistencyGroupInlineLunsInlineArrayItem struct {
 	// space
 	Space *ConsistencyGroupInlineLunsInlineArrayItemInlineSpace `json:"space,omitempty" yaml:"space,omitempty"`
 
-	// The unique identifier of the LUN.  The UUID is generated by ONTAP when the LUN is created.
+	// The unique identifier of the LUN. The UUID is generated by ONTAP when the LUN is created.
 	//
 	// Example: 1cd8a442-86d1-11e0-ae1c-123478563412
 	// Read Only: true
@@ -10234,12 +10251,18 @@ func (m *ConsistencyGroupInlineLunsInlineArrayItemInlineClone) UnmarshalBinary(b
 // swagger:model consistency_group_inline_luns_inline_array_item_inline_clone_inline_source
 type ConsistencyGroupInlineLunsInlineArrayItemInlineCloneInlineSource struct {
 
-	// The fully qualified path name of the clone source LUN composed of a "/vol" prefix, the volume name, the (optional) qtree name, and base name of the LUN. Valid in POST and PATCH.
+	// The name of the clone source LUN.
+	// A LUN is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+	// LUN names are paths of the form "/vol/\<volume>[/\<qtree>]/\<namespace>" where the qtree name is optional.<br/>
+	// Valid in POST and PATCH.
+	//
 	//
 	// Example: /vol/volume1/lun1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
-	// The unique identifier of the clone source LUN. Valid in POST and PATCH.
+	// The unique identifier of the clone source LUN.
+	// Valid in POST and PATCH.
+	//
 	//
 	// Example: 1cd8a442-86d1-11e0-ae1c-123478563412
 	UUID *string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
@@ -10282,7 +10305,7 @@ type ConsistencyGroupLunsItems0LunMapsItems0 struct {
 	// igroup
 	Igroup *ConsistencyGroupLunsItems0LunMapsItems0Igroup `json:"igroup,omitempty" yaml:"igroup,omitempty"`
 
-	// The logical unit number assigned to the LUN when mapped to the specified initiator group. The number is used to identify the LUN to initiators in the initiator group when communicating through the Fibre Channel Protocol or iSCSI. Optional in POST; if no value is provided, ONTAP assigns the lowest available value.
+	// The logical unit number assigned to the LUN when mapped to the specified initiator group. The number is used to identify the LUN to initiators in the initiator group when communicating through the Fibre Channel Protocol or iSCSI. Optional in POST; if no value is provided, ONTAP assigns the lowest available value. This property is not supported when the _provisioning_options.count_ property is 2 or more.
 	//
 	LogicalUnitNumber *int64 `json:"logical_unit_number,omitempty" yaml:"logical_unit_number,omitempty"`
 }
@@ -10384,7 +10407,11 @@ type ConsistencyGroupLunsItems0LunMapsItems0Igroup struct {
 	// Min Length: 0
 	Comment *string `json:"comment,omitempty" yaml:"comment,omitempty"`
 
-	// Separate igroup definitions to include in this igroup.
+	// The existing initiator groups that are members of the group. Optional in POST.<br/>
+	// This property is mutually exclusive with the _initiators_ property during POST.<br/>
+	// This array contains only the direct children of the initiator group. If the member initiator groups have further nested initiator groups, those are reported in the `igroups` property of the child initiator group.<br/>
+	// Zero or more nested initiator groups can be supplied when the initiator group is created. The initiator group will act as if it contains the aggregation of all initiators in any nested initiator groups.<br/>
+	// After creation, nested initiator groups can be added or removed from the initiator group using the `/protocols/san/igroups/{igroup.uuid}/igroups` endpoint. See [`POST /protocols/san/igroups/{igroup.uuid}/igroups`](#/SAN/igroup_nested_create) and [`DELETE /protocols/san/igroups/{igroup.uuid}/igroups/{uuid}`](#/SAN/igroup_nested_delete) for more details.
 	//
 	Igroups []*ConsistencyGroupLunsItems0LunMapsItems0IgroupIgroupsItems0 `json:"igroups" yaml:"igroups"`
 
@@ -11427,7 +11454,7 @@ type ConsistencyGroupInlineLunsInlineArrayItemInlineSpace struct {
 	Guarantee *ConsistencyGroupInlineLunsInlineArrayItemInlineSpaceInlineGuarantee `json:"guarantee,omitempty" yaml:"guarantee,omitempty"`
 
 	// The total provisioned size of the LUN. The LUN size can be increased but not reduced using the REST interface.
-	// The maximum and minimum sizes listed here are the absolute maximum and absolute minimum sizes, in bytes. The actual minimum and maxiumum sizes vary depending on the ONTAP version, ONTAP platform, and the available space in the containing volume and aggregate.
+	// The maximum and minimum sizes listed here are the absolute maximum and absolute minimum sizes, in bytes. The actual minimum and maximum sizes vary depending on the ONTAP version, ONTAP platform, and the available space in the containing volume and aggregate.
 	// For more information, see _Size properties_ in the _docs_ section of the ONTAP REST API documentation.
 	//
 	// Example: 1073741824
@@ -11568,6 +11595,7 @@ func (m *ConsistencyGroupInlineLunsInlineArrayItemInlineSpace) UnmarshalBinary(b
 type ConsistencyGroupInlineLunsInlineArrayItemInlineSpaceInlineGuarantee struct {
 
 	// The requested space reservation policy for the LUN. If _true_, a space reservation is requested for the LUN; if _false_, the LUN is thin provisioned. Guaranteeing a space reservation request for a LUN requires that the volume in which the LUN resides is also space reserved and that the fractional reserve for the volume is 100%. Valid in POST and PATCH.
+	//
 	//
 	Requested *bool `json:"requested,omitempty" yaml:"requested,omitempty"`
 
@@ -12144,7 +12172,7 @@ type ConsistencyGroupInlineMetricInlineIops struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -12198,7 +12226,7 @@ type ConsistencyGroupInlineMetricInlineLatency struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -12347,7 +12375,7 @@ type ConsistencyGroupInlineMetricInlineThroughput struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -12386,9 +12414,11 @@ func (m *ConsistencyGroupInlineMetricInlineThroughput) UnmarshalBinary(b []byte)
 }
 
 // ConsistencyGroupInlineNamespacesInlineArrayItem An NVMe namespace is a collection of addressable logical blocks presented to hosts connected to the storage virtual machine using the NVMe over Fabrics protocol.<br/>
-// In ONTAP, an NVMe namespace is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
-// An NVMe namespace is created to a specified size using thin or thick provisioning as determined by the volume on which it is created. NVMe namespaces support being cloned. An NVMe namespace cannot be renamed, resized, or moved to a different volume. NVMe namespaces do not support the assignment of a QoS policy for performance management, but a QoS policy can be assigned to the volume containing the namespace. See the NVMe namespace object model to learn more about each of the properties supported by the NVMe namespace REST API.<br/>
-// An NVMe namespace must be mapped to an NVMe subsystem to grant access to the subsystem's hosts. Hosts can then access the NVMe namespace and perform I/O using the NVMe over Fabrics protocol.
+// An NVMe namespace must be mapped to an NVMe subsystem to grant access to the subsystem's hosts. Hosts can then access the NVMe namespace and perform I/O using the NVMe over Fabrics protocol.<br/>
+// See the NVMe namespace object model to learn more about each of the properties supported by the NVMe namespace REST API.
+// An NVMe namespace is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+// NVMe namespace names are paths of the form "/vol/\<volume>[/\<qtree>]/\<namespace>" where the qtree name is optional.<br/>
+// An NVMe namespace is created to a specified size using thin or thick provisioning as determined by the volume on which it is created. An NVMe namespace can then be resized or cloned. An NVMe namespace cannot be renamed, or moved to a different volume. NVMe namespaces do not support the assignment of a QoS policy for performance management, but a QoS policy can be assigned to the volume containing the namespace.
 //
 // swagger:model consistency_group_inline_namespaces_inline_array_item
 type ConsistencyGroupInlineNamespacesInlineArrayItem struct {
@@ -12396,7 +12426,8 @@ type ConsistencyGroupInlineNamespacesInlineArrayItem struct {
 	// This property marks the NVMe namespace for auto deletion when the volume containing the namespace runs out of space. This is most commonly set on namespace clones.<br/>
 	// When set to _true_, the NVMe namespace becomes eligible for automatic deletion when the volume runs out of space. Auto deletion only occurs when the volume containing the namespace is also configured for auto deletion and free space in the volume decreases below a particular threshold.<br/>
 	// This property is optional in POST and PATCH. The default value for a new NVMe namespace is _false_.<br/>
-	// There is an added computational cost to retrieving this property's value. It is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
+	// There is an added computational cost to retrieving this property's value. It is not populated for a GET request unless it is explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
+	//
 	//
 	AutoDelete *bool `json:"auto_delete,omitempty" yaml:"auto_delete,omitempty"`
 
@@ -12412,13 +12443,16 @@ type ConsistencyGroupInlineNamespacesInlineArrayItem struct {
 	// Format: date-time
 	CreateTime *strfmt.DateTime `json:"create_time,omitempty" yaml:"create_time,omitempty"`
 
-	// The enabled state of the NVMe namespace. Certain error conditions cause the namespace to become disabled. If the namespace is disabled, you can check the `state` property to determine what error disabled the namespace. An NVMe namespace is enabled automatically when it is created.
+	// The enabled state of the NVMe namespace. Certain error conditions cause the namespace to become disabled. If the namespace is disabled, check the `status.state` property to determine what error disabled the namespace. An NVMe namespace is enabled automatically when it is created.
 	//
 	// Read Only: true
 	Enabled *bool `json:"enabled,omitempty" yaml:"enabled,omitempty"`
 
-	// The fully qualified path name of the NVMe namespace composed of a "/vol" prefix, the volume name, the (optional) qtree name and base name of the namespace. Valid in POST.<br/>
-	// NVMe namespaces do not support rename, or movement between volumes.
+	// The name of the NVMe namespace.
+	// An NVMe namespace is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+	// NVMe namespace names are paths of the form "/vol/\<volume>[/\<qtree>]/\<namespace>" where the qtree name is optional.<br/>
+	// Renaming an NVMe namespace is not supported. Valid in POST.
+	//
 	//
 	// Example: /vol/volume1/qtree1/namespace1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
@@ -13317,7 +13351,7 @@ type ConsistencyGroupInlineNamespacesInlineArrayItemInlineSubsystemMap struct {
 
 	// The Asymmetric Namespace Access Group ID (ANAGRPID) of the NVMe namespace.<br/>
 	// The format for an ANAGRPID is 8 hexadecimal digits (zero-filled) followed by a lower case "h".<br/>
-	// There is an added computational cost to retrieving this property's value. It is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
+	// There is an added computational cost to retrieving this property's value. It is not populated for a GET request unless it is explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
 	//
 	// Example: 00103050h
 	// Read Only: true
@@ -14197,7 +14231,7 @@ func (m *ConsistencyGroupInlineReplicationRelationshipsInlineArrayItem) Unmarsha
 	return nil
 }
 
-// ConsistencyGroupInlineRestoreTo Use to restore a consistency group to a previous Snapshot copy
+// ConsistencyGroupInlineRestoreTo Use to restore a consistency group to a previous snapshot
 //
 // swagger:model consistency_group_inline_restore_to
 type ConsistencyGroupInlineRestoreTo struct {
@@ -14292,15 +14326,15 @@ func (m *ConsistencyGroupInlineRestoreTo) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// ConsistencyGroupInlineRestoreToInlineSnapshot A consistency group's Snapshot copy
+// ConsistencyGroupInlineRestoreToInlineSnapshot A consistency group's snapshot
 //
 // swagger:model consistency_group_inline_restore_to_inline_snapshot
 type ConsistencyGroupInlineRestoreToInlineSnapshot struct {
 
-	// The name of the consistency group's Snapshot copy to restore to.
+	// The name of the consistency group's snapshot to restore to.
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
-	// The UUID of the consistency group's Snapshot copy to restore to.
+	// The UUID of the consistency group's snapshot to restore to.
 	UUID *string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 }
 
@@ -14772,7 +14806,7 @@ type ConsistencyGroupInlineStatisticsInlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -14826,7 +14860,7 @@ type ConsistencyGroupInlineStatisticsInlineLatencyRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -14880,7 +14914,7 @@ type ConsistencyGroupInlineStatisticsInlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -15134,7 +15168,7 @@ type ConsistencyGroupInlineTiering struct {
 	ObjectStores []*ConsistencyGroupTieringObjectStoresItems0 `json:"object_stores,omitempty" yaml:"object_stores,omitempty"`
 
 	// Policy that determines whether the user data blocks of a volume in a FabricPool will be tiered to the cloud store when they become cold.
-	// <br>FabricPool combines flash (performance tier) with a cloud store into a single aggregate. Temperature of a volume block increases if it is accessed frequently and decreases when it is not. Valid in POST or PATCH.<br/>all &dash; Allows tiering of both Snapshot copies and active file system user data to the cloud store as soon as possible by ignoring the temperature on the volume blocks.<br/>auto &dash; Allows tiering of both snapshot and active file system user data to the cloud store<br/>none &dash; Volume blocks are not be tiered to the cloud store.<br/>snapshot_only &dash; Allows tiering of only the volume Snapshot copies not associated with the active file system.
+	// <br>FabricPool combines flash (performance tier) with a cloud store into a single aggregate. Temperature of a volume block increases if it is accessed frequently and decreases when it is not. Valid in POST or PATCH.<br/>all &dash; Allows tiering of both snapshots and active file system user data to the cloud store as soon as possible by ignoring the temperature on the volume blocks.<br/>auto &dash; Allows tiering of both snapshot and active file system user data to the cloud store<br/>none &dash; Volume blocks are not be tiered to the cloud store.<br/>snapshot_only &dash; Allows tiering of only the volume snapshots not associated with the active file system.
 	// <br>The default tiering policy is "snapshot-only" for a FlexVol volume and "none" for a FlexGroup volume. The default minimum cooling period for the "snapshot-only" tiering policy is 2 days and for the "auto" tiering policy it is 31 days.
 	//
 	// Enum: ["all","auto","backup","none","snapshot_only"]
@@ -15402,7 +15436,7 @@ type ConsistencyGroupInlineVolumesInlineArrayItem struct {
 	// Min Length: 0
 	Comment *string `json:"comment,omitempty" yaml:"comment,omitempty"`
 
-	// Volume name. The name of volume must start with an alphabetic character (a to z or A to Z) or an underscore (_). The name must be 197 or fewer characters in length for FlexGroups, and 203 or fewer characters in length for all other types of volumes. Volume names must be unique within an SVM. Required on POST.
+	// Volume name. The name of volume must start with an alphabetic character (a to z or A to Z) or an underscore (_). The name must be 197 or fewer characters in length for FlexGroup volumes, and 203 or fewer characters in length for all other types of volumes. Volume names must be unique within an SVM. Required on POST.
 	// Example: vol_cs_dept
 	// Max Length: 203
 	// Min Length: 1
@@ -15417,7 +15451,7 @@ type ConsistencyGroupInlineVolumesInlineArrayItem struct {
 	// qos
 	Qos *ConsistencyGroupInlineVolumesInlineArrayItemInlineQos `json:"qos,omitempty" yaml:"qos,omitempty"`
 
-	// The Snapshot copy policy for this volume.
+	// The snapshot policy for this volume.
 	//
 	SnapshotPolicy *SnapshotPolicyReference `json:"snapshot_policy,omitempty" yaml:"snapshot_policy,omitempty"`
 
@@ -17002,7 +17036,7 @@ type ConsistencyGroupInlineVolumesInlineArrayItemInlineTiering struct {
 	ObjectStores []*ConsistencyGroupVolumesItems0TieringObjectStoresItems0 `json:"object_stores" yaml:"object_stores"`
 
 	// Policy that determines whether the user data blocks of a volume in a FabricPool will be tiered to the cloud store when they become cold.
-	// <br>FabricPool combines flash (performance tier) with a cloud store into a single aggregate. Temperature of a volume block increases if it is accessed frequently and decreases when it is not. Valid in POST or PATCH.<br/>all &dash; Allows tiering of both Snapshot copies and active file system user data to the cloud store as soon as possible by ignoring the temperature on the volume blocks.<br/>auto &dash; Allows tiering of both snapshot and active file system user data to the cloud store<br/>none &dash; Volume blocks are not be tiered to the cloud store.<br/>snapshot_only &dash; Allows tiering of only the volume Snapshot copies not associated with the active file system.
+	// <br>FabricPool combines flash (performance tier) with a cloud store into a single aggregate. Temperature of a volume block increases if it is accessed frequently and decreases when it is not. Valid in POST or PATCH.<br/>all &dash; Allows tiering of both snapshots and active file system user data to the cloud store as soon as possible by ignoring the temperature on the volume blocks.<br/>auto &dash; Allows tiering of both snapshot and active file system user data to the cloud store<br/>none &dash; Volume blocks are not be tiered to the cloud store.<br/>snapshot_only &dash; Allows tiering of only the volume snapshots not associated with the active file system.
 	// <br>The default tiering policy is "snapshot-only" for a FlexVol volume and "none" for a FlexGroup volume. The default minimum cooling period for the "snapshot-only" tiering policy is 2 days and for the "auto" tiering policy it is 31 days.
 	//
 	// Enum: ["all","auto","backup","none","snapshot_only"]

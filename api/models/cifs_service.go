@@ -32,6 +32,11 @@ type CifsService struct {
 	// Enum: ["domain","workgroup"]
 	AuthStyle *string `json:"auth-style,omitempty" yaml:"auth-style,omitempty"`
 
+	// Specifies the type of user who can access the SMB Volume. The default is domain_user. In the case of a hybrid-user, ONTAP won't contact on-premise ADDS.
+	//
+	// Enum: ["domain_user","hybrid_user"]
+	AuthUserType *string `json:"auth_user_type,omitempty" yaml:"auth_user_type,omitempty"`
+
 	// Specifies the authentication method.
 	// The available values are:
 	//   * client_secret
@@ -45,7 +50,7 @@ type CifsService struct {
 	// Format: password
 	ClientCertificate *strfmt.Password `json:"client_certificate,omitempty" yaml:"client_certificate,omitempty"`
 
-	// Application client ID of the deployed Azure application with appropriate access to an AKV.
+	// Application client ID of the deployed Azure application with appropriate access to an AKV or EntraId.
 	// Example: e959d1b5-5a63-4284-9268-851e30e3eceb
 	ClientID *string `json:"client_id,omitempty" yaml:"client_id,omitempty"`
 
@@ -123,7 +128,7 @@ type CifsService struct {
 	// svm
 	Svm *CifsServiceInlineSvm `json:"svm,omitempty" yaml:"svm,omitempty"`
 
-	// Directory (tenant) ID of the deployed Azure application with appropriate access to an AKV.
+	// Directory (tenant) ID of the deployed Azure application with appropriate access to an AKV or EntraId.
 	// Example: c9f32fcb-4ab7-40fe-af1b-1850d46cfbbe
 	TenantID *string `json:"tenant_id,omitempty" yaml:"tenant_id,omitempty"`
 
@@ -154,6 +159,10 @@ func (m *CifsService) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateAuthStyle(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateAuthUserType(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -293,6 +302,48 @@ func (m *CifsService) validateAuthStyle(formats strfmt.Registry) error {
 
 	// value enum
 	if err := m.validateAuthStyleEnum("auth-style", "body", *m.AuthStyle); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var cifsServiceTypeAuthUserTypePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["domain_user","hybrid_user"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		cifsServiceTypeAuthUserTypePropEnum = append(cifsServiceTypeAuthUserTypePropEnum, v)
+	}
+}
+
+const (
+
+	// CifsServiceAuthUserTypeDomainUser captures enum value "domain_user"
+	CifsServiceAuthUserTypeDomainUser string = "domain_user"
+
+	// CifsServiceAuthUserTypeHybridUser captures enum value "hybrid_user"
+	CifsServiceAuthUserTypeHybridUser string = "hybrid_user"
+)
+
+// prop value enum
+func (m *CifsService) validateAuthUserTypeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, cifsServiceTypeAuthUserTypePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *CifsService) validateAuthUserType(formats strfmt.Registry) error {
+	if swag.IsZero(m.AuthUserType) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateAuthUserTypeEnum("auth_user_type", "body", *m.AuthUserType); err != nil {
 		return err
 	}
 
@@ -1386,7 +1437,7 @@ type CifsServiceInlineMetricInlineIops struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1440,7 +1491,7 @@ type CifsServiceInlineMetricInlineLatency struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1586,7 +1637,7 @@ type CifsServiceInlineMetricInlineThroughput struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1964,7 +2015,7 @@ type CifsServiceInlineStatisticsInlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -2018,7 +2069,7 @@ type CifsServiceInlineStatisticsInlineLatencyRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -2069,7 +2120,7 @@ type CifsServiceInlineStatisticsInlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }

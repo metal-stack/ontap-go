@@ -246,6 +246,8 @@ func NewQtreeCreateDefault(code int) *QtreeCreateDefault {
 | 5242953 | Qtree name must be provided. |
 | 5242967 | UNIX user or group ID must be 32-bit unsigned integer. |
 | 5242970 | FlexCache create is in progress for the volume. |
+| 5242978 | The maximum number of qtrees for which extended performance monitoring can be enabled has been reached. Retry the POST request with ext_performance_monitoring.enabled set to false. |
+| 5242979 | Qtree creation succeeded but failed to enable extended performance monitoring on the qtree. |
 | 6622064 | Security-style NTFS is not supported on a SnapMirror active sync relationship volume. |
 | 8454348 | QoS on qtrees is not supported because not all nodes in the cluster can support it. |
 | 9437324 | The security style unified is not supported. |

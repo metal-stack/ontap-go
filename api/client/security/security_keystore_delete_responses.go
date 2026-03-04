@@ -116,6 +116,9 @@ func NewSecurityKeystoreDeleteDefault(code int) *SecurityKeystoreDeleteDefault {
 | 65538905 | The keystore configuration is currently enabled and cannot be deleted. |
 | 65538907 | The method is not yet supported for deleting the given UUID's type of configuration. |
 | 65538908 | The specified keystore configuration UUID either does not exist or corresponds to a keystore configuration that is not supported by this operation. |
+| 65539521 | An effective cluster version of ONTAP 9.16.1 or later is required to delete an inactive key manager on the admin SVM. |
+| 65539522 | This command does not support disabling key manager configurations with the specified keystore type on the admin SVM. |
+| 65539593 | Cannot delete an inactive key manager configuration while the keystore is in the switching state. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SecurityKeystoreDeleteDefault struct {

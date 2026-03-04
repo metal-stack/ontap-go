@@ -25,7 +25,7 @@ type ConsistencyGroupLunMap struct {
 	// igroup
 	Igroup *ConsistencyGroupLunMapInlineIgroup `json:"igroup,omitempty" yaml:"igroup,omitempty"`
 
-	// The logical unit number assigned to the LUN when mapped to the specified initiator group. The number is used to identify the LUN to initiators in the initiator group when communicating through the Fibre Channel Protocol or iSCSI. Optional in POST; if no value is provided, ONTAP assigns the lowest available value.
+	// The logical unit number assigned to the LUN when mapped to the specified initiator group. The number is used to identify the LUN to initiators in the initiator group when communicating through the Fibre Channel Protocol or iSCSI. Optional in POST; if no value is provided, ONTAP assigns the lowest available value. This property is not supported when the _provisioning_options.count_ property is 2 or more.
 	//
 	LogicalUnitNumber *int64 `json:"logical_unit_number,omitempty" yaml:"logical_unit_number,omitempty"`
 }
@@ -127,7 +127,11 @@ type ConsistencyGroupLunMapInlineIgroup struct {
 	// Min Length: 0
 	Comment *string `json:"comment,omitempty" yaml:"comment,omitempty"`
 
-	// Separate igroup definitions to include in this igroup.
+	// The existing initiator groups that are members of the group. Optional in POST.<br/>
+	// This property is mutually exclusive with the _initiators_ property during POST.<br/>
+	// This array contains only the direct children of the initiator group. If the member initiator groups have further nested initiator groups, those are reported in the `igroups` property of the child initiator group.<br/>
+	// Zero or more nested initiator groups can be supplied when the initiator group is created. The initiator group will act as if it contains the aggregation of all initiators in any nested initiator groups.<br/>
+	// After creation, nested initiator groups can be added or removed from the initiator group using the `/protocols/san/igroups/{igroup.uuid}/igroups` endpoint. See [`POST /protocols/san/igroups/{igroup.uuid}/igroups`](#/SAN/igroup_nested_create) and [`DELETE /protocols/san/igroups/{igroup.uuid}/igroups/{uuid}`](#/SAN/igroup_nested_delete) for more details.
 	//
 	Igroups []*ConsistencyGroupLunMapIgroupIgroupsItems0 `json:"igroups,omitempty" yaml:"igroups,omitempty"`
 

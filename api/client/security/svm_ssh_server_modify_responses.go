@@ -123,6 +123,12 @@ func NewSvmSSHServerModifyDefault(code int) *SvmSSHServerModifyDefault {
 | 10682413 | Failed to modify maximum authentication retry attempts. |
 | 10682418 | Cipher not supported in FIPS-enabled mode. |
 | 10682420 | To modify the SSH configuration of the admin SVM, use the /api/security/ssh REST API. |
+| 10682423 | There must be at least one host key algorithm associated with the SSH configuration. |
+| 10682424 | Host key algorithm not supported in FIPS enabled mode. |
+| 10682425 | Failed to modify Host key algorithms. |
+| 10682426 | Failed to modify _ssh-rsa_ enabled status for publickey algorithms configuration. |
+| 10682428 | Cipher not supported in FIPS enabled mode. |
+| 10682429 | Adding 'diffie_hellman_group16_sha512' or 'diffie_hellman_group18_sha512' to the SSH key exchange algorithms list requires an effective cluster version of ONTAP 9.16.1 or later. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SvmSSHServerModifyDefault struct {

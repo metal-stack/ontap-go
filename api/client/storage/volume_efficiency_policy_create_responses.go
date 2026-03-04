@@ -123,6 +123,7 @@ func NewVolumeEfficiencyPolicyCreateDefault(code int) *VolumeEfficiencyPolicyCre
 
 | Error Code | Description |
 | ---------- | ----------- |
+| 918702 | The specified operation on the volume efficiency policies endpoint is not supported on this platform. |
 | 6881341 | Specified schedule not found. |
 | 6881344 | Failed to queue specified job. |
 | 6881345 | This operation is not permitted on a node SVM. |

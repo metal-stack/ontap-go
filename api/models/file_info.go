@@ -76,7 +76,6 @@ type FileInfo struct {
 	InodeNumber *int64 `json:"inode_number,omitempty" yaml:"inode_number,omitempty"`
 
 	// Specifies whether or not a directory is empty. A directory is considered empty if it only contains entries for "." and "..". This element is present if the file is a directory. In some special error cases, such as when the volume goes offline or when the directory is moved while retrieving this info, this field might not get set.
-	// Example: false
 	IsEmpty *bool `json:"is_empty,omitempty" yaml:"is_empty,omitempty"`
 
 	// Returns "true" if the directory is a junction.
@@ -84,7 +83,7 @@ type FileInfo struct {
 	// Read Only: true
 	IsJunction *bool `json:"is_junction,omitempty" yaml:"is_junction,omitempty"`
 
-	// Returns "true" if the directory is a Snapshot copy.
+	// Returns "true" if the directory is a snapshot.
 	// Example: false
 	// Read Only: true
 	IsSnapshot *bool `json:"is_snapshot,omitempty" yaml:"is_snapshot,omitempty"`
@@ -101,7 +100,6 @@ type FileInfo struct {
 	ModifiedTime *strfmt.DateTime `json:"modified_time,omitempty" yaml:"modified_time,omitempty"`
 
 	// Name of the file.
-	// Example: test_file
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// Returns "true" if the space reservation for overwrites is enabled. The field fill_enabled must also be set to the same value as this field.
@@ -113,18 +111,15 @@ type FileInfo struct {
 	OwnerID *int64 `json:"owner_id,omitempty" yaml:"owner_id,omitempty"`
 
 	// Path of the file.
-	// Example: d1/d2/d3
 	Path *string `json:"path,omitempty" yaml:"path,omitempty"`
 
 	// qos policy
 	QosPolicy *FileInfoInlineQosPolicy `json:"qos_policy,omitempty" yaml:"qos_policy,omitempty"`
 
 	// The size of the file, in bytes.
-	// Example: 200
 	Size *int64 `json:"size,omitempty" yaml:"size,omitempty"`
 
 	// The relative or absolute path contained in a symlink, in the form <some>/<path>.
-	// Example: some_directory/some_other_directory/some_file
 	Target *string `json:"target,omitempty" yaml:"target,omitempty"`
 
 	// Type of the file.
@@ -138,7 +133,6 @@ type FileInfo struct {
 	UniqueBytes *int64 `json:"unique_bytes,omitempty" yaml:"unique_bytes,omitempty"`
 
 	// UNIX permissions to be viewed as an octal number. It consists of 4 digits derived by adding up bits 4 (read), 2 (write), and 1 (execute). The first digit selects the set user ID(4), set group ID (2), and sticky (1) attributes. The second digit selects permissions for the owner of the file; the third selects permissions for other users in the same group; the fourth selects permissions for other users not in the group.
-	// Example: 493
 	UnixPermissions *int64 `json:"unix_permissions,omitempty" yaml:"unix_permissions,omitempty"`
 
 	// volume
@@ -736,7 +730,7 @@ func (m *FileInfo) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// FileInfoInlineAnalytics Additional file system analytics information summarizing all descendents of a directory. <br/>
+// FileInfoInlineAnalytics Additional file system analytics information summarizing all descendants of a directory. <br/>
 // This property is only populated if file system analytics is enabled on the containing volume. <br/>
 // In the context of the `records` property of a [`file_info_response`](#model-file_info_response), analytics objects will only include properties that may vary between elements within the collection. For example, the analytics objects will not contain histogram labels, since the same histogram labels are used for all elements within the collection. The invariant information is instead available via the `analytics` property of the [`file_info_response`](#model-file_info_response). This avoids an excessive amount of duplicated information when a [`GET  /storage/volumes/{volume.uuid}/files/{path}`](#/storage/file_collection_get) call returns a large collection.
 //
@@ -1713,12 +1707,10 @@ type FileInfoInlineQosPolicy struct {
 
 	// The name of the QoS policy. To remove the file from a QoS policy, set this property to an empty string "" or set it to "none" in a PATCH request.
 	//
-	// Example: qos1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// The unique identifier of the QoS policy. Valid in PATCH.
 	//
-	// Example: 1cd8a442-86d1-11e0-ae1c-123478563412
 	UUID *string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
 }
 
@@ -1911,7 +1903,7 @@ type FileInfoInlineVolume struct {
 	// links
 	Links *FileInfoInlineVolumeInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 

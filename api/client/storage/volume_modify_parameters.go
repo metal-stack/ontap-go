@@ -66,7 +66,7 @@ type VolumeModifyParams struct {
 
 	/* AggressiveReadaheadMode.
 
-	   Specifies the aggressive readahead mode enabled on the volume. When set to "file_prefetch", on a file read, the system aggressively issues readaheads for all of the blocks in the file and retains those blocks in a cache for a finite period of time. This feature is only available on FabricPool volumes on FSx for ONTAP and Cloud Volumes ONTAP.
+	   Specifies the `aggressive_readahead_mode` enabled on the volume. When set to _file_prefetch_, on a file read, the system aggressively issues readaheads for all of the blocks in the file and retains those blocks in a cache for a finite period of time. This feature is only available on FabricPool volumes on FSx for ONTAP and Cloud Volumes ONTAP. When the option is set to _sequential_read_, the system aggressively prefetches the file completely, or to a certain length based on the file size limit, and continues as the read makes progress. If the option is set to _cross_file_sequential_read_, then the system aggressively prefetches multiple files completely, or to a certain length, and continues as the read makes progress.
 
 	   Default: "none"
 	*/
@@ -92,7 +92,7 @@ type VolumeModifyParams struct {
 
 	/* PreserveLunIds.
 
-	   Specifies whether LUN IDs need to be preserved during a Snapshot copy restore operation.
+	   Specifies whether LUN IDs need to be preserved during a snapshot restore operation.
 	*/
 	PreserveLunIds *bool
 
@@ -104,7 +104,7 @@ type VolumeModifyParams struct {
 
 	/* RestoreToPath.
 
-	   Path to the file which is restored from the Snapshot copy.
+	   Path to the file which is restored from the snapshot.
 	*/
 	RestoreToPath *string
 
@@ -116,13 +116,13 @@ type VolumeModifyParams struct {
 
 	/* RestoreToSnapshotName.
 
-	   Name of the Snapshot copy to restore volume to the point in time the Snapshot copy was taken.
+	   Name of the snapshot to restore volume to the point in time the snapshot was taken.
 	*/
 	RestoreToSnapshotName *string
 
 	/* RestoreToSnapshotUUID.
 
-	   UUID of the Snapshot copy to restore volume to the point in time the Snapshot copy was taken.
+	   UUID of the snapshot to restore volume to the point in time the snapshot was taken.
 	*/
 	RestoreToSnapshotUUID *string
 
@@ -140,8 +140,8 @@ type VolumeModifyParams struct {
 
 	/* ScheduledSnapshotNamingScheme.
 
-	     Naming Scheme for automatic Snapshot copies:
-	* create_time - Automatic Snapshot copies are saved as per the start of their current date and time.
+	     Naming Scheme for automatic snapshots:
+	* create_time - Automatic snapshots are saved as per the start of their current date and time.
 	* ordinal - Latest automatic snapshot copy is saved as <scheduled_frequency>.0 and subsequent copies will follow the create_time naming convention.
 
 

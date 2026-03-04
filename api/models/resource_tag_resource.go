@@ -32,6 +32,10 @@ type ResourceTagResource struct {
 
 	// svm
 	Svm *ResourceTagResourceInlineSvm `json:"svm,omitempty" yaml:"svm,omitempty"`
+
+	// The text value of the tag formatted as `key:value`.
+	//
+	Value *string `json:"value,omitempty" yaml:"value,omitempty"`
 }
 
 // Validate validates this resource tag resource

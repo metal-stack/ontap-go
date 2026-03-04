@@ -120,9 +120,19 @@ func NewExportPolicyCollectionGetDefault(code int) *ExportPolicyCollectionGetDef
 }
 
 /*
-ExportPolicyCollectionGetDefault describes a response with status code -1, with default header values.
+	ExportPolicyCollectionGetDefault describes a response with status code -1, with default header values.
 
-Error
+	ONTAP Error Response Codes
+
+| Error Code | Description |
+| ---------- | ----------- |
+| 262197     | The value provided is invalid for the field |
+| 2621462    | The specified SVM name does not exist |
+| 2621519    | SVM name is invalid. The SVM name must begin with a letter or an underscore. If the SVM is of type \"sync-source\", the maximum supported length is 41. Otherwise, the maximum supported length is 47 |
+| 2621643    | The specified SVM name is too long |
+| 2621685    | SVM name length cannot be zero |
+| 2621706    | The specified SVM UUID is incorrect for the specified SVM name |
+| 6691623    | User is not authorized |
 */
 type ExportPolicyCollectionGetDefault struct {
 	_statusCode int

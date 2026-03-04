@@ -464,6 +464,12 @@ type ConsistencyGroupCollectionGetParams struct {
 	*/
 	ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapHashFunction *string
 
+	/* ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode.
+
+	   Filter by consistency_groups.namespaces.subsystem_map.subsystem.hosts.dh_hmac_chap.mode
+	*/
+	ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode *string
+
 	/* ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsNqn.
 
 	   Filter by consistency_groups.namespaces.subsystem_map.subsystem.hosts.nqn
@@ -475,6 +481,12 @@ type ConsistencyGroupCollectionGetParams struct {
 	   Filter by consistency_groups.namespaces.subsystem_map.subsystem.hosts.priority
 	*/
 	ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsPriority *string
+
+	/* ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType.
+
+	   Filter by consistency_groups.namespaces.subsystem_map.subsystem.hosts.tls.key_type
+	*/
+	ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType *string
 
 	/* ConsistencyGroupsNamespacesSubsystemMapSubsystemName.
 
@@ -613,6 +625,12 @@ type ConsistencyGroupCollectionGetParams struct {
 	   Filter by consistency_groups.volumes.nas.cifs.shares.acls.user_or_group
 	*/
 	ConsistencyGroupsVolumesNasCifsSharesAclsUserOrGroup *string
+
+	/* ConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID.
+
+	   Filter by consistency_groups.volumes.nas.cifs.shares.acls.win_sid_unix_id
+	*/
+	ConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID *string
 
 	/* ConsistencyGroupsVolumesNasCifsSharesAllowUnencryptedAccess.
 
@@ -1292,6 +1310,12 @@ type ConsistencyGroupCollectionGetParams struct {
 	*/
 	NamespacesSubsystemMapSubsystemHostsDhHmacChapHashFunction *string
 
+	/* NamespacesSubsystemMapSubsystemHostsDhHmacChapMode.
+
+	   Filter by namespaces.subsystem_map.subsystem.hosts.dh_hmac_chap.mode
+	*/
+	NamespacesSubsystemMapSubsystemHostsDhHmacChapMode *string
+
 	/* NamespacesSubsystemMapSubsystemHostsNqn.
 
 	   Filter by namespaces.subsystem_map.subsystem.hosts.nqn
@@ -1303,6 +1327,12 @@ type ConsistencyGroupCollectionGetParams struct {
 	   Filter by namespaces.subsystem_map.subsystem.hosts.priority
 	*/
 	NamespacesSubsystemMapSubsystemHostsPriority *string
+
+	/* NamespacesSubsystemMapSubsystemHostsTLSKeyType.
+
+	   Filter by namespaces.subsystem_map.subsystem.hosts.tls.key_type
+	*/
+	NamespacesSubsystemMapSubsystemHostsTLSKeyType *string
 
 	/* NamespacesSubsystemMapSubsystemName.
 
@@ -1595,6 +1625,12 @@ type ConsistencyGroupCollectionGetParams struct {
 	   Filter by volumes.nas.cifs.shares.acls.user_or_group
 	*/
 	VolumesNasCifsSharesAclsUserOrGroup *string
+
+	/* VolumesNasCifsSharesAclsWinSidUnixID.
+
+	   Filter by volumes.nas.cifs.shares.acls.win_sid_unix_id
+	*/
+	VolumesNasCifsSharesAclsWinSidUnixID *string
 
 	/* VolumesNasCifsSharesAllowUnencryptedAccess.
 
@@ -2670,6 +2706,17 @@ func (o *ConsistencyGroupCollectionGetParams) SetConsistencyGroupsNamespacesSubs
 	o.ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapHashFunction = consistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapHashFunction
 }
 
+// WithConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode adds the consistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode to the consistency group collection get params
+func (o *ConsistencyGroupCollectionGetParams) WithConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode(consistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode *string) *ConsistencyGroupCollectionGetParams {
+	o.SetConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode(consistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode)
+	return o
+}
+
+// SetConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode adds the consistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode to the consistency group collection get params
+func (o *ConsistencyGroupCollectionGetParams) SetConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode(consistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode *string) {
+	o.ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode = consistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode
+}
+
 // WithConsistencyGroupsNamespacesSubsystemMapSubsystemHostsNqn adds the consistencyGroupsNamespacesSubsystemMapSubsystemHostsNqn to the consistency group collection get params
 func (o *ConsistencyGroupCollectionGetParams) WithConsistencyGroupsNamespacesSubsystemMapSubsystemHostsNqn(consistencyGroupsNamespacesSubsystemMapSubsystemHostsNqn *string) *ConsistencyGroupCollectionGetParams {
 	o.SetConsistencyGroupsNamespacesSubsystemMapSubsystemHostsNqn(consistencyGroupsNamespacesSubsystemMapSubsystemHostsNqn)
@@ -2690,6 +2737,17 @@ func (o *ConsistencyGroupCollectionGetParams) WithConsistencyGroupsNamespacesSub
 // SetConsistencyGroupsNamespacesSubsystemMapSubsystemHostsPriority adds the consistencyGroupsNamespacesSubsystemMapSubsystemHostsPriority to the consistency group collection get params
 func (o *ConsistencyGroupCollectionGetParams) SetConsistencyGroupsNamespacesSubsystemMapSubsystemHostsPriority(consistencyGroupsNamespacesSubsystemMapSubsystemHostsPriority *string) {
 	o.ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsPriority = consistencyGroupsNamespacesSubsystemMapSubsystemHostsPriority
+}
+
+// WithConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType adds the consistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType to the consistency group collection get params
+func (o *ConsistencyGroupCollectionGetParams) WithConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType(consistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType *string) *ConsistencyGroupCollectionGetParams {
+	o.SetConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType(consistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType)
+	return o
+}
+
+// SetConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType adds the consistencyGroupsNamespacesSubsystemMapSubsystemHostsTlsKeyType to the consistency group collection get params
+func (o *ConsistencyGroupCollectionGetParams) SetConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType(consistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType *string) {
+	o.ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType = consistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType
 }
 
 // WithConsistencyGroupsNamespacesSubsystemMapSubsystemName adds the consistencyGroupsNamespacesSubsystemMapSubsystemName to the consistency group collection get params
@@ -2943,6 +3001,17 @@ func (o *ConsistencyGroupCollectionGetParams) WithConsistencyGroupsVolumesNasCif
 // SetConsistencyGroupsVolumesNasCifsSharesAclsUserOrGroup adds the consistencyGroupsVolumesNasCifsSharesAclsUserOrGroup to the consistency group collection get params
 func (o *ConsistencyGroupCollectionGetParams) SetConsistencyGroupsVolumesNasCifsSharesAclsUserOrGroup(consistencyGroupsVolumesNasCifsSharesAclsUserOrGroup *string) {
 	o.ConsistencyGroupsVolumesNasCifsSharesAclsUserOrGroup = consistencyGroupsVolumesNasCifsSharesAclsUserOrGroup
+}
+
+// WithConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID adds the consistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID to the consistency group collection get params
+func (o *ConsistencyGroupCollectionGetParams) WithConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID(consistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID *string) *ConsistencyGroupCollectionGetParams {
+	o.SetConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID(consistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID)
+	return o
+}
+
+// SetConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID adds the consistencyGroupsVolumesNasCifsSharesAclsWinSidUnixId to the consistency group collection get params
+func (o *ConsistencyGroupCollectionGetParams) SetConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID(consistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID *string) {
+	o.ConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID = consistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID
 }
 
 // WithConsistencyGroupsVolumesNasCifsSharesAllowUnencryptedAccess adds the consistencyGroupsVolumesNasCifsSharesAllowUnencryptedAccess to the consistency group collection get params
@@ -4188,6 +4257,17 @@ func (o *ConsistencyGroupCollectionGetParams) SetNamespacesSubsystemMapSubsystem
 	o.NamespacesSubsystemMapSubsystemHostsDhHmacChapHashFunction = namespacesSubsystemMapSubsystemHostsDhHmacChapHashFunction
 }
 
+// WithNamespacesSubsystemMapSubsystemHostsDhHmacChapMode adds the namespacesSubsystemMapSubsystemHostsDhHmacChapMode to the consistency group collection get params
+func (o *ConsistencyGroupCollectionGetParams) WithNamespacesSubsystemMapSubsystemHostsDhHmacChapMode(namespacesSubsystemMapSubsystemHostsDhHmacChapMode *string) *ConsistencyGroupCollectionGetParams {
+	o.SetNamespacesSubsystemMapSubsystemHostsDhHmacChapMode(namespacesSubsystemMapSubsystemHostsDhHmacChapMode)
+	return o
+}
+
+// SetNamespacesSubsystemMapSubsystemHostsDhHmacChapMode adds the namespacesSubsystemMapSubsystemHostsDhHmacChapMode to the consistency group collection get params
+func (o *ConsistencyGroupCollectionGetParams) SetNamespacesSubsystemMapSubsystemHostsDhHmacChapMode(namespacesSubsystemMapSubsystemHostsDhHmacChapMode *string) {
+	o.NamespacesSubsystemMapSubsystemHostsDhHmacChapMode = namespacesSubsystemMapSubsystemHostsDhHmacChapMode
+}
+
 // WithNamespacesSubsystemMapSubsystemHostsNqn adds the namespacesSubsystemMapSubsystemHostsNqn to the consistency group collection get params
 func (o *ConsistencyGroupCollectionGetParams) WithNamespacesSubsystemMapSubsystemHostsNqn(namespacesSubsystemMapSubsystemHostsNqn *string) *ConsistencyGroupCollectionGetParams {
 	o.SetNamespacesSubsystemMapSubsystemHostsNqn(namespacesSubsystemMapSubsystemHostsNqn)
@@ -4208,6 +4288,17 @@ func (o *ConsistencyGroupCollectionGetParams) WithNamespacesSubsystemMapSubsyste
 // SetNamespacesSubsystemMapSubsystemHostsPriority adds the namespacesSubsystemMapSubsystemHostsPriority to the consistency group collection get params
 func (o *ConsistencyGroupCollectionGetParams) SetNamespacesSubsystemMapSubsystemHostsPriority(namespacesSubsystemMapSubsystemHostsPriority *string) {
 	o.NamespacesSubsystemMapSubsystemHostsPriority = namespacesSubsystemMapSubsystemHostsPriority
+}
+
+// WithNamespacesSubsystemMapSubsystemHostsTLSKeyType adds the namespacesSubsystemMapSubsystemHostsTLSKeyType to the consistency group collection get params
+func (o *ConsistencyGroupCollectionGetParams) WithNamespacesSubsystemMapSubsystemHostsTLSKeyType(namespacesSubsystemMapSubsystemHostsTLSKeyType *string) *ConsistencyGroupCollectionGetParams {
+	o.SetNamespacesSubsystemMapSubsystemHostsTLSKeyType(namespacesSubsystemMapSubsystemHostsTLSKeyType)
+	return o
+}
+
+// SetNamespacesSubsystemMapSubsystemHostsTLSKeyType adds the namespacesSubsystemMapSubsystemHostsTlsKeyType to the consistency group collection get params
+func (o *ConsistencyGroupCollectionGetParams) SetNamespacesSubsystemMapSubsystemHostsTLSKeyType(namespacesSubsystemMapSubsystemHostsTLSKeyType *string) {
+	o.NamespacesSubsystemMapSubsystemHostsTLSKeyType = namespacesSubsystemMapSubsystemHostsTLSKeyType
 }
 
 // WithNamespacesSubsystemMapSubsystemName adds the namespacesSubsystemMapSubsystemName to the consistency group collection get params
@@ -4736,6 +4827,17 @@ func (o *ConsistencyGroupCollectionGetParams) WithVolumesNasCifsSharesAclsUserOr
 // SetVolumesNasCifsSharesAclsUserOrGroup adds the volumesNasCifsSharesAclsUserOrGroup to the consistency group collection get params
 func (o *ConsistencyGroupCollectionGetParams) SetVolumesNasCifsSharesAclsUserOrGroup(volumesNasCifsSharesAclsUserOrGroup *string) {
 	o.VolumesNasCifsSharesAclsUserOrGroup = volumesNasCifsSharesAclsUserOrGroup
+}
+
+// WithVolumesNasCifsSharesAclsWinSidUnixID adds the volumesNasCifsSharesAclsWinSidUnixID to the consistency group collection get params
+func (o *ConsistencyGroupCollectionGetParams) WithVolumesNasCifsSharesAclsWinSidUnixID(volumesNasCifsSharesAclsWinSidUnixID *string) *ConsistencyGroupCollectionGetParams {
+	o.SetVolumesNasCifsSharesAclsWinSidUnixID(volumesNasCifsSharesAclsWinSidUnixID)
+	return o
+}
+
+// SetVolumesNasCifsSharesAclsWinSidUnixID adds the volumesNasCifsSharesAclsWinSidUnixId to the consistency group collection get params
+func (o *ConsistencyGroupCollectionGetParams) SetVolumesNasCifsSharesAclsWinSidUnixID(volumesNasCifsSharesAclsWinSidUnixID *string) {
+	o.VolumesNasCifsSharesAclsWinSidUnixID = volumesNasCifsSharesAclsWinSidUnixID
 }
 
 // WithVolumesNasCifsSharesAllowUnencryptedAccess adds the volumesNasCifsSharesAllowUnencryptedAccess to the consistency group collection get params
@@ -6380,6 +6482,23 @@ func (o *ConsistencyGroupCollectionGetParams) WriteToRequest(r runtime.ClientReq
 		}
 	}
 
+	if o.ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode != nil {
+
+		// query param consistency_groups.namespaces.subsystem_map.subsystem.hosts.dh_hmac_chap.mode
+		var qrConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode string
+
+		if o.ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode != nil {
+			qrConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode = *o.ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode
+		}
+		qConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode := qrConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode
+		if qConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode != "" {
+
+			if err := r.SetQueryParam("consistency_groups.namespaces.subsystem_map.subsystem.hosts.dh_hmac_chap.mode", qConsistencyGroupsNamespacesSubsystemMapSubsystemHostsDhHmacChapMode); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsNqn != nil {
 
 		// query param consistency_groups.namespaces.subsystem_map.subsystem.hosts.nqn
@@ -6409,6 +6528,23 @@ func (o *ConsistencyGroupCollectionGetParams) WriteToRequest(r runtime.ClientReq
 		if qConsistencyGroupsNamespacesSubsystemMapSubsystemHostsPriority != "" {
 
 			if err := r.SetQueryParam("consistency_groups.namespaces.subsystem_map.subsystem.hosts.priority", qConsistencyGroupsNamespacesSubsystemMapSubsystemHostsPriority); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType != nil {
+
+		// query param consistency_groups.namespaces.subsystem_map.subsystem.hosts.tls.key_type
+		var qrConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType string
+
+		if o.ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType != nil {
+			qrConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType = *o.ConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType
+		}
+		qConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType := qrConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType
+		if qConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType != "" {
+
+			if err := r.SetQueryParam("consistency_groups.namespaces.subsystem_map.subsystem.hosts.tls.key_type", qConsistencyGroupsNamespacesSubsystemMapSubsystemHostsTLSKeyType); err != nil {
 				return err
 			}
 		}
@@ -6800,6 +6936,23 @@ func (o *ConsistencyGroupCollectionGetParams) WriteToRequest(r runtime.ClientReq
 		if qConsistencyGroupsVolumesNasCifsSharesAclsUserOrGroup != "" {
 
 			if err := r.SetQueryParam("consistency_groups.volumes.nas.cifs.shares.acls.user_or_group", qConsistencyGroupsVolumesNasCifsSharesAclsUserOrGroup); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.ConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID != nil {
+
+		// query param consistency_groups.volumes.nas.cifs.shares.acls.win_sid_unix_id
+		var qrConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID string
+
+		if o.ConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID != nil {
+			qrConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID = *o.ConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID
+		}
+		qConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID := qrConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID
+		if qConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID != "" {
+
+			if err := r.SetQueryParam("consistency_groups.volumes.nas.cifs.shares.acls.win_sid_unix_id", qConsistencyGroupsVolumesNasCifsSharesAclsWinSidUnixID); err != nil {
 				return err
 			}
 		}
@@ -8720,6 +8873,23 @@ func (o *ConsistencyGroupCollectionGetParams) WriteToRequest(r runtime.ClientReq
 		}
 	}
 
+	if o.NamespacesSubsystemMapSubsystemHostsDhHmacChapMode != nil {
+
+		// query param namespaces.subsystem_map.subsystem.hosts.dh_hmac_chap.mode
+		var qrNamespacesSubsystemMapSubsystemHostsDhHmacChapMode string
+
+		if o.NamespacesSubsystemMapSubsystemHostsDhHmacChapMode != nil {
+			qrNamespacesSubsystemMapSubsystemHostsDhHmacChapMode = *o.NamespacesSubsystemMapSubsystemHostsDhHmacChapMode
+		}
+		qNamespacesSubsystemMapSubsystemHostsDhHmacChapMode := qrNamespacesSubsystemMapSubsystemHostsDhHmacChapMode
+		if qNamespacesSubsystemMapSubsystemHostsDhHmacChapMode != "" {
+
+			if err := r.SetQueryParam("namespaces.subsystem_map.subsystem.hosts.dh_hmac_chap.mode", qNamespacesSubsystemMapSubsystemHostsDhHmacChapMode); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.NamespacesSubsystemMapSubsystemHostsNqn != nil {
 
 		// query param namespaces.subsystem_map.subsystem.hosts.nqn
@@ -8749,6 +8919,23 @@ func (o *ConsistencyGroupCollectionGetParams) WriteToRequest(r runtime.ClientReq
 		if qNamespacesSubsystemMapSubsystemHostsPriority != "" {
 
 			if err := r.SetQueryParam("namespaces.subsystem_map.subsystem.hosts.priority", qNamespacesSubsystemMapSubsystemHostsPriority); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.NamespacesSubsystemMapSubsystemHostsTLSKeyType != nil {
+
+		// query param namespaces.subsystem_map.subsystem.hosts.tls.key_type
+		var qrNamespacesSubsystemMapSubsystemHostsTLSKeyType string
+
+		if o.NamespacesSubsystemMapSubsystemHostsTLSKeyType != nil {
+			qrNamespacesSubsystemMapSubsystemHostsTLSKeyType = *o.NamespacesSubsystemMapSubsystemHostsTLSKeyType
+		}
+		qNamespacesSubsystemMapSubsystemHostsTLSKeyType := qrNamespacesSubsystemMapSubsystemHostsTLSKeyType
+		if qNamespacesSubsystemMapSubsystemHostsTLSKeyType != "" {
+
+			if err := r.SetQueryParam("namespaces.subsystem_map.subsystem.hosts.tls.key_type", qNamespacesSubsystemMapSubsystemHostsTLSKeyType); err != nil {
 				return err
 			}
 		}
@@ -9559,6 +9746,23 @@ func (o *ConsistencyGroupCollectionGetParams) WriteToRequest(r runtime.ClientReq
 		if qVolumesNasCifsSharesAclsUserOrGroup != "" {
 
 			if err := r.SetQueryParam("volumes.nas.cifs.shares.acls.user_or_group", qVolumesNasCifsSharesAclsUserOrGroup); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.VolumesNasCifsSharesAclsWinSidUnixID != nil {
+
+		// query param volumes.nas.cifs.shares.acls.win_sid_unix_id
+		var qrVolumesNasCifsSharesAclsWinSidUnixID string
+
+		if o.VolumesNasCifsSharesAclsWinSidUnixID != nil {
+			qrVolumesNasCifsSharesAclsWinSidUnixID = *o.VolumesNasCifsSharesAclsWinSidUnixID
+		}
+		qVolumesNasCifsSharesAclsWinSidUnixID := qrVolumesNasCifsSharesAclsWinSidUnixID
+		if qVolumesNasCifsSharesAclsWinSidUnixID != "" {
+
+			if err := r.SetQueryParam("volumes.nas.cifs.shares.acls.win_sid_unix_id", qVolumesNasCifsSharesAclsWinSidUnixID); err != nil {
 				return err
 			}
 		}

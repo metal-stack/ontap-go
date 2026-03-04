@@ -144,7 +144,7 @@ func NewNvmeServiceCreateDefault(code int) *NvmeServiceCreateDefault {
 | 2621706 | The specified `svm.uuid` and `svm.name` do not refer to the same SVM. |
 | 2621707 | No SVM was specified. Either `svm.name` or `svm.uuid` must be supplied. |
 | 5374893 | The SVM is stopped. The SVM must be running to create an NVMe service. |
-| 5376452 | Service POST and DELETE are not supported on ASA.next. |
+| 5376452 | Service POST and DELETE are not supported on ASA r2. |
 | 72089650 | An NVMe service already exists for the specified SVM. |
 | 72089900 | An NVMe service cannot be creating in an SVM that is configured for a SAN protocol. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.

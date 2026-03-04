@@ -227,14 +227,22 @@ func NewClusterCreateDefault(code int) *ClusterCreateDefault {
 | Error Code | Description |
 | ---------- | ----------- |
 | 262245 | The value provided is invalid. |
+| 655562 | The NetBIOS name cannot be longer than 15 characters. |
+| 655915 | A CIFS server for this SVM already exists. Having both a CIFS server and an Active Directory account for the same SVM is not supported. Use the \\\"vserver cifs delete\\\" command to delete the existing CIFS server and try the command again. |
+| 656464 | Failed to create the Active Directory machine account. Reason: Invalid Credentials. |
+| 656465 | Failed to create the Active Directory machine account. Reason: An account with this name already exists. |
+| 656466 | Failed to create the Active Directory machine account. Reason: Unable to connect to any domain controllers. |
+| 656467 | Failed to create the Active Directory machine account. Reason: Organizational-Unit not found. |
+| 656483 | Active Directory account creation for the admin SVM requires an effective cluster version of 9.16.0 or later. |
 | 1179813 | Fields set for one node must be set for all nodes. |
-| 1179817 | The IP address, subnet mask, and gateway must all be provided for cluster manangement interface. |
+| 1179817 | The IP address, subnet mask, and gateway must all be provided for cluster management interface. |
 | 1179818 | The IP address and gateway must be of the same family. |
 | 1179821 | An IP address and subnet mask conflicts with an existing entry. |
 | 1179823 | An invalid netmask was provided. |
 | 1179824 | An invalid gateway was provided. |
 | 1179825 | All management and cluster config IP addresses must belong to the same address family. |
 | 2097165 | An NTP server could not be reached. |
+| 7077919 | The minimum length for the new password does not meet the policy. |
 | 8847361 | Too many DNS domains provided. |
 | 8847362 | Too many name servers provided. |
 | 8847394 | An invalid DNS domain was provided. |

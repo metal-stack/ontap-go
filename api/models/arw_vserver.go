@@ -116,7 +116,7 @@ type ArwVserverInlineEventLog struct {
 	// Specifies whether to send an EMS when a new file extension is discovered.
 	IsEnabledOnNewFileExtensionSeen *bool `json:"is_enabled_on_new_file_extension_seen,omitempty" yaml:"is_enabled_on_new_file_extension_seen,omitempty"`
 
-	// Specifies whether to send an EMS when a Snapshot copy is created.
+	// Specifies whether to send an EMS when a snapshot is created.
 	IsEnabledOnSnapshotCopyCreation *bool `json:"is_enabled_on_snapshot_copy_creation,omitempty" yaml:"is_enabled_on_snapshot_copy_creation,omitempty"`
 }
 

@@ -43,6 +43,9 @@ type Svm struct {
 	// One of the many conditions to be satisfied to automatically switch the anti-ransomware state of the volumes in this SVM from “learning” (dry-run) to “enabled” is that the volume should have minimum number of file extensions in “learning” state. This parameter optionally specifies the minimum number of new file extensions in “learning” state in a given volume to automatically switch the anti-ransomware state from “learning” to “enabled”.
 	AntiRansomwareAutoSwitchMinimumFileExtension *int64 `json:"anti_ransomware_auto_switch_minimum_file_extension,omitempty" yaml:"anti_ransomware_auto_switch_minimum_file_extension,omitempty"`
 
+	// One of the many conditions to be satisfied to automatically switch the anti-ransomware state of the volumes in this SVM from “learning” (dry-run) to “enabled” is that the volume should have sufficient data ingested to do the learning. This parameter optionally specifies the minimum amount of data (in GB) to be written to a given volume during the learning period to automatically switch the anti-ransomware state from “learning” to “enabled”. The amount of data considered as ingested also includes the data that is deleted or overwritten after ingestion.
+	AntiRansomwareAutoSwitchMinimumIncomingData *string `json:"anti_ransomware_auto_switch_minimum_incoming_data,omitempty" yaml:"anti_ransomware_auto_switch_minimum_incoming_data,omitempty"`
+
 	// One of the many conditions to be satisfied to automatically switch the anti-ransomware state of the volumes in this SVM from “learning” (dry-run) to “enabled” is that the volume should be in “learning” state for sufficient time period. This parameter optionally specifies the minimum number of days a given volume should be in “learning” state to automatically switch the anti-ransomware state from “learning” to “enabled”.
 	AntiRansomwareAutoSwitchMinimumLearningPeriod *int64 `json:"anti_ransomware_auto_switch_minimum_learning_period,omitempty" yaml:"anti_ransomware_auto_switch_minimum_learning_period,omitempty"`
 
@@ -50,7 +53,7 @@ type Svm struct {
 	// Enum: ["disabled","dry_run"]
 	AntiRansomwareDefaultVolumeState *string `json:"anti_ransomware_default_volume_state,omitempty" yaml:"anti_ransomware_default_volume_state,omitempty"`
 
-	// One of the many conditions to be satisfied to automatically switch the anti-ransomware state of the volumes in this SVM from “learning” (dry-run) to “enabled” is that the volume should have sufficient data ingested to do the learning. This parameter optionally specifies the minimum amount of data (in GB) to be written to a given volume during the learning period to automatically switch the anti-ransomware state from “learning” to “enabled”. The amount of data considered as ingested also includes the data that is deleted or overwritten after ingestion.
+	// One of the many conditions to be satisfied to automatically switch the anti-ransomware state of the volumes in this SVM from “learning” (dry-run) to “enabled” is that the volume should have sufficient data ingested to do the learning. This parameter optionally specifies the minimum amount of data (in GB) to be written to a given volume during the learning period to automatically switch the anti-ransomware state from “learning” to “enabled”. The amount of data considered as ingested also includes the data that is deleted or overwritten after ingestion. This field is no longer supported.
 	AntiRansomwareIncomingWriteThreshold *string `json:"anti_ransomware_incoming_write_threshold,omitempty" yaml:"anti_ransomware_incoming_write_threshold,omitempty"`
 
 	// One of the many conditions to be satisfied to automatically switch the anti-ransomware state of the volumes in this SVM from “learning” (dry-run) to “enabled” is that the volume should have sufficient data ingested to do the learning. This parameter optionally specifies the minimum amount of data (in percentage) to be written to a given volume during the learning period to automatically switch the anti-ransomware state from “learning” to “enabled”. The amount of data considered as ingested also includes the data that is deleted or overwritten after ingestion.
@@ -131,6 +134,9 @@ type Svm struct {
 
 	// qos policy
 	QosPolicy *SvmInlineQosPolicy `json:"qos_policy,omitempty" yaml:"qos_policy,omitempty"`
+
+	// qos policy group template
+	QosPolicyGroupTemplate *SvmInlineQosPolicyGroupTemplate `json:"qos_policy_group_template,omitempty" yaml:"qos_policy_group_template,omitempty"`
 
 	// s3
 	S3 *SvmInlineS3 `json:"s3,omitempty" yaml:"s3,omitempty"`
@@ -253,6 +259,10 @@ func (m *Svm) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateQosPolicy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateQosPolicyGroupTemplate(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -907,6 +917,25 @@ func (m *Svm) validateQosPolicy(formats strfmt.Registry) error {
 	return nil
 }
 
+func (m *Svm) validateQosPolicyGroupTemplate(formats strfmt.Registry) error {
+	if swag.IsZero(m.QosPolicyGroupTemplate) { // not required
+		return nil
+	}
+
+	if m.QosPolicyGroupTemplate != nil {
+		if err := m.QosPolicyGroupTemplate.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("qos_policy_group_template")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("qos_policy_group_template")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
 func (m *Svm) validateS3(formats strfmt.Registry) error {
 	if swag.IsZero(m.S3) { // not required
 		return nil
@@ -1262,6 +1291,10 @@ func (m *Svm) ContextValidate(ctx context.Context, formats strfmt.Registry) erro
 	}
 
 	if err := m.contextValidateQosPolicy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateQosPolicyGroupTemplate(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -1657,6 +1690,27 @@ func (m *Svm) contextValidateQosPolicy(ctx context.Context, formats strfmt.Regis
 				return ve.ValidateName("qos_policy")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("qos_policy")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Svm) contextValidateQosPolicyGroupTemplate(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.QosPolicyGroupTemplate != nil {
+
+		if swag.IsZero(m.QosPolicyGroupTemplate) { // not required
+			return nil
+		}
+
+		if err := m.QosPolicyGroupTemplate.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("qos_policy_group_template")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("qos_policy_group_template")
 			}
 			return err
 		}
@@ -3216,7 +3270,9 @@ func (m *SvmInlineDNSInlineLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// SvmInlineFcp svm inline fcp
+// SvmInlineFcp ### Platform Specifics
+// * **Unified ONTAP**: Available for GET, POST and PATCH.
+// * **ASA r2**: Available for GET. All SVMs are provisioned with the FCP service configured.
 //
 // swagger:model svm_inline_fcp
 type SvmInlineFcp struct {
@@ -3610,7 +3666,9 @@ func (m *SvmInlineIpspaceInlineLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// SvmInlineIscsi svm inline iscsi
+// SvmInlineIscsi ### Platform Specifics
+// * **Unified ONTAP**: Available for GET, POST and PATCH.
+// * **ASA r2**: Available for GET. All SVMs are provisioned with the iSCSI service configured.
 //
 // swagger:model svm_inline_iscsi
 type SvmInlineIscsi struct {
@@ -3621,7 +3679,7 @@ type SvmInlineIscsi struct {
 	// If this is set to true, an SVM administrator can manage the iSCSI service. If it is false, only the cluster administrator can manage the service.
 	Allowed *bool `json:"allowed,omitempty" yaml:"allowed,omitempty"`
 
-	// If allowed, setting to true enables the ISCSI service.
+	// If allowed, setting to true enables the iSCSI service.
 	Enabled *bool `json:"enabled,omitempty" yaml:"enabled,omitempty"`
 }
 
@@ -4830,7 +4888,9 @@ func (m *SvmInlineNsswitch) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// SvmInlineNvme svm inline nvme
+// SvmInlineNvme ### Platform Specifics
+// * **Unified ONTAP**: Available for GET, POST and PATCH.
+// * **ASA r2**: Available for GET. All SVMs are provisioned with the NVMe service configured.
 //
 // swagger:model svm_inline_nvme
 type SvmInlineNvme struct {
@@ -5535,6 +5595,308 @@ func (m *SvmInlineQosPolicy) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
+// SvmInlineQosPolicyGroupTemplate This optionally specifies which QoS non-shared policy group to apply to the SVM as a template. This policy group is then assigned to volumes created or rehosted into this SVM. This policy group defines measurable service level objectives (SLOs) and Service Level Agreements (SLAs).
+//
+// swagger:model svm_inline_qos_policy_group_template
+type SvmInlineQosPolicyGroupTemplate struct {
+
+	// links
+	Links *SvmInlineQosPolicyGroupTemplateInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
+
+	// Specifies the maximum throughput in IOPS, 0 means none. This is mutually exclusive with name and UUID during POST and PATCH.
+	// Example: 10000
+	// Maximum: 2.147483647e+09
+	// Minimum: 0
+	MaxThroughputIops *int64 `json:"max_throughput_iops,omitempty" yaml:"max_throughput_iops,omitempty"`
+
+	// Specifies the maximum throughput in Megabytes per sec, 0 means none. This is mutually exclusive with name and UUID during POST and PATCH.
+	// Example: 500
+	// Maximum: 4.194303e+06
+	// Minimum: 0
+	MaxThroughputMbps *int64 `json:"max_throughput_mbps,omitempty" yaml:"max_throughput_mbps,omitempty"`
+
+	// Specifies the minimum throughput in IOPS, 0 means none. Setting "min_throughput" is supported on AFF platforms only, unless FabricPool tiering policies are set. This is mutually exclusive with name and UUID during POST and PATCH.
+	// Example: 2000
+	// Maximum: 2.147483647e+09
+	// Minimum: 0
+	MinThroughputIops *int64 `json:"min_throughput_iops,omitempty" yaml:"min_throughput_iops,omitempty"`
+
+	// Specifies the minimum throughput in Megabytes per sec, 0 means none. This is mutually exclusive with name and UUID during POST and PATCH.
+	// Example: 500
+	// Maximum: 4.194303e+06
+	// Minimum: 0
+	MinThroughputMbps *int64 `json:"min_throughput_mbps,omitempty" yaml:"min_throughput_mbps,omitempty"`
+
+	// The QoS policy group name. This is mutually exclusive with UUID and other QoS attributes during POST and PATCH.
+	// Example: performance
+	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
+
+	// The QoS policy group UUID. This is mutually exclusive with name and other QoS attributes during POST and PATCH.
+	// Example: 1cd8a442-86d1-11e0-ae1c-123478563412
+	UUID *string `json:"uuid,omitempty" yaml:"uuid,omitempty"`
+}
+
+// Validate validates this svm inline qos policy group template
+func (m *SvmInlineQosPolicyGroupTemplate) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateLinks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMaxThroughputIops(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMaxThroughputMbps(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMinThroughputIops(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMinThroughputMbps(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SvmInlineQosPolicyGroupTemplate) validateLinks(formats strfmt.Registry) error {
+	if swag.IsZero(m.Links) { // not required
+		return nil
+	}
+
+	if m.Links != nil {
+		if err := m.Links.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("qos_policy_group_template" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("qos_policy_group_template" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SvmInlineQosPolicyGroupTemplate) validateMaxThroughputIops(formats strfmt.Registry) error {
+	if swag.IsZero(m.MaxThroughputIops) { // not required
+		return nil
+	}
+
+	if err := validate.MinimumInt("qos_policy_group_template"+"."+"max_throughput_iops", "body", *m.MaxThroughputIops, 0, false); err != nil {
+		return err
+	}
+
+	if err := validate.MaximumInt("qos_policy_group_template"+"."+"max_throughput_iops", "body", *m.MaxThroughputIops, 2.147483647e+09, false); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SvmInlineQosPolicyGroupTemplate) validateMaxThroughputMbps(formats strfmt.Registry) error {
+	if swag.IsZero(m.MaxThroughputMbps) { // not required
+		return nil
+	}
+
+	if err := validate.MinimumInt("qos_policy_group_template"+"."+"max_throughput_mbps", "body", *m.MaxThroughputMbps, 0, false); err != nil {
+		return err
+	}
+
+	if err := validate.MaximumInt("qos_policy_group_template"+"."+"max_throughput_mbps", "body", *m.MaxThroughputMbps, 4.194303e+06, false); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SvmInlineQosPolicyGroupTemplate) validateMinThroughputIops(formats strfmt.Registry) error {
+	if swag.IsZero(m.MinThroughputIops) { // not required
+		return nil
+	}
+
+	if err := validate.MinimumInt("qos_policy_group_template"+"."+"min_throughput_iops", "body", *m.MinThroughputIops, 0, false); err != nil {
+		return err
+	}
+
+	if err := validate.MaximumInt("qos_policy_group_template"+"."+"min_throughput_iops", "body", *m.MinThroughputIops, 2.147483647e+09, false); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *SvmInlineQosPolicyGroupTemplate) validateMinThroughputMbps(formats strfmt.Registry) error {
+	if swag.IsZero(m.MinThroughputMbps) { // not required
+		return nil
+	}
+
+	if err := validate.MinimumInt("qos_policy_group_template"+"."+"min_throughput_mbps", "body", *m.MinThroughputMbps, 0, false); err != nil {
+		return err
+	}
+
+	if err := validate.MaximumInt("qos_policy_group_template"+"."+"min_throughput_mbps", "body", *m.MinThroughputMbps, 4.194303e+06, false); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this svm inline qos policy group template based on the context it is used
+func (m *SvmInlineQosPolicyGroupTemplate) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SvmInlineQosPolicyGroupTemplate) contextValidateLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Links != nil {
+
+		if swag.IsZero(m.Links) { // not required
+			return nil
+		}
+
+		if err := m.Links.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("qos_policy_group_template" + "." + "_links")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("qos_policy_group_template" + "." + "_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *SvmInlineQosPolicyGroupTemplate) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *SvmInlineQosPolicyGroupTemplate) UnmarshalBinary(b []byte) error {
+	var res SvmInlineQosPolicyGroupTemplate
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// SvmInlineQosPolicyGroupTemplateInlineLinks svm inline qos policy group template inline links
+//
+// swagger:model svm_inline_qos_policy_group_template_inline__links
+type SvmInlineQosPolicyGroupTemplateInlineLinks struct {
+
+	// self
+	Self *Href `json:"self,omitempty" yaml:"self,omitempty"`
+}
+
+// Validate validates this svm inline qos policy group template inline links
+func (m *SvmInlineQosPolicyGroupTemplateInlineLinks) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateSelf(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SvmInlineQosPolicyGroupTemplateInlineLinks) validateSelf(formats strfmt.Registry) error {
+	if swag.IsZero(m.Self) { // not required
+		return nil
+	}
+
+	if m.Self != nil {
+		if err := m.Self.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("qos_policy_group_template" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("qos_policy_group_template" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this svm inline qos policy group template inline links based on the context it is used
+func (m *SvmInlineQosPolicyGroupTemplateInlineLinks) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateSelf(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SvmInlineQosPolicyGroupTemplateInlineLinks) contextValidateSelf(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Self != nil {
+
+		if swag.IsZero(m.Self) { // not required
+			return nil
+		}
+
+		if err := m.Self.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("qos_policy_group_template" + "." + "_links" + "." + "self")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("qos_policy_group_template" + "." + "_links" + "." + "self")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *SvmInlineQosPolicyGroupTemplateInlineLinks) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *SvmInlineQosPolicyGroupTemplateInlineLinks) UnmarshalBinary(b []byte) error {
+	var res SvmInlineQosPolicyGroupTemplateInlineLinks
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
 // SvmInlineQosPolicyInlineLinks svm inline qos policy inline links
 //
 // swagger:model svm_inline_qos_policy_inline__links
@@ -5637,6 +5999,9 @@ type SvmInlineS3 struct {
 
 	// links
 	Links *SvmInlineS3InlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
+
+	// If this is set to true, an SVM administrator can manage the S3 service. If it is false, only the cluster administrator can manage the service.
+	Allowed *bool `json:"allowed,omitempty" yaml:"allowed,omitempty"`
 
 	// certificate
 	Certificate *SvmInlineS3InlineCertificate `json:"certificate,omitempty" yaml:"certificate,omitempty"`
@@ -6205,7 +6570,7 @@ func (m *SvmInlineSnapmirror) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// SvmInlineSnapshotPolicy This is a reference to the Snapshot copy policy.
+// SvmInlineSnapshotPolicy This is a reference to the snapshot policy.
 //
 // swagger:model svm_inline_snapshot_policy
 type SvmInlineSnapshotPolicy struct {

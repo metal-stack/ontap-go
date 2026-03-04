@@ -43,7 +43,7 @@ type SoftwareHistory struct {
 	// Status of this installation request.
 	// Example: successful
 	// Read Only: true
-	// Enum: ["successful","canceled"]
+	// Enum: ["successful","canceled","skip_upgrade"]
 	State *string `json:"state,omitempty" yaml:"state,omitempty"`
 
 	// Updated version of node
@@ -125,7 +125,7 @@ var softwareHistoryTypeStatePropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["successful","canceled"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["successful","canceled","skip_upgrade"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -140,6 +140,9 @@ const (
 
 	// SoftwareHistoryStateCanceled captures enum value "canceled"
 	SoftwareHistoryStateCanceled string = "canceled"
+
+	// SoftwareHistoryStateSkipUpgrade captures enum value "skip_upgrade"
+	SoftwareHistoryStateSkipUpgrade string = "skip_upgrade"
 )
 
 // prop value enum

@@ -77,7 +77,7 @@ type NodeModifyParams struct {
 
 	/* AllowDataOutage.
 
-	   This only applies when an action of reboot or shutdown is provided. It allows storage failover to be bypassed along with any failures related to mainintaing quorum in the cluster.
+	   This only applies when an action of reboot or shutdown is provided. It allows storage failover to be bypassed along with any failures related to maintaining quorum in the cluster.
 
 	*/
 	AllowDataOutage *bool

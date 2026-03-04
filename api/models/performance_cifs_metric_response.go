@@ -792,7 +792,7 @@ type PerformanceCifsMetricResponseInlineRecordsInlineArrayItemInlineIops struct 
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -846,7 +846,7 @@ type PerformanceCifsMetricResponseInlineRecordsInlineArrayItemInlineLatency stru
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -995,7 +995,7 @@ type PerformanceCifsMetricResponseInlineRecordsInlineArrayItemInlineThroughput s
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }

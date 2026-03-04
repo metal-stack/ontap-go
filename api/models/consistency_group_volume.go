@@ -26,7 +26,7 @@ type ConsistencyGroupVolume struct {
 	// Min Length: 0
 	Comment *string `json:"comment,omitempty" yaml:"comment,omitempty"`
 
-	// Volume name. The name of volume must start with an alphabetic character (a to z or A to Z) or an underscore (_). The name must be 197 or fewer characters in length for FlexGroups, and 203 or fewer characters in length for all other types of volumes. Volume names must be unique within an SVM. Required on POST.
+	// Volume name. The name of volume must start with an alphabetic character (a to z or A to Z) or an underscore (_). The name must be 197 or fewer characters in length for FlexGroup volumes, and 203 or fewer characters in length for all other types of volumes. Volume names must be unique within an SVM. Required on POST.
 	// Example: vol_cs_dept
 	// Max Length: 203
 	// Min Length: 1
@@ -41,7 +41,7 @@ type ConsistencyGroupVolume struct {
 	// qos
 	Qos *ConsistencyGroupVolumeInlineQos `json:"qos,omitempty" yaml:"qos,omitempty"`
 
-	// The Snapshot copy policy for this volume.
+	// The snapshot policy for this volume.
 	//
 	SnapshotPolicy *SnapshotPolicyReference `json:"snapshot_policy,omitempty" yaml:"snapshot_policy,omitempty"`
 
@@ -1626,7 +1626,7 @@ type ConsistencyGroupVolumeInlineTiering struct {
 	ObjectStores []*ConsistencyGroupVolumeTieringObjectStoresItems0 `json:"object_stores,omitempty" yaml:"object_stores,omitempty"`
 
 	// Policy that determines whether the user data blocks of a volume in a FabricPool will be tiered to the cloud store when they become cold.
-	// <br>FabricPool combines flash (performance tier) with a cloud store into a single aggregate. Temperature of a volume block increases if it is accessed frequently and decreases when it is not. Valid in POST or PATCH.<br/>all &dash; Allows tiering of both Snapshot copies and active file system user data to the cloud store as soon as possible by ignoring the temperature on the volume blocks.<br/>auto &dash; Allows tiering of both snapshot and active file system user data to the cloud store<br/>none &dash; Volume blocks are not be tiered to the cloud store.<br/>snapshot_only &dash; Allows tiering of only the volume Snapshot copies not associated with the active file system.
+	// <br>FabricPool combines flash (performance tier) with a cloud store into a single aggregate. Temperature of a volume block increases if it is accessed frequently and decreases when it is not. Valid in POST or PATCH.<br/>all &dash; Allows tiering of both snapshots and active file system user data to the cloud store as soon as possible by ignoring the temperature on the volume blocks.<br/>auto &dash; Allows tiering of both snapshot and active file system user data to the cloud store<br/>none &dash; Volume blocks are not be tiered to the cloud store.<br/>snapshot_only &dash; Allows tiering of only the volume snapshots not associated with the active file system.
 	// <br>The default tiering policy is "snapshot-only" for a FlexVol volume and "none" for a FlexGroup volume. The default minimum cooling period for the "snapshot-only" tiering policy is 2 days and for the "auto" tiering policy it is 31 days.
 	//
 	// Enum: ["all","auto","backup","none","snapshot_only"]

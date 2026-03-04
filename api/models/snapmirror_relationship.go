@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// SnapmirrorRelationship SnapMirror relationship information. The SnapMirror relatiosnhip can be either "async" or "sync" based on the type of SnapMirror policy associated with the relationship. The source and destination endpoints of a SnapMirror relationship must be of the same type, for example, if the source endpoint is a FlexVol volume then the destination endpoint must be a FlexVol volume.<br>The SnapMirror policy type "async" can be used when the SnapMirror relationship has FlexVol volume or FlexGroup volume or SVM as the endpoint. The SnapMirror policy type "sync" can be used when the SnapMirror relationship has FlexVol volume as the endpoint. The SnapMirror policy type "sync" with "sync_type" as "automated_failover" can be used when the SnapMirror relationship has Consistency Group as the endpoint.
+// SnapmirrorRelationship SnapMirror relationship information. The SnapMirror relationship can be either "async" or "sync" based on the type of SnapMirror policy associated with the relationship. The source and destination endpoints of a SnapMirror relationship must be of the same type, for example, if the source endpoint is a FlexVol volume then the destination endpoint must be a FlexVol volume.<br>The SnapMirror policy type "async" can be used when the SnapMirror relationship has FlexVol volume or FlexGroup volume or SVM as the endpoint. The SnapMirror policy type "sync" can be used when the SnapMirror relationship has FlexVol volume as the endpoint. The SnapMirror policy type "sync" with "sync_type" as "automated_failover" can be used when the SnapMirror relationship has Consistency Group as the endpoint.
 //
 // swagger:model snapmirror_relationship
 type SnapmirrorRelationship struct {
@@ -35,10 +35,10 @@ type SnapmirrorRelationship struct {
 	// create destination
 	CreateDestination *SnapmirrorDestinationCreation `json:"create_destination,omitempty" yaml:"create_destination,omitempty"`
 
-	// This property is the destination endpoint of the relationship. The destination endpoint can be a FlexVol volume, FlexGroup volume, Consistency Group, or SVM. For the POST request, the destination endpoint must be of type "DP" when the endpoint is a FlexVol volume or a FlexGroup volume. When specifying a Consistency Group as the destination endpoint, the "destination.consistency_group_volumes" property must be specified with the FlexVol volumes of type "DP". The POST request for SVM must have a destination endpoint of type "dp-destination". The destination endpoint path name must be specified in the "destination.path" property. For relationships of type "async", the destination endpoint for FlexVol volume and FlexGroup volume will change to type "RW" when the relationship status is "broken_off" and will revert to type "DP" when the relationship status is "snapmirrored" or "in_sync" using the PATCH request. The destination endpoint for SVM will change from "dp-destination" to type "default" when the relationship status is "broken_off" and will revert to type "dp-destination" when the relationship status is "snapmirrored" using the PATCH request. When the destination endpoint is a Consistency Group, the Consistency Group FlexVol volumes will change to type "RW" when the relationship status is "broken_off" and will revert to type "DP" when the relationship status is "in_sync" using the PATCH request.
+	// This property is the destination endpoint of the relationship. The destination endpoint can be a FlexVol volume, FlexGroup volume, Consistency Group, or SVM. For the POST request, the destination endpoint must be of type "DP" when the endpoint is a FlexVol volume or a FlexGroup volume. When specifying a Consistency Group as the destination endpoint, the "destination.consistency_group_volumes" or "destination.luns" property must be specified with the FlexVol volumes or LUNs of type "DP". The POST request for SVM must have a destination endpoint of type "dp-destination". The destination endpoint path name must be specified in the "destination.path" property. For relationships of type "async", the destination endpoint for FlexVol volume and FlexGroup volume will change to type "RW" when the relationship status is "broken_off" and will revert to type "DP" when the relationship status is "snapmirrored" or "in_sync" using the PATCH request. The destination endpoint for SVM will change from "dp-destination" to type "default" when the relationship status is "broken_off" and will revert to type "dp-destination" when the relationship status is "snapmirrored" using the PATCH request. When the destination endpoint is a Consistency Group, the Consistency Group FlexVol volumes will change to type "RW" when the relationship status is "broken_off" and will revert to type "DP" when the relationship status is "in_sync" using the PATCH request.
 	Destination *SnapmirrorEndpoint `json:"destination,omitempty" yaml:"destination,omitempty"`
 
-	// Snapshot copy exported to clients on destination.
+	// Snapshot exported to clients on destination.
 	// Read Only: true
 	ExportedSnapshot *string `json:"exported_snapshot,omitempty" yaml:"exported_snapshot,omitempty"`
 
@@ -60,7 +60,7 @@ type SnapmirrorRelationship struct {
 	// Example: C1_sti85-vsim-ucs209a_cluster, C1_sti85-vsim-ucs209c_cluster
 	IoServingCopy *string `json:"io_serving_copy,omitempty" yaml:"io_serving_copy,omitempty"`
 
-	// Time since the exported Snapshot copy was created.
+	// Time since the exported snapshot was created.
 	// Example: PT8H35M42S
 	// Read Only: true
 	LagTime *string `json:"lag_time,omitempty" yaml:"lag_time,omitempty"`
@@ -87,19 +87,19 @@ type SnapmirrorRelationship struct {
 	// Example: C1_sti85-vsim-ucs209a_cluster
 	PreferredSite *string `json:"preferred_site,omitempty" yaml:"preferred_site,omitempty"`
 
-	// Set to true on resync to preserve Snapshot copies on the destination that are newer than the latest common Snapshot copy. This property is applicable only for relationships with FlexVol volume or FlexGroup volume endpoints and when the PATCH state is being changed to "snapmirrored".
+	// Set to true on resync to preserve snapshots on the destination that are newer than the latest common snapshot. This property is applicable only for relationships with FlexVol volume or FlexGroup volume endpoints and when the PATCH state is being changed to "snapmirrored".
 	Preserve *bool `json:"preserve,omitempty" yaml:"preserve,omitempty"`
 
 	// Set to true to reduce resync time by not preserving storage efficiency. This property is applicable only for relationships with FlexVol volume endpoints and SVMDR relationships when the PATCH state is being changed to "snapmirrored".
 	QuickResync *bool `json:"quick_resync,omitempty" yaml:"quick_resync,omitempty"`
 
-	// Set to true to recover from a failed SnapMirror break operation on a FlexGroup volume relationship. This restores all destination FlexGroup constituent volumes to the latest Snapshot copy, and any writes to the read-write constituents are lost. This property is applicable only for SnapMirror relationships with FlexGroup volume endpoints and when the PATCH state is being changed to "broken_off".
+	// Set to true to recover from a failed SnapMirror break operation on a FlexGroup volume relationship. This restores all destination FlexGroup constituent volumes to the latest snapshot, and any writes to the read-write constituents are lost. This property is applicable only for SnapMirror relationships with FlexGroup volume endpoints and when the PATCH state is being changed to "broken_off".
 	RecoverAfterBreak *bool `json:"recover_after_break,omitempty" yaml:"recover_after_break,omitempty"`
 
 	// Set to true to create a relationship for restore. To trigger restore-transfer, use transfers POST on the restore relationship. SnapMirror relationships with the policy type "async" can be restored. SnapMirror relationships with the policy type "sync" cannot be restored.
 	Restore *bool `json:"restore,omitempty" yaml:"restore,omitempty"`
 
-	// Specifies the Snapshot copy to restore to on the destination during the break operation. This property is applicable only for SnapMirror relationships with FlexVol volume endpoints and when the PATCH state is being changed to "broken_off".
+	// Specifies the snapshot to restore to on the destination during the break operation. This property is applicable only for SnapMirror relationships with FlexVol volume endpoints and when the PATCH state is being changed to "broken_off".
 	RestoreToSnapshot *string `json:"restore_to_snapshot,omitempty" yaml:"restore_to_snapshot,omitempty"`
 
 	// Specifies the list of constituent FlexVol volumes and FlexGroup volumes for an SVM DR SnapMirror relationship. FlexGroup constituents are not considered.
@@ -110,7 +110,7 @@ type SnapmirrorRelationship struct {
 	// Read Only: true
 	SnapmirrorRelationshipInlineUnhealthyReason []*SnapmirrorError `json:"unhealthy_reason,omitempty" yaml:"unhealthy_reason,omitempty"`
 
-	// This property is the source endpoint of the relationship. The source endpoint can be a FlexVol volume, FlexGroup volume, Consistency Group, or SVM. To establish a SnapMirror relationship with SVM as source endpoint, the SVM must have only FlexVol volumes. For a Consistency Group this property identifies the source Consistency Group name. When specifying a Consistency Group as the source endpoint, the "source.consistency_group_volumes" property must be specified with the FlexVol volumes of type "RW". FlexVol volumes of type "DP" cannot be specified in the "source.consistency_group_volumes" list.
+	// This property is the source endpoint of the relationship. The source endpoint can be a FlexVol volume, FlexGroup volume, Consistency Group, or SVM. To establish a SnapMirror relationship with SVM as source endpoint, the SVM must have only FlexVol volumes. For a Consistency Group this property identifies the source Consistency Group name. When specifying a Consistency Group as the source endpoint, the "source.consistency_group_volumes" property must be specified with the FlexVol volumes of type "RW". FlexVol volumes of type "DP" cannot be specified in the "source.consistency_group_volumes" list. Optionally, "source.luns" property of source endpoint can be specified with source LUN names during SnapMirror Consistency Group LUN Restore Operation.
 	Source *SnapmirrorSourceEndpoint `json:"source,omitempty" yaml:"source,omitempty"`
 
 	// State of the relationship.<br>To initialize the relationship, PATCH the state to "snapmirrored" for relationships with a policy of type "async" or to state "in_sync" for relationships with a policy of type "sync".<br>To break the relationship, PATCH the state to "broken_off" for relationships with a policy of type "async" or "sync". SnapMirror relationships with the policy type as "sync" and "sync_type" as "automated_failover" cannot be "broken_off".<br>To resync the relationship, PATCH the state to "snapmirrored" for relationships with a policy of type "async" or to state "in_sync" for relationships with a policy of type "sync". SnapMirror relationships with the policy type as "sync" and "sync_type" as "automated_failover" can be in "broken_off" state due to a failed attempt of SnapMirror failover.<br>To pause the relationship, suspending further transfers, PATCH the state to "paused" for relationships with a policy of type "async" or "sync". SnapMirror relationships with the policy type as "sync" and "sync_type" as "automated_failover" cannot be "paused".<br>To resume transfers for a paused relationship, PATCH the state to "snapmirrored" for relationships with a policy of type "async" or to state "in_sync" for relationships with a policy of type "sync".<br>The entries "in_sync", "out_of_sync", "synchronizing", and "expanding" are only applicable to relationships with a policy of type "sync". A PATCH call on the state change only triggers the transition to the specified state. You must poll on the "state", "healthy" and "unhealthy_reason" properties using a GET request to determine if the transition is successful. To automatically initialize the relationship when specifying "create_destination" property, set the state to "snapmirrored" for relationships with a policy of type "async" or to state "in_sync" for relationships with a policy of type "sync".
@@ -1527,11 +1527,11 @@ type SnapmirrorRelationshipInlineTransfer struct {
 	// Enum: ["aborted","failed","hard_aborted","queued","success","transferring"]
 	State *string `json:"state,omitempty" yaml:"state,omitempty"`
 
-	// Elapsed time to transfer all Snapshot copies for the last successful transfer.
+	// Elapsed time to transfer all snapshots for the last successful transfer.
 	// Example: PT28M41S
 	TotalDuration *string `json:"total_duration,omitempty" yaml:"total_duration,omitempty"`
 
-	// Specifies the operation type of the current transfer on the relationship. The _initialize_ transfer occurs when the relationship state changes from "uninitialized" to "snapmirrored" or "in_sync". The _update_ transfer occurs when Snapshot copies are being transferred from the source endpoint to the destination endpoint as part of a scheduled or manual update. The _resync_ transfer occurs when the relationship state changes from "broken_off" to "snapmirrored" or "in_sync". The _restore_ transfer occurs when a Snapshot copy is being restored from a destination endpoint to another endpoint.
+	// Specifies the operation type of the current transfer on the relationship. The _initialize_ transfer occurs when the relationship state changes from "uninitialized" to "snapmirrored" or "in_sync". The _update_ transfer occurs when snapshots are being transferred from the source endpoint to the destination endpoint as part of a scheduled or manual update. The _resync_ transfer occurs when the relationship state changes from "broken_off" to "snapmirrored" or "in_sync". The _restore_ transfer occurs when a snapshot is being restored from a destination endpoint to another endpoint.
 	// Example: initialize
 	// Enum: ["initialize","update","resync","restore"]
 	Type *string `json:"type,omitempty" yaml:"type,omitempty"`

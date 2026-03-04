@@ -114,11 +114,20 @@ func NewNetworkIPBgpPeerGroupModifyDefault(code int) *NetworkIPBgpPeerGroupModif
 | ---------- | ----------- |
 | 1967171 | Internal error. Fail to access or update BGP peer group. Retry the command, if necessary. |
 | 1967188 | Configuring peer address as a next hop requires an effective cluster version of 9.9.1 or later. |
+| 1967192 | Configuring peer.md5_enabled requires an effective cluster version of 9.16.1 or later. |
+| 1967193 | Configuring peer.md5_enabled requires the peer.md5_secret parameter. |
+| 1967194 | Configuring peer.md5_secret requires that peer.md5_enabled is set to true. |
 | 53281998 | Failed to rename the BGP peer group because that name is already assigned to a different peer group in the IPspace. |
 | 53282006 | BGP peer group could not be updated to use a peer address because the value provided is not a valid peer address. If necessary, try the command again with a routable host address. |
 | 53282007 | BGP peer group could not be updated to use a peer address because the address represents a different address family to the address of the associated BGP LIF. If necessary, try the command again with a matching address family. |
 | 53282018 | Failed to create BGP peer group because an existing peer group has already established a BGP session between LIF and peer address. If necessary, try the command again with a different BGP LIF or a different peer address. |
 | 53282020 | To utilize the peer as the next hop, the peer IP address must be within the same subnet as the BGP LIF. |
+| 53282021 | IPsec must be enabled to use TCP MD5 in BGP sessions with a BGP peer-group. |
+| 53282024 | peer.md5_secret should be 1-80 bytes. |
+| 53282025 | peer.md5_secret should have an even length. |
+| 53282026 | The hex format of peer.md5_secret should only contain a hex string starting with '0x'. The specified peer.md5-secret contains non-hex characters. |
+| 53282027 | peer.md5_secret should be 1-79 characters. |
+| 53282028 | peer.md5_secret supports only printable ASCII characters such as numbers, alphabets, or special characters. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type NetworkIPBgpPeerGroupModifyDefault struct {

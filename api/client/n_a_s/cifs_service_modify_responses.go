@@ -214,6 +214,7 @@ func NewCifsServiceModifyDefault(code int) *CifsServiceModifyDefault {
 | 3735764    | Request to Azure failed. Reason - Azure error code and Azure error message. |
 | 655390     | STARTTLS and LDAPS cannot be used together.|
 | 655562     | NetBIOS name is longer than 15 characters. |
+| 655538     | Unable to modify the CIFS server. The server name is already used by another SVM.|
 | 655563     | NetBIOS name contains characters that are not allowed. |
 | 655771     | The number of NetBIOS aliases cannot exceed the maximum supported number of '200'. |
 | 655923     | Retrieving credentials from AKV is not supported because the effective cluster version is not ONTAP 9.15.0 or later. |

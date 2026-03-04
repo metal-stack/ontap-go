@@ -120,9 +120,15 @@ func NewSoftwareGetDefault(code int) *SoftwareGetDefault {
 }
 
 /*
-SoftwareGetDefault describes a response with status code -1, with default header values.
+	SoftwareGetDefault describes a response with status code -1, with default header values.
 
-Error
+	ONTAP Error Response Codes
+
+| Error Code | Description |
+| ---------- | ----------- |
+| 1048576 | Error initializing software image information. |
+| 1048577 | Software image information not initialized. |
+Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SoftwareGetDefault struct {
 	_statusCode int

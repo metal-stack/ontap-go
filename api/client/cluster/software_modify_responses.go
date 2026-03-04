@@ -196,9 +196,67 @@ func NewSoftwareModifyDefault(code int) *SoftwareModifyDefault {
 }
 
 /*
-SoftwareModifyDefault describes a response with status code -1, with default header values.
+	SoftwareModifyDefault describes a response with status code -1, with default header values.
 
-Error
+	ONTAP Error Response Codes
+
+| Error Code | Description |
+| ---------- | ----------- |
+| 2424933 | An internal error occurred while checking MetroCluster information. |
+| 2424998 | An internal error occurred while checking MetroCluster configuration. |
+| 2425737 | An internal error occurred while checking MetroCluster information. |
+| 10551297 | Failed to find an update in progress. |
+| 10551298 | Internal error while attempting to pause the upgrade operation. |
+| 10551300 | There is no update in progress to be paused. |
+| 10551303 | The operation is invalid while the update is not in the paused state. |
+| 10551304 | An internal error occurred while canceling the current update operation. |
+| 10551306 | A cancel operation is not possible at this time. |
+| 10551315 | Failed to find the package in the package repository. |
+| 10551319 | An internal error occurred while preparing for the update. |
+| 10551320 | Failed to create task on master update manager node. |
+| 10551325 | The required package version is not present in RDB. |
+| 10551353 | Internal error occurred while running the ANDU pre-validation checks. |
+| 10551354 | Invalid operation while the package is being deleted. |
+| 10551357 | The operation is invalid while a previous update is still in progress. |
+| 10551368 | The list of nodes should contain HA pairs only. |
+| 10551391 | An internal error occurred while performing the upgrade operation. |
+| 10551395 | ANDU validation check resulted in warnings. |
+| 10551396 | ANDU validation checks failed. |
+| 10551434 | The options are invalid for a resume operation. |
+| 10551524 | The upgrade operation is in the running state, pause the operation before attempting to cancel. |
+| 10551558 | Cluster configuration is not supported. |
+| 10551564 | Batch mode upgrade is not supported for MetroCluster configurations. |
+| 10551565 | Failed to contact the MetroCluster partner cluster, check the MetroCluster configuration then try again. |
+| 10551566 | Validation is not complete on the partner MetroCluster cluster. |
+| 10551567 | The required package is not available on the partner MetroCluster cluster. |
+| 10551572 | Internal error while checking the update status from RDB. Ensure that cluster is healthy and retry the operation. |
+| 10551573 | The running update is not in paused state on the MetroCluster partner cluster, so it cannot be resumed. |
+| 10551574 | The running update is not in the paused state on the MetroCluster partner cluster, so it cannot be canceled. |
+| 10551592 | The nodes selection option is not supported for MetroCluster configurations. |
+| 10551599 | Double-hop package is missing. |
+| 10551602 | A double-hop upgrade is not supported. |
+| 10551606 | An option selected requires a higher effective cluster version. |
+| 10551643 | Operation invalid while controller replacement is in progress. |
+| 10551656 | Invalid operation while ANDU validation checks are in progress. |
+| 10551718 | Invalid operation before running validation checks. |
+| 10551719 | ANDU validation results are too old. |
+| 10551720 | ANDU validation checks have failed with errors on both clusters in a MetroCluster config. |
+| 10551724 | ANDU validation checks were run on a different version from the requested operation. |
+| 10551837 | An internal error occurred while generating the AutoSupport prior to starting ANDU. |
+| 10551840 | An internal error occurred while generating the AutoSupport prior to starting ANDU. |
+| 10551841 | An internal error occurred while generating the AutoSupport prior to starting ANDU. |
+| 10551854 | All specified nodes are already running the specified package version. |
+| 10551859 | Failed to access the package repository and its backup copy. |
+| 10551897 | All nodes are already running the requested version. |
+| 10551898 | Failed to get nodes-to-update list. |
+| 10551899 | skip_nodes_at_target_version cannot be specified in a validate_only, pause, resume, or cancel operations. |
+| 10551900 | skip_nodes_at_target_version cannot be set to true in MetroCluster configurations. |
+| 10551901 | skip_nodes_at_target_version conflicts with another specified field. |
+| 10551902 | Failed to determine if the cluster is configured for MetroCluster. |
+| 10551908 | skip_nodes_at_target_version is not a valid option until effective cluster version is 9_16_0. |
+| 10551910 | The operation is invalid while in the current upgrade state. |
+| 13303864 | SnapMirror operation is in progress, retry later. |
+Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SoftwareModifyDefault struct {
 	_statusCode int

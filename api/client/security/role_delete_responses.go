@@ -120,6 +120,10 @@ func NewRoleDeleteDefault(code int) *RoleDeleteDefault {
 | 5636184 | Expanded REST roles for granular resource control feature is currently disabled. |
 | 5636185 | The specified UUID was not found. |
 | 5636186 | Expanded REST roles for granular resource control requires an effective cluster version of 9.10.1 or later. |
+| 5636245 | Failed to delete the role because it is part of the group role-mapping configuration. |
+| 5636246 | Failed to delete the rest role because it is part of the group role-mapping configuration. |
+| 5636247 | Failed to delete the rest role because it is part of the external-role-mapping configuration. |
+| 5636249 | Failed to delete the role because it is part of the external-role-mapping configuration. |
 | 13434890 | Vserver-ID failed for Vserver roles. |
 | 13434893 | The SVM does not exist. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.

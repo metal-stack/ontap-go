@@ -128,6 +128,8 @@ func NewLocalHostCreateDefault(code int) *LocalHostCreateDefault {
 | 2621706 | The specified owner UUID is incorrect for the specified owner name. |
 | 8912896 | Only admin or data Vservers allowed. |
 | 23724055 | Internal error. Configuration for Vserver failed. Verify that the cluster is healthy, then try the command again. For further assistance, contact technical support. |
+| 23724155 | The specified IPv4 address is not supported because it is one of the following: multicast, loopback, 0.0.0.0, or broadcast. |
+| 23724156 | The specified IPv6 address is not supported because it is one of the following: ::, link-local, multicast, v4-compatible, v4-mapped, or loopback. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type LocalHostCreateDefault struct {

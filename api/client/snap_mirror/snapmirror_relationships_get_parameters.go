@@ -134,6 +134,18 @@ type SnapmirrorRelationshipsGetParams struct {
 	*/
 	DestinationConsistencyGroupVolumesName *string
 
+	/* DestinationLunsName.
+
+	   Filter by destination.luns.name
+	*/
+	DestinationLunsName *string
+
+	/* DestinationLunsUUID.
+
+	   Filter by destination.luns.uuid
+	*/
+	DestinationLunsUUID *string
+
 	/* DestinationPath.
 
 	   Filter by destination.path
@@ -293,6 +305,18 @@ type SnapmirrorRelationshipsGetParams struct {
 	   Filter by source.consistency_group_volumes.name
 	*/
 	SourceConsistencyGroupVolumesName *string
+
+	/* SourceLunsName.
+
+	   Filter by source.luns.name
+	*/
+	SourceLunsName *string
+
+	/* SourceLunsUUID.
+
+	   Filter by source.luns.uuid
+	*/
+	SourceLunsUUID *string
 
 	/* SourcePath.
 
@@ -619,6 +643,28 @@ func (o *SnapmirrorRelationshipsGetParams) SetDestinationConsistencyGroupVolumes
 	o.DestinationConsistencyGroupVolumesName = destinationConsistencyGroupVolumesName
 }
 
+// WithDestinationLunsName adds the destinationLunsName to the snapmirror relationships get params
+func (o *SnapmirrorRelationshipsGetParams) WithDestinationLunsName(destinationLunsName *string) *SnapmirrorRelationshipsGetParams {
+	o.SetDestinationLunsName(destinationLunsName)
+	return o
+}
+
+// SetDestinationLunsName adds the destinationLunsName to the snapmirror relationships get params
+func (o *SnapmirrorRelationshipsGetParams) SetDestinationLunsName(destinationLunsName *string) {
+	o.DestinationLunsName = destinationLunsName
+}
+
+// WithDestinationLunsUUID adds the destinationLunsUUID to the snapmirror relationships get params
+func (o *SnapmirrorRelationshipsGetParams) WithDestinationLunsUUID(destinationLunsUUID *string) *SnapmirrorRelationshipsGetParams {
+	o.SetDestinationLunsUUID(destinationLunsUUID)
+	return o
+}
+
+// SetDestinationLunsUUID adds the destinationLunsUuid to the snapmirror relationships get params
+func (o *SnapmirrorRelationshipsGetParams) SetDestinationLunsUUID(destinationLunsUUID *string) {
+	o.DestinationLunsUUID = destinationLunsUUID
+}
+
 // WithDestinationPath adds the destinationPath to the snapmirror relationships get params
 func (o *SnapmirrorRelationshipsGetParams) WithDestinationPath(destinationPath *string) *SnapmirrorRelationshipsGetParams {
 	o.SetDestinationPath(destinationPath)
@@ -903,6 +949,28 @@ func (o *SnapmirrorRelationshipsGetParams) WithSourceConsistencyGroupVolumesName
 // SetSourceConsistencyGroupVolumesName adds the sourceConsistencyGroupVolumesName to the snapmirror relationships get params
 func (o *SnapmirrorRelationshipsGetParams) SetSourceConsistencyGroupVolumesName(sourceConsistencyGroupVolumesName *string) {
 	o.SourceConsistencyGroupVolumesName = sourceConsistencyGroupVolumesName
+}
+
+// WithSourceLunsName adds the sourceLunsName to the snapmirror relationships get params
+func (o *SnapmirrorRelationshipsGetParams) WithSourceLunsName(sourceLunsName *string) *SnapmirrorRelationshipsGetParams {
+	o.SetSourceLunsName(sourceLunsName)
+	return o
+}
+
+// SetSourceLunsName adds the sourceLunsName to the snapmirror relationships get params
+func (o *SnapmirrorRelationshipsGetParams) SetSourceLunsName(sourceLunsName *string) {
+	o.SourceLunsName = sourceLunsName
+}
+
+// WithSourceLunsUUID adds the sourceLunsUUID to the snapmirror relationships get params
+func (o *SnapmirrorRelationshipsGetParams) WithSourceLunsUUID(sourceLunsUUID *string) *SnapmirrorRelationshipsGetParams {
+	o.SetSourceLunsUUID(sourceLunsUUID)
+	return o
+}
+
+// SetSourceLunsUUID adds the sourceLunsUuid to the snapmirror relationships get params
+func (o *SnapmirrorRelationshipsGetParams) SetSourceLunsUUID(sourceLunsUUID *string) {
+	o.SourceLunsUUID = sourceLunsUUID
 }
 
 // WithSourcePath adds the sourcePath to the snapmirror relationships get params
@@ -1348,6 +1416,40 @@ func (o *SnapmirrorRelationshipsGetParams) WriteToRequest(r runtime.ClientReques
 		}
 	}
 
+	if o.DestinationLunsName != nil {
+
+		// query param destination.luns.name
+		var qrDestinationLunsName string
+
+		if o.DestinationLunsName != nil {
+			qrDestinationLunsName = *o.DestinationLunsName
+		}
+		qDestinationLunsName := qrDestinationLunsName
+		if qDestinationLunsName != "" {
+
+			if err := r.SetQueryParam("destination.luns.name", qDestinationLunsName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.DestinationLunsUUID != nil {
+
+		// query param destination.luns.uuid
+		var qrDestinationLunsUUID string
+
+		if o.DestinationLunsUUID != nil {
+			qrDestinationLunsUUID = *o.DestinationLunsUUID
+		}
+		qDestinationLunsUUID := qrDestinationLunsUUID
+		if qDestinationLunsUUID != "" {
+
+			if err := r.SetQueryParam("destination.luns.uuid", qDestinationLunsUUID); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.DestinationPath != nil {
 
 		// query param destination.path
@@ -1773,6 +1875,40 @@ func (o *SnapmirrorRelationshipsGetParams) WriteToRequest(r runtime.ClientReques
 		if qSourceConsistencyGroupVolumesName != "" {
 
 			if err := r.SetQueryParam("source.consistency_group_volumes.name", qSourceConsistencyGroupVolumesName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.SourceLunsName != nil {
+
+		// query param source.luns.name
+		var qrSourceLunsName string
+
+		if o.SourceLunsName != nil {
+			qrSourceLunsName = *o.SourceLunsName
+		}
+		qSourceLunsName := qrSourceLunsName
+		if qSourceLunsName != "" {
+
+			if err := r.SetQueryParam("source.luns.name", qSourceLunsName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.SourceLunsUUID != nil {
+
+		// query param source.luns.uuid
+		var qrSourceLunsUUID string
+
+		if o.SourceLunsUUID != nil {
+			qrSourceLunsUUID = *o.SourceLunsUUID
+		}
+		qSourceLunsUUID := qrSourceLunsUUID
+		if qSourceLunsUUID != "" {
+
+			if err := r.SetQueryParam("source.luns.uuid", qSourceLunsUUID); err != nil {
 				return err
 			}
 		}

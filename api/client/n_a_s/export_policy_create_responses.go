@@ -158,9 +158,15 @@ func NewExportPolicyCreateDefault(code int) *ExportPolicyCreateDefault {
 | 1704064    | Clientmatch host name too long |
 | 1704065    | Clientmatch domain name too long |
 | 1704071    | The export policy was not created because of duplicate export policy rules present in the request |
+| 2621462    | The specified SVM name does not exist |
+| 2621519    | SVM name is invalid. The SVM name must begin with a letter or an underscore. If the SVM is of type \"sync-source\", the maximum supported length is 41. Otherwise, the maximum supported length is 47 |
+| 2621643    | The specified SVM name is too long |
+| 2621685    | SVM name length cannot be zero |
+| 2621706    | The specified SVM UUID is incorrect for the specified SVM name |
 | 3277000    | Upgrade all nodes to ONTAP 9.0.0 or above to use krb5p as a security flavor in export-policy rules |
 | 3277083    | User ID is not valid. Enter a value for User ID from 0 to 4294967295 |
 | 3277149    | The "Anon" field cannot be an empty string |
+| 6691623    | User is not authorized |
 */
 type ExportPolicyCreateDefault struct {
 	_statusCode int

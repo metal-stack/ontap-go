@@ -30,6 +30,12 @@ func (o *NvmeNamespaceCreateReader) ReadResponse(response runtime.ClientResponse
 			return nil, err
 		}
 		return result, nil
+	case 202:
+		result := NewNvmeNamespaceCreateAccepted()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return result, nil
 	default:
 		result := NewNvmeNamespaceCreateDefault(response.Code())
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
@@ -124,6 +130,88 @@ func (o *NvmeNamespaceCreateCreated) readResponse(response runtime.ClientRespons
 	return nil
 }
 
+// NewNvmeNamespaceCreateAccepted creates a NvmeNamespaceCreateAccepted with default headers values
+func NewNvmeNamespaceCreateAccepted() *NvmeNamespaceCreateAccepted {
+	return &NvmeNamespaceCreateAccepted{}
+}
+
+/*
+NvmeNamespaceCreateAccepted describes a response with status code 202, with default header values.
+
+Accepted
+*/
+type NvmeNamespaceCreateAccepted struct {
+
+	/* Useful for tracking the resource location
+	 */
+	Location string
+
+	Payload *models.JobLinkResponse
+}
+
+// IsSuccess returns true when this nvme namespace create accepted response has a 2xx status code
+func (o *NvmeNamespaceCreateAccepted) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this nvme namespace create accepted response has a 3xx status code
+func (o *NvmeNamespaceCreateAccepted) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this nvme namespace create accepted response has a 4xx status code
+func (o *NvmeNamespaceCreateAccepted) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this nvme namespace create accepted response has a 5xx status code
+func (o *NvmeNamespaceCreateAccepted) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this nvme namespace create accepted response a status code equal to that given
+func (o *NvmeNamespaceCreateAccepted) IsCode(code int) bool {
+	return code == 202
+}
+
+// Code gets the status code for the nvme namespace create accepted response
+func (o *NvmeNamespaceCreateAccepted) Code() int {
+	return 202
+}
+
+func (o *NvmeNamespaceCreateAccepted) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /storage/namespaces][%d] nvmeNamespaceCreateAccepted %s", 202, payload)
+}
+
+func (o *NvmeNamespaceCreateAccepted) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /storage/namespaces][%d] nvmeNamespaceCreateAccepted %s", 202, payload)
+}
+
+func (o *NvmeNamespaceCreateAccepted) GetPayload() *models.JobLinkResponse {
+	return o.Payload
+}
+
+func (o *NvmeNamespaceCreateAccepted) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	// hydrates response header Location
+	hdrLocation := response.GetHeader("Location")
+
+	if hdrLocation != "" {
+		o.Location = hdrLocation
+	}
+
+	o.Payload = new(models.JobLinkResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
+
+	return nil
+}
+
 // NewNvmeNamespaceCreateDefault creates a NvmeNamespaceCreateDefault with default headers values
 func NewNvmeNamespaceCreateDefault(code int) *NvmeNamespaceCreateDefault {
 	return &NvmeNamespaceCreateDefault{
@@ -148,7 +236,7 @@ func NewNvmeNamespaceCreateDefault(code int) *NvmeNamespaceCreateDefault {
 | 2621707 | No SVM was specified. Either `svm.name` or `svm.uuid` must be supplied. |
 | 5242927 | The specified qtree was not found. |
 | 5242950 | The specified `location.qtree.id` and `location.qtree.name` do not refer to the same qtree. |
-| 5374127 | An invalid namespace name was specified. |
+| 5374127 | The specified namespace name is invalid. |
 | 5374140 | LUN has a non-zero prefix and/or suffix size. |
 | 5374141 | LUN is part of a SnapMirror active sync relationship. |
 | 5374156 | A protocol endpoint LUN cannot be converted to an NVMe namespace. |
@@ -160,9 +248,13 @@ func NewNvmeNamespaceCreateDefault(code int) *NvmeNamespaceCreateDefault {
 | 5374861 | The NVME namespace base name specified by `name` is not the same as that specified by `location.name`. |
 | 5374862 | No NVMe namespace path base name was provided for the namespace. |
 | 5374876 | The LUN specified for conversion to a namespace was not found. |
+| 5376461 | The specified namespace name is invalid. |
+| 5376462 | The specified namespace name is too long. |
+| 5376463 | The snapshot portion of the specified namespace name is too long. |
+| 5440509 | No suitable storage can be found for the specified requirements. |
 | 13565952 | The NVMe namespace clone request failed. |
 | 72089636 | Creating NVMe namespaces with `os_type` AIX is not supported until the effective cluster version is 9.13.1 or later. |
-| 72089720 | NVMe namespaces cannot be created in Snapshot copies. |
+| 72089720 | NVMe namespaces cannot be created in snapshots. |
 | 72089721 | The volume specified is in a load sharing mirror relationship. Namespaces are not supported in load sharing mirrors. |
 | 72089722 | A negative size was provided for the NVMe namespace. |
 | 72089723 | The specified size is too small for the NVMe namespace. |
@@ -179,7 +271,7 @@ func NewNvmeNamespaceCreateDefault(code int) *NvmeNamespaceCreateDefault {
 | 72090013 | The property is required except when creating an NVMe namespace clone. The `target` property of the error object identifies the property. |
 | 72090014 | No volume was specified for the NVMe namespace. |
 | 72090015 | An error occurred after successfully creating the NVMe namespace preventing the retrieval of its properties. |
-| 72090033 | The `clone.source.uuid` property is not supported when specifying a source NVMe namespace from a Snapshot copy. |
+| 72090033 | The `clone.source.uuid` property is not supported when specifying a source NVMe namespace from a snapshot. |
 | 72090039 | The property cannot be specified at the same time when creating an NVMe namespace as a clone. The `target` property of the error object identifies the other property given with clone. |
 | 72090040 | The property cannot be specified when converting a LUN into an NVMe namespace. The `target` property of the error object identifies the property. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.

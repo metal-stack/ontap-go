@@ -120,6 +120,10 @@ type ClientService interface {
 
 	AccountTotpDelete(params *AccountTotpDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AccountTotpDeleteOK, error)
 
+	AntiRansomwareGet(params *AntiRansomwareGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AntiRansomwareGetOK, error)
+
+	AntiRansomwareModify(params *AntiRansomwareModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AntiRansomwareModifyOK, *AntiRansomwareModifyAccepted, error)
+
 	AntiRansomwareSuspectCollectionGet(params *AntiRansomwareSuspectCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AntiRansomwareSuspectCollectionGetOK, error)
 
 	AntiRansomwareSuspectDelete(params *AntiRansomwareSuspectDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AntiRansomwareSuspectDeleteOK, *AntiRansomwareSuspectDeleteAccepted, error)
@@ -215,6 +219,16 @@ type ClientService interface {
 	GcpKmsRekeyInternal(params *GcpKmsRekeyInternalParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GcpKmsRekeyInternalCreated, *GcpKmsRekeyInternalAccepted, error)
 
 	GcpKmsRestore(params *GcpKmsRestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GcpKmsRestoreCreated, *GcpKmsRestoreAccepted, error)
+
+	GroupRoleMappingsCollectionGet(params *GroupRoleMappingsCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupRoleMappingsCollectionGetOK, error)
+
+	GroupRoleMappingsCreate(params *GroupRoleMappingsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupRoleMappingsCreateCreated, error)
+
+	GroupRoleMappingsDelete(params *GroupRoleMappingsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupRoleMappingsDeleteOK, error)
+
+	GroupRoleMappingsGet(params *GroupRoleMappingsGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupRoleMappingsGetOK, error)
+
+	GroupRoleMappingsModify(params *GroupRoleMappingsModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupRoleMappingsModifyOK, error)
 
 	IpsecCaCertificateCollectionGet(params *IpsecCaCertificateCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*IpsecCaCertificateCollectionGetOK, error)
 
@@ -344,9 +358,29 @@ type ClientService interface {
 
 	SecurityConfigModify(params *SecurityConfigModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityConfigModifyOK, *SecurityConfigModifyAccepted, error)
 
+	SecurityExternalRoleMappingCollectionGet(params *SecurityExternalRoleMappingCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityExternalRoleMappingCollectionGetOK, error)
+
+	SecurityExternalRoleMappingCreate(params *SecurityExternalRoleMappingCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityExternalRoleMappingCreateCreated, error)
+
+	SecurityExternalRoleMappingDelete(params *SecurityExternalRoleMappingDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityExternalRoleMappingDeleteOK, error)
+
+	SecurityExternalRoleMappingGet(params *SecurityExternalRoleMappingGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityExternalRoleMappingGetOK, error)
+
+	SecurityExternalRoleMappingModify(params *SecurityExternalRoleMappingModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityExternalRoleMappingModifyOK, error)
+
+	SecurityGroupCollectionGet(params *SecurityGroupCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityGroupCollectionGetOK, error)
+
+	SecurityGroupCreate(params *SecurityGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityGroupCreateCreated, error)
+
+	SecurityGroupDelete(params *SecurityGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityGroupDeleteOK, error)
+
+	SecurityGroupGet(params *SecurityGroupGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityGroupGetOK, error)
+
+	SecurityGroupModify(params *SecurityGroupModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityGroupModifyOK, error)
+
 	SecurityKeyManagerCollectionGet(params *SecurityKeyManagerCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityKeyManagerCollectionGetOK, error)
 
-	SecurityKeyManagerCreate(params *SecurityKeyManagerCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityKeyManagerCreateCreated, error)
+	SecurityKeyManagerCreate(params *SecurityKeyManagerCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityKeyManagerCreateCreated, *SecurityKeyManagerCreateAccepted, error)
 
 	SecurityKeyManagerDelete(params *SecurityKeyManagerDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityKeyManagerDeleteOK, error)
 
@@ -364,7 +398,7 @@ type ClientService interface {
 
 	SecurityKeyManagerMigrate(params *SecurityKeyManagerMigrateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityKeyManagerMigrateCreated, *SecurityKeyManagerMigrateAccepted, error)
 
-	SecurityKeyManagerModify(params *SecurityKeyManagerModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityKeyManagerModifyOK, error)
+	SecurityKeyManagerModify(params *SecurityKeyManagerModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityKeyManagerModifyOK, *SecurityKeyManagerModifyAccepted, error)
 
 	SecurityKeyManagerRestore(params *SecurityKeyManagerRestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityKeyManagerRestoreCreated, *SecurityKeyManagerRestoreAccepted, error)
 
@@ -408,6 +442,10 @@ type ClientService interface {
 
 	SSHModify(params *SSHModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SSHModifyOK, error)
 
+	SupportedAlgorithmsCollectionGet(params *SupportedAlgorithmsCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SupportedAlgorithmsCollectionGetOK, error)
+
+	SupportedAlgorithmsGet(params *SupportedAlgorithmsGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SupportedAlgorithmsGetOK, error)
+
 	SvmSSHServerCollectionGet(params *SvmSSHServerCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SvmSSHServerCollectionGetOK, error)
 
 	SvmSSHServerGet(params *SvmSSHServerGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SvmSSHServerGetOK, error)
@@ -421,6 +459,16 @@ type ClientService interface {
 	TotpGet(params *TotpGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TotpGetOK, error)
 
 	TotpModify(params *TotpModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*TotpModifyOK, error)
+
+	WebauthnCredentialsCollectionGet(params *WebauthnCredentialsCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WebauthnCredentialsCollectionGetOK, error)
+
+	WebauthnCredentialsDelete(params *WebauthnCredentialsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WebauthnCredentialsDeleteOK, error)
+
+	WebauthnCredentialsGet(params *WebauthnCredentialsGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WebauthnCredentialsGetOK, error)
+
+	WebauthnGlobalCollectionGet(params *WebauthnGlobalCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WebauthnGlobalCollectionGetOK, error)
+
+	WebauthnGlobalGet(params *WebauthnGlobalGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WebauthnGlobalGetOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -898,6 +946,92 @@ func (a *Client) AccountTotpDelete(params *AccountTotpDeleteParams, authInfo run
 	// unexpected success response
 	unexpectedSuccess := result.(*AccountTotpDeleteDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	AntiRansomwareGet Retrieves the anti-ransomware version of the nodes in the cluster.
+
+### Related ONTAP commands
+* `security anti-ransomware show`
+*/
+func (a *Client) AntiRansomwareGet(params *AntiRansomwareGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AntiRansomwareGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAntiRansomwareGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "anti_ransomware_get",
+		Method:             "GET",
+		PathPattern:        "/security/anti-ransomware",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &AntiRansomwareGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*AntiRansomwareGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*AntiRansomwareGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	AntiRansomwareModify Updates the anti-ransomware package on the cluster.
+
+### Required properties
+* `uri` - URI of the anti-ransomware package
+### Related ONTAP commands
+* `security anti-ransomware update-package-from-uri`
+*/
+func (a *Client) AntiRansomwareModify(params *AntiRansomwareModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AntiRansomwareModifyOK, *AntiRansomwareModifyAccepted, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewAntiRansomwareModifyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "anti_ransomware_modify",
+		Method:             "PATCH",
+		PathPattern:        "/security/anti-ransomware",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &AntiRansomwareModifyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, nil, err
+	}
+	switch value := result.(type) {
+	case *AntiRansomwareModifyOK:
+		return value, nil, nil
+	case *AntiRansomwareModifyAccepted:
+		return nil, value, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*AntiRansomwareModifyDefault)
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -1606,11 +1740,12 @@ func (a *Client) AzureKeyVaultGet(params *AzureKeyVaultGetParams, authInfo runti
 * `oauth_host` - Open authorization server host name.
 * `vault_host` - AKV host subdomain.
 * `verify_host` - Verify the identity of the AKV host name.
-* `verfiy_ip ` - Verify the identity of the AKV IP address.
+* `verify_ip ` - Verify the identity of the AKV IP address.
 * `proxy_username` - Proxy username if proxy configuration is used.
 * `proxy_password` - Proxy password if proxy configuration is used.
 * `client_id` - Application (client) ID of the deployed Azure application with appropriate access to an AKV.
 * `tenant_id` - Directory (tenant) ID of the deployed Azure application with appropriate access to an AKV.
+* `skip_verification` - Skip the verification of the updated credentials, set to true to bypass the verification. The default value is false.
 ### Related ONTAP commands
 * `security key-manager external azure update-client-secret`
 * `security key-manager external azure update-credentials`
@@ -2437,6 +2572,10 @@ func (a *Client) DuoCollectionGet(params *DuoCollectionGetParams, authInfo runti
 /*
 	DuoCreate Creates a Duo profile.
 
+### Required properties
+* `api_host` - Duo API host
+* `integration_key` - Integration key
+* `secret_key` - Secret key
 ### Related ONTAP commands
 * `security login duo create`
 ### Learn more
@@ -2611,10 +2750,9 @@ func (a *Client) DuogroupCollectionGet(params *DuogroupCollectionGetParams, auth
 }
 
 /*
-	DuogroupCreate Creates a Duo Group.
+	DuogroupCreate Creates a Duo group.
 
 ### Required properties
-* `owner.uuid` - Account owner UUID.
 * `name` - Group name
 ### Related ONTAP commands
 * `security login duo group create`
@@ -3126,6 +3264,216 @@ func (a *Client) GcpKmsRestore(params *GcpKmsRestoreParams, authInfo runtime.Cli
 }
 
 /*
+	GroupRoleMappingsCollectionGet Retrieves all the group to role mapping entries.
+
+### Related ONTAP commands
+* `security login group role-mapping show`
+*/
+func (a *Client) GroupRoleMappingsCollectionGet(params *GroupRoleMappingsCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupRoleMappingsCollectionGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGroupRoleMappingsCollectionGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "group_role_mappings_collection_get",
+		Method:             "GET",
+		PathPattern:        "/security/group/role-mappings",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GroupRoleMappingsCollectionGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GroupRoleMappingsCollectionGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GroupRoleMappingsCollectionGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	GroupRoleMappingsCreate Creates a group to role mapping entry.
+
+### Required properties
+* `group_id`
+* `ontap_role`
+### Optional properties
+* `comment`
+### Related ONTAP commands
+* `security login group role-mapping create`
+*/
+func (a *Client) GroupRoleMappingsCreate(params *GroupRoleMappingsCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupRoleMappingsCreateCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGroupRoleMappingsCreateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "group_role_mappings_create",
+		Method:             "POST",
+		PathPattern:        "/security/group/role-mappings",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GroupRoleMappingsCreateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GroupRoleMappingsCreateCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GroupRoleMappingsCreateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	GroupRoleMappingsDelete Deletes a group to role mapping entry.
+
+### Related ONTAP commands
+* `security login group role-mapping delete`
+*/
+func (a *Client) GroupRoleMappingsDelete(params *GroupRoleMappingsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupRoleMappingsDeleteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGroupRoleMappingsDeleteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "group_role_mappings_delete",
+		Method:             "DELETE",
+		PathPattern:        "/security/group/role-mappings/{group_id}/{ontap_role.name}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GroupRoleMappingsDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GroupRoleMappingsDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GroupRoleMappingsDeleteDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	GroupRoleMappingsGet Retrieves a group to role mapping entry.
+
+### Related ONTAP commands
+* `security login group role-mapping show`
+*/
+func (a *Client) GroupRoleMappingsGet(params *GroupRoleMappingsGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupRoleMappingsGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGroupRoleMappingsGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "group_role_mappings_get",
+		Method:             "GET",
+		PathPattern:        "/security/group/role-mappings/{group_id}/{ontap_role.name}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GroupRoleMappingsGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GroupRoleMappingsGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GroupRoleMappingsGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	GroupRoleMappingsModify Updates a configured group role-mapping.
+
+### Related ONTAP commands
+* `security login group role-mapping modify`
+*/
+func (a *Client) GroupRoleMappingsModify(params *GroupRoleMappingsModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GroupRoleMappingsModifyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGroupRoleMappingsModifyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "group_role_mappings_modify",
+		Method:             "PATCH",
+		PathPattern:        "/security/group/role-mappings/{group_id}/{ontap_role.name}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GroupRoleMappingsModifyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GroupRoleMappingsModifyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GroupRoleMappingsModifyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 	IpsecCaCertificateCollectionGet Retrieves the collection of IPsec CA certificates configured for cluster and all SVMs.
 
 ### Related ONTAP commands
@@ -3335,6 +3683,10 @@ func (a *Client) IpsecGet(params *IpsecGetParams, authInfo runtime.ClientAuthInf
 /*
 	IpsecModify Updates IPsec configuration via REST APIs.
 
+### Optional properties
+* 'enabled' - Enable IPsec.
+* 'replay_window' - Replay window size in packets.
+* 'offload_enabled' - Enable IPsec hardware offload.
 ### Related ONTAP commands
 * 'security ipsec config modify'
 */
@@ -5850,8 +6202,14 @@ func (a *Client) SecurityConfigGet(params *SecurityConfigGetParams, authInfo run
 }
 
 /*
-	SecurityConfigModify Updates the software FIPS mode or enables conversion of non-encrypted metadata volumes to encrypted metadata volumes and non-NAE aggregates to NAE aggregates.
+	SecurityConfigModify Updates the software FIPS mode or modifies software data encryption.
 
+## Platform Specifics
+### Unified ONTAP
+The PATCH request can be used to enable conversion of non-encrypted metadata volumes to encrypted metadata volumes and non-NAE aggregates to NAE aggregates.
+### ASA r2
+The PATCH request can be used to enable conversion of all non-encrypted volumes and LUNs to encrypted volumes and LUNs.
+The PATCH request can also be used to start the rekey of all encrypted volumes and LUNs.
 ### Related ONTAP commands
 * `security config modify`
 */
@@ -5890,6 +6248,429 @@ func (a *Client) SecurityConfigModify(params *SecurityConfigModifyParams, authIn
 	// unexpected success response
 	unexpectedSuccess := result.(*SecurityConfigModifyDefault)
 	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	SecurityExternalRoleMappingCollectionGet Retrieves all external-role-mapping entries.
+
+### Related ONTAP commands
+* `security login external-role-mapping show`
+*/
+func (a *Client) SecurityExternalRoleMappingCollectionGet(params *SecurityExternalRoleMappingCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityExternalRoleMappingCollectionGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSecurityExternalRoleMappingCollectionGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "security_external_role_mapping_collection_get",
+		Method:             "GET",
+		PathPattern:        "/security/external-role-mappings",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SecurityExternalRoleMappingCollectionGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SecurityExternalRoleMappingCollectionGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SecurityExternalRoleMappingCollectionGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	SecurityExternalRoleMappingCreate Creates an external-role-mapping entry.
+
+### Required properties
+* `external_role`
+* `provider`
+* `ontap_role`
+### Optional properties
+* `comment`
+### Related ONTAP commands
+* `security login external-role-mapping create`
+*/
+func (a *Client) SecurityExternalRoleMappingCreate(params *SecurityExternalRoleMappingCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityExternalRoleMappingCreateCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSecurityExternalRoleMappingCreateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "security_external_role_mapping_create",
+		Method:             "POST",
+		PathPattern:        "/security/external-role-mappings",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SecurityExternalRoleMappingCreateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SecurityExternalRoleMappingCreateCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SecurityExternalRoleMappingCreateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	SecurityExternalRoleMappingDelete Deletes an external-role-mapping entry.
+
+### Related ONTAP commands
+* `security login external-role-mapping delete`
+*/
+func (a *Client) SecurityExternalRoleMappingDelete(params *SecurityExternalRoleMappingDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityExternalRoleMappingDeleteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSecurityExternalRoleMappingDeleteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "security_external_role_mapping_delete",
+		Method:             "DELETE",
+		PathPattern:        "/security/external-role-mappings/{external_role}/{provider}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SecurityExternalRoleMappingDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SecurityExternalRoleMappingDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SecurityExternalRoleMappingDeleteDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	SecurityExternalRoleMappingGet Retrieves an external-role-mapping entry.
+
+### Related ONTAP commands
+* `security login external-role-mapping show`
+*/
+func (a *Client) SecurityExternalRoleMappingGet(params *SecurityExternalRoleMappingGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityExternalRoleMappingGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSecurityExternalRoleMappingGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "security_external_role_mapping_get",
+		Method:             "GET",
+		PathPattern:        "/security/external-role-mappings/{external_role}/{provider}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SecurityExternalRoleMappingGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SecurityExternalRoleMappingGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SecurityExternalRoleMappingGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	SecurityExternalRoleMappingModify Updates an external-role-mapping entry.
+
+### Related ONTAP commands
+* `security login external-role-mapping modify`
+*/
+func (a *Client) SecurityExternalRoleMappingModify(params *SecurityExternalRoleMappingModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityExternalRoleMappingModifyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSecurityExternalRoleMappingModifyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "security_external_role_mapping_modify",
+		Method:             "PATCH",
+		PathPattern:        "/security/external-role-mappings/{external_role}/{provider}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SecurityExternalRoleMappingModifyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SecurityExternalRoleMappingModifyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SecurityExternalRoleMappingModifyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	SecurityGroupCollectionGet Retrieves all group entries.
+
+### Related ONTAP commands
+* `security login group show`
+*/
+func (a *Client) SecurityGroupCollectionGet(params *SecurityGroupCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityGroupCollectionGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSecurityGroupCollectionGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "security_group_collection_get",
+		Method:             "GET",
+		PathPattern:        "/security/groups",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SecurityGroupCollectionGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SecurityGroupCollectionGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SecurityGroupCollectionGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	SecurityGroupCreate Creates a group entry.
+
+### Required properties
+* `name`
+### Optional properties
+* `owner`
+* `type`
+* `uuid`
+* `comment`
+### Related ONTAP commands
+* `security login group create`
+*/
+func (a *Client) SecurityGroupCreate(params *SecurityGroupCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityGroupCreateCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSecurityGroupCreateParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "security_group_create",
+		Method:             "POST",
+		PathPattern:        "/security/groups",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SecurityGroupCreateReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SecurityGroupCreateCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SecurityGroupCreateDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	SecurityGroupDelete Deletes a group entry.
+
+### Related ONTAP commands
+* `security login group delete`
+*/
+func (a *Client) SecurityGroupDelete(params *SecurityGroupDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityGroupDeleteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSecurityGroupDeleteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "security_group_delete",
+		Method:             "DELETE",
+		PathPattern:        "/security/groups/{owner.uuid}/{name}/{type}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SecurityGroupDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SecurityGroupDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SecurityGroupDeleteDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	SecurityGroupGet Retrieves a group entry.
+
+### Related ONTAP commands
+* `security login group show`
+*/
+func (a *Client) SecurityGroupGet(params *SecurityGroupGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityGroupGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSecurityGroupGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "security_group_get",
+		Method:             "GET",
+		PathPattern:        "/security/groups/{owner.uuid}/{name}/{type}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SecurityGroupGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SecurityGroupGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SecurityGroupGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	SecurityGroupModify Updates configured group information.
+
+### Related ONTAP commands
+* `security login group modify`
+*/
+func (a *Client) SecurityGroupModify(params *SecurityGroupModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityGroupModifyOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSecurityGroupModifyParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "security_group_modify",
+		Method:             "PATCH",
+		PathPattern:        "/security/groups/{owner.uuid}/{name}/{type}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SecurityGroupModifyReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SecurityGroupModifyOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SecurityGroupModifyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -5954,12 +6735,14 @@ func (a *Client) SecurityKeyManagerCollectionGet(params *SecurityKeyManagerColle
 * `external.servers.server` - Primary Key servers. Required only when creating an external key manager.
 * `onboard.passphrase` - Cluster-wide passphrase. Required only when creating an Onboard Key Manager.
 * `synchronize` - Synchronizes missing onboard keys on any node in the cluster. Required only when creating an Onboard Key Manager at the partner site of a MetroCluster configuration.
+### Optional parameters:
+* `create_inactive` - Create a configuration without enabling it. This flag is set to "false" by default.
 ### Related ONTAP commands
 * `security key-manager external enable`
 * `security key-manager onboard enable`
 * `security key-manager onboard sync`
 */
-func (a *Client) SecurityKeyManagerCreate(params *SecurityKeyManagerCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityKeyManagerCreateCreated, error) {
+func (a *Client) SecurityKeyManagerCreate(params *SecurityKeyManagerCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityKeyManagerCreateCreated, *SecurityKeyManagerCreateAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSecurityKeyManagerCreateParams()
@@ -5983,15 +6766,17 @@ func (a *Client) SecurityKeyManagerCreate(params *SecurityKeyManagerCreateParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*SecurityKeyManagerCreateCreated)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *SecurityKeyManagerCreateCreated:
+		return value, nil, nil
+	case *SecurityKeyManagerCreateAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*SecurityKeyManagerCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -6039,6 +6824,18 @@ func (a *Client) SecurityKeyManagerDelete(params *SecurityKeyManagerDeleteParams
 /*
 	SecurityKeyManagerGet Retrieves key managers.
 
+### Examples:
+  - To retrieve basic information about a key server:
+    ```
+    GET /security/key-managers/{uuid}
+    ```
+  - To retrieve specific fields, including expensive properties:
+    ```
+    GET /security/key-managers/{uuid}?fields=connectivity.cluster_availability,connectivity.node_states.node.name
+    ```
+
+### Note:
+These fields are not available for inactive configurations due to the additional computational cost and the relevance of these fields is exclusive to active configurations.
 ### Expensive properties
 There is an added computational cost to retrieving values for these properties. They are not included by default in GET results and must be explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
 * `connectivity.cluster_availability`
@@ -6365,17 +7162,20 @@ func (a *Client) SecurityKeyManagerMigrate(params *SecurityKeyManagerMigratePara
 /*
 	SecurityKeyManagerModify Updates a key manager.
 
+NOTE: When validate_certificates is set, the API returns a 202 status code for successful creation of the job, otherwise an error is returned.
 ### Required properties (when patching the Onboard Key Manager)
 * `onboard.existing_passphrase` - Cluster-wide passphrase. Required only when synchronizing the passphrase of the Onboard Key Manager.
 * `synchronize` - Synchronizes missing Onboard Key Manager keys on any node in the cluster. Required only when synchronizing the Onboard Key Manager keys in a local cluster.
 ### Required properties (when patching an external key manager)
 * `external.client_certificate` or `external.server_ca_certificates` - Client certificate or Server CA certificate. Required when modifying an external key manager.
+### Optional parameters (when patching an external key manager):
+* `validate_certificates` - Validate certificates by testing the connection to the KMIP server using them. This flag is set to "false" by default.
 ### Related ONTAP commands
 * `security key-manager external modify`
 * `security key-manager onboard sync`
 * `security key-manager onboard update-passphrase`
 */
-func (a *Client) SecurityKeyManagerModify(params *SecurityKeyManagerModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityKeyManagerModifyOK, error) {
+func (a *Client) SecurityKeyManagerModify(params *SecurityKeyManagerModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SecurityKeyManagerModifyOK, *SecurityKeyManagerModifyAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewSecurityKeyManagerModifyParams()
@@ -6399,15 +7199,17 @@ func (a *Client) SecurityKeyManagerModify(params *SecurityKeyManagerModifyParams
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*SecurityKeyManagerModifyOK)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *SecurityKeyManagerModifyOK:
+		return value, nil, nil
+	case *SecurityKeyManagerModifyAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*SecurityKeyManagerModifyDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -6852,6 +7654,7 @@ func (a *Client) SecurityOauth2CollectionGet(params *SecurityOauth2CollectionGet
 * `use_local_roles_if_present`
 * `skip_uri_validation`
 * `use_mutual_tls`
+* `provider`
 ### Related ONTAP commands
 * `security oauth2 client create`
 */
@@ -7221,7 +8024,7 @@ func (a *Client) SecuritySamlSpModify(params *SecuritySamlSpModifyParams, authIn
 }
 
 /*
-	SSHGet Retrieves the cluster SSH server ciphers, MAC algorithms, key exchange algorithms, and connection limits.
+	SSHGet Retrieves the cluster SSH server ciphers, MAC algorithms, key exchange algorithms, host key algorithms, connection limits, and _ssh-rsa_ enabled status for public key algorithms.
 
 ### Related ONTAP commands
 * `security ssh`
@@ -7269,9 +8072,11 @@ func (a *Client) SSHGet(params *SSHGetParams, authInfo runtime.ClientAuthInfoWri
 * `ciphers` - Encryption algorithms for the payload
 * `key_exchange_algorithms` - SSH key exchange algorithms
 * `mac_algorithms` - MAC algorithms
+* `host_key_algorithms` - Host key algorithms
 * `max_authentication_retry_count` - Maximum authentication retries allowed before closing the connection
 * `connections_per_second` - Maximum allowed connections per second
 * `max_instances` - Maximum allowed connections per node
+* `is_rsa_in_publickey_algorithms_enabled` - _ssh-rsa_ enabled status for public key algorithms
 * `per_source_limit` - Maximum allowed connections from the same client host
 ### Related ONTAP commands
 * `security ssh`
@@ -7309,6 +8114,88 @@ func (a *Client) SSHModify(params *SSHModifyParams, authInfo runtime.ClientAuthI
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*SSHModifyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	SupportedAlgorithmsCollectionGet Retrieve all WebAuthn supported algorithms entries.
+
+### Related ONTAP commands
+* `security webauthn supported-algorithms show`
+*/
+func (a *Client) SupportedAlgorithmsCollectionGet(params *SupportedAlgorithmsCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SupportedAlgorithmsCollectionGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSupportedAlgorithmsCollectionGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "supported_algorithms_collection_get",
+		Method:             "GET",
+		PathPattern:        "/security/webauthn/supported-algorithms",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SupportedAlgorithmsCollectionGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SupportedAlgorithmsCollectionGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SupportedAlgorithmsCollectionGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	SupportedAlgorithmsGet Retrieves a WebAuthn supported algorithms entry.
+
+### Related ONTAP commands
+* `security webauthn supported-algorithms show`
+*/
+func (a *Client) SupportedAlgorithmsGet(params *SupportedAlgorithmsGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*SupportedAlgorithmsGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewSupportedAlgorithmsGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "supported_algorithms_get",
+		Method:             "GET",
+		PathPattern:        "/security/webauthn/supported-algorithms/{owner.uuid}/{algorithm.name}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &SupportedAlgorithmsGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*SupportedAlgorithmsGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*SupportedAlgorithmsGetDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -7400,8 +8287,10 @@ func (a *Client) SvmSSHServerGet(params *SvmSSHServerGetParams, authInfo runtime
 ### Optional parameters
 * `ciphers` - Encryption algorithms for the payload
 * `key_exchange_algorithms` - SSH key exchange algorithms
+* `host_key_algorithms` - Host key algorithms
 * `mac_algorithms` - MAC algorithms
 * `max_authentication_retry_count` - Maximum authentication retries allowed before closing the connection
+* `is_rsa_in_publickey_algorithms_enabled` - _ssh-rsa_ enabled status for public key algorithms
 ### Related ONTAP commands
 * `security ssh`
 */
@@ -7616,6 +8505,217 @@ func (a *Client) TotpModify(params *TotpModifyParams, authInfo runtime.ClientAut
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*TotpModifyDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	WebauthnCredentialsCollectionGet Retrieves all WebAuthn credentials entries.
+
+### Related ONTAP commands
+* `security webauthn credentials show`
+*/
+func (a *Client) WebauthnCredentialsCollectionGet(params *WebauthnCredentialsCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WebauthnCredentialsCollectionGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWebauthnCredentialsCollectionGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "webauthn_credentials_collection_get",
+		Method:             "GET",
+		PathPattern:        "/security/webauthn/credentials",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &WebauthnCredentialsCollectionGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WebauthnCredentialsCollectionGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WebauthnCredentialsCollectionGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	WebauthnCredentialsDelete Deletes a WebAuthn credentials entry.
+
+### Required properties
+  - `owner.uuid`
+  - `username`
+  - `index`
+  - `relying_party.id`
+
+### Related ONTAP commands
+* `security webauthn credentials delete`
+*/
+func (a *Client) WebauthnCredentialsDelete(params *WebauthnCredentialsDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WebauthnCredentialsDeleteOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWebauthnCredentialsDeleteParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "webauthn_credentials_delete",
+		Method:             "DELETE",
+		PathPattern:        "/security/webauthn/credentials/{owner.uuid}/{username}/{index}/{relying_party.id}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &WebauthnCredentialsDeleteReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WebauthnCredentialsDeleteOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WebauthnCredentialsDeleteDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	WebauthnCredentialsGet Retrieves a WebAuthn credentials entry.
+
+### Related ONTAP commands
+* `security webauthn credentials show`
+*/
+func (a *Client) WebauthnCredentialsGet(params *WebauthnCredentialsGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WebauthnCredentialsGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWebauthnCredentialsGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "webauthn_credentials_get",
+		Method:             "GET",
+		PathPattern:        "/security/webauthn/credentials/{owner.uuid}/{username}/{index}/{relying_party.id}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &WebauthnCredentialsGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WebauthnCredentialsGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WebauthnCredentialsGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	WebauthnGlobalCollectionGet Retrieve WebAuthn global settings for a cluster and all SVMs.
+
+### Related ONTAP commands
+* `security webauthn show`
+*/
+func (a *Client) WebauthnGlobalCollectionGet(params *WebauthnGlobalCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WebauthnGlobalCollectionGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWebauthnGlobalCollectionGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "webauthn_global_collection_get",
+		Method:             "GET",
+		PathPattern:        "/security/webauthn/global-settings",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &WebauthnGlobalCollectionGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WebauthnGlobalCollectionGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WebauthnGlobalCollectionGetDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+	WebauthnGlobalGet Retrieves a WebAuthn global setting entry.
+
+### Related ONTAP commands
+* `security webauthn show`
+*/
+func (a *Client) WebauthnGlobalGet(params *WebauthnGlobalGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*WebauthnGlobalGetOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewWebauthnGlobalGetParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "webauthn_global_get",
+		Method:             "GET",
+		PathPattern:        "/security/webauthn/global-settings/{owner.uuid}",
+		ProducesMediaTypes: []string{"application/json", "application/hal+json"},
+		ConsumesMediaTypes: []string{"application/json", "application/hal+json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &WebauthnGlobalGetReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*WebauthnGlobalGetOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*WebauthnGlobalGetDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

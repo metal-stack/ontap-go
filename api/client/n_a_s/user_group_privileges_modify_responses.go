@@ -112,6 +112,8 @@ func NewUserGroupPrivilegesModifyDefault(code int) *UserGroupPrivilegesModifyDef
 
 | Error Code | Description |
 | ---------- | ----------- |
+| 262196     | Field 'svm.name' is not supported in the body of PATCH request. |
+| 262203     | Field 'svm.uuid' is not supported in the body of PATCH request. |
 | 655673     | Failed to resolve the user or group. |
 | 655730     | The specified local user to which privileges are to be associated to does not exist. |
 */

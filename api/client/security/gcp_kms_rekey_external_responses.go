@@ -204,8 +204,11 @@ func NewGcpKmsRekeyExternalDefault(code int) *GcpKmsRekeyExternalDefault {
 | ---------- | ----------- |
 | 65537547 | One or more volume encryption keys for encrypted volumes of this data SVM are stored in the key manager configured for the admin SVM. Use the REST API POST method to migrate this data SVM's keys from the admin SVM's key manager to this data SVM's key manager before running the rekey operation. |
 | 65537556 | ONTAP is not able to successfully encrypt or decrypt because the configured external key manager for this SVM is in a blocked state. Possible reasons for a blocked state include the top-level external key protection key not found, disabled or having insufficient privileges. |
+| 65537610 | Rekey cannot be performed on the SVM while the enabled keystore configuration is being switched. If a previous attempt to switch the keystore configuration failed, or was interrupted, the system will continue to prevent rekeying for the SVM. Use the REST API PATCH method "/api/security/key-stores/{uuid}" to re-run and complete the operation. |
 | 65537721 | Google Cloud KMS is not configured for the given SVM. |
 | 65537729 | External rekey failed on one or more nodes. Use the REST API POST method \"/api/security/gcp-kms/{uuid}/rekey-external\" to try the rekey operation again. |
+| 65539436 | Rekey cannot be performed on the SVM while the enabled keystore configuration is being initialized. Wait until the keystore is in the active state, and rerun the rekey operation. |
+| 65539437 | Rekey cannot be performed on the SVM while the enabled keystore configuration is being disabled. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type GcpKmsRekeyExternalDefault struct {

@@ -226,8 +226,8 @@ func NewConsistencyGroupSnapshotCreateDefault(code int) *ConsistencyGroupSnapsho
 
 | Error Code | Description |
 | ---------- | ----------- |
-| 53411918 | Snapshot copy operation not permitted. |
-| 53411921 | Failed to create Snapshot copy for consistency group. |
+| 53411918 | Snapshot operation not permitted. |
+| 53411921 | Failed to create snapshot for consistency group. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type ConsistencyGroupSnapshotCreateDefault struct {

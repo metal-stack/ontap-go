@@ -16,9 +16,11 @@ import (
 )
 
 // ConsistencyGroupNamespace An NVMe namespace is a collection of addressable logical blocks presented to hosts connected to the storage virtual machine using the NVMe over Fabrics protocol.<br/>
-// In ONTAP, an NVMe namespace is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
-// An NVMe namespace is created to a specified size using thin or thick provisioning as determined by the volume on which it is created. NVMe namespaces support being cloned. An NVMe namespace cannot be renamed, resized, or moved to a different volume. NVMe namespaces do not support the assignment of a QoS policy for performance management, but a QoS policy can be assigned to the volume containing the namespace. See the NVMe namespace object model to learn more about each of the properties supported by the NVMe namespace REST API.<br/>
-// An NVMe namespace must be mapped to an NVMe subsystem to grant access to the subsystem's hosts. Hosts can then access the NVMe namespace and perform I/O using the NVMe over Fabrics protocol.
+// An NVMe namespace must be mapped to an NVMe subsystem to grant access to the subsystem's hosts. Hosts can then access the NVMe namespace and perform I/O using the NVMe over Fabrics protocol.<br/>
+// See the NVMe namespace object model to learn more about each of the properties supported by the NVMe namespace REST API.
+// An NVMe namespace is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+// NVMe namespace names are paths of the form "/vol/\<volume>[/\<qtree>]/\<namespace>" where the qtree name is optional.<br/>
+// An NVMe namespace is created to a specified size using thin or thick provisioning as determined by the volume on which it is created. An NVMe namespace can then be resized or cloned. An NVMe namespace cannot be renamed, or moved to a different volume. NVMe namespaces do not support the assignment of a QoS policy for performance management, but a QoS policy can be assigned to the volume containing the namespace.
 //
 // swagger:model consistency_group_namespace
 type ConsistencyGroupNamespace struct {
@@ -26,7 +28,8 @@ type ConsistencyGroupNamespace struct {
 	// This property marks the NVMe namespace for auto deletion when the volume containing the namespace runs out of space. This is most commonly set on namespace clones.<br/>
 	// When set to _true_, the NVMe namespace becomes eligible for automatic deletion when the volume runs out of space. Auto deletion only occurs when the volume containing the namespace is also configured for auto deletion and free space in the volume decreases below a particular threshold.<br/>
 	// This property is optional in POST and PATCH. The default value for a new NVMe namespace is _false_.<br/>
-	// There is an added computational cost to retrieving this property's value. It is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
+	// There is an added computational cost to retrieving this property's value. It is not populated for a GET request unless it is explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
+	//
 	//
 	AutoDelete *bool `json:"auto_delete,omitempty" yaml:"auto_delete,omitempty"`
 
@@ -42,13 +45,16 @@ type ConsistencyGroupNamespace struct {
 	// Format: date-time
 	CreateTime *strfmt.DateTime `json:"create_time,omitempty" yaml:"create_time,omitempty"`
 
-	// The enabled state of the NVMe namespace. Certain error conditions cause the namespace to become disabled. If the namespace is disabled, you can check the `state` property to determine what error disabled the namespace. An NVMe namespace is enabled automatically when it is created.
+	// The enabled state of the NVMe namespace. Certain error conditions cause the namespace to become disabled. If the namespace is disabled, check the `status.state` property to determine what error disabled the namespace. An NVMe namespace is enabled automatically when it is created.
 	//
 	// Read Only: true
 	Enabled *bool `json:"enabled,omitempty" yaml:"enabled,omitempty"`
 
-	// The fully qualified path name of the NVMe namespace composed of a "/vol" prefix, the volume name, the (optional) qtree name and base name of the namespace. Valid in POST.<br/>
-	// NVMe namespaces do not support rename, or movement between volumes.
+	// The name of the NVMe namespace.
+	// An NVMe namespace is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+	// NVMe namespace names are paths of the form "/vol/\<volume>[/\<qtree>]/\<namespace>" where the qtree name is optional.<br/>
+	// Renaming an NVMe namespace is not supported. Valid in POST.
+	//
 	//
 	// Example: /vol/volume1/qtree1/namespace1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
@@ -947,7 +953,7 @@ type ConsistencyGroupNamespaceInlineSubsystemMap struct {
 
 	// The Asymmetric Namespace Access Group ID (ANAGRPID) of the NVMe namespace.<br/>
 	// The format for an ANAGRPID is 8 hexadecimal digits (zero-filled) followed by a lower case "h".<br/>
-	// There is an added computational cost to retrieving this property's value. It is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
+	// There is an added computational cost to retrieving this property's value. It is not populated for a GET request unless it is explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
 	//
 	// Example: 00103050h
 	// Read Only: true

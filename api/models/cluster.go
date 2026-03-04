@@ -24,6 +24,9 @@ type Cluster struct {
 	// links
 	Links *ClusterInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
+	// active directory
+	ActiveDirectory *ClusterInlineActiveDirectory `json:"active_directory,omitempty" yaml:"active_directory,omitempty"`
+
 	// Indicates how new SVMs will default "auto_enable_activity_tracking" for new volumes.
 	AutoEnableActivityTracking *bool `json:"auto_enable_activity_tracking,omitempty" yaml:"auto_enable_activity_tracking,omitempty"`
 
@@ -80,6 +83,10 @@ type Cluster struct {
 	// Example: support@company.com
 	Contact *string `json:"contact,omitempty" yaml:"contact,omitempty"`
 
+	// Specifies whether the cluster is designed for disaggregated storage.
+	// Read Only: true
+	Disaggregated *bool `json:"disaggregated,omitempty" yaml:"disaggregated,omitempty"`
+
 	// license
 	License *ClusterInlineLicense `json:"license,omitempty" yaml:"license,omitempty"`
 
@@ -130,6 +137,10 @@ func (m *Cluster) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateLinks(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateActiveDirectory(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -214,6 +225,25 @@ func (m *Cluster) validateLinks(formats strfmt.Registry) error {
 				return ve.ValidateName("_links")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Cluster) validateActiveDirectory(formats strfmt.Registry) error {
+	if swag.IsZero(m.ActiveDirectory) { // not required
+		return nil
+	}
+
+	if m.ActiveDirectory != nil {
+		if err := m.ActiveDirectory.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("active_directory")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("active_directory")
 			}
 			return err
 		}
@@ -534,6 +564,10 @@ func (m *Cluster) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateActiveDirectory(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateCertificate(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -547,6 +581,10 @@ func (m *Cluster) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 	}
 
 	if err := m.contextValidateConfigurationBackup(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDisaggregated(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -605,6 +643,27 @@ func (m *Cluster) contextValidateLinks(ctx context.Context, formats strfmt.Regis
 				return ve.ValidateName("_links")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("_links")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *Cluster) contextValidateActiveDirectory(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ActiveDirectory != nil {
+
+		if swag.IsZero(m.ActiveDirectory) { // not required
+			return nil
+		}
+
+		if err := m.ActiveDirectory.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("active_directory")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("active_directory")
 			}
 			return err
 		}
@@ -704,6 +763,15 @@ func (m *Cluster) contextValidateConfigurationBackup(ctx context.Context, format
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *Cluster) contextValidateDisaggregated(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "disaggregated", "body", m.Disaggregated); err != nil {
+		return err
 	}
 
 	return nil
@@ -885,6 +953,137 @@ func (m *Cluster) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary interface implementation
 func (m *Cluster) UnmarshalBinary(b []byte) error {
 	var res Cluster
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
+// ClusterInlineActiveDirectory cluster inline active directory
+//
+// swagger:model cluster_inline_active_directory
+type ClusterInlineActiveDirectory struct {
+
+	// If set to true and a machine account exists with the same name as specified in "name" in Active Directory, it is overwritten and reused.
+	// Example: false
+	ForceAccountOverwrite *bool `json:"force_account_overwrite,omitempty" yaml:"force_account_overwrite,omitempty"`
+
+	// Fully qualified domain name.
+	// Example: server1.com
+	// Max Length: 254
+	Fqdn *string `json:"fqdn,omitempty" yaml:"fqdn,omitempty"`
+
+	// Active Directory account NetBIOS name.
+	// Example: account1
+	// Max Length: 15
+	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
+
+	// Organizational unit under which the Active Directory account is created.
+	// Example: CN=Test
+	OrganizationalUnit *string `json:"organizational_unit,omitempty" yaml:"organizational_unit,omitempty"`
+
+	// Administrator password required for Active Directory account creation, modification, and deletion.
+	// Example: testpwd
+	// Min Length: 1
+	Password *string `json:"password,omitempty" yaml:"password,omitempty"`
+
+	// Administrator username required for Active Directory account creation, modification, and deletion.
+	// Example: admin
+	// Min Length: 1
+	Username *string `json:"username,omitempty" yaml:"username,omitempty"`
+}
+
+// Validate validates this cluster inline active directory
+func (m *ClusterInlineActiveDirectory) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateFqdn(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePassword(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUsername(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ClusterInlineActiveDirectory) validateFqdn(formats strfmt.Registry) error {
+	if swag.IsZero(m.Fqdn) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("active_directory"+"."+"fqdn", "body", *m.Fqdn, 254); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ClusterInlineActiveDirectory) validateName(formats strfmt.Registry) error {
+	if swag.IsZero(m.Name) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("active_directory"+"."+"name", "body", *m.Name, 15); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ClusterInlineActiveDirectory) validatePassword(formats strfmt.Registry) error {
+	if swag.IsZero(m.Password) { // not required
+		return nil
+	}
+
+	if err := validate.MinLength("active_directory"+"."+"password", "body", *m.Password, 1); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *ClusterInlineActiveDirectory) validateUsername(formats strfmt.Registry) error {
+	if swag.IsZero(m.Username) { // not required
+		return nil
+	}
+
+	if err := validate.MinLength("active_directory"+"."+"username", "body", *m.Username, 1); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validates this cluster inline active directory based on context it is used
+func (m *ClusterInlineActiveDirectory) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *ClusterInlineActiveDirectory) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *ClusterInlineActiveDirectory) UnmarshalBinary(b []byte) error {
+	var res ClusterInlineActiveDirectory
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
@@ -2305,7 +2504,7 @@ type ClusterInlineMetricInlineIops struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -2359,7 +2558,7 @@ type ClusterInlineMetricInlineLatency struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -2508,7 +2707,7 @@ type ClusterInlineMetricInlineThroughput struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -2553,6 +2752,11 @@ type ClusterInlineNodesInlineArrayItem struct {
 
 	// links
 	Links *ClusterInlineNodesInlineArrayItemInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
+
+	// Anti ransomware version.
+	// Example: 1.0
+	// Read Only: true
+	AntiRansomwareVersion *string `json:"anti_ransomware_version,omitempty" yaml:"anti_ransomware_version,omitempty"`
 
 	// cluster interface
 	ClusterInterface *ClusterInlineNodesInlineArrayItemInlineClusterInterface `json:"cluster_interface,omitempty" yaml:"cluster_interface,omitempty"`
@@ -3372,6 +3576,10 @@ func (m *ClusterInlineNodesInlineArrayItem) ContextValidate(ctx context.Context,
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateAntiRansomwareVersion(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateClusterInterface(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -3510,6 +3718,15 @@ func (m *ClusterInlineNodesInlineArrayItem) contextValidateLinks(ctx context.Con
 			}
 			return err
 		}
+	}
+
+	return nil
+}
+
+func (m *ClusterInlineNodesInlineArrayItem) contextValidateAntiRansomwareVersion(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "anti_ransomware_version", "body", m.AntiRansomwareVersion); err != nil {
+		return err
 	}
 
 	return nil
@@ -6286,7 +6503,7 @@ type ClusterInlineNodesInlineArrayItemInlineHaInlineGiveback struct {
 	// Enum: ["nothing_to_giveback","not_attempted","in_progress","failed"]
 	State *string `json:"state,omitempty" yaml:"state,omitempty"`
 
-	// Giveback status of each aggregate.
+	// Giveback status of each aggregate. This property is not supported on the ASA r2 platform.
 	// Read Only: true
 	Status []*ClusterNodesItems0HaGivebackStatusItems0 `json:"status" yaml:"status"`
 }
@@ -6492,7 +6709,7 @@ func (m *ClusterInlineNodesInlineArrayItemInlineHaInlineGiveback) UnmarshalBinar
 	return nil
 }
 
-// ClusterInlineNodesInlineArrayItemInlineHaInlineGivebackInlineFailure Indicates the failure code and message.
+// ClusterInlineNodesInlineArrayItemInlineHaInlineGivebackInlineFailure Indicates the failure code and message. This property is not supported on the ASA r2 platform.
 //
 // swagger:model cluster_inline_nodes_inline_array_item_inline_ha_inline_giveback_inline_failure
 type ClusterInlineNodesInlineArrayItemInlineHaInlineGivebackInlineFailure struct {
@@ -7815,7 +8032,7 @@ func (m *ClusterInlineNodesInlineArrayItemInlineHaInlineTakeoverCheck) Unmarshal
 	return nil
 }
 
-// ClusterInlineNodesInlineArrayItemInlineHaInlineTakeoverInlineFailure Indicates the failure code and message.
+// ClusterInlineNodesInlineArrayItemInlineHaInlineTakeoverInlineFailure Indicates the failure code and message. This property is not supported on the ASA r2 platform.
 //
 // swagger:model cluster_inline_nodes_inline_array_item_inline_ha_inline_takeover_inline_failure
 type ClusterInlineNodesInlineArrayItemInlineHaInlineTakeoverInlineFailure struct {
@@ -11261,7 +11478,8 @@ type ClusterInlineNodesInlineArrayItemInlineStatistics struct {
 	// Example: 12345123
 	ProcessorUtilizationBase *int64 `json:"processor_utilization_base,omitempty" yaml:"processor_utilization_base,omitempty"`
 
-	// Raw CPU Utilization for the node. This should be divided by the processor_utilization_base to calculate the percentage CPU utilization for the node.
+	// Raw CPU utilization for the node. The change in this value over time should be divided by corresponding change in processor_utilization_base, then multiplied by 100 to calculate the percentage CPU utilization for the node. For example: ((processor_utilization_raw_t2 - processor_utilization_raw_t1) / (processor_utilization_base_t2 - processor_utilization_base_t1)) * 100.
+	//
 	// Example: 13
 	ProcessorUtilizationRaw *int64 `json:"processor_utilization_raw,omitempty" yaml:"processor_utilization_raw,omitempty"`
 
@@ -12272,7 +12490,7 @@ type ClusterInlineStatisticsInlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -12326,7 +12544,7 @@ type ClusterInlineStatisticsInlineLatencyRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -12380,7 +12598,7 @@ type ClusterInlineStatisticsInlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }

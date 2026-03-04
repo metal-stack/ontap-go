@@ -123,10 +123,10 @@ func NewSnapshotPolicyScheduleCreateDefault(code int) *SnapshotPolicyScheduleCre
 
 | Error Code | Description |
 | ---------- | ----------- |
-| 1638407    | When adding schedule to a Snapshot copy policy, the count for that schedule must be specified. |
+| 1638407    | When adding schedule to a snapshot policy, the count for that schedule must be specified. |
 | 1638410    | Specified schedule already exists in snapshot policy. |
 | 1638413    | Schedule not found. |
-| 1638451    | This operation would result in total Snapshot copy count for the policy to exceed maximum supported count. |
+| 1638451    | This operation would result in total snapshot count for the policy to exceed maximum supported count. |
 | 1638508    | Another schedule has the same prefix within this policy. |
 | 1638510    | Duplicate prefix. |
 | 1638528    | This operation is not supported in a mixed-version cluster. |

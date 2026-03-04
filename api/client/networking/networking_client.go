@@ -2321,6 +2321,7 @@ func (a *Client) NetworkIPBgpPeerGroupModify(params *NetworkIPBgpPeerGroupModify
 ### Default property values
 If not specified in POST, the following default property values are assigned:
 * `is_next_hop` - _false_
+* `peer.md5_enabled` - _false_
 ### Related ONTAP commands
 * `network bgp peer-group create`
 */
@@ -2566,7 +2567,8 @@ If not specified in POST, the following default property values are assigned:
 * `enabled` - _true_
 * `location.auto_revert` - _true_
 * `service_policy`
-  - _default-data-files_ if scope is `svm`
+  - **Unified ONTAP**: _default-data-files_ if scope is `svm`
+  - **ASA r2**: _default-data-blocks_ if scope is `svm`
   - _default-management_ if scope is `cluster` and IPspace is not `Cluster`
   - _default-cluster_ if scope is `cluster` and IPspace is `Cluster`
 
@@ -3166,7 +3168,6 @@ func (a *Client) SwitchCollectionGet(params *SwitchCollectionGetParams, authInfo
 * `network`
   - _cluster_ for cluster or shared switches.
   - _storage_ for storage switches.
-  - _management_ for management switches.
 
 * `snmp.version` - SNMP version.
 * `snmp.user` - SNMP user.

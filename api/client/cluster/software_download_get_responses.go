@@ -120,9 +120,15 @@ func NewSoftwareDownloadGetDefault(code int) *SoftwareDownloadGetDefault {
 }
 
 /*
-SoftwareDownloadGetDefault describes a response with status code -1, with default header values.
+	SoftwareDownloadGetDefault describes a response with status code -1, with default header values.
 
-Error
+	ONTAP Error Response Codes
+
+| Error Code | Description |
+| ---------- | ----------- |
+| 10551382 | Package download is still running. |
+| 10551383 | Operation took longer than the maximum 1 hour time limit. |
+Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SoftwareDownloadGetDefault struct {
 	_statusCode int

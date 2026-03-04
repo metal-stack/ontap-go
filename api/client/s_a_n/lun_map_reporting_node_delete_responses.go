@@ -116,7 +116,6 @@ func NewLunMapReportingNodeDeleteDefault(code int) *LunMapReportingNodeDeleteDef
 | 5374875 | The specified LUN does not exist or is not accessible to the caller. |
 | 5374878 | The specified initiator group does not exist, is not accessible to the caller, or is not in the same SVM as the specified LUN. |
 | 5374922 | The specified LUN map does not exist. |
-| 5376454 | Modifying reporting nodes of a LUN map is not supported on this platform. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type LunMapReportingNodeDeleteDefault struct {

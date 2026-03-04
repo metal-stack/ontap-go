@@ -126,7 +126,7 @@ func (_m *ClientService) NvmeNamespaceCollectionGet(params *clientn_v_me.NvmeNam
 }
 
 // NvmeNamespaceCreate provides a mock function with given fields: params, authInfo, opts
-func (_m *ClientService) NvmeNamespaceCreate(params *clientn_v_me.NvmeNamespaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientn_v_me.ClientOption) (*clientn_v_me.NvmeNamespaceCreateCreated, error) {
+func (_m *ClientService) NvmeNamespaceCreate(params *clientn_v_me.NvmeNamespaceCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientn_v_me.ClientOption) (*clientn_v_me.NvmeNamespaceCreateCreated, *clientn_v_me.NvmeNamespaceCreateAccepted, error) {
 	_va := make([]interface{}, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
@@ -141,8 +141,9 @@ func (_m *ClientService) NvmeNamespaceCreate(params *clientn_v_me.NvmeNamespaceC
 	}
 
 	var r0 *clientn_v_me.NvmeNamespaceCreateCreated
-	var r1 error
-	if rf, ok := ret.Get(0).(func(*clientn_v_me.NvmeNamespaceCreateParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) (*clientn_v_me.NvmeNamespaceCreateCreated, error)); ok {
+	var r1 *clientn_v_me.NvmeNamespaceCreateAccepted
+	var r2 error
+	if rf, ok := ret.Get(0).(func(*clientn_v_me.NvmeNamespaceCreateParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) (*clientn_v_me.NvmeNamespaceCreateCreated, *clientn_v_me.NvmeNamespaceCreateAccepted, error)); ok {
 		return rf(params, authInfo, opts...)
 	}
 	if rf, ok := ret.Get(0).(func(*clientn_v_me.NvmeNamespaceCreateParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) *clientn_v_me.NvmeNamespaceCreateCreated); ok {
@@ -153,17 +154,25 @@ func (_m *ClientService) NvmeNamespaceCreate(params *clientn_v_me.NvmeNamespaceC
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(*clientn_v_me.NvmeNamespaceCreateParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) error); ok {
+	if rf, ok := ret.Get(1).(func(*clientn_v_me.NvmeNamespaceCreateParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) *clientn_v_me.NvmeNamespaceCreateAccepted); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
-		r1 = ret.Error(1)
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*clientn_v_me.NvmeNamespaceCreateAccepted)
+		}
 	}
 
-	return r0, r1
+	if rf, ok := ret.Get(2).(func(*clientn_v_me.NvmeNamespaceCreateParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) error); ok {
+		r2 = rf(params, authInfo, opts...)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
 }
 
 // NvmeNamespaceDelete provides a mock function with given fields: params, authInfo, opts
-func (_m *ClientService) NvmeNamespaceDelete(params *clientn_v_me.NvmeNamespaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientn_v_me.ClientOption) (*clientn_v_me.NvmeNamespaceDeleteOK, error) {
+func (_m *ClientService) NvmeNamespaceDelete(params *clientn_v_me.NvmeNamespaceDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientn_v_me.ClientOption) (*clientn_v_me.NvmeNamespaceDeleteOK, *clientn_v_me.NvmeNamespaceDeleteAccepted, error) {
 	_va := make([]interface{}, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
@@ -178,8 +187,9 @@ func (_m *ClientService) NvmeNamespaceDelete(params *clientn_v_me.NvmeNamespaceD
 	}
 
 	var r0 *clientn_v_me.NvmeNamespaceDeleteOK
-	var r1 error
-	if rf, ok := ret.Get(0).(func(*clientn_v_me.NvmeNamespaceDeleteParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) (*clientn_v_me.NvmeNamespaceDeleteOK, error)); ok {
+	var r1 *clientn_v_me.NvmeNamespaceDeleteAccepted
+	var r2 error
+	if rf, ok := ret.Get(0).(func(*clientn_v_me.NvmeNamespaceDeleteParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) (*clientn_v_me.NvmeNamespaceDeleteOK, *clientn_v_me.NvmeNamespaceDeleteAccepted, error)); ok {
 		return rf(params, authInfo, opts...)
 	}
 	if rf, ok := ret.Get(0).(func(*clientn_v_me.NvmeNamespaceDeleteParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) *clientn_v_me.NvmeNamespaceDeleteOK); ok {
@@ -190,13 +200,21 @@ func (_m *ClientService) NvmeNamespaceDelete(params *clientn_v_me.NvmeNamespaceD
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(*clientn_v_me.NvmeNamespaceDeleteParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) error); ok {
+	if rf, ok := ret.Get(1).(func(*clientn_v_me.NvmeNamespaceDeleteParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) *clientn_v_me.NvmeNamespaceDeleteAccepted); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
-		r1 = ret.Error(1)
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*clientn_v_me.NvmeNamespaceDeleteAccepted)
+		}
 	}
 
-	return r0, r1
+	if rf, ok := ret.Get(2).(func(*clientn_v_me.NvmeNamespaceDeleteParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) error); ok {
+		r2 = rf(params, authInfo, opts...)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
 }
 
 // NvmeNamespaceGet provides a mock function with given fields: params, authInfo, opts
@@ -237,7 +255,7 @@ func (_m *ClientService) NvmeNamespaceGet(params *clientn_v_me.NvmeNamespaceGetP
 }
 
 // NvmeNamespaceModify provides a mock function with given fields: params, authInfo, opts
-func (_m *ClientService) NvmeNamespaceModify(params *clientn_v_me.NvmeNamespaceModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientn_v_me.ClientOption) (*clientn_v_me.NvmeNamespaceModifyOK, error) {
+func (_m *ClientService) NvmeNamespaceModify(params *clientn_v_me.NvmeNamespaceModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientn_v_me.ClientOption) (*clientn_v_me.NvmeNamespaceModifyOK, *clientn_v_me.NvmeNamespaceModifyAccepted, error) {
 	_va := make([]interface{}, len(opts))
 	for _i := range opts {
 		_va[_i] = opts[_i]
@@ -252,8 +270,9 @@ func (_m *ClientService) NvmeNamespaceModify(params *clientn_v_me.NvmeNamespaceM
 	}
 
 	var r0 *clientn_v_me.NvmeNamespaceModifyOK
-	var r1 error
-	if rf, ok := ret.Get(0).(func(*clientn_v_me.NvmeNamespaceModifyParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) (*clientn_v_me.NvmeNamespaceModifyOK, error)); ok {
+	var r1 *clientn_v_me.NvmeNamespaceModifyAccepted
+	var r2 error
+	if rf, ok := ret.Get(0).(func(*clientn_v_me.NvmeNamespaceModifyParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) (*clientn_v_me.NvmeNamespaceModifyOK, *clientn_v_me.NvmeNamespaceModifyAccepted, error)); ok {
 		return rf(params, authInfo, opts...)
 	}
 	if rf, ok := ret.Get(0).(func(*clientn_v_me.NvmeNamespaceModifyParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) *clientn_v_me.NvmeNamespaceModifyOK); ok {
@@ -264,13 +283,21 @@ func (_m *ClientService) NvmeNamespaceModify(params *clientn_v_me.NvmeNamespaceM
 		}
 	}
 
-	if rf, ok := ret.Get(1).(func(*clientn_v_me.NvmeNamespaceModifyParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) error); ok {
+	if rf, ok := ret.Get(1).(func(*clientn_v_me.NvmeNamespaceModifyParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) *clientn_v_me.NvmeNamespaceModifyAccepted); ok {
 		r1 = rf(params, authInfo, opts...)
 	} else {
-		r1 = ret.Error(1)
+		if ret.Get(1) != nil {
+			r1 = ret.Get(1).(*clientn_v_me.NvmeNamespaceModifyAccepted)
+		}
 	}
 
-	return r0, r1
+	if rf, ok := ret.Get(2).(func(*clientn_v_me.NvmeNamespaceModifyParams, runtime.ClientAuthInfoWriter, ...clientn_v_me.ClientOption) error); ok {
+		r2 = rf(params, authInfo, opts...)
+	} else {
+		r2 = ret.Error(2)
+	}
+
+	return r0, r1, r2
 }
 
 // NvmeServiceCollectionGet provides a mock function with given fields: params, authInfo, opts

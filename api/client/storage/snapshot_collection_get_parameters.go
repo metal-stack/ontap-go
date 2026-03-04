@@ -68,11 +68,23 @@ type SnapshotCollectionGetParams struct {
 	*/
 	Comment *string
 
+	/* CompressSavings.
+
+	   Filter by compress_savings
+	*/
+	CompressSavings *int64
+
 	/* CreateTime.
 
 	   Filter by create_time
 	*/
 	CreateTime *string
+
+	/* DedupSavings.
+
+	   Filter by dedup_savings
+	*/
+	DedupSavings *int64
 
 	/* DeltaSizeConsumed.
 
@@ -210,6 +222,12 @@ type SnapshotCollectionGetParams struct {
 	*/
 	UUID *string
 
+	/* Vbn0Savings.
+
+	   Filter by vbn0_savings
+	*/
+	Vbn0Savings *int64
+
 	/* VersionUUID.
 
 	   Filter by version_uuid
@@ -306,6 +324,17 @@ func (o *SnapshotCollectionGetParams) SetComment(comment *string) {
 	o.Comment = comment
 }
 
+// WithCompressSavings adds the compressSavings to the snapshot collection get params
+func (o *SnapshotCollectionGetParams) WithCompressSavings(compressSavings *int64) *SnapshotCollectionGetParams {
+	o.SetCompressSavings(compressSavings)
+	return o
+}
+
+// SetCompressSavings adds the compressSavings to the snapshot collection get params
+func (o *SnapshotCollectionGetParams) SetCompressSavings(compressSavings *int64) {
+	o.CompressSavings = compressSavings
+}
+
 // WithCreateTime adds the createTime to the snapshot collection get params
 func (o *SnapshotCollectionGetParams) WithCreateTime(createTime *string) *SnapshotCollectionGetParams {
 	o.SetCreateTime(createTime)
@@ -315,6 +344,17 @@ func (o *SnapshotCollectionGetParams) WithCreateTime(createTime *string) *Snapsh
 // SetCreateTime adds the createTime to the snapshot collection get params
 func (o *SnapshotCollectionGetParams) SetCreateTime(createTime *string) {
 	o.CreateTime = createTime
+}
+
+// WithDedupSavings adds the dedupSavings to the snapshot collection get params
+func (o *SnapshotCollectionGetParams) WithDedupSavings(dedupSavings *int64) *SnapshotCollectionGetParams {
+	o.SetDedupSavings(dedupSavings)
+	return o
+}
+
+// SetDedupSavings adds the dedupSavings to the snapshot collection get params
+func (o *SnapshotCollectionGetParams) SetDedupSavings(dedupSavings *int64) {
+	o.DedupSavings = dedupSavings
 }
 
 // WithDeltaSizeConsumed adds the deltaSizeConsumed to the snapshot collection get params
@@ -559,6 +599,17 @@ func (o *SnapshotCollectionGetParams) SetUUID(uuid *string) {
 	o.UUID = uuid
 }
 
+// WithVbn0Savings adds the vbn0Savings to the snapshot collection get params
+func (o *SnapshotCollectionGetParams) WithVbn0Savings(vbn0Savings *int64) *SnapshotCollectionGetParams {
+	o.SetVbn0Savings(vbn0Savings)
+	return o
+}
+
+// SetVbn0Savings adds the vbn0Savings to the snapshot collection get params
+func (o *SnapshotCollectionGetParams) SetVbn0Savings(vbn0Savings *int64) {
+	o.Vbn0Savings = vbn0Savings
+}
+
 // WithVersionUUID adds the versionUUID to the snapshot collection get params
 func (o *SnapshotCollectionGetParams) WithVersionUUID(versionUUID *string) *SnapshotCollectionGetParams {
 	o.SetVersionUUID(versionUUID)
@@ -617,6 +668,23 @@ func (o *SnapshotCollectionGetParams) WriteToRequest(r runtime.ClientRequest, re
 		}
 	}
 
+	if o.CompressSavings != nil {
+
+		// query param compress_savings
+		var qrCompressSavings int64
+
+		if o.CompressSavings != nil {
+			qrCompressSavings = *o.CompressSavings
+		}
+		qCompressSavings := swag.FormatInt64(qrCompressSavings)
+		if qCompressSavings != "" {
+
+			if err := r.SetQueryParam("compress_savings", qCompressSavings); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.CreateTime != nil {
 
 		// query param create_time
@@ -629,6 +697,23 @@ func (o *SnapshotCollectionGetParams) WriteToRequest(r runtime.ClientRequest, re
 		if qCreateTime != "" {
 
 			if err := r.SetQueryParam("create_time", qCreateTime); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.DedupSavings != nil {
+
+		// query param dedup_savings
+		var qrDedupSavings int64
+
+		if o.DedupSavings != nil {
+			qrDedupSavings = *o.DedupSavings
+		}
+		qDedupSavings := swag.FormatInt64(qrDedupSavings)
+		if qDedupSavings != "" {
+
+			if err := r.SetQueryParam("dedup_savings", qDedupSavings); err != nil {
 				return err
 			}
 		}
@@ -991,6 +1076,23 @@ func (o *SnapshotCollectionGetParams) WriteToRequest(r runtime.ClientRequest, re
 		if qUUID != "" {
 
 			if err := r.SetQueryParam("uuid", qUUID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Vbn0Savings != nil {
+
+		// query param vbn0_savings
+		var qrVbn0Savings int64
+
+		if o.Vbn0Savings != nil {
+			qrVbn0Savings = *o.Vbn0Savings
+		}
+		qVbn0Savings := swag.FormatInt64(qrVbn0Savings)
+		if qVbn0Savings != "" {
+
+			if err := r.SetQueryParam("vbn0_savings", qVbn0Savings); err != nil {
 				return err
 			}
 		}

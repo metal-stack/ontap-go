@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Vscan Vscan can be used to protect data from being compromised by viruses or other malicious code. This combines best-in-class third-party antivirus software with ONTAP features that give you the flexibility you need to control which files get scanned and when. Storage systems offload scanning operations to external servers hosting antivirus software from thirdparty vendors. An Antivirus Connector on the external server handles communications between the storage system and the antivirus software.
+// Vscan Vscan can be used to protect data from being compromised by viruses or other malicious code. This combines best-in-class third-party antivirus software with ONTAP features that give you the flexibility you need to control which files get scanned and when. Storage systems offload scanning operations to external servers hosting antivirus software from third-party vendors. An Antivirus Connector on the external server handles communications between the storage system and the antivirus software.
 //
 // swagger:model vscan
 type Vscan struct {
@@ -32,7 +32,7 @@ type Vscan struct {
 	Svm *VscanInlineSvm `json:"svm,omitempty" yaml:"svm,omitempty"`
 
 	// vscan inline on access policies
-	VscanInlineOnAccessPolicies []*VscanOnAccess `json:"on_access_policies,omitempty" yaml:"on_access_policies,omitempty"`
+	VscanInlineOnAccessPolicies []*VscanOnAccessPolicy `json:"on_access_policies,omitempty" yaml:"on_access_policies,omitempty"`
 
 	// vscan inline on demand policies
 	VscanInlineOnDemandPolicies []*VscanOnDemandPolicy `json:"on_demand_policies,omitempty" yaml:"on_demand_policies,omitempty"`

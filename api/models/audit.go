@@ -18,6 +18,10 @@ import (
 // swagger:model audit
 type Audit struct {
 
+	// Indicates if audit logs generation should incur an extra charge.
+	// Example: false
+	ChargeQos *bool `json:"charge_qos,omitempty" yaml:"charge_qos,omitempty"`
+
 	// Specifies whether or not auditing is enabled on the SVM.
 	Enabled *bool `json:"enabled,omitempty" yaml:"enabled,omitempty"`
 
@@ -224,6 +228,12 @@ func (m *Audit) UnmarshalBinary(b []byte) error {
 //
 // swagger:model audit_inline_events
 type AuditInlineEvents struct {
+
+	// Volume file async delete events
+	AsyncDelete *bool `json:"async_delete,omitempty" yaml:"async_delete,omitempty"`
+
+	// Audit policy change events
+	AuditPolicyChange *bool `json:"audit_policy_change,omitempty" yaml:"audit_policy_change,omitempty"`
 
 	// Authorization policy change events
 	AuthorizationPolicy *bool `json:"authorization_policy,omitempty" yaml:"authorization_policy,omitempty"`

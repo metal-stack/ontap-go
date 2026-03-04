@@ -138,7 +138,7 @@ func NewLdapCreateDefault(code int) *LdapCreateDefault {
 
 | Error Code | Description |
 | ---------- | ----------- |
-| 262186     | LDAP Servers cannot be used with Active Directory domain and/or preferred Acti Directory servers |
+| 262186     | LDAP Servers cannot be used with Active Directory domain and/or preferred Active Directory servers |
 | 2621488    | Invalid SVM context |
 | 2621706    | The specified SVM UUID is incorrect for the specified SVM name |
 | 4915203    | The specified LDAP schema does not exist |

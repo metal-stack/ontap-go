@@ -21,7 +21,6 @@ type S3User struct {
 
 	// Specifies the access key for the user.
 	// Example: HJAKU28M3SXTE2UXUACV
-	// Read Only: true
 	AccessKey *string `json:"access_key,omitempty" yaml:"access_key,omitempty"`
 
 	// Can contain any additional information about the user being created or modified.
@@ -50,6 +49,10 @@ type S3User struct {
 	// Max Length: 64
 	// Min Length: 1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
+
+	// Specifies the secret key for the user.
+	// Example: dummy_secret_key_1234_abcd_ldjf
+	SecretKey *string `json:"secret_key,omitempty" yaml:"secret_key,omitempty"`
 
 	// svm
 	Svm *S3UserInlineSvm `json:"svm,omitempty" yaml:"svm,omitempty"`
@@ -148,10 +151,6 @@ func (m *S3User) validateSvm(formats strfmt.Registry) error {
 func (m *S3User) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateAccessKey(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateKeyExpiryTime(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -163,15 +162,6 @@ func (m *S3User) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *S3User) contextValidateAccessKey(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := validate.ReadOnly(ctx, "access_key", "body", m.AccessKey); err != nil {
-		return err
-	}
-
 	return nil
 }
 

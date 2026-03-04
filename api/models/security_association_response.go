@@ -1308,6 +1308,12 @@ type SecurityAssociationResponseInlineRecordsInlineArrayItemInlineIpsecInlineInb
 	// Number of inbound bytes for the IPsec security association.
 	Bytes *int64 `json:"bytes,omitempty" yaml:"bytes,omitempty"`
 
+	// Number of inbound bytes processed by offload for the IPsec security association.
+	OffloadBytes *int64 `json:"offload_bytes,omitempty" yaml:"offload_bytes,omitempty"`
+
+	// Number of inbound packets processed by offload for the IPsec security association.
+	OffloadPackets *int64 `json:"offload_packets,omitempty" yaml:"offload_packets,omitempty"`
+
 	// Number of inbound packets for the IPsec security association.
 	Packets *int64 `json:"packets,omitempty" yaml:"packets,omitempty"`
 
@@ -1350,6 +1356,12 @@ type SecurityAssociationResponseInlineRecordsInlineArrayItemInlineIpsecInlineOut
 
 	// Number of outbound bytes for the IPsec security association.
 	Bytes *int64 `json:"bytes,omitempty" yaml:"bytes,omitempty"`
+
+	// Number of outbound bytes processed by offload for the IPsec security association.
+	OffloadBytes *int64 `json:"offload_bytes,omitempty" yaml:"offload_bytes,omitempty"`
+
+	// Number of outbound packets processed by offload for the IPsec security association.
+	OffloadPackets *int64 `json:"offload_packets,omitempty" yaml:"offload_packets,omitempty"`
 
 	// Number of outbound packets for the IPsec security association.
 	Packets *int64 `json:"packets,omitempty" yaml:"packets,omitempty"`

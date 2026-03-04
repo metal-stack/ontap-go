@@ -113,7 +113,6 @@ func NewEmsConfigModifyDefault(code int) *EmsConfigModifyDefault {
 | Error Code | Description |
 | ---------- | ----------- |
 | 983123 | The validation of the mail server provided failed |
-| 983136 | The proxy URL cannot contain a username or password |
 | 983137 | The proxy URL provided is invalid |
 | 983139 | The IPv6 proxy URL provided is invalid |
 | 983140 | The proxy URL provided contains an invalid scheme. The only supported scheme is 'http' |
@@ -123,6 +122,7 @@ func NewEmsConfigModifyDefault(code int) *EmsConfigModifyDefault {
 | 983225 | The mail server username cannot be set without a mail server URL |
 | 983226 | The mail server password cannot be set without a mail server username |
 | 983227 | The provided field requires an effective cluster version of ONTAP 9.15.1 or later |
+| 983229 | The proxy URL cannot contain a username or password |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type EmsConfigModifyDefault struct {

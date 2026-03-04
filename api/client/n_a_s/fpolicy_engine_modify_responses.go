@@ -119,7 +119,7 @@ func NewFpolicyEngineModifyDefault(code int) *FpolicyEngineModifyDefault {
 | 9765012    | The specified resiliency directory path does not exist|
 | 9765042    | The specified send buffer size exceeds the maximum limit |
 | 9765043    | The specified receive buffer size exceeds the maximum limit |
-| 9765063    | Policy with Persistent Store feature does not support a "synchronus" |
+| 9765063    | Policy with Persistent Store feature does not support a "synchronous" |
 */
 type FpolicyEngineModifyDefault struct {
 	_statusCode int

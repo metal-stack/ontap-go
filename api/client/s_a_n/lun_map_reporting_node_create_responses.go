@@ -144,7 +144,6 @@ func NewLunMapReportingNodeCreateDefault(code int) *LunMapReportingNodeCreateDef
 | 5374921 | The specified cluster node name and UUID do not refer to the same cluster node. |
 | 5374922 | The specified LUN map does not exist. |
 | 5374923 | A cluster node `uuid` or `name` must be specified to add a reporting node. |
-| 5376454 | Modifying reporting nodes of a LUN map is not supported on this platform. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type LunMapReportingNodeCreateDefault struct {

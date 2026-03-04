@@ -16,7 +16,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// SnapshotPolicy The Snapshot copy policy object is associated with a read-write volume used to create and delete Snapshot copies at regular intervals.
+// SnapshotPolicy The snapshot policy object is associated with a read-write volume used to create and delete snapshots at regular intervals.
 //
 // swagger:model snapshot_policy
 type SnapshotPolicy struct {
@@ -24,14 +24,14 @@ type SnapshotPolicy struct {
 	// links
 	Links *SnapshotPolicyInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// A comment associated with the Snapshot copy policy.
+	// A comment associated with the snapshot policy.
 	Comment *string `json:"comment,omitempty" yaml:"comment,omitempty"`
 
-	// Is the Snapshot copy policy enabled?
+	// Is the snapshot policy enabled?
 	// Example: true
 	Enabled *bool `json:"enabled,omitempty" yaml:"enabled,omitempty"`
 
-	// Name of the Snapshot copy policy.
+	// Name of the snapshot policy.
 	// Example: default
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
@@ -322,13 +322,13 @@ func (m *SnapshotPolicy) UnmarshalBinary(b []byte) error {
 // swagger:model snapshot_policy_inline_copies_inline_array_item
 type SnapshotPolicyInlineCopiesInlineArrayItem struct {
 
-	// The number of Snapshot copies to maintain for this schedule.
+	// The number of snapshots to maintain for this schedule.
 	Count *int64 `json:"count,omitempty" yaml:"count,omitempty"`
 
-	// The prefix to use while creating Snapshot copies at regular intervals.
+	// The prefix to use while creating snapshots at regular intervals.
 	Prefix *string `json:"prefix,omitempty" yaml:"prefix,omitempty"`
 
-	// The retention period of Snapshot copies for this schedule. The retention period value represents a duration and must be specified in the ISO-8601 duration format. The retention period can be in years, months, days, hours, and minutes. A period specified for years, months, and days is represented in the ISO-8601 format as "P<num>Y", "P<num>M", "P<num>D" respectively, for example "P10Y" represents a duration of 10 years. A duration in hours and minutes is represented by "PT<num>H" and "PT<num>M" respectively. The period string must contain only a single time element that is, either years, months, days, hours, or minutes. A duration which combines different periods is not supported, for example "P1Y10M" is not supported.
+	// The retention period of snapshots for this schedule. The retention period value represents a duration and must be specified in the ISO-8601 duration format. The retention period can be in years, months, days, hours, and minutes. A period specified for years, months, and days is represented in the ISO-8601 format as "P<num>Y", "P<num>M", "P<num>D" respectively, for example "P10Y" represents a duration of 10 years. A duration in hours and minutes is represented by "PT<num>H" and "PT<num>M" respectively. The period string must contain only a single time element that is, either years, months, days, hours, or minutes. A duration which combines different periods is not supported, for example "P1Y10M" is not supported.
 	RetentionPeriod *string `json:"retention_period,omitempty" yaml:"retention_period,omitempty"`
 
 	// schedule

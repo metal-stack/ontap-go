@@ -62,6 +62,12 @@ NodesGetParams contains all the parameters to send to the API endpoint
 */
 type NodesGetParams struct {
 
+	/* AntiRansomwareVersion.
+
+	   Filter by anti_ransomware_version
+	*/
+	AntiRansomwareVersion *string
+
 	/* ClusterInterfacesIPAddress.
 
 	   Filter by cluster_interfaces.ip.address
@@ -977,6 +983,17 @@ func (o *NodesGetParams) WithHTTPClient(client *http.Client) *NodesGetParams {
 // SetHTTPClient adds the HTTPClient to the nodes get params
 func (o *NodesGetParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
+}
+
+// WithAntiRansomwareVersion adds the antiRansomwareVersion to the nodes get params
+func (o *NodesGetParams) WithAntiRansomwareVersion(antiRansomwareVersion *string) *NodesGetParams {
+	o.SetAntiRansomwareVersion(antiRansomwareVersion)
+	return o
+}
+
+// SetAntiRansomwareVersion adds the antiRansomwareVersion to the nodes get params
+func (o *NodesGetParams) SetAntiRansomwareVersion(antiRansomwareVersion *string) {
+	o.AntiRansomwareVersion = antiRansomwareVersion
 }
 
 // WithClusterInterfacesIPAddress adds the clusterInterfacesIPAddress to the nodes get params
@@ -2537,6 +2554,23 @@ func (o *NodesGetParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Regi
 		return err
 	}
 	var res []error
+
+	if o.AntiRansomwareVersion != nil {
+
+		// query param anti_ransomware_version
+		var qrAntiRansomwareVersion string
+
+		if o.AntiRansomwareVersion != nil {
+			qrAntiRansomwareVersion = *o.AntiRansomwareVersion
+		}
+		qAntiRansomwareVersion := qrAntiRansomwareVersion
+		if qAntiRansomwareVersion != "" {
+
+			if err := r.SetQueryParam("anti_ransomware_version", qAntiRansomwareVersion); err != nil {
+				return err
+			}
+		}
+	}
 
 	if o.ClusterInterfacesIPAddress != nil {
 

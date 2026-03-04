@@ -216,6 +216,7 @@ func NewCifsServiceDeleteDefault(code int) *CifsServiceDeleteDefault {
 | 655563     | NetBIOS name contains characters that are not allowed. |
 | 655562     | NetBIOS name is longer than 15 characters. |
 | 655923     | Retrieving credentials from AKV is not supported because the effective cluster version is not ONTAP 9.15.0 or later. |
+| 656487     | Missing fields when doing CIFS operation with hybrid auth user type. |
 */
 type CifsServiceDeleteDefault struct {
 	_statusCode int

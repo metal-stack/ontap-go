@@ -135,7 +135,6 @@ func NewAccountCreateDefault(code int) *AccountCreateDefault {
 | 5636136 | Specifying "is_ns_switch_group" as "true" is supported only for authentication method "nsswitch". |
 | 5636140 | Creating a login with application console for a data SVM  is not supported. |
 | 5636141 | Creating a login with application service-processor for a data SVM is not supported. |
-| 5636154 | The second authentication method parameter is supported for SSH and Service Processor (SP) applications only. |
 | 5636155 | The second-authentication-method parameter can be specified only if the authentication-method password or public key nsswitch. |
 | 5636156 | The same value cannot be specified for the second-authentication-method and the authentication-method. |
 | 5636164 | If the value for either the authentication-method second-authentication-method is nsswitch or password, the other parameter must differ. |
@@ -149,10 +148,12 @@ func NewAccountCreateDefault(code int) *AccountCreateDefault {
 | 5636207 | If the value for either the authentication-method or second-authentication-method parameters is domain, the other parameter must be publickey or none. |
 | 5636212 | TOTP is supported only when the primary authentication method is password or public key. |
 | 5636214 | Configuring the user with TOTP as secondary authentication method requires an effective cluster version of 9.13.1 or later |
-| 5636223 | Specifying "is_ns_switch_group" as "true" is supported only for SSH, ONTAPI and HTTP applications. |
+| 5636223 | Specifying "is_ns_switch_group" as "true" is supported only for SSH, ONTAPI, and HTTP applications. |
 | 5636224 | Configuring a Service Processor (SP) user with two-factor authentication requires an effective cluster version of 9.15.1 or later. |
 | 5636225 | For a Service Processor (SP) user, the second factor of authentication must be one of publickey or none. |
 | 5636226 | Internal error. Failed to check for ONTAP capability. |
+| 5636250 | The "second_authentication_method" parameter is supported for HTTP, SSH, and Service Processor (SP) applications only. |
+| 5636251 | For HTTP application, "publickey" is the only supported value for the "second_authentication_method" parameter; and can be specified only if the "authentication_methods" parameter has value "password" or "domain" or "nsswitch". |
 | 7077897 | Invalid character in username. |
 | 7077898 | The username must contain both letters and numbers. |
 | 7077899 | The username does not meet length requirements. |

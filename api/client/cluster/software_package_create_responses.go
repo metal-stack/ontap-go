@@ -220,9 +220,26 @@ func NewSoftwarePackageCreateDefault(code int) *SoftwarePackageCreateDefault {
 }
 
 /*
-SoftwarePackageCreateDefault describes a response with status code -1, with default header values.
+	SoftwarePackageCreateDefault describes a response with status code -1, with default header values.
 
-Error
+	ONTAP Error Response Codes
+
+| Error Code | Description |
+| ---------- | ----------- |
+| 10551327 | Package image with the same name already exists. |
+| 10551357 | Cannot perform an update when a previous update is still in progress. |
+| 10551359 | Internal error. Failed to process the package after download completed. Try uploading the file again or contact technical support for assistance. |
+| 10551381 | Package download failed. |
+| 10551382 | Package download is still running. |
+| 10551384 | Package download has not started. |
+| 10551391 | Internal error. Contact technical support for assistance. |
+| 10551392 | Internal error. Contact technical support for assistance. |
+| 10551496 | Firmware file already exists. |
+| 10551797 | Internal error. Failed to check if file upload is enabled. Contact technical support for assistance. |
+| 10551859 | Failed to set primary and secondary nodes to store new image. |
+| 39387137 | Invalid URL syntax was provided. Retry with a valid URL. |
+| 39387138 | Unsupported URL scheme provided. Retry with one of FILE://, FTP://, or HTTPS://. |
+Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SoftwarePackageCreateDefault struct {
 	_statusCode int

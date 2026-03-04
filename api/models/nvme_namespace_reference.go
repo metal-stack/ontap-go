@@ -21,7 +21,10 @@ type NvmeNamespaceReference struct {
 	// links
 	Links *NvmeNamespaceReferenceInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The fully qualified path name of the NVMe namespace composed from the volume name, qtree name and base name of the namespace.
+	// The name of an NVMe namespace.
+	// An NVMe namespace is located within a volume. Optionally, it can be located within a qtree in a volume.<br/>
+	// NVMe namespace names are paths of the form "/vol/\<volume>[/\<qtree>]/\<namespace>" where the qtree name is optional.
+	//
 	//
 	// Example: /vol/volume1/namespace1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`

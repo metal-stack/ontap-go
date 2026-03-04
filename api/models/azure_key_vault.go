@@ -102,6 +102,10 @@ type AzureKeyVault struct {
 	// Enum: ["svm","cluster"]
 	Scope *string `json:"scope,omitempty" yaml:"scope,omitempty"`
 
+	// Set to true to skip the verification of the updated user credentials when updating credentials. The default value is false.
+	// Example: false
+	SkipVerification *bool `json:"skip_verification,omitempty" yaml:"skip_verification,omitempty"`
+
 	// state
 	State *AzureKeyVaultInlineState `json:"state,omitempty" yaml:"state,omitempty"`
 
@@ -1375,7 +1379,7 @@ func (m *AzureKeyVaultInlineLinks) UnmarshalBinary(b []byte) error {
 }
 
 // AzureKeyVaultInlineState Indicates whether or not the AKV wrapped internal key is available cluster wide.
-// This is an advanced property; there is an added computationl cost to retrieving its value. The property is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter or GET for all advanced properties is enabled.
+// This is an advanced property; there is an added computational cost to retrieving its value. The property is not populated for either a collection GET or an instance GET unless it is explicitly requested using the `fields` query parameter or GET for all advanced properties is enabled.
 //
 // swagger:model azure_key_vault_inline_state
 type AzureKeyVaultInlineState struct {

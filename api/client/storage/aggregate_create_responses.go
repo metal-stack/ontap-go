@@ -253,6 +253,7 @@ func NewAggregateCreateDefault(code int) *AggregateCreateDefault {
 | 19726401 | Aggregate recommendations are not supported when the DR group is not in the "normal" state. |
 | 19726402 | Internal error. Unable to determine the MetroCluster configuration state. |
 | 19726403 | Aggregate recommendation is not supported when there are no healthy target connections to remote storage. |
+| 19726544 | POST on the aggregate endpoint is not supported on this version of ONTAP. |
 | 65537119 | Key management is not configured for the admin SVM. Configure a key manager for the admin SVM. |
 | 196608055 | Aggregate recommendation is not supported on this node because it does not support NetApp Aggregate Encryption (NAE). |
 | 196608206 | Internal error. Failed to get encryption operation status. |

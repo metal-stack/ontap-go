@@ -130,7 +130,7 @@ func NewAggregateGetDefault(code int) *AggregateGetDefault {
 | 7209049 | Cannot perform the operation because the aggregate is currently expanding. |
 | 8586225 | Unexpected error encountered when retrieving metrics and statistics for this aggregate. |
 | 19726382 | Another provisioning operation is in progress on this cluster. Wait a few minutes, and try the operation again. |
-| 19726390 | Unable to provide a recommmendation to expand the aggregate. |
+| 19726390 | Unable to provide a recommendation to expand the aggregate. |
 | 19726391 | Too many unassigned disks visible to the node that owns this aggregate. |
 | 19726392 | Layout of this aggregate is not a supported configuration. |
 | 19726393 | Failed to expand the aggregate. Aggregate expansion is not supported on this system. |

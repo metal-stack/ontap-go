@@ -146,7 +146,7 @@ func NewIscsiServiceCreateDefault(code int) *IscsiServiceCreateDefault {
 | 5373966 | An iSCSI service cannot be created in an SVM that is configured for NVMe. |
 | 5374077 | An iSCSI service already exists for the specified SVM. |
 | 5374893 | The SVM is stopped. The SVM must be running to create an iSCSI service. |
-| 5376452 | Service POST and DELETE are not supported on ASA.next. |
+| 5376452 | Service POST and DELETE are not supported on ASA r2. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type IscsiServiceCreateDefault struct {

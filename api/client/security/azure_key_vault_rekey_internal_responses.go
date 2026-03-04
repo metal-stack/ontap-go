@@ -205,6 +205,9 @@ func NewAzureKeyVaultRekeyInternalDefault(code int) *AzureKeyVaultRekeyInternalD
 | 65537120 | Azure Key Vault is not configured for the given SVM. |
 | 65537547 | One or more volume encryption keys for encrypted volumes of this data SVM are stored in the key manager configured for the admin SVM. Use the REST API POST method to migrate this data SVM's keys from the admin SVM's key manager to this data SVM's key manager before running the rekey operation. |
 | 65537559 | There are no existing internal keys for the SVM. A rekey operation is allowed for an SVM with one or more encryption keys. |
+| 65537610 | Rekey cannot be performed on the SVM while the enabled keystore configuration is being switched. If a previous attempt to switch the keystore configuration failed, or was interrupted, the system will continue to prevent rekeying for the SVM. Use the REST API PATCH method "/api/security/key-stores/{uuid}" to re-run and complete the operation. |
+| 65539436 | Rekey cannot be performed on the SVM while the enabled keystore configuration is being initialized. Wait until the keystore is in the active state, and rerun the rekey operation. |
+| 65539437 | Rekey cannot be performed on the SVM while the enabled keystore configuration is being disabled. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type AzureKeyVaultRekeyInternalDefault struct {

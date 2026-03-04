@@ -124,14 +124,15 @@ func NewIgroupModifyDefault(code int) *IgroupModifyDefault {
 | 5374749 | An initiator group's replication peer SVM cannot be changed without first being cleared. |
 | 5374759 | An error was reported by the peer cluster while modifying a replicated initiator group. The specific error will be included as a nested error. |
 | 5374763 | An error was reported by the peer cluster while renaming a replicated initiator group. The specific error will be included as a nested error. |
-| 5374765 | An initiator group cannot be replicated if it has unreplicated child initiatior groups. |
-| 5374766 | A replicated initiator group cannot be changed to unreplicated if it is the child of a replicated initiatior group. |
+| 5374765 | An initiator group cannot be replicated if it has unreplicated child initiator groups. |
+| 5374766 | A replicated initiator group cannot be changed to unreplicated if it is the child of a replicated initiator group. |
 | 5374770 | An unreplicated initiator group cannot be changed to replicated due to a conflict in its LUN maps. |
 | 5374852 | The initiator group does not exist. |
 | 5374868 | The initiator group was partially modified before an error was encountered while renaming the initiator group. |
 | 5375258 | The igroup is already replicated to a different peer SVM. |
 | 5376253 | Initiator group replication requires an effective cluster version of 9.15.1. |
 | 5376255 | Initiator group replication requires the peer cluster to have an effective cluster version of 9.15.1. |
+| 5376488 | An NVMe over Fabrics subsystem already exists with the requested name. |
 | 6620376 | SVM peering information is unavailable. |
 | 6620384 | The supplied SVMs are not peered. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.

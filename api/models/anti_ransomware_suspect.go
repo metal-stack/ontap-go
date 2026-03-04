@@ -25,9 +25,6 @@ type AntiRansomwareSuspect struct {
 	// file
 	File *AntiRansomwareSuspectInlineFile `json:"file,omitempty" yaml:"file,omitempty"`
 
-	// Specifies whether the suspected ransomware activity is a false positive or not. This parameter is only used when making a DELETE call.
-	IsFalsePositive *bool `json:"is_false_positive,omitempty" yaml:"is_false_positive,omitempty"`
-
 	// volume
 	Volume *AntiRansomwareSuspectInlineVolume `json:"volume,omitempty" yaml:"volume,omitempty"`
 }
@@ -231,7 +228,7 @@ type AntiRansomwareSuspectInlineFile struct {
 	// Example: d1/d2/d3
 	Path *string `json:"path,omitempty" yaml:"path,omitempty"`
 
-	// Reason behind this file bieng suspected
+	// Reason behind this file being suspected
 	// Example: High Entropy
 	Reason *string `json:"reason,omitempty" yaml:"reason,omitempty"`
 
@@ -412,7 +409,7 @@ type AntiRansomwareSuspectInlineVolume struct {
 	// links
 	Links *AntiRansomwareSuspectInlineVolumeInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 

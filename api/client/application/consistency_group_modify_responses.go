@@ -189,6 +189,7 @@ func NewConsistencyGroupModifyDefault(code int) *ConsistencyGroupModifyDefault {
 | Error Code | Description |
 | ---------- | ----------- |
 | 262285 | Consistency group does not support removing elements using a PATCH request. |
+| 2621761 | Consistency groups with DP volumes are not supported on storage-limit enabled SVM. |
 | 53411842 | Consistency group does not exist. |
 | 53411843 | A consistency group with specified UUID was not found. |
 | 53411844 | Specified consistency group was not found in the specified SVM. |
@@ -208,7 +209,10 @@ func NewConsistencyGroupModifyDefault(code int) *ConsistencyGroupModifyDefault {
 | 53411869 | Volume name is too long after appending a unique suffix. |
 | 53411870 | When using the \"round_robin\" layout, the volume count must not be greater than the LUN count. |
 | 53411942 | The application or component type of a consistency group that has an associated SnapMirror relationship cannot be changed. |
-| 53411959 | Volumes with Snapshot copy locking enabled cannot be added to a consistency group. |
+| 53411959 | Volumes with snapshot locking enabled cannot be added to a consistency group. |
+| 53412027 | Failed to update the snapshot policy because the snapshot policies are not supported on the destination consistency group of SnapMirror active sync relationships. |
+| 53412056 | The consistency group is not a FlexClone. |
+| 53412057 | Consistency group split operation failed. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type ConsistencyGroupModifyDefault struct {

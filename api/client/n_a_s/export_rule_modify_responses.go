@@ -112,6 +112,9 @@ func NewExportRuleModifyDefault(code int) *ExportRuleModifyDefault {
 
 | Error Code | Description |
 | ---------- | ----------- |
+| 262196     | Field 'svm.name' is not supported in the body of PATCH request |
+| 262197     | The value provided is invalid for the field |
+| 262203     | Field 'svm.uuid' is not supported in the body of PATCH request |
 | 1703954    | Export policy does not exist |
 | 1704036    | Invalid clientmatch:  missing domain name |
 | 1704037    | Invalid clientmatch:  missing network name |
@@ -130,6 +133,7 @@ func NewExportRuleModifyDefault(code int) *ExportRuleModifyDefault {
 | 3277000    | Upgrade all nodes to ONTAP 9.0.0 or above to use krb5p as a security flavor in export-policy rules |
 | 3277083    | User ID is not valid. Enter a value for User ID from 0 to 4294967295 |
 | 3277149    | The "Anon" field cannot be an empty string |
+| 6691623    | User is not authorized |
 */
 type ExportRuleModifyDefault struct {
 	_statusCode int

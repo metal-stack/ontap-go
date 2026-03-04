@@ -137,6 +137,10 @@ func NewS3UserModifyDefault(code int) *S3UserModifyDefault {
 
 | 92406196   | The specified value for the \"key_time_to_live\" field cannot be greater than the maximum limit specified for the \"max_key_time_to_live\" field in the object store server. |
 | 92406197   | Object store user \"user-2\" must have a non-zero value for the \"key_time_to_live\" field because the maximum limit specified for the \"max_key_time_to_live\" field in the object store server is not zero.
+| 92406200   | An object store user with the same access-key already exists. |
+| 92406201   | Missing access-key or secret-key. Either provide both of the keys or none. If not provided, keys are generated automatically. |
+| 92406202   | The \"delete_keys\" operation must be performed without specifying the user keys. |
+| 92406205   | The object store user access key contains invalid characters. Valid characters are 0-9 and A-Z. |
 */
 type S3UserModifyDefault struct {
 	_statusCode int

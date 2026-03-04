@@ -216,6 +216,14 @@ func NewS3BucketSvmModifyDefault(code int) *S3BucketSvmModifyDefault {
 | 92405940   | "The specified condition key is not valid for operator \"ip-address\". Valid choices of keys for this operator: source-ips.";
 | 92406014   | "Failed to modify event selector for bucket \\\"{bucket name}\\\". If value of either access or permission is set to none, then the other must be set to none as well.";
 | 92406032   | "Modifying the NAS path for a NAS bucket is not supported.";
+| 92406230   | "The value for \\\"retention.default_period\\\" parameter for object store bucket \\\"<bucket>\\\" cannot be greater than the maximum lock retention period set in the object store server for SVM \\\"<SVM>\\\". Check the maximum allowed lock retention period present in the object store server for SVM \\\"<SVM>\\\" and try the operation again.";
+| 92406236   | "The value for \\\"retention.default_period\\\" parameter for object store bucket \\\"<bucket>\\\" cannot be less than the minimum lock retention period set in the object store server for SVM \\\"<SVM>\\\". Check the minimum allowed lock retention period present in the object store server for SVM \\\"<SVM>\\\" and try the operation again.";
+| 92406217   | "The specified \"allowed_headers\" is not valid because it contains more than one wild card (\"*\") character.";
+| 92406224   | "A Cross-Origin Resource Sharing (CORS) rule must have an origin and HTTP method specified.";
+| 92406222   | "Cannot specify Cross-Origin Resource Sharing (CORS) configuration for object store bucket \\\"<bucket>\\\" on SVM \\\"<SVM>\\\". Specifying such configuration is supported on object store volumes created in ONTAP 9.8 or later releases only.";
+| 92406211   | "The specified method \"DONE\" is not valid. Valid methods are GET, PUT, DELETE, HEAD, and POST.";
+| 92405863   | "Failed to create CORS rules for bucket \"bb1\". Reason: \"Field \"index\" cannot be specified for this operation.\". Resolve all the issues and retry the operation.";
+| 92406228   | "Cannot exceed the maximum limit of 100 Cross-Origin Resource Sharing (CORS) rules per S3 bucket \\\"<bucket>\\\" in SVM \\\"<SVM>\\\".";;
 */
 type S3BucketSvmModifyDefault struct {
 	_statusCode int

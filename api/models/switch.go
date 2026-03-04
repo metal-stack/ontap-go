@@ -40,7 +40,7 @@ type Switch struct {
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 
 	// Switch Network.
-	// Enum: ["cluster","management","storage"]
+	// Enum: ["cluster","storage"]
 	Network *string `json:"network,omitempty" yaml:"network,omitempty"`
 
 	// Serial Number.
@@ -123,7 +123,7 @@ var switchTypeNetworkPropEnum []interface{}
 
 func init() {
 	var res []string
-	if err := json.Unmarshal([]byte(`["cluster","management","storage"]`), &res); err != nil {
+	if err := json.Unmarshal([]byte(`["cluster","storage"]`), &res); err != nil {
 		panic(err)
 	}
 	for _, v := range res {
@@ -135,9 +135,6 @@ const (
 
 	// SwitchNetworkCluster captures enum value "cluster"
 	SwitchNetworkCluster string = "cluster"
-
-	// SwitchNetworkManagement captures enum value "management"
-	SwitchNetworkManagement string = "management"
 
 	// SwitchNetworkStorage captures enum value "storage"
 	SwitchNetworkStorage string = "storage"

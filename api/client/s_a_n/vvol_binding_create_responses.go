@@ -141,7 +141,7 @@ func NewVvolBindingCreateDefault(code int) *VvolBindingCreateDefault {
 | 2621462 | The specified SVM does not exist or is not accessible to the caller. |
 | 2621706 | Both the SVM UUID and SVM name were supplied, but don't refer to the same SVM. |
 | 2621707 | No SVM was specified. Either `svm.name` or `svm.uuid` must be supplied. |
-| 5374238 | A LUN in a Snapshot copy was specified. |
+| 5374238 | A LUN in a snapshot was specified. |
 | 5374323 | The LUN specified as the protocol endpoint LUN is not of class `protocol_endpoint`. |
 | 5374325 | The LUN specified as the vVol LUN is not of class `vvol`. |
 | 5374874 | The UUID and name supplied for the protocol endpoint of Vvol LUN do not refer to the same LUN. Use to the `target` property of the error object to differentiate between the protocol endpoint LUN and the vVol LUN. |

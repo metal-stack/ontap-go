@@ -62,6 +62,24 @@ SecurityKeyManagerCollectionGetParams contains all the parameters to send to the
 */
 type SecurityKeyManagerCollectionGetParams struct {
 
+	/* ConfigurationName.
+
+	   Filter by configuration.name
+	*/
+	ConfigurationName *string
+
+	/* ConfigurationUUID.
+
+	   Filter by configuration.uuid
+	*/
+	ConfigurationUUID *string
+
+	/* Enabled.
+
+	   Filter by enabled
+	*/
+	Enabled *bool
+
 	/* ExternalClientCertificateName.
 
 	   Filter by external.client_certificate.name
@@ -311,6 +329,39 @@ func (o *SecurityKeyManagerCollectionGetParams) WithHTTPClient(client *http.Clie
 // SetHTTPClient adds the HTTPClient to the security key manager collection get params
 func (o *SecurityKeyManagerCollectionGetParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
+}
+
+// WithConfigurationName adds the configurationName to the security key manager collection get params
+func (o *SecurityKeyManagerCollectionGetParams) WithConfigurationName(configurationName *string) *SecurityKeyManagerCollectionGetParams {
+	o.SetConfigurationName(configurationName)
+	return o
+}
+
+// SetConfigurationName adds the configurationName to the security key manager collection get params
+func (o *SecurityKeyManagerCollectionGetParams) SetConfigurationName(configurationName *string) {
+	o.ConfigurationName = configurationName
+}
+
+// WithConfigurationUUID adds the configurationUUID to the security key manager collection get params
+func (o *SecurityKeyManagerCollectionGetParams) WithConfigurationUUID(configurationUUID *string) *SecurityKeyManagerCollectionGetParams {
+	o.SetConfigurationUUID(configurationUUID)
+	return o
+}
+
+// SetConfigurationUUID adds the configurationUuid to the security key manager collection get params
+func (o *SecurityKeyManagerCollectionGetParams) SetConfigurationUUID(configurationUUID *string) {
+	o.ConfigurationUUID = configurationUUID
+}
+
+// WithEnabled adds the enabled to the security key manager collection get params
+func (o *SecurityKeyManagerCollectionGetParams) WithEnabled(enabled *bool) *SecurityKeyManagerCollectionGetParams {
+	o.SetEnabled(enabled)
+	return o
+}
+
+// SetEnabled adds the enabled to the security key manager collection get params
+func (o *SecurityKeyManagerCollectionGetParams) SetEnabled(enabled *bool) {
+	o.Enabled = enabled
 }
 
 // WithExternalClientCertificateName adds the externalClientCertificateName to the security key manager collection get params
@@ -650,6 +701,57 @@ func (o *SecurityKeyManagerCollectionGetParams) WriteToRequest(r runtime.ClientR
 		return err
 	}
 	var res []error
+
+	if o.ConfigurationName != nil {
+
+		// query param configuration.name
+		var qrConfigurationName string
+
+		if o.ConfigurationName != nil {
+			qrConfigurationName = *o.ConfigurationName
+		}
+		qConfigurationName := qrConfigurationName
+		if qConfigurationName != "" {
+
+			if err := r.SetQueryParam("configuration.name", qConfigurationName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.ConfigurationUUID != nil {
+
+		// query param configuration.uuid
+		var qrConfigurationUUID string
+
+		if o.ConfigurationUUID != nil {
+			qrConfigurationUUID = *o.ConfigurationUUID
+		}
+		qConfigurationUUID := qrConfigurationUUID
+		if qConfigurationUUID != "" {
+
+			if err := r.SetQueryParam("configuration.uuid", qConfigurationUUID); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Enabled != nil {
+
+		// query param enabled
+		var qrEnabled bool
+
+		if o.Enabled != nil {
+			qrEnabled = *o.Enabled
+		}
+		qEnabled := swag.FormatBool(qrEnabled)
+		if qEnabled != "" {
+
+			if err := r.SetQueryParam("enabled", qEnabled); err != nil {
+				return err
+			}
+		}
+	}
 
 	if o.ExternalClientCertificateName != nil {
 

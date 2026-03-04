@@ -248,6 +248,8 @@ func NewSvmCreateDefault(code int) *SvmCreateDefault {
 | 13434917    | SVM creation successful. |
 | 13434918    | IPspace name not provided for creating an SVM. |
 | 458753      | Destination and gateway must belong to the same address family. |
+| 13434935    | FCP, iSCSI and NVMe cannot be disabled or disallowed on this platform. |
+| 23724038    | Invalid source for the provided ns-switch database. |
 ```
 <br/>
 */

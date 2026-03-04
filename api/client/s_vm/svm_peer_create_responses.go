@@ -64,7 +64,7 @@ type SvmPeerCreateCreated struct {
 	 */
 	Location string
 
-	Payload *models.SvmPeer
+	Payload *models.JobLinkResponse
 }
 
 // IsSuccess returns true when this svm peer create created response has a 2xx status code
@@ -107,7 +107,7 @@ func (o *SvmPeerCreateCreated) String() string {
 	return fmt.Sprintf("[POST /svm/peers][%d] svmPeerCreateCreated %s", 201, payload)
 }
 
-func (o *SvmPeerCreateCreated) GetPayload() *models.SvmPeer {
+func (o *SvmPeerCreateCreated) GetPayload() *models.JobLinkResponse {
 	return o.Payload
 }
 
@@ -120,7 +120,7 @@ func (o *SvmPeerCreateCreated) readResponse(response runtime.ClientResponse, con
 		o.Location = hdrLocation
 	}
 
-	o.Payload = new(models.SvmPeer)
+	o.Payload = new(models.JobLinkResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -146,7 +146,7 @@ type SvmPeerCreateAccepted struct {
 	 */
 	Location string
 
-	Payload *models.SvmPeer
+	Payload *models.JobLinkResponse
 }
 
 // IsSuccess returns true when this svm peer create accepted response has a 2xx status code
@@ -189,7 +189,7 @@ func (o *SvmPeerCreateAccepted) String() string {
 	return fmt.Sprintf("[POST /svm/peers][%d] svmPeerCreateAccepted %s", 202, payload)
 }
 
-func (o *SvmPeerCreateAccepted) GetPayload() *models.SvmPeer {
+func (o *SvmPeerCreateAccepted) GetPayload() *models.JobLinkResponse {
 	return o.Payload
 }
 
@@ -202,7 +202,7 @@ func (o *SvmPeerCreateAccepted) readResponse(response runtime.ClientResponse, co
 		o.Location = hdrLocation
 	}
 
-	o.Payload = new(models.SvmPeer)
+	o.Payload = new(models.JobLinkResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
@@ -234,6 +234,8 @@ func NewSvmPeerCreateDefault(code int) *SvmPeerCreateDefault {
 | 26345580    | SVM name or SVM UUID must be provided. |
 | 9896086     | Peer SVM name conflicts with one of the following: a peer SVM in an existing SVM peer relationship, a local SVM, or an IPSpace. Use the \"name\" property to uniquely specify the peer SVM alias name. |
 | 9895996     | Cannot specify lun-copy as an inter-cluster application. |
+| 9896093     | The flexcache application is not supported on this platform. |
+| 9896095     | SVM name is in use by a peer Vserver in a Vserver peer relationship. |
 ```
 <br/>
 */

@@ -23,6 +23,9 @@ type QtreeStatisticsRawReference struct {
 	// iops raw
 	IopsRaw *QtreeStatisticsRawReferenceInlineIopsRaw `json:"iops_raw,omitempty" yaml:"iops_raw,omitempty"`
 
+	// latency raw
+	LatencyRaw *QtreeStatisticsRawReferenceInlineLatencyRaw `json:"latency_raw,omitempty" yaml:"latency_raw,omitempty"`
+
 	// Any errors associated with the sample. For example, if the aggregation of data over multiple nodes fails then any of the partial errors might be returned, "ok" on success, or "error" on any internal uncategorized failure. Whenever a sample collection is missed but done at a later time, it is back filled with the next closest collection and tagged with "backfilled_data". "inconsistent_delta_time" is encountered when the time between two collections is not the same for all nodes. Therefore, the aggregated value might be over or under inflated. "negative_delta" is returned when an expected monotonically increasing value has decreased in value. "inconsistent_old_data" is returned when one or more nodes does not have the latest data.
 	// Example: ok
 	// Read Only: true
@@ -44,6 +47,10 @@ func (m *QtreeStatisticsRawReference) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateIopsRaw(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateLatencyRaw(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -76,6 +83,25 @@ func (m *QtreeStatisticsRawReference) validateIopsRaw(formats strfmt.Registry) e
 				return ve.ValidateName("iops_raw")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("iops_raw")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QtreeStatisticsRawReference) validateLatencyRaw(formats strfmt.Registry) error {
+	if swag.IsZero(m.LatencyRaw) { // not required
+		return nil
+	}
+
+	if m.LatencyRaw != nil {
+		if err := m.LatencyRaw.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("latency_raw")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("latency_raw")
 			}
 			return err
 		}
@@ -189,6 +215,10 @@ func (m *QtreeStatisticsRawReference) ContextValidate(ctx context.Context, forma
 		res = append(res, err)
 	}
 
+	if err := m.contextValidateLatencyRaw(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateStatus(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -220,6 +250,27 @@ func (m *QtreeStatisticsRawReference) contextValidateIopsRaw(ctx context.Context
 				return ve.ValidateName("iops_raw")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("iops_raw")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *QtreeStatisticsRawReference) contextValidateLatencyRaw(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.LatencyRaw != nil {
+
+		if swag.IsZero(m.LatencyRaw) { // not required
+			return nil
+		}
+
+		if err := m.LatencyRaw.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("latency_raw")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("latency_raw")
 			}
 			return err
 		}
@@ -301,7 +352,7 @@ type QtreeStatisticsRawReferenceInlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -339,6 +390,60 @@ func (m *QtreeStatisticsRawReferenceInlineIopsRaw) UnmarshalBinary(b []byte) err
 	return nil
 }
 
+// QtreeStatisticsRawReferenceInlineLatencyRaw The raw latency observed at the storage object, in microseconds. This can be divided by the raw IOPS value to calculate the average latency per I/O operation.
+//
+// swagger:model qtree_statistics_raw_reference_inline_latency_raw
+type QtreeStatisticsRawReferenceInlineLatencyRaw struct {
+
+	// Performance metric for other I/O operations. Other I/O operations can be metadata operations, such as directory lookups and so on.
+	Other *int64 `json:"other,omitempty" yaml:"other,omitempty"`
+
+	// Performance metric for read I/O operations.
+	// Example: 200
+	Read *int64 `json:"read,omitempty" yaml:"read,omitempty"`
+
+	// Performance metric aggregated over all types of I/O operations.
+	// Example: 1000
+	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
+
+	// Performance metric for write I/O operations.
+	// Example: 100
+	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
+}
+
+// Validate validates this qtree statistics raw reference inline latency raw
+func (m *QtreeStatisticsRawReferenceInlineLatencyRaw) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validate this qtree statistics raw reference inline latency raw based on the context it is used
+func (m *QtreeStatisticsRawReferenceInlineLatencyRaw) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+// MarshalBinary interface implementation
+func (m *QtreeStatisticsRawReferenceInlineLatencyRaw) MarshalBinary() ([]byte, error) {
+	if m == nil {
+		return nil, nil
+	}
+	return swag.WriteJSON(m)
+}
+
+// UnmarshalBinary interface implementation
+func (m *QtreeStatisticsRawReferenceInlineLatencyRaw) UnmarshalBinary(b []byte) error {
+	var res QtreeStatisticsRawReferenceInlineLatencyRaw
+	if err := swag.ReadJSON(b, &res); err != nil {
+		return err
+	}
+	*m = res
+	return nil
+}
+
 // QtreeStatisticsRawReferenceInlineThroughputRaw Throughput bytes observed at the storage object. This should be used along with delta time to calculate the rate of throughput bytes per unit of time.
 //
 // swagger:model qtree_statistics_raw_reference_inline_throughput_raw
@@ -355,7 +460,7 @@ type QtreeStatisticsRawReferenceInlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }

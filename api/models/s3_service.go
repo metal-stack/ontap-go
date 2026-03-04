@@ -55,8 +55,16 @@ type S3Service struct {
 	// Example: PT6H3M
 	MaxKeyTimeToLive *string `json:"max_key_time_to_live,omitempty" yaml:"max_key_time_to_live,omitempty"`
 
+	// Specifies the maximum value that can be set as the retention period for an object in a bucket with locking enabled. The value for this property can be in years or days, not both. The value represents a duration and must be specified in the ISO-8601 duration format.  A period specified for years and days is represented in the ISO-8601 format as "P<num>Y" and "P<num>D" respectively, for example "P10Y" represents a duration of 10 years.
+	// Example: P10Y
+	MaxLockRetentionPeriod *string `json:"max_lock_retention_period,omitempty" yaml:"max_lock_retention_period,omitempty"`
+
 	// metric
 	Metric *S3ServiceInlineMetric `json:"metric,omitempty" yaml:"metric,omitempty"`
+
+	// Specifies the minimum value that can be set as the retention period for an object in a bucket with locking enabled. The value for this property can be in years or days, not both. The value represents a duration and must be specified in the ISO-8601 duration format.  A period specified for years and days is represented in the ISO-8601 format as "P<num>Y" and "P<num>D" respectively, for example "P10Y" represents a duration of 10 years.
+	// Example: P10Y
+	MinLockRetentionPeriod *string `json:"min_lock_retention_period,omitempty" yaml:"min_lock_retention_period,omitempty"`
 
 	// Specifies the name of the S3 server. A server name can contain 3 to 253 characters using only the following combination of characters':' 0-9, A-Z, a-z, ".", and "-".
 	// Example: Server-1
@@ -1231,7 +1239,7 @@ type S3ServiceInlineMetricInlineIops struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1285,7 +1293,7 @@ type S3ServiceInlineMetricInlineLatency struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1431,7 +1439,7 @@ type S3ServiceInlineMetricInlineThroughput struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1809,7 +1817,7 @@ type S3ServiceInlineStatisticsInlineIopsRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1863,7 +1871,7 @@ type S3ServiceInlineStatisticsInlineLatencyRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }
@@ -1914,7 +1922,7 @@ type S3ServiceInlineStatisticsInlineThroughputRaw struct {
 	// Example: 1000
 	Total *int64 `json:"total,omitempty" yaml:"total,omitempty"`
 
-	// Peformance metric for write I/O operations.
+	// Performance metric for write I/O operations.
 	// Example: 100
 	Write *int64 `json:"write,omitempty" yaml:"write,omitempty"`
 }

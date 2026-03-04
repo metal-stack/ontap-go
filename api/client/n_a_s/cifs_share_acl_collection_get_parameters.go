@@ -132,6 +132,12 @@ type CifsShareACLCollectionGetParams struct {
 	*/
 	Type *string
 
+	/* UnixID.
+
+	   Filter by unix_id
+	*/
+	UnixID *int64
+
 	/* UserOrGroup.
 
 	   Filter by user_or_group
@@ -326,6 +332,17 @@ func (o *CifsShareACLCollectionGetParams) SetType(typeVar *string) {
 	o.Type = typeVar
 }
 
+// WithUnixID adds the unixID to the cifs share acl collection get params
+func (o *CifsShareACLCollectionGetParams) WithUnixID(unixID *int64) *CifsShareACLCollectionGetParams {
+	o.SetUnixID(unixID)
+	return o
+}
+
+// SetUnixID adds the unixId to the cifs share acl collection get params
+func (o *CifsShareACLCollectionGetParams) SetUnixID(unixID *int64) {
+	o.UnixID = unixID
+}
+
 // WithUserOrGroup adds the userOrGroup to the cifs share acl collection get params
 func (o *CifsShareACLCollectionGetParams) WithUserOrGroup(userOrGroup *string) *CifsShareACLCollectionGetParams {
 	o.SetUserOrGroup(userOrGroup)
@@ -491,6 +508,23 @@ func (o *CifsShareACLCollectionGetParams) WriteToRequest(r runtime.ClientRequest
 		if qType != "" {
 
 			if err := r.SetQueryParam("type", qType); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.UnixID != nil {
+
+		// query param unix_id
+		var qrUnixID int64
+
+		if o.UnixID != nil {
+			qrUnixID = *o.UnixID
+		}
+		qUnixID := swag.FormatInt64(qrUnixID)
+		if qUnixID != "" {
+
+			if err := r.SetQueryParam("unix_id", qUnixID); err != nil {
 				return err
 			}
 		}

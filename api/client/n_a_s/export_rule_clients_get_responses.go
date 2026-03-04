@@ -120,9 +120,13 @@ func NewExportRuleClientsGetDefault(code int) *ExportRuleClientsGetDefault {
 }
 
 /*
-ExportRuleClientsGetDefault describes a response with status code -1, with default header values.
+	ExportRuleClientsGetDefault describes a response with status code -1, with default header values.
 
-Error
+	ONTAP Error Response Codes
+
+| Error Code | Description |
+| ---------- | ----------- |
+| 6691623    | User is not authorized |
 */
 type ExportRuleClientsGetDefault struct {
 	_statusCode int

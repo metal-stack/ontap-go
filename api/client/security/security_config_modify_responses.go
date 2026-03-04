@@ -209,8 +209,36 @@ func NewSecurityConfigModifyDefault(code int) *SecurityConfigModifyDefault {
 | 52428830 | Cannot enable FIPS-compliant mode because the configured minimum security strength for certificates is not compatible. |
 | 52428832 | TLSv1.1 is not supported when FIPS is enabled. |
 | 52559974 | Cannot enable FIPS-compliant mode because a certificate that is not FIPS-compliant is in use. |
+| 65536987 | One or more key servers are unavailable. |
+| 196608047 | Operation is not allowed when volume move is in progress. |
+| 196608070 | Key manager is not configured on the cluster. Configure either an external Key Management Server or an onboard key manager. |
 | 196608081 | Cannot start software encryption conversion while there are data volumes in the cluster. |
 | 196608082 | The operation is not valid when the MetroCluster is in switchover mode. |
+| 196608368 | Failed to perform the requested operation. One or more data volume in offline state. |
+| 196608369 | Conversion cannot be enabled because the cluster contains read-only or primordial logical data-protection volumes. Retry the patch operation after deleting those volumes. |
+| 196608370 | The PATCH request to enable conversion failed because one or more volumes are already queued for the encryption conversion operation. |
+| 196608372 | An automated ONTAP update is in progress, retry the PATCH request after it is completed. |
+| 196608373 | Unable to perform the encryption operation because of a mixed-release cluster. Complete the upgrade or revert operation, then try the PATCH request again. |
+| 196608374 | Failed to perform the requested operation. One or more SVMs not in admin running state. |
+| 196608375 | Failed to perform the requested operation. One or more volume is of temporary type. |
+| 196608376 | Internal error. Could not get volume encryption information. |
+| 196608377 | Internal error. The Volume Location Database (VLDB) is inconsistent. Contact support personnel to resolve this issue. |
+| 196608378 | Failed to perform the requested operation. Data SVM Key manager configuration is in mixed state. |
+| 196608379 | Internal error. The encryption metadata for the volume is inconsistent. Contact technical support for assistance. |
+| 196608380 | Failed to perform the requested operation. Wafliron is currently active. |
+| 196608381 | Failed to perform the requested operation. A clone split operation is in progress. |
+| 196608382 | Failed to perform the requested operation. A volume rehost operation is in progress. |
+| 196608383 | Failed to perform the requested operation. The cluster contains one or more SnapLock volume. |
+| 196608384 | The PATCH request to start rekey failed because the cluster contains one or more plain text volumes. Retry the PATCH request after converting the existing plain text volumes to encrypted volumes. |
+| 196608385 | Failed to perform the requested operation. Keystore configuration is being switched. Wait until the keystore is in the active state and then try the PATCH request again. |
+| 196608386 | Failed to perform the requested operation. Rekey operation for one or more SVMs is in progress. Wait until the keystore is in the active state and then try the PATCH request again. |
+| 196608387 | \"software_data_encryption.conversion_enabled\" cannot be set to \"false\" in a PATCH request. |
+| 196608388 | Both \"software_data_encryption.conversion_enabled\" and \"software_data_encryption.disabled_by_default\" cannot be set to \"true\" in a single PATCH request. |
+| 196608389 | Both \"software_data_encryption.conversion_enabled\" and \"software_data_encryption.rekey\" cannot be set to \"true\" in a single PATCH request. |
+| 196608390 | \"software_data_encryption.rekey\" cannot be set to \"false\" in a PATCH request. |
+| 196608391 | Both \"software_data_encryption.rekey\" and \"software_data_encryption.disabled_by_default\" cannot be set to \"true\" in a single PATCH request. |
+| 196608392 | The PATCH request for cluster level rekey requires an effective cluster version of 9.16.1 or later. |
+| 196608393 | The PATCH request for cluster level rekey is not supported on this platform. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SecurityConfigModifyDefault struct {

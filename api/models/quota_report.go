@@ -37,15 +37,11 @@ type QuotaReport struct {
 	// qtree
 	Qtree *QuotaReportInlineQtree `json:"qtree,omitempty" yaml:"qtree,omitempty"`
 
-	// This parameter specifies the target user or users associated with the given quota report record. This parameter is available for user quota records and is not available for group or tree quota records. The target user or users are identified by a user name and user identifier. The user name can be a UNIX user name or a Windows user name, and the identifer can be a UNIX user identifier or a Windows security identifier.
+	// This parameter specifies the target user or users associated with the given quota report record. This parameter is available for user quota records and is not available for group or tree quota records. The target user or users are identified by a user name and user identifier. The user name can be a UNIX user name or a Windows user name, and the identifier can be a UNIX user identifier or a Windows security identifier.
 	QuotaReportInlineUsers []*QuotaReportInlineUsersInlineArrayItem `json:"users,omitempty" yaml:"users,omitempty"`
 
 	// space
 	Space *QuotaReportInlineSpace `json:"space,omitempty" yaml:"space,omitempty"`
-
-	// Quota specifier
-	// Read Only: true
-	Specifier *string `json:"specifier,omitempty" yaml:"specifier,omitempty"`
 
 	// svm
 	Svm *QuotaReportInlineSvm `json:"svm,omitempty" yaml:"svm,omitempty"`
@@ -341,10 +337,6 @@ func (m *QuotaReport) ContextValidate(ctx context.Context, formats strfmt.Regist
 		res = append(res, err)
 	}
 
-	if err := m.contextValidateSpecifier(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateSvm(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -497,15 +489,6 @@ func (m *QuotaReport) contextValidateSpace(ctx context.Context, formats strfmt.R
 			}
 			return err
 		}
-	}
-
-	return nil
-}
-
-func (m *QuotaReport) contextValidateSpecifier(ctx context.Context, formats strfmt.Registry) error {
-
-	if err := validate.ReadOnly(ctx, "specifier", "body", m.Specifier); err != nil {
-		return err
 	}
 
 	return nil
@@ -799,7 +782,7 @@ func (m *QuotaReportInlineFilesInlineUsed) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// QuotaReportInlineGroup This parameter specifies the target group associated with the given quota report record. This parameter is available for group quota records and is not available for user or tree quota records. The target group is identified by a UNIX group name and UNIX group identifer.
+// QuotaReportInlineGroup This parameter specifies the target group associated with the given quota report record. This parameter is available for group quota records and is not available for user or tree quota records. The target group is identified by a UNIX group name and UNIX group identifier.
 //
 // swagger:model quota_report_inline_group
 type QuotaReportInlineGroup struct {
@@ -1665,7 +1648,7 @@ type QuotaReportInlineVolume struct {
 	// links
 	Links *QuotaReportInlineVolumeInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 

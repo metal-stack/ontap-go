@@ -29,7 +29,7 @@ type FlexcacheRelationship struct {
 	// Format: date-time
 	CreateTime *strfmt.DateTime `json:"create_time,omitempty" yaml:"create_time,omitempty"`
 
-	// Cluster managerment IP of the remote cluster.
+	// Cluster management IP of the remote cluster.
 	// Example: 10.10.10.7
 	// Read Only: true
 	IPAddress *string `json:"ip_address,omitempty" yaml:"ip_address,omitempty"`
@@ -775,7 +775,7 @@ type FlexcacheRelationshipInlineVolume struct {
 	// links
 	Links *FlexcacheRelationshipInlineVolumeInlineLinks `json:"_links,omitempty" yaml:"_links,omitempty"`
 
-	// The name of the volume. This field cannot be specified in a POST or PATCH method.
+	// The name of the volume. This field cannot be specified in a PATCH method.
 	// Example: volume1
 	Name *string `json:"name,omitempty" yaml:"name,omitempty"`
 

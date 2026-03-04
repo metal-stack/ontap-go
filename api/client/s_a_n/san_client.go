@@ -180,7 +180,7 @@ type ClientService interface {
 
 	LunAttributeCollectionGet(params *LunAttributeCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunAttributeCollectionGetOK, error)
 
-	LunAttributeCreate(params *LunAttributeCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunAttributeCreateCreated, error)
+	LunAttributeCreate(params *LunAttributeCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunAttributeCreateCreated, *LunAttributeCreateAccepted, error)
 
 	LunAttributeDelete(params *LunAttributeDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunAttributeDeleteOK, error)
 
@@ -190,9 +190,9 @@ type ClientService interface {
 
 	LunCollectionGet(params *LunCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunCollectionGetOK, error)
 
-	LunCreate(params *LunCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunCreateCreated, error)
+	LunCreate(params *LunCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunCreateCreated, *LunCreateAccepted, error)
 
-	LunDelete(params *LunDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunDeleteOK, error)
+	LunDelete(params *LunDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunDeleteOK, *LunDeleteAccepted, error)
 
 	LunGet(params *LunGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunGetOK, error)
 
@@ -212,7 +212,7 @@ type ClientService interface {
 
 	LunMapReportingNodeGet(params *LunMapReportingNodeGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunMapReportingNodeGetOK, error)
 
-	LunModify(params *LunModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunModifyOK, error)
+	LunModify(params *LunModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunModifyOK, *LunModifyAccepted, error)
 
 	PerformanceFcpMetricCollectionGet(params *PerformanceFcpMetricCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PerformanceFcpMetricCollectionGetOK, error)
 
@@ -1895,7 +1895,7 @@ func (a *Client) LunAttributeCollectionGet(params *LunAttributeCollectionGetPara
 ### Learn more
 * [`DOC /storage/luns/{lun.uuid}/attributes`](#docs-SAN-storage_luns_{lun.uuid}_attributes)
 */
-func (a *Client) LunAttributeCreate(params *LunAttributeCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunAttributeCreateCreated, error) {
+func (a *Client) LunAttributeCreate(params *LunAttributeCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunAttributeCreateCreated, *LunAttributeCreateAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewLunAttributeCreateParams()
@@ -1919,15 +1919,17 @@ func (a *Client) LunAttributeCreate(params *LunAttributeCreateParams, authInfo r
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*LunAttributeCreateCreated)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *LunAttributeCreateCreated:
+		return value, nil, nil
+	case *LunAttributeCreateAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*LunAttributeCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -2063,6 +2065,9 @@ There is an added computational cost to retrieving values for these properties. 
 * `copy.*`
 * `lun_maps.*`
 * `movement.*`
+* `space.physical_used`
+* `space.physical_used_by_snapshots`
+* `space.efficiency_ratio`
 * `statistics.*`
 * `vvol.bindings.*`
 * `metric.*`
@@ -2131,10 +2136,12 @@ If not specified in POST, the follow default property values are assigned.
 * `lun copy start`
 * `volume file clone autodelete`
 * `volume file clone create`
+
+POST is asynchronous when creating a new LUN. It is synchronous when converting a namespace to a LUN via the `convert` property.
 ### Learn more
 * [`DOC /storage/luns`](#docs-SAN-storage_luns)
 */
-func (a *Client) LunCreate(params *LunCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunCreateCreated, error) {
+func (a *Client) LunCreate(params *LunCreateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunCreateCreated, *LunCreateAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewLunCreateParams()
@@ -2158,15 +2165,17 @@ func (a *Client) LunCreate(params *LunCreateParams, authInfo runtime.ClientAuthI
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*LunCreateCreated)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *LunCreateCreated:
+		return value, nil, nil
+	case *LunCreateAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*LunCreateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -2175,10 +2184,11 @@ func (a *Client) LunCreate(params *LunCreateParams, authInfo runtime.ClientAuthI
 ### Related ONTAP commands
 * `lun copy cancel`
 * `lun delete`
+
 ### Learn more
 * [`DOC /storage/luns`](#docs-SAN-storage_luns)
 */
-func (a *Client) LunDelete(params *LunDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunDeleteOK, error) {
+func (a *Client) LunDelete(params *LunDeleteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunDeleteOK, *LunDeleteAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewLunDeleteParams()
@@ -2202,15 +2212,17 @@ func (a *Client) LunDelete(params *LunDeleteParams, authInfo runtime.ClientAuthI
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*LunDeleteOK)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *LunDeleteOK:
+		return value, nil, nil
+	case *LunDeleteAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*LunDeleteDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -2224,6 +2236,9 @@ There is an added computational cost to retrieving values for these properties. 
 * `copy.*`
 * `lun_maps.*`
 * `movement.*`
+* `space.physical_used`
+* `space.physical_used_by_snapshots`
+* `space.efficiency_ratio`
 * `statistics.*`
 * `vvol.bindings.*`
 * `metric.*`
@@ -2644,10 +2659,11 @@ func (a *Client) LunMapReportingNodeGet(params *LunMapReportingNodeGetParams, au
 * `lun move start`
 * `lun resize`
 * `volume file clone autodelete`
+
 ### Learn more
 * [`DOC /storage/luns`](#docs-SAN-storage_luns)
 */
-func (a *Client) LunModify(params *LunModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunModifyOK, error) {
+func (a *Client) LunModify(params *LunModifyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LunModifyOK, *LunModifyAccepted, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewLunModifyParams()
@@ -2671,15 +2687,17 @@ func (a *Client) LunModify(params *LunModifyParams, authInfo runtime.ClientAuthI
 
 	result, err := a.transport.Submit(op)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	success, ok := result.(*LunModifyOK)
-	if ok {
-		return success, nil
+	switch value := result.(type) {
+	case *LunModifyOK:
+		return value, nil, nil
+	case *LunModifyAccepted:
+		return nil, value, nil
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*LunModifyDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+	return nil, nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
 /*
@@ -2835,7 +2853,7 @@ func (a *Client) PerformanceIscsiMetricGet(params *PerformanceIscsiMetricGetPara
 }
 
 /*
-PerformanceLunMetricCollectionGet Retrieves historical performance metrics for a LUN.
+PerformanceLunMetricCollectionGet Retrieves historical space and performance metrics for a LUN.
 */
 func (a *Client) PerformanceLunMetricCollectionGet(params *PerformanceLunMetricCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PerformanceLunMetricCollectionGetOK, error) {
 	// TODO: Validate the params before sending
@@ -2873,7 +2891,7 @@ func (a *Client) PerformanceLunMetricCollectionGet(params *PerformanceLunMetricC
 }
 
 /*
-PerformanceLunMetricGet Retrieves historical performance metrics for a LUN for a specific time.
+PerformanceLunMetricGet Retrieves historical space and performance metrics for a LUN for a specific time.
 */
 func (a *Client) PerformanceLunMetricGet(params *PerformanceLunMetricGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PerformanceLunMetricGetOK, error) {
 	// TODO: Validate the params before sending

@@ -236,6 +236,12 @@ func NewCloudTargetModifyDefault(code int) *CloudTargetModifyDefault {
 | 787302 | Cannot use HTTP port with \"-is-ssl-enabled\" set to true. |
 | 787303 | Cannot use HTTPS port with \"-is-ssl-enabled\" set to false. |
 | 787306 | Object store is not accessible from the partner cluster in a MetroCluster configuration. |
+| 787350 | Modifying an object store configuration with a Managed Service Identity (MSI) token is only supported on Azure NetApp Files. |
+| 787351 | Internal Error. Invalid authentication type. |
+| 787352 | Modifying an object store configuration with a Managed Service Identity (MSI) token requires an effective cluster version of ONTAP 9.16.1 or later. |
+| 787353 | Modifying an object store configuration with a Managed Service Identity (MSI) token is not supported for this owner. |
+| 787354 | The specified properties are mutually exclusive. |
+| 787355 | _azure_msi_ `authentication-type` is only supported with _Azure_Cloud_ `provider-type`. |
 | 45940761 | Hostname cannot be resolved. Check the spelling of the hostname and check the system DNS availability using the \"vserver services name-service dns check\" command. |
 | 45940778 | Bucket already exists. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.

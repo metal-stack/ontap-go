@@ -44,10 +44,10 @@ type Igroup struct {
 	//
 	DeleteOnUnmap *bool `json:"delete_on_unmap,omitempty" yaml:"delete_on_unmap,omitempty"`
 
-	// The initiator groups that are members of the group. Optional in POST.<br/>
+	// The existing initiator groups that are members of the group. Optional in POST.<br/>
 	// This property is mutually exclusive with the _initiators_ property during POST.<br/>
 	// This array contains only the direct children of the initiator group. If the member initiator groups have further nested initiator groups, those are reported in the `igroups` property of the child initiator group.<br/>
-	// Zero or more nested initiator groups can be supplied when the initiator group is created. The initiator group will act as if it contains the aggregatation of all initiators in any nested initiator groups.<br/>
+	// Zero or more nested initiator groups can be supplied when the initiator group is created. The initiator group will act as if it contains the aggregation of all initiators in any nested initiator groups.<br/>
 	// After creation, nested initiator groups can be added or removed from the initiator group using the `/protocols/san/igroups/{igroup.uuid}/igroups` endpoint. See [`POST /protocols/san/igroups/{igroup.uuid}/igroups`](#/SAN/igroup_nested_create) and [`DELETE /protocols/san/igroups/{igroup.uuid}/igroups/{uuid}`](#/SAN/igroup_nested_delete) for more details.
 	//
 	IgroupInlineIgroups []*IgroupChild `json:"igroups,omitempty" yaml:"igroups,omitempty"`
@@ -61,7 +61,7 @@ type Igroup struct {
 
 	// All LUN maps with which the initiator is associated.<br/>
 	// If the requested igroup is part of a remote, non-local, MetroCluster SVM, the LUN maps are not retrieved.<br/>
-	// There is an added computational cost to retrieving property values for `lun_maps`. They are not populated for either a collection GET or an instance GET unless explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
+	// There is an added computational cost to retrieving property values for `lun_maps`. They are not populated for a GET request unless explicitly requested using the `fields` query parameter. See [`Requesting specific fields`](#Requesting_specific_fields) to learn more.
 	//
 	// Read Only: true
 	IgroupInlineLunMaps []*IgroupInlineLunMapsInlineArrayItem `json:"lun_maps,omitempty" yaml:"lun_maps,omitempty"`
@@ -3827,7 +3827,7 @@ func (m *IgroupInlinePortsetInlineLinks) UnmarshalBinary(b []byte) error {
 	return nil
 }
 
-// IgroupInlineReplication Properties related to initator group replication.
+// IgroupInlineReplication Properties related to initiator group replication.
 //
 // swagger:model igroup_inline_replication
 type IgroupInlineReplication struct {

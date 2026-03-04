@@ -128,6 +128,7 @@ func NewNdmpPasswordGetDefault(code int) *NdmpPasswordGetDefault {
 |-------------|--------------|
 | 65601536    | The operation is not supported because NDMP SVM-aware mode is disabled.|
 | 65601560    | An NDMP-specific password is not supported for authentication type \"plaintext_sso\".|
+| 65601587    | The NDMP protocol is not supported on this platform.|
 */
 type NdmpPasswordGetDefault struct {
 	_statusCode int

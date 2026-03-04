@@ -15,7 +15,7 @@ import (
 	"github.com/go-openapi/validate"
 )
 
-// ConsistencyGroupNvmeHostDhHmacChap A container for properties of NVMe in-band authentication with the DH-HMAC-CHAP protocol.
+// ConsistencyGroupNvmeHostDhHmacChap A container for the configuration of NVMe in-band authentication using the DH-HMAC-CHAP protocol for a host.
 //
 // swagger:model consistency_group_nvme_host_dh_hmac_chap
 type ConsistencyGroupNvmeHostDhHmacChap struct {
@@ -41,6 +41,16 @@ type ConsistencyGroupNvmeHostDhHmacChap struct {
 	//
 	// Example: DHHC-1:00:ia6zGodOr4SEG0Zzaw398rpY0wqipUWj4jWjUh4HWUz6aQ2n:
 	HostSecretKey *string `json:"host_secret_key,omitempty" yaml:"host_secret_key,omitempty"`
+
+	// The expected NVMe in-band authentication mode for the host. This property is an indication of which secrets are configured for the host. When set to:
+	// - none: The host has neither the host nor controller secret configured, and no authentication is performed.
+	// - unidirectional: The host has a host secret configured. The controller will authenticate the host.
+	// - bidirectional: The host has both a host and controller secret configured. The controller will authenticate the host and the host will authenticate the controller.
+	//
+	// Example: bidirectional
+	// Read Only: true
+	// Enum: ["none","unidirectional","bidirectional"]
+	Mode *string `json:"mode,omitempty" yaml:"mode,omitempty"`
 }
 
 // Validate validates this consistency group nvme host dh hmac chap
@@ -52,6 +62,10 @@ func (m *ConsistencyGroupNvmeHostDhHmacChap) Validate(formats strfmt.Registry) e
 	}
 
 	if err := m.validateHashFunction(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateMode(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -157,8 +171,71 @@ func (m *ConsistencyGroupNvmeHostDhHmacChap) validateHashFunction(formats strfmt
 	return nil
 }
 
-// ContextValidate validates this consistency group nvme host dh hmac chap based on context it is used
+var consistencyGroupNvmeHostDhHmacChapTypeModePropEnum []interface{}
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["none","unidirectional","bidirectional"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		consistencyGroupNvmeHostDhHmacChapTypeModePropEnum = append(consistencyGroupNvmeHostDhHmacChapTypeModePropEnum, v)
+	}
+}
+
+const (
+
+	// ConsistencyGroupNvmeHostDhHmacChapModeNone captures enum value "none"
+	ConsistencyGroupNvmeHostDhHmacChapModeNone string = "none"
+
+	// ConsistencyGroupNvmeHostDhHmacChapModeUnidirectional captures enum value "unidirectional"
+	ConsistencyGroupNvmeHostDhHmacChapModeUnidirectional string = "unidirectional"
+
+	// ConsistencyGroupNvmeHostDhHmacChapModeBidirectional captures enum value "bidirectional"
+	ConsistencyGroupNvmeHostDhHmacChapModeBidirectional string = "bidirectional"
+)
+
+// prop value enum
+func (m *ConsistencyGroupNvmeHostDhHmacChap) validateModeEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, consistencyGroupNvmeHostDhHmacChapTypeModePropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *ConsistencyGroupNvmeHostDhHmacChap) validateMode(formats strfmt.Registry) error {
+	if swag.IsZero(m.Mode) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateModeEnum("mode", "body", *m.Mode); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this consistency group nvme host dh hmac chap based on the context it is used
 func (m *ConsistencyGroupNvmeHostDhHmacChap) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateMode(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ConsistencyGroupNvmeHostDhHmacChap) contextValidateMode(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := validate.ReadOnly(ctx, "mode", "body", m.Mode); err != nil {
+		return err
+	}
+
 	return nil
 }
 

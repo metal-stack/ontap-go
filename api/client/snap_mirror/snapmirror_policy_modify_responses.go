@@ -210,14 +210,15 @@ func NewSnapmirrorPolicyModifyDefault(code int) *SnapmirrorPolicyModifyDefault {
 | 13304050    | Retention cannot be empty for a SnapMirror policy with 'create_snapshot_on_source' set to false. |
 | 13304092    | Input value of the retention period property is invalid. For relationships with FlexVol volume or FlexGroup volume destinations, the duration must be in ISO 6801 format or can be infinite. For relationships with object store destinations, only duration values with Y, M or D and supported and must be in the specified range. |
 
-| 6621045     | The property rentention.warn is not supported for a policy when the retention.preserve property is false. |
+| 6621045     | The property retention.warn is not supported for a policy when the retention.preserve property is false. |
 | 13304129    | The property retention.warn value must be less than the property retention.count value for a rule in a policy. |
 | 13304126    | Enter a value for "count" in the range indicated in the error message. |
 | 13304130    | The total retention.count value for all rules in a policy cannot exceed the value indicated in the error message." |
 | 13304131    | Modifying property "retention.creation_schedule" for the policy is not supported because the policy is associated with a relationship with a FlexGroup volume endpoint. |
-| 13304011    | Failed to create or modify the specified Snapmirror policy. Reason: The propery retention.count cannot have a value greater than 1. |
+| 13304011    | Failed to create or modify the specified Snapmirror policy. Reason: The property retention.count cannot have a value greater than 1. |
 | 6621091     | The specified Snapmirror policy cannot have a rule with a preserve value of true. |
 | 6621088     | The specified Snapmirror policy must have at least one rule without a schedule. |
+| 6621129     | Cannot add a snapshot creation schedule to the policy because it is associated with a Consistency Group relationship. |
 */
 type SnapmirrorPolicyModifyDefault struct {
 	_statusCode int

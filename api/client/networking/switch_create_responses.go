@@ -231,9 +231,8 @@ func NewSwitchCreateDefault(code int) *SwitchCreateDefault {
 | 12517378 | IP address \"{address}\" is not reachable. Verify that the address is valid or check the network path. |
 | 12517380 | SNMP validation request timed out. Verify that the \"snmp.user\" parameter is valid. |
 | 12517382 | SNMP validation request timed out. Verify that the \"snmp.user\" parameter is valid (i.e., the SNMPv3 user exists in ONTAP and on the remote switch). If the \"snmp.user\" parameter is valid, verify that the SNMPv3 user's credentials are the same both in ONTAP as well as in the remote switch. If a custom engine-id was provided for the SNMPv3 user, ensure it is the same as that of the remote switch. |
-| 12517384 | Switch type \"{network}\" is not valid for specified switch model \"{model}\". |
-| 12517385 | SHM is already monitoring a switch with IP address \"{address}\". |
-| 12517386 | Model \"{model}\" is unknown. Use \"OTHER\" if the switch model is not one of the following&#58; {models}. |
+| 12517384 | SHM is already monitoring a switch with IP address \"{address}\". |
+| 12517385 | Model \"{model}\" is unknown. Use \"OTHER\" if the switch model is not one of the following&#58; {models}. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SwitchCreateDefault struct {

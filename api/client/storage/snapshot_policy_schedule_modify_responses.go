@@ -112,7 +112,7 @@ func NewSnapshotPolicyScheduleModifyDefault(code int) *SnapshotPolicyScheduleMod
 
 | Error Code | Description |
 | ---------- | ----------- |
-| 1638451    | This operation would result in total Snapshot copy count for the policy to exceed maximum supported count. |
+| 1638451    | This operation would result in total snapshot count for the policy to exceed maximum supported count. |
 | 918253     | Incorrect format for the retention period, duration must be in the ISO-8601 format. |
 */
 type SnapshotPolicyScheduleModifyDefault struct {

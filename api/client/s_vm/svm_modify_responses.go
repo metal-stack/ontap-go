@@ -208,7 +208,7 @@ func NewSvmModifyDefault(code int) *SvmModifyDefault {
 | 13434881    | Failed to rename SVM. |
 | 13434883    | SVM parameters except name modified successfully. |
 | 13434885    | Non-UTF8 language(s) not supported. |
-| 13434886    | Invalid Snapshot copy policy. |
+| 13434886    | Invalid snapshot policy. |
 | 13434902    | Modification of NSSwitch parameters failed for the SVM. |
 | 13434906    | Operation not supported for an SVM of type sync-destination. |
 | 12451843    | Certificate does not exist. |
@@ -217,6 +217,8 @@ func NewSvmModifyDefault(code int) *SvmModifyDefault {
 | 13434915    | Failed to unlock the SVM because SVM create or delete job is in progress. Wait a few minutes, and then try the command again. |
 | 13434911    | Invalid SVM name. Maximum supported length is 41 if SVM is of type \\\"sync-source\\\", otherwise 47. |
 | 262179      | Unexpected argument \"storage_limit\". |
+| 13434935    | FCP, iSCSI and NVMe cannot be disabled or disallowed on this platform. |
+| 23724038    | Invalid source for the provided ns-switch database. |
 ```
 <br/>
 */

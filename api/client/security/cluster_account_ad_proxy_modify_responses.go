@@ -112,6 +112,7 @@ func NewClusterAccountAdProxyModifyDefault(code int) *ClusterAccountAdProxyModif
 
 | Error Code | Description |
 | ---------- | ----------- |
+| 2621516 | This operation is only supported on a data SVM. |
 | 2621706 | The specified `svm.uuid` and `svm.name` refer to different SVMs. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */

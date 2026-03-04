@@ -196,9 +196,30 @@ func NewSoftwareUploadDefault(code int) *SoftwareUploadDefault {
 }
 
 /*
-SoftwareUploadDefault describes a response with status code -1, with default header values.
+	SoftwareUploadDefault describes a response with status code -1, with default header values.
 
-Error
+	ONTAP Error Response Codes
+
+| Error Code | Description |
+| ---------- | ----------- |
+| 10551359 | Internal error. Failed to process the package after download completed. Try uploading the file again or contact technical support for assistance. |
+| 10551373 | Operation took longer than the maximum 1 hour time limit. |
+| 10551391 | Internal error. Contact technical support for assistance. |
+| 10551392 | Internal error. Contact technical support for assistance. |
+| 10551496 | Firmware file already exists. |
+| 10551797 | Internal error. Failed to check if file upload is enabled. |
+| 10551798 | File upload is disabled. Enable file upload by setting "ApacheUploadEnabled 1" in the web services configuration file or contact technical support for assistance. |
+| 10551799 | The requested filename exceeds the max path length. Rename using a shorter name. |
+| 10551800 | Internal error. Access permissions restrict file upload. This is likely due to a bad web jail setup. Contact technical support for assistance. |
+| 10551801 | Internal error. A read/write error occurred when uploading this file. Contact technical support for assistance |
+| 10551802 | An invalid argument was supplied to create a file handle. Try uploading the file again or contact technical support for assistance. |
+| 10551803 | An unknown error occurred. Retry file upload operation again or contact technical support for assistance. |
+| 10551804 | Internal error. There is not sufficient space in the file upload directory to upload this file. Contact technical support for assistance. |
+| 10551805 | Internal error in JAIL setup. Contact technical support for assistance. |
+| 10551806 | Internal error. Failed to write to file in the webjail directory. Contact technical support for assistance. |
+| 10551807 | The request must only contain a single file. More than one file per request is not supported. |
+| 10551808 | The request must be of type multipart/form-data. |
+Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type SoftwareUploadDefault struct {
 	_statusCode int

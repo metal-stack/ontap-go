@@ -145,6 +145,7 @@ func NewNisCreateDefault(code int) *NisCreateDefault {
 | 3276933    | A maximum of 10 NIS servers can be configured per SVM |
 | 13434916   | The SVM is in the process of being created. Wait a few minutes, and then try the command again. |
 | 23724109   | DNS resolution failed for one or more specified servers  |
+| 23724111   | Empty NIS servers cannot be specified.  |
 | 23724112   | DNS resolution failed due to an internal error. Contact technical support if this issue persists  |
 | 23724132   | DNS resolution failed for all the specified servers  |
 | 23724130   | Cannot use an IPv6 name server address because there are no IPv6 LIFs |

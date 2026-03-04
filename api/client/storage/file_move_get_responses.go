@@ -120,9 +120,26 @@ func NewFileMoveGetDefault(code int) *FileMoveGetDefault {
 }
 
 /*
-FileMoveGetDefault describes a response with status code -1, with default header values.
+	FileMoveGetDefault describes a response with status code -1, with default header values.
 
-Error
+	ONTAP Error Response Codes
+
+| Error Code | Description |
+| ---------- | ----------- |
+| 6521       | Cannot quiesce source file. Source file \"file.name\" is under construction and is being used by either a file copy or move operation. Wait a few minutes and try the operation again.|
+| 6522       | Volume is not VM aligned.|
+| 6523       | File suffix not VM aligned.|
+| 6524       | Completion interface not specified.|
+| 6525       | Maximum simultaneous file operations reached.|
+| 6526       | Lock conflict.|
+| 6527       | Permission denied.|
+| 6528       | Waiting for an I/O fence to be released.|
+| 6529       | Waiting for space to become available.|
+| 6530       | Waiting for an external process to complete.|
+| 6531       | Source volume was deleted.|
+| 6532       | Slowed due to resource constraints.|
+| 6533       | Volume does not support block reallocation.|
+| 6534       | File operation not supported.|
 */
 type FileMoveGetDefault struct {
 	_statusCode int

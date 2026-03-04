@@ -229,9 +229,12 @@ func NewNodesCreateDefault(code int) *NodesCreateDefault {
 | 262245 | The value provided was invalid. |
 | 1179795 | A node being added is already in the cluster. |
 | 1179813 | Fields set for one node must be set for all nodes. |
-| 1179817 | The IP address, subnet mask, and gateway must all be provided for cluster manangement interface. |
+| 1179817 | The IP address, subnet mask, and gateway must all be provided for cluster management interface. |
 | 1179818 | The IP address and gateway must be of the same family. |
 | 1179821 | An IP address and subnet mask conflicts with an existing entry. |
+| 1179850 | Internal error. Failed to find the gateway for the default SVM. |
+| 1179851 | Failed to set the node management LIF configuration on the node. |
+| 1377682 | IPv6 is not enabled in the cluster. |
 | 9240591 | The name is not valid. The name is already in use by a cluster node, SVM, or it is the name of the local cluster. |
 | 9240594 | An invalid name was provided. |
 | 11862025 | The specified node management address and existing node management address belong to two subnets. Create a node management interface after creating the cluster or provide cluster and node management interfaces from the same subnet as the cluster management interface. |

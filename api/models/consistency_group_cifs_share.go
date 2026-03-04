@@ -111,7 +111,7 @@ type ConsistencyGroupCifsShare struct {
 	//
 	Oplocks *bool `json:"oplocks,omitempty" yaml:"oplocks,omitempty"`
 
-	// Specifies whether or not the Snapshot copies can be viewed and traversed by clients.
+	// Specifies whether or not the snapshots can be viewed and traversed by clients.
 	//
 	ShowSnapshot *bool `json:"show_snapshot,omitempty" yaml:"show_snapshot,omitempty"`
 
@@ -503,6 +503,9 @@ type ConsistencyGroupCifsShareInlineAclsInlineArrayItem struct {
 	// Specifies the user or group name to add to the access control list of a CIFS share.
 	// Example: ENGDOMAIN\\ad_user
 	UserOrGroup *string `json:"user_or_group,omitempty" yaml:"user_or_group,omitempty"`
+
+	// Windows SID/UNIX ID depending on access-control type.
+	WinSidUnixID *string `json:"win_sid_unix_id,omitempty" yaml:"win_sid_unix_id,omitempty"`
 }
 
 // Validate validates this consistency group cifs share inline acls inline array item

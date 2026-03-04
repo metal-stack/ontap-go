@@ -410,6 +410,18 @@ type SvmCollectionGetParams struct {
 	*/
 	QosPolicyUUID *string
 
+	/* QosPolicyGroupTemplateName.
+
+	   Filter by qos_policy_group_template.name
+	*/
+	QosPolicyGroupTemplateName *string
+
+	/* QosPolicyGroupTemplateUUID.
+
+	   Filter by qos_policy_group_template.uuid
+	*/
+	QosPolicyGroupTemplateUUID *string
+
 	/* ReturnRecords.
 
 	   The default is true for GET calls.  When set to false, only the number of records is returned.
@@ -432,17 +444,53 @@ type SvmCollectionGetParams struct {
 	*/
 	S3Allowed *bool
 
+	/* S3CertificateName.
+
+	   Filter by s3.certificate.name
+	*/
+	S3CertificateName *string
+
+	/* S3CertificateUUID.
+
+	   Filter by s3.certificate.uuid
+	*/
+	S3CertificateUUID *string
+
 	/* S3Enabled.
 
 	   Filter by s3.enabled
 	*/
 	S3Enabled *bool
 
+	/* S3IsHTTPEnabled.
+
+	   Filter by s3.is_http_enabled
+	*/
+	S3IsHTTPEnabled *bool
+
+	/* S3IsHTTPSEnabled.
+
+	   Filter by s3.is_https_enabled
+	*/
+	S3IsHTTPSEnabled *bool
+
 	/* S3Name.
 
 	   Filter by s3.name
 	*/
 	S3Name *string
+
+	/* S3Port.
+
+	   Filter by s3.port
+	*/
+	S3Port *int64
+
+	/* S3SecurePort.
+
+	   Filter by s3.secure_port
+	*/
+	S3SecurePort *int64
 
 	/* SnapshotPolicyName.
 
@@ -1221,6 +1269,28 @@ func (o *SvmCollectionGetParams) SetQosPolicyUUID(qosPolicyUUID *string) {
 	o.QosPolicyUUID = qosPolicyUUID
 }
 
+// WithQosPolicyGroupTemplateName adds the qosPolicyGroupTemplateName to the svm collection get params
+func (o *SvmCollectionGetParams) WithQosPolicyGroupTemplateName(qosPolicyGroupTemplateName *string) *SvmCollectionGetParams {
+	o.SetQosPolicyGroupTemplateName(qosPolicyGroupTemplateName)
+	return o
+}
+
+// SetQosPolicyGroupTemplateName adds the qosPolicyGroupTemplateName to the svm collection get params
+func (o *SvmCollectionGetParams) SetQosPolicyGroupTemplateName(qosPolicyGroupTemplateName *string) {
+	o.QosPolicyGroupTemplateName = qosPolicyGroupTemplateName
+}
+
+// WithQosPolicyGroupTemplateUUID adds the qosPolicyGroupTemplateUUID to the svm collection get params
+func (o *SvmCollectionGetParams) WithQosPolicyGroupTemplateUUID(qosPolicyGroupTemplateUUID *string) *SvmCollectionGetParams {
+	o.SetQosPolicyGroupTemplateUUID(qosPolicyGroupTemplateUUID)
+	return o
+}
+
+// SetQosPolicyGroupTemplateUUID adds the qosPolicyGroupTemplateUuid to the svm collection get params
+func (o *SvmCollectionGetParams) SetQosPolicyGroupTemplateUUID(qosPolicyGroupTemplateUUID *string) {
+	o.QosPolicyGroupTemplateUUID = qosPolicyGroupTemplateUUID
+}
+
 // WithReturnRecords adds the returnRecords to the svm collection get params
 func (o *SvmCollectionGetParams) WithReturnRecords(returnRecords *bool) *SvmCollectionGetParams {
 	o.SetReturnRecords(returnRecords)
@@ -1254,6 +1324,28 @@ func (o *SvmCollectionGetParams) SetS3Allowed(s3Allowed *bool) {
 	o.S3Allowed = s3Allowed
 }
 
+// WithS3CertificateName adds the s3CertificateName to the svm collection get params
+func (o *SvmCollectionGetParams) WithS3CertificateName(s3CertificateName *string) *SvmCollectionGetParams {
+	o.SetS3CertificateName(s3CertificateName)
+	return o
+}
+
+// SetS3CertificateName adds the s3CertificateName to the svm collection get params
+func (o *SvmCollectionGetParams) SetS3CertificateName(s3CertificateName *string) {
+	o.S3CertificateName = s3CertificateName
+}
+
+// WithS3CertificateUUID adds the s3CertificateUUID to the svm collection get params
+func (o *SvmCollectionGetParams) WithS3CertificateUUID(s3CertificateUUID *string) *SvmCollectionGetParams {
+	o.SetS3CertificateUUID(s3CertificateUUID)
+	return o
+}
+
+// SetS3CertificateUUID adds the s3CertificateUuid to the svm collection get params
+func (o *SvmCollectionGetParams) SetS3CertificateUUID(s3CertificateUUID *string) {
+	o.S3CertificateUUID = s3CertificateUUID
+}
+
 // WithS3Enabled adds the s3Enabled to the svm collection get params
 func (o *SvmCollectionGetParams) WithS3Enabled(s3Enabled *bool) *SvmCollectionGetParams {
 	o.SetS3Enabled(s3Enabled)
@@ -1265,6 +1357,28 @@ func (o *SvmCollectionGetParams) SetS3Enabled(s3Enabled *bool) {
 	o.S3Enabled = s3Enabled
 }
 
+// WithS3IsHTTPEnabled adds the s3IsHTTPEnabled to the svm collection get params
+func (o *SvmCollectionGetParams) WithS3IsHTTPEnabled(s3IsHTTPEnabled *bool) *SvmCollectionGetParams {
+	o.SetS3IsHTTPEnabled(s3IsHTTPEnabled)
+	return o
+}
+
+// SetS3IsHTTPEnabled adds the s3IsHttpEnabled to the svm collection get params
+func (o *SvmCollectionGetParams) SetS3IsHTTPEnabled(s3IsHTTPEnabled *bool) {
+	o.S3IsHTTPEnabled = s3IsHTTPEnabled
+}
+
+// WithS3IsHTTPSEnabled adds the s3IsHTTPSEnabled to the svm collection get params
+func (o *SvmCollectionGetParams) WithS3IsHTTPSEnabled(s3IsHTTPSEnabled *bool) *SvmCollectionGetParams {
+	o.SetS3IsHTTPSEnabled(s3IsHTTPSEnabled)
+	return o
+}
+
+// SetS3IsHTTPSEnabled adds the s3IsHttpsEnabled to the svm collection get params
+func (o *SvmCollectionGetParams) SetS3IsHTTPSEnabled(s3IsHTTPSEnabled *bool) {
+	o.S3IsHTTPSEnabled = s3IsHTTPSEnabled
+}
+
 // WithS3Name adds the s3Name to the svm collection get params
 func (o *SvmCollectionGetParams) WithS3Name(s3Name *string) *SvmCollectionGetParams {
 	o.SetS3Name(s3Name)
@@ -1274,6 +1388,28 @@ func (o *SvmCollectionGetParams) WithS3Name(s3Name *string) *SvmCollectionGetPar
 // SetS3Name adds the s3Name to the svm collection get params
 func (o *SvmCollectionGetParams) SetS3Name(s3Name *string) {
 	o.S3Name = s3Name
+}
+
+// WithS3Port adds the s3Port to the svm collection get params
+func (o *SvmCollectionGetParams) WithS3Port(s3Port *int64) *SvmCollectionGetParams {
+	o.SetS3Port(s3Port)
+	return o
+}
+
+// SetS3Port adds the s3Port to the svm collection get params
+func (o *SvmCollectionGetParams) SetS3Port(s3Port *int64) {
+	o.S3Port = s3Port
+}
+
+// WithS3SecurePort adds the s3SecurePort to the svm collection get params
+func (o *SvmCollectionGetParams) WithS3SecurePort(s3SecurePort *int64) *SvmCollectionGetParams {
+	o.SetS3SecurePort(s3SecurePort)
+	return o
+}
+
+// SetS3SecurePort adds the s3SecurePort to the svm collection get params
+func (o *SvmCollectionGetParams) SetS3SecurePort(s3SecurePort *int64) {
+	o.S3SecurePort = s3SecurePort
 }
 
 // WithSnapshotPolicyName adds the snapshotPolicyName to the svm collection get params
@@ -2390,6 +2526,40 @@ func (o *SvmCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg str
 		}
 	}
 
+	if o.QosPolicyGroupTemplateName != nil {
+
+		// query param qos_policy_group_template.name
+		var qrQosPolicyGroupTemplateName string
+
+		if o.QosPolicyGroupTemplateName != nil {
+			qrQosPolicyGroupTemplateName = *o.QosPolicyGroupTemplateName
+		}
+		qQosPolicyGroupTemplateName := qrQosPolicyGroupTemplateName
+		if qQosPolicyGroupTemplateName != "" {
+
+			if err := r.SetQueryParam("qos_policy_group_template.name", qQosPolicyGroupTemplateName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.QosPolicyGroupTemplateUUID != nil {
+
+		// query param qos_policy_group_template.uuid
+		var qrQosPolicyGroupTemplateUUID string
+
+		if o.QosPolicyGroupTemplateUUID != nil {
+			qrQosPolicyGroupTemplateUUID = *o.QosPolicyGroupTemplateUUID
+		}
+		qQosPolicyGroupTemplateUUID := qrQosPolicyGroupTemplateUUID
+		if qQosPolicyGroupTemplateUUID != "" {
+
+			if err := r.SetQueryParam("qos_policy_group_template.uuid", qQosPolicyGroupTemplateUUID); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.ReturnRecords != nil {
 
 		// query param return_records
@@ -2441,6 +2611,40 @@ func (o *SvmCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg str
 		}
 	}
 
+	if o.S3CertificateName != nil {
+
+		// query param s3.certificate.name
+		var qrS3CertificateName string
+
+		if o.S3CertificateName != nil {
+			qrS3CertificateName = *o.S3CertificateName
+		}
+		qS3CertificateName := qrS3CertificateName
+		if qS3CertificateName != "" {
+
+			if err := r.SetQueryParam("s3.certificate.name", qS3CertificateName); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.S3CertificateUUID != nil {
+
+		// query param s3.certificate.uuid
+		var qrS3CertificateUUID string
+
+		if o.S3CertificateUUID != nil {
+			qrS3CertificateUUID = *o.S3CertificateUUID
+		}
+		qS3CertificateUUID := qrS3CertificateUUID
+		if qS3CertificateUUID != "" {
+
+			if err := r.SetQueryParam("s3.certificate.uuid", qS3CertificateUUID); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.S3Enabled != nil {
 
 		// query param s3.enabled
@@ -2458,6 +2662,40 @@ func (o *SvmCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg str
 		}
 	}
 
+	if o.S3IsHTTPEnabled != nil {
+
+		// query param s3.is_http_enabled
+		var qrS3IsHTTPEnabled bool
+
+		if o.S3IsHTTPEnabled != nil {
+			qrS3IsHTTPEnabled = *o.S3IsHTTPEnabled
+		}
+		qS3IsHTTPEnabled := swag.FormatBool(qrS3IsHTTPEnabled)
+		if qS3IsHTTPEnabled != "" {
+
+			if err := r.SetQueryParam("s3.is_http_enabled", qS3IsHTTPEnabled); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.S3IsHTTPSEnabled != nil {
+
+		// query param s3.is_https_enabled
+		var qrS3IsHTTPSEnabled bool
+
+		if o.S3IsHTTPSEnabled != nil {
+			qrS3IsHTTPSEnabled = *o.S3IsHTTPSEnabled
+		}
+		qS3IsHTTPSEnabled := swag.FormatBool(qrS3IsHTTPSEnabled)
+		if qS3IsHTTPSEnabled != "" {
+
+			if err := r.SetQueryParam("s3.is_https_enabled", qS3IsHTTPSEnabled); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.S3Name != nil {
 
 		// query param s3.name
@@ -2470,6 +2708,40 @@ func (o *SvmCollectionGetParams) WriteToRequest(r runtime.ClientRequest, reg str
 		if qS3Name != "" {
 
 			if err := r.SetQueryParam("s3.name", qS3Name); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.S3Port != nil {
+
+		// query param s3.port
+		var qrS3Port int64
+
+		if o.S3Port != nil {
+			qrS3Port = *o.S3Port
+		}
+		qS3Port := swag.FormatInt64(qrS3Port)
+		if qS3Port != "" {
+
+			if err := r.SetQueryParam("s3.port", qS3Port); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.S3SecurePort != nil {
+
+		// query param s3.secure_port
+		var qrS3SecurePort int64
+
+		if o.S3SecurePort != nil {
+			qrS3SecurePort = *o.S3SecurePort
+		}
+		qS3SecurePort := swag.FormatInt64(qrS3SecurePort)
+		if qS3SecurePort != "" {
+
+			if err := r.SetQueryParam("s3.secure_port", qS3SecurePort); err != nil {
 				return err
 			}
 		}

@@ -115,7 +115,7 @@ func NewIscsiServiceDeleteDefault(code int) *IscsiServiceDeleteDefault {
 | 2621462 | An SVM with the specified UUID does not exist. |
 | 5373960 | The iSCSI service is enabled. The iSCSI service must be disabled before it can be deleted. |
 | 5374078 | The SVM does not have an iSCSI service. |
-| 5376452 | Service POST and DELETE are not supported on ASA.next. |
+| 5376452 | Service POST and DELETE are not supported on ASA r2. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type IscsiServiceDeleteDefault struct {

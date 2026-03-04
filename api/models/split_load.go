@@ -225,7 +225,7 @@ type SplitLoadInlineLoad struct {
 	// Read Only: true
 	Current *int64 `json:"current,omitempty" yaml:"current,omitempty"`
 
-	// Specifies the maximum allowable file clone split load on the node at any point in time. The least allowable file clone split load is 4KB and the maximum is 675TB. The default file clone split load is set based on the system configuration.
+	// Specifies the maximum allowable file clone split load on the node at any point in time. The least allowable file clone split load is 4KB and the maximum is 675TB. The default value is 4KB for the maximum split load when unit is not specified. The default file clone split load is set based on the system configuration.
 	// Example: 4KB
 	Maximum *int64 `json:"maximum,omitempty" yaml:"maximum,omitempty"`
 

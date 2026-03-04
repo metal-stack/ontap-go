@@ -86,6 +86,12 @@ type CifsShareCollectionGetParams struct {
 	*/
 	AclsUserOrGroup *string
 
+	/* AclsWinSidUnixID.
+
+	   Filter by acls.win_sid_unix_id
+	*/
+	AclsWinSidUnixID *string
+
 	/* AllowUnencryptedAccess.
 
 	   Filter by allow_unencrypted_access
@@ -126,7 +132,7 @@ type CifsShareCollectionGetParams struct {
 
 	   Filter by dir_umask
 	*/
-	DirUmask *int64
+	DirUmask *string
 
 	/* Encryption.
 
@@ -144,7 +150,7 @@ type CifsShareCollectionGetParams struct {
 
 	   Filter by file_umask
 	*/
-	FileUmask *int64
+	FileUmask *string
 
 	/* ForceGroupForCreate.
 
@@ -387,6 +393,17 @@ func (o *CifsShareCollectionGetParams) SetAclsUserOrGroup(aclsUserOrGroup *strin
 	o.AclsUserOrGroup = aclsUserOrGroup
 }
 
+// WithAclsWinSidUnixID adds the aclsWinSidUnixID to the cifs share collection get params
+func (o *CifsShareCollectionGetParams) WithAclsWinSidUnixID(aclsWinSidUnixID *string) *CifsShareCollectionGetParams {
+	o.SetAclsWinSidUnixID(aclsWinSidUnixID)
+	return o
+}
+
+// SetAclsWinSidUnixID adds the aclsWinSidUnixId to the cifs share collection get params
+func (o *CifsShareCollectionGetParams) SetAclsWinSidUnixID(aclsWinSidUnixID *string) {
+	o.AclsWinSidUnixID = aclsWinSidUnixID
+}
+
 // WithAllowUnencryptedAccess adds the allowUnencryptedAccess to the cifs share collection get params
 func (o *CifsShareCollectionGetParams) WithAllowUnencryptedAccess(allowUnencryptedAccess *bool) *CifsShareCollectionGetParams {
 	o.SetAllowUnencryptedAccess(allowUnencryptedAccess)
@@ -454,13 +471,13 @@ func (o *CifsShareCollectionGetParams) SetContinuouslyAvailable(continuouslyAvai
 }
 
 // WithDirUmask adds the dirUmask to the cifs share collection get params
-func (o *CifsShareCollectionGetParams) WithDirUmask(dirUmask *int64) *CifsShareCollectionGetParams {
+func (o *CifsShareCollectionGetParams) WithDirUmask(dirUmask *string) *CifsShareCollectionGetParams {
 	o.SetDirUmask(dirUmask)
 	return o
 }
 
 // SetDirUmask adds the dirUmask to the cifs share collection get params
-func (o *CifsShareCollectionGetParams) SetDirUmask(dirUmask *int64) {
+func (o *CifsShareCollectionGetParams) SetDirUmask(dirUmask *string) {
 	o.DirUmask = dirUmask
 }
 
@@ -487,13 +504,13 @@ func (o *CifsShareCollectionGetParams) SetFields(fields []string) {
 }
 
 // WithFileUmask adds the fileUmask to the cifs share collection get params
-func (o *CifsShareCollectionGetParams) WithFileUmask(fileUmask *int64) *CifsShareCollectionGetParams {
+func (o *CifsShareCollectionGetParams) WithFileUmask(fileUmask *string) *CifsShareCollectionGetParams {
 	o.SetFileUmask(fileUmask)
 	return o
 }
 
 // SetFileUmask adds the fileUmask to the cifs share collection get params
-func (o *CifsShareCollectionGetParams) SetFileUmask(fileUmask *int64) {
+func (o *CifsShareCollectionGetParams) SetFileUmask(fileUmask *string) {
 	o.FileUmask = fileUmask
 }
 
@@ -804,6 +821,23 @@ func (o *CifsShareCollectionGetParams) WriteToRequest(r runtime.ClientRequest, r
 		}
 	}
 
+	if o.AclsWinSidUnixID != nil {
+
+		// query param acls.win_sid_unix_id
+		var qrAclsWinSidUnixID string
+
+		if o.AclsWinSidUnixID != nil {
+			qrAclsWinSidUnixID = *o.AclsWinSidUnixID
+		}
+		qAclsWinSidUnixID := qrAclsWinSidUnixID
+		if qAclsWinSidUnixID != "" {
+
+			if err := r.SetQueryParam("acls.win_sid_unix_id", qAclsWinSidUnixID); err != nil {
+				return err
+			}
+		}
+	}
+
 	if o.AllowUnencryptedAccess != nil {
 
 		// query param allow_unencrypted_access
@@ -909,12 +943,12 @@ func (o *CifsShareCollectionGetParams) WriteToRequest(r runtime.ClientRequest, r
 	if o.DirUmask != nil {
 
 		// query param dir_umask
-		var qrDirUmask int64
+		var qrDirUmask string
 
 		if o.DirUmask != nil {
 			qrDirUmask = *o.DirUmask
 		}
-		qDirUmask := swag.FormatInt64(qrDirUmask)
+		qDirUmask := qrDirUmask
 		if qDirUmask != "" {
 
 			if err := r.SetQueryParam("dir_umask", qDirUmask); err != nil {
@@ -954,12 +988,12 @@ func (o *CifsShareCollectionGetParams) WriteToRequest(r runtime.ClientRequest, r
 	if o.FileUmask != nil {
 
 		// query param file_umask
-		var qrFileUmask int64
+		var qrFileUmask string
 
 		if o.FileUmask != nil {
 			qrFileUmask = *o.FileUmask
 		}
-		qFileUmask := swag.FormatInt64(qrFileUmask)
+		qFileUmask := qrFileUmask
 		if qFileUmask != "" {
 
 			if err := r.SetQueryParam("file_umask", qFileUmask); err != nil {

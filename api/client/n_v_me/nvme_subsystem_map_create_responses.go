@@ -138,9 +138,12 @@ func NewNvmeSubsystemMapCreateDefault(code int) *NvmeSubsystemMapCreateDefault {
 
 | Error Code | Description |
 | ---------- | ----------- |
-| 5374127 | An invalid namespace name was specified. |
+| 5374127 | The specified namespace name is invalid. |
+| 5376461 | The specified namespace name is invalid. |
+| 5376462 | The specified namespace name is too long. |
+| 72089731 | The specified NVMe namespace does not exist. |
 | 72089790 | The supplied NVMe namespace is already mapped to the supplied NVMe subsystem. |
-| 72089793 | An NVMe namespace in a Snapshot copy cannot be mapped. |
+| 72089793 | An NVMe namespace in a snapshot cannot be mapped. |
 | 72089799 | The NVMe namespace is the destination of an ongoing restore operation and is inaccessible for I/O and management. |
 | 72089902 | A node does not have an NVMe interface configured. |
 | 72089903 | Multiple nodes do not have an NVMe interface configured. |

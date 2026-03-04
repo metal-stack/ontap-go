@@ -1278,6 +1278,43 @@ func (_m *ClientService) FlexcacheOriginModify(params *clientstorage.FlexcacheOr
 	return r0, r1, r2
 }
 
+// PerformanceQtreeMetricCollectionGet provides a mock function with given fields: params, authInfo, opts
+func (_m *ClientService) PerformanceQtreeMetricCollectionGet(params *clientstorage.PerformanceQtreeMetricCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientstorage.ClientOption) (*clientstorage.PerformanceQtreeMetricCollectionGetOK, error) {
+	_va := make([]interface{}, len(opts))
+	for _i := range opts {
+		_va[_i] = opts[_i]
+	}
+	var _ca []interface{}
+	_ca = append(_ca, params, authInfo)
+	_ca = append(_ca, _va...)
+	ret := _m.Called(_ca...)
+
+	if len(ret) == 0 {
+		panic("no return value specified for PerformanceQtreeMetricCollectionGet")
+	}
+
+	var r0 *clientstorage.PerformanceQtreeMetricCollectionGetOK
+	var r1 error
+	if rf, ok := ret.Get(0).(func(*clientstorage.PerformanceQtreeMetricCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientstorage.ClientOption) (*clientstorage.PerformanceQtreeMetricCollectionGetOK, error)); ok {
+		return rf(params, authInfo, opts...)
+	}
+	if rf, ok := ret.Get(0).(func(*clientstorage.PerformanceQtreeMetricCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientstorage.ClientOption) *clientstorage.PerformanceQtreeMetricCollectionGetOK); ok {
+		r0 = rf(params, authInfo, opts...)
+	} else {
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*clientstorage.PerformanceQtreeMetricCollectionGetOK)
+		}
+	}
+
+	if rf, ok := ret.Get(1).(func(*clientstorage.PerformanceQtreeMetricCollectionGetParams, runtime.ClientAuthInfoWriter, ...clientstorage.ClientOption) error); ok {
+		r1 = rf(params, authInfo, opts...)
+	} else {
+		r1 = ret.Error(1)
+	}
+
+	return r0, r1
+}
+
 // PlexCollectionGet provides a mock function with given fields: params, authInfo, opts
 func (_m *ClientService) PlexCollectionGet(params *clientstorage.PlexCollectionGetParams, authInfo runtime.ClientAuthInfoWriter, opts ...clientstorage.ClientOption) (*clientstorage.PlexCollectionGetOK, error) {
 	_va := make([]interface{}, len(opts))

@@ -140,6 +140,7 @@ func NewTokenCreateDefault(code int) *TokenCreateDefault {
 | ---------- | ----------- |
 | 13565959 | Failed to create token for node `node.name`. |
 | 13565964 | Reserve size cannot be negative. |
+| 13565997 | The node.uuid doesn't exist. |
 Also see the table of common errors in the <a href="#Response_body">Response body</a> overview section of this documentation.
 */
 type TokenCreateDefault struct {
