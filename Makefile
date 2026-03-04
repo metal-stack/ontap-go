@@ -10,6 +10,9 @@ generate-client:
 		-w /work \
 		ghcr.io/metal-stack/builder swagger generate client -A Ontap -f spec/ontap.yaml -t api --struct-tags json --struct-tags yaml
 	rm api/models/application_template.go # this redeclares ApplicationTemplate which is a BUG in the ontap swagger spec.
+	# The ontap swagger spec uses hyphens for "volume-count" but the actual API returns "volume_count".
+	# The spec itself states: "REST API properties use underscores instead of hyphens between words."
+	sed -i 's/volume-count/volume_count/g' api/models/aggregate.go
 
 .PHONY: mocks
 mocks:
