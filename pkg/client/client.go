@@ -1,6 +1,8 @@
 package client
 
 import (
+	"crypto/tls"
+	"crypto/x509"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -27,9 +29,17 @@ type BasicAuthConfig struct {
 }
 
 type TLSConfig struct {
-	CertPath    string
-	KeyPath     string
-	CaPath      string
+	// either set directly as bytes
+	Cert []byte
+	Key  []byte
+	Ca   []byte
+
+	// or set from file paths
+	CertPath string
+	KeyPath  string
+	CaPath   string
+
+	// InsecureTLS should only be used for devel purposes
 	InsecureTLS *bool
 }
 
@@ -58,6 +68,24 @@ func NewAPIClient(cfg Config) (*client.Ontap, error) {
 		}
 		if cfg.TLS.InsecureTLS != nil {
 			tlsOptions.InsecureSkipVerify = *cfg.TLS.InsecureTLS
+		}
+
+		if len(cfg.TLS.Ca) > 0 {
+			ca, err := x509.ParseCertificate(cfg.TLS.Ca)
+			if err != nil {
+				return nil, err
+			}
+
+			tlsOptions.LoadedCA = ca
+		}
+		if len(cfg.TLS.Cert) > 0 || len(cfg.TLS.Key) > 0 {
+			pair, err := tls.X509KeyPair(cfg.TLS.Cert, cfg.TLS.Key)
+			if err != nil {
+				return nil, err
+			}
+
+			tlsOptions.LoadedCertificate = pair.Leaf
+			tlsOptions.LoadedKey = pair.PrivateKey
 		}
 
 		tlsConfig, err := httptransport.TLSClientAuth(tlsOptions)
