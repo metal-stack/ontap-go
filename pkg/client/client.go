@@ -3,7 +3,6 @@ package client
 import (
 	"crypto/tls"
 	"crypto/x509"
-	"encoding/pem"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -72,18 +71,15 @@ func NewAPIClient(cfg Config) (*client.Ontap, error) {
 		}
 
 		if len(cfg.TLS.Ca) > 0 {
-			block, _ := pem.Decode([]byte(cfg.TLS.Ca))
-			if block == nil {
-				return nil, fmt.Errorf("failed to decode PEM block: %w", err)
+			pool := x509.NewCertPool()
+
+			if !pool.AppendCertsFromPEM(cfg.TLS.Ca) {
+				return nil, fmt.Errorf("failed to append pem-encoded CA certificate(s)")
 			}
 
-			ca, err := x509.ParseCertificate(block.Bytes)
-			if err != nil {
-				return nil, err
-			}
-
-			tlsOptions.LoadedCA = ca
+			tlsOptions.LoadedCAPool = pool
 		}
+
 		if len(cfg.TLS.Cert) > 0 || len(cfg.TLS.Key) > 0 {
 			pair, err := tls.X509KeyPair(cfg.TLS.Cert, cfg.TLS.Key)
 			if err != nil {
