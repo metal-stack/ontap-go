@@ -3,6 +3,7 @@ package client
 import (
 	"crypto/tls"
 	"crypto/x509"
+	"encoding/pem"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -71,7 +72,12 @@ func NewAPIClient(cfg Config) (*client.Ontap, error) {
 		}
 
 		if len(cfg.TLS.Ca) > 0 {
-			ca, err := x509.ParseCertificate(cfg.TLS.Ca)
+			block, _ := pem.Decode([]byte(cfg.TLS.Ca))
+			if block == nil {
+				return nil, fmt.Errorf("failed to decode PEM block: %w", err)
+			}
+
+			ca, err := x509.ParseCertificate(block.Bytes)
 			if err != nil {
 				return nil, err
 			}
