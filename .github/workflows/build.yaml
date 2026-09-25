@@ -1,27 +1,24 @@
-name: build
+---
+name: metal-stack component release
 
 on:
-  push
+  pull_request:
+    branches:
+      - main
+  release:
+    types:
+      - published
+  push:
+    branches:
+      - main
 
 jobs:
+  draft:
+    uses: metal-stack/actions-common/.github/workflows/release-drafter.yaml@v1
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-    - name: Check out code into the Go module directory
-      uses: actions/checkout@v4
-
-    - name: Setup Go
-      uses: actions/setup-go@v5
-      with:
-        go-version-file: 'go.mod'
-        cache: false
-
-    - name: Lint
-      uses: golangci/golangci-lint-action@v6
-      with:
-        args: -p bugs -p unused --timeout 10m
-
-    - name: Build
-      run: make test
+  go-build:
+    uses: metal-stack/actions-common/.github/workflows/go-build.yaml@v1
+    secrets: inherit
+    with:
+      build: false
+      test-command: make test
