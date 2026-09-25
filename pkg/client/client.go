@@ -52,7 +52,7 @@ func NewAPIClient(cfg Config) (*client.Ontap, error) {
 		return nil, fmt.Errorf("invalid ontap api url: %s, must be in the form scheme://host[:port]/basepath", cfg.ApiURL)
 	}
 
-	httpClient := http.DefaultClient
+	httpClient := &http.Client{}
 
 	if cfg.TLS != nil {
 		tlsOptions := httptransport.TLSClientOptions{}
